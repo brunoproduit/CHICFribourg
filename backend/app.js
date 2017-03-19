@@ -74,18 +74,36 @@ app.get('/coins', function(req, res) {
 
 //POST
 app.post('/coins', function(req, res) {
-    if(!req.body.hasOwnProperty('value') ||
+    if(!req.body.hasOwnProperty('name') ||
         !req.body.hasOwnProperty('amount')) {
         res.statusCode = 400;
         return res.send('Error 400: Post syntax incorrect.');
     }
 
     var newQuote = {
-        value : req.body.value,
+        value : req.body.name,
         amount : req.body.amount
     };
 
     coins.push(newQuote);
+    res.json(true);
+});
+
+app.post('/users', function(req, res) {
+    if(!req.body.hasOwnProperty('name') ||
+        !req.body.hasOwnProperty('balance') ||
+        !req.body.hasOwnProperty('role')) {
+        res.statusCode = 400;
+        return res.send('Error 400: Post syntax incorrect.');
+    }
+
+    var newQuote = {
+        value : req.body.name,
+        amount : req.body.balance,
+        role : req.body.role
+    };
+
+    users.push(newQuote);
     res.json(true);
 });
 
@@ -100,5 +118,17 @@ app.delete('/coins/:id', function(req, res) {
     coins.splice(req.params.id, 1);
     res.json(true);
 });
+
+app.delete('/users/:id', function(req, res) {
+    if(coins.length <= req.params.id) {
+        res.statusCode = 404;
+        return res.send('Error 404: No coins found');
+    }
+
+    users.splice(req.params.id, 1);
+    res.json(true);
+});
+
+
 console.log('Server running at http://chic.tic.heia-fr/');
 app.listen(process.env.PORT || 80);
