@@ -1,5 +1,12 @@
 
 //Var
+var fs = require('fs');
+var http = require('http');
+var https = require('https');
+var privateKey  = fs.readFileSync('sslcert/privkey.pem', 'utf8');
+var certificate = fs.readFileSync('sslcert/fullchain.pem', 'utf8');
+
+var credentials = {key: privateKey, cert: certificate};
 var express = require('express');
 var app = express();
 
@@ -10,6 +17,13 @@ Array.prototype.get = function(name) {
     for (var i=0, len=this.length; i<len; i++) {
         if (typeof this[i] != "object") continue;
         if (this[i].name === name) return this[i];
+    }
+};
+
+Array.prototype.remove = function(name) {
+    for (var i=0, len=this.length; i<len; i++) {
+        if (typeof this[i] != "object") continue;
+        if (this[i].name === name)  this.splice(i,1);
     }
 };
 
@@ -98,7 +112,7 @@ app.post('/users', function(req, res) {
     }
 
     var newQuote = {
-        value : req.body.name,
+        name : req.body.name,
         amount : req.body.balance,
         role : req.body.role
     };
@@ -115,7 +129,7 @@ app.delete('/coins/:id', function(req, res) {
         return res.send('Error 404: No coins found');
     }
 
-    coins.splice(req.params.id, 1);
+    coins.remove(req.params.id);
     res.json(true);
 });
 
@@ -125,10 +139,10 @@ app.delete('/users/:id', function(req, res) {
         return res.send('Error 404: No coins found');
     }
 
-    users.splice(req.params.id, 1);
+    users.remove(req.params.id);
     res.json(true);
 });
 
 
-console.log('Server running at http://chic.tic.heia-fr/');
-app.listen(process.env.PORT || 80);
+console.log('Server running at https://chic.tic.heia-fr/');
+https.createServer(credentials, app).listen(443);
