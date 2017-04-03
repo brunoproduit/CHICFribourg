@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{device.name}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-buttons>
+    <button ion-button (click) = "disconnect(device.id)" block>Disconnect</button>
+  </ion-buttons>
+  {{StringDataNotify}}
+  <ion-card *ngFor="let characteristic of characteristics">
+    <ion-card-header>UUID: {{characteristic.characteristic}}</ion-card-header>
+    <ion-card-content>
+      <p>Properties: {{characteristic.properties}}<br>
+        Service: {{characteristic.service}} <br>
+      <ion-buttons end>
+        <button *ngIf="displayNotifyButton(characteristic.properties)== true" ion-button (click)="startNotify(device.id, characteristic.service, characteristic.characteristic)" round>Notify</button>
+      </ion-buttons>
+    </ion-card-content>
+  </ion-card>
+  <p >AMOUNT OF MONEY : {{money}}</p>
+  <ion-spinner *ngIf="connecting==true" name="circles"></ion-spinner>
+</ion-content>

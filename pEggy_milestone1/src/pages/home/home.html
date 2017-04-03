@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic BLE TEST
+      pEggy 1st Milestone
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -12,7 +12,10 @@
     <div>
       <ion-buttons>
         <button ion-button (click) = "startScanning()" block>Scan</button>
+        <button ion-button (click) = "testGet()" block>GET</button>
+        <button ion-button (click) = "testPost()" block>POST</button>
       </ion-buttons>
+      <p>AMOUNT OF COINS 5 : {{getValue}}</p>
     </div>
     <div align="center">
       <ion-spinner *ngIf="isScanning==true" name="circles"></ion-spinner>
@@ -28,14 +31,5 @@
         <button ion-button (click) = "connectToDevice(device)" outline>Connect</button>
       </ion-buttons>
     </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-buttons>
-      <button ion-button (click) = "searchUser(user)" block>GET USER</button>
-    </ion-buttons>
-    <!--<ion-item>
-    <ion-input type="text" placeholder="Search a user" (input)="searchUser($event)"></ion-input>
-    </ion-item>-->
-    <h3>{{user2}}</h3>
   </ion-card>
 </ion-content>

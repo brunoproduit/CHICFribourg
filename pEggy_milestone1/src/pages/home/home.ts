@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { BLE } from '@ionic-native/ble';
 import { BlePage } from "../ble/ble";
-import { Http } from '@angular/http';
+import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
+
 
 @Component({
   selector: 'page-home',
@@ -13,15 +14,13 @@ export class HomePage {
 
   public devices; // list of devices
   public isScanning;
-  public user;
-  public user2;
+  public getValue;
 
 
-  constructor(public navCtrl: NavController, public ble: BLE, private http: Http) {
+  constructor(public navCtrl: NavController, public ble: BLE, public http: Http) {
     this.navCtrl = navCtrl;
     this.isScanning = false;
-    this.user = "dad";
-    this.user2 = "mom"
+    this.getValue;
   }
 
   startScanning() {
@@ -47,13 +46,27 @@ export class HomePage {
     this.navCtrl.push(BlePage, {device: device});
   };
 
-  searchUser(UserName) {
-    var url = 'https://chic.tic.heia-fr.ch/users/' + encodeURI(UserName);
-    //var response = this.http.get(url).map(res => res.json());
-    //var response = this.http.get(url).map(res => res.json());
-   this.http.get(url).map(res => res.json()).subscribe(data =>{
-      console.log(data);
-    });
+  testGet(){
+    this.http.get('https://chic.tic.heia-fr.ch/coins/5').map(res => res.json()).subscribe(data =>{
+      console.log(data.name);
+      console.log(data.amount);
+      this.getValue = data.amout;
+    })
+  }
 
-  };
+  testPost(){
+    let headers = new Headers();
+    headers.append('Content Type', 'application/json');
+
+    let body = {
+      name: "5",
+      amount : "1"
+    };
+
+    this.http.post('https://chic.tic.heia-fr.ch/coins/5', JSON.stringify(body), {headers: headers})
+      .map(res => res.json())
+      .subscribe(data =>{
+        console.log(data);
+      });
+  }
 }

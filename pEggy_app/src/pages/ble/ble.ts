@@ -43,6 +43,9 @@ export class BlePage {
     this.isRead = true;
     this.ble.read(deviceID, serviceUUID, characteristicUUID).then( data => {
       console.log("## READ DATA NOT MODIFIED ##" +data);
+      var dataView = new DataView(data);
+      //dataView.getUint16(0).toString();
+      console.log("## DATAVIEW ##" + dataView.getUint16(0, true).toString());
       this.StringData = this.bytesToString(data);
       console.log("## READ ## " + this.StringData);
     }, data => {
@@ -53,11 +56,11 @@ export class BlePage {
   startNotify(deviceID, serviceUUID, characteristicUUID) {
     this.isNotify = true;
     this.ble.startNotification(deviceID, serviceUUID, characteristicUUID).subscribe(buffer => {
+      console.log("## NOTIFY BUFFER CONTENT ## "+ buffer.byteLength);
       this.StringDataNotify = String.fromCharCode.apply(null, new Uint8Array(buffer));
-      //this.setText(String.fromCharCode.apply(null, new Uint8Array(buffer)));
       console.log("## NOTIFY VALUE ## " + String.fromCharCode.apply(null, new Uint8Array(buffer)));
-    }, buffer => {
-      console.log("## NOTIFY ERROR ## " + buffer);
+    }, error => {
+      console.log("## NOTIFY ERROR ## " + error);
     });
   }
 
@@ -120,12 +123,6 @@ export class BlePage {
   bytesToString(buffer) {
     return String.fromCharCode.apply(null, new Uint8Array(buffer));
   };
-  /*
-  //FONCTION POUR METTRE A JOUR AUTOMATIQUEMENT UN CHAMP
-  setText(text){
-    return this.StringDataNotify = text;
-  };*/
-
 }
 
 
