@@ -7,8 +7,9 @@
   <ion-buttons>
     <button ion-button (click) = "disconnect(device.id)" block>Disconnect</button>
   </ion-buttons>
-  {{StringDataNotify}}
-  <ion-card *ngFor="let characteristic of characteristics">
+  <p>COIN'S AMOUNT OF 2CHF VALUE : {{getValueOf2}}</p>
+  <p>COIN'S AMOUNT OF 5CHF VALUE : {{getValueOf5}}</p>
+  <!--<ion-card *ngFor="let characteristic of characteristics">
     <ion-card-header>UUID: {{characteristic.characteristic}}</ion-card-header>
     <ion-card-content>
       <p>Properties: {{characteristic.properties}}<br>
@@ -18,6 +19,5 @@
       </ion-buttons>
     </ion-card-content>
   </ion-card>
-  <p >AMOUNT OF MONEY : {{money}}</p>
-  <ion-spinner *ngIf="connecting==true" name="circles"></ion-spinner>
+  <ion-spinner *ngIf="connecting==true" name="circles"></ion-spinner>-->
 </ion-content>

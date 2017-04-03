@@ -38,7 +38,7 @@ export class HomePage {
         console.log("## DEVICES SCANNED ## " + JSON.stringify(this.devices))
         this.isScanning = false;
       });
-    }, 5000);
+    }, 4000);
   }
   connectToDevice(device) {
     console.log('Connect To Device');
@@ -50,23 +50,39 @@ export class HomePage {
     this.http.get('https://chic.tic.heia-fr.ch/coins/5').map(res => res.json()).subscribe(data =>{
       console.log(data.name);
       console.log(data.amount);
-      this.getValue = data.amout;
+      this.getValue = data.amount;
     })
   }
 
   testPost(){
     let headers = new Headers();
-    headers.append('Content Type', 'application/json');
+    headers.append('Content-Type', 'application/json');
 
     let body = {
-      name: "5",
-      amount : "1"
+      "name": 5,
+      "amount" : 1
     };
-
-    this.http.post('https://chic.tic.heia-fr.ch/coins/5', JSON.stringify(body), {headers: headers})
+    this.http.post('https://chic.tic.heia-fr.ch/coins', JSON.stringify(body), {headers: headers})
       .map(res => res.json())
       .subscribe(data =>{
-        console.log(data);
+        console.log(JSON.stringify(data));
       });
+    this.testGet();
+  }
+
+  testDelete(){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    let body = {
+      "name": 5,
+      "amount" : -1
+    };
+    this.http.post('https://chic.tic.heia-fr.ch/coins', JSON.stringify(body), {headers: headers})
+      .map(res => res.json())
+      .subscribe(data =>{
+        console.log(JSON.stringify(data));
+      });
+    this.testGet();
   }
 }
