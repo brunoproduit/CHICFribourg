@@ -37,3 +37,6 @@ ehthumbs.db
 Thumbs.db
 backend/node_modules/
 backend/sslcert/
+backend/passwd
+backend/postgresql-9.6.2/
+.idea/
