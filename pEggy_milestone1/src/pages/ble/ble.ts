@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { BLE } from '@ionic-native/ble';
 import { Http, Headers} from "@angular/http";
@@ -20,7 +20,7 @@ export class BlePage {
   public getValueOf5;
   public getValueOf2;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private ble: BLE, private http: Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private ble: BLE, private http: Http, private zone: NgZone) {
     this.device = this.navParams.get('device');
     console.log("## DEVICE INFORMATION ##" + JSON.stringify(this.device));
     this.connecting = true;
@@ -154,12 +154,17 @@ export class BlePage {
     this.http.get('https://chic.tic.heia-fr.ch/coins/'+name).map(res => res.json()).subscribe(data =>{
       console.log(data.name);
       console.log(data.amount);
-      if(name == 2){
-        this.getValueOf2 = data.amount;
-      } else if (name == 5){
-        this.getValueOf5 = data.amount;
+      if(data.name == 2){
+        this.zone.run(() => {
+          this.getValueOf2 = data.amount;
+        });
+        console.log("## VALUE OF 2 ## "+ this.getValueOf2);
+      } else if (data.name == 5){
+        this.zone.run(() => {
+          this.getValueOf5 = data.amount;
+        });
+        console.log("## VALUE OF 5 ## "+ this.getValueOf5);
       }
-
     })
   }
 
@@ -175,7 +180,7 @@ export class BlePage {
       .map(res => res.json())
       .subscribe(data =>{
         console.log(JSON.stringify(data));
+        this.doGet(name);
       });
-    this.doGet(name);
   }
 }

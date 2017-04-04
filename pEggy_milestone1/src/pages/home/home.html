@@ -12,11 +12,7 @@
     <div>
       <ion-buttons>
         <button ion-button (click) = "startScanning()" block>Scan</button>
-        <button ion-button (click) = "testGet()" block>GET AMOUNT</button>
-        <button ion-button (click) = "testPost()" block>ADD 1 COIN</button>
-        <button ion-button (click) = "testDelete()" block>SUBSTRACT 1 COIN</button>
       </ion-buttons>
-      <p>AMOUNT OF COINS 5 : {{getValue}}</p>
     </div>
     <div align="center">
       <ion-spinner *ngIf="isScanning==true" name="circles"></ion-spinner>
