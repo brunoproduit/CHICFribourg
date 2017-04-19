@@ -35,8 +35,6 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
-backend/node_modules/
-backend/sslcert/
-backend/passwd
+backend/src/node_modules/
+backend/misc/
 backend/postgresql-9.6.2/
-.idea/
