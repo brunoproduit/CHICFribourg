@@ -19,12 +19,13 @@ pool.connect();
 
 
 
+
+
 /* -------------------------------------------------------------------------- */
 //GET
 app.get('/', cors(), function(req, res) {
     //TODO error handeling
     res.type('application/json');
-    var result = user.getUser('*');
     coin.getAllCoins(function(response){
         console.log(JSON.stringify(response));
         res.json(response);
@@ -38,8 +39,9 @@ app.get('/coins/:id', cors(), function(req, res) {
      }*/ //TODO error handeling
     res.type('application/json');
     coin.getCoin(req.params.id, function(response){
-        console.log(JSON.stringify(response));
-        res.json(response);
+        var out = response.pop();
+        console.log(JSON.stringify(out));
+        res.json(out);
     });
 });
 
@@ -50,8 +52,9 @@ app.get('/users/:id', cors(), function(req, res) {
      }*/ //TODO error handeling
     res.type('application/json');
     user.getUser(req.params.id, function(response){
-        console.log(JSON.stringify(response));
-        res.json(response);
+        var out = response.pop();
+        console.log(JSON.stringify(out));
+        res.json(out);
     });
 });
 
@@ -116,14 +119,14 @@ app.post('/users', cors(), function(req, res) {
 
 //DELETE
 app.delete('/coins/:id', cors(), function(req, res) {
-/*    if(coins.length <= req.params.id) {
-        res.statusCode = 404;
-        return res.send('Error 404: No coins found.');
-    }*/ //TODO error handeling
+    /*    if(coins.length <= req.params.id) {
+     res.statusCode = 404;
+     return res.send('Error 404: No coins found.');
+     }*/ //TODO error handeling
     coin.deleteCoin(req.params.id);
     res.type('application/json');
     res.json(true); //TODO return value
-    });
+});
 
 app.delete('/users/:id', cors(), function(req, res) {
     /*    if(coins.length <= req.params.id) {
