@@ -47,6 +47,15 @@
           }
         } ],
         "responses" : {
+          "201" : {
+            "description" : "Created"
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "deletes a user.",
+        "parameters" : [ ],
+        "responses" : {
           "200" : {
             "description" : "OK"
           }
