@@ -52,6 +52,25 @@
           }
         }
       }
+    },
+    "/users/{userId}" : {
+      "get" : {
+        "summary" : "Returns a user by ID.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "Parameter description in Markdown.",
+          "required" : true,
+          "type" : "string",
+          "minimum" : 1
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -65,7 +84,6 @@
           "type" : "string"
         }
       }
-    },
-    "/users/{userId}" : { }
+    }
   }
 }
