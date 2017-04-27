@@ -5,9 +5,67 @@
     "version" : "0.1",
     "title" : "CHICFribourg"
   },
-  "host" : "virtserver.swaggerhub.com",
-  "basePath" : "/brunoproduit/CHICFribourg/0.1",
+  "host" : "chic.tic.heia-fr.ch",
   "schemes" : [ "https" ],
-  "paths" : { },
-  "definitions" : { }
+  "paths" : {
+    "/users" : {
+      "get" : {
+        "summary" : "Returns a list of users.",
+        "description" : "Optional extended description in Markdown.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Creates a new user.",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "user",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/User"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "put" : {
+        "summary" : "updates a user.",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "user",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/User"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "User" : {
+      "required" : [ "id", "name" ],
+      "properties" : {
+        "id" : {
+          "type" : "integer"
+        },
+        "name" : {
+          "type" : "string"
+        }
+      }
+    },
+    "/users/{userId}" : { }
+  }
 }
