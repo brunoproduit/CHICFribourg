@@ -53,6 +53,51 @@
         }
       }
     },
+    "/peggy" : {
+      "get" : {
+        "summary" : "Returns a list of peggy.",
+        "description" : "Optional extended description in Markdown.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Creates a new peggy.",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "peggy",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Peggy"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "put" : {
+        "summary" : "updates a peggy.",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "peggy",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Peggy"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Created"
+          }
+        }
+      }
+    },
     "/users/{userId}" : {
       "get" : {
         "summary" : "Returns a user by ID.",
@@ -80,10 +125,49 @@
           }
         }
       }
+    },
+    "/peggy/{peggyId}" : {
+      "get" : {
+        "summary" : "Returns a peggy by ID.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "peggyId",
+          "in" : "path",
+          "description" : "Parameter description in Markdown.",
+          "required" : true,
+          "type" : "string",
+          "minimum" : 1
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "deletes a user.",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
     }
   },
   "definitions" : {
     "User" : {
+      "required" : [ "id", "name" ],
+      "properties" : {
+        "id" : {
+          "type" : "integer"
+        },
+        "name" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Peggy" : {
       "required" : [ "id", "name" ],
       "properties" : {
         "id" : {
