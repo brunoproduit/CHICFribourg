@@ -98,12 +98,12 @@
         }
       }
     },
-    "/users/{userId}" : {
+    "/users/{uuid}" : {
       "get" : {
         "summary" : "Returns a user by ID.",
         "produces" : [ "application/json" ],
         "parameters" : [ {
-          "name" : "userId",
+          "name" : "uuid",
           "in" : "path",
           "description" : "Parameter description in Markdown.",
           "required" : true,
@@ -126,12 +126,12 @@
         }
       }
     },
-    "/peggy/{peggyId}" : {
+    "/peggy/{uuid}" : {
       "get" : {
         "summary" : "Returns a peggy by ID.",
         "produces" : [ "application/json" ],
         "parameters" : [ {
-          "name" : "peggyId",
+          "name" : "uuid",
           "in" : "path",
           "description" : "Parameter description in Markdown.",
           "required" : true,
@@ -157,23 +157,61 @@
   },
   "definitions" : {
     "User" : {
-      "required" : [ "id", "name" ],
       "properties" : {
-        "id" : {
+        "uuid" : {
           "type" : "integer"
         },
         "name" : {
           "type" : "string"
+        },
+        "password" : {
+          "type" : "integer"
+        },
+        "role" : {
+          "type" : "string"
+        },
+        "balance" : {
+          "type" : "integer"
         }
       }
     },
     "Peggy" : {
-      "required" : [ "id", "name" ],
       "properties" : {
-        "id" : {
+        "uuid" : {
+          "type" : "integer"
+        },
+        "coin5" : {
+          "type" : "integer"
+        },
+        "coin2" : {
+          "type" : "integer"
+        },
+        "coin1" : {
+          "type" : "integer"
+        },
+        "coin50c" : {
+          "type" : "integer"
+        },
+        "coin20c" : {
+          "type" : "integer"
+        },
+        "coin10c" : {
+          "type" : "integer"
+        }
+      }
+    },
+    "Objective" : {
+      "properties" : {
+        "uuid" : {
           "type" : "integer"
         },
         "name" : {
+          "type" : "integer"
+        },
+        "price" : {
+          "type" : "integer"
+        },
+        "deadline" : {
           "type" : "string"
         }
       }
