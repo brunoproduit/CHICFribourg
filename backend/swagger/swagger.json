@@ -98,6 +98,51 @@
         }
       }
     },
+    "/objective" : {
+      "get" : {
+        "summary" : "Returns a list of objective.",
+        "description" : "Optional extended description in Markdown.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Creates a new objective.",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "peggy",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Objective"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "put" : {
+        "summary" : "updates a objective.",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "objective",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Objective"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Created"
+          }
+        }
+      }
+    },
     "/users/{uuid}" : {
       "get" : {
         "summary" : "Returns a user by ID.",
@@ -146,6 +191,34 @@
       },
       "delete" : {
         "summary" : "deletes a user.",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/objective/{uuid}" : {
+      "get" : {
+        "summary" : "Returns a objective by ID.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "uuid",
+          "in" : "path",
+          "description" : "Parameter description in Markdown.",
+          "required" : true,
+          "type" : "string",
+          "minimum" : 1
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "deletes a objective.",
         "parameters" : [ ],
         "responses" : {
           "200" : {
