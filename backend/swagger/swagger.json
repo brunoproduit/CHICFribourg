@@ -232,7 +232,7 @@
     "User" : {
       "properties" : {
         "uuid" : {
-          "type" : "integer"
+          "type" : "string"
         },
         "name" : {
           "type" : "string"
@@ -251,7 +251,7 @@
     "Peggy" : {
       "properties" : {
         "uuid" : {
-          "type" : "integer"
+          "type" : "string"
         },
         "coin5" : {
           "type" : "integer"
@@ -276,7 +276,7 @@
     "Objective" : {
       "properties" : {
         "uuid" : {
-          "type" : "integer"
+          "type" : "string"
         },
         "name" : {
           "type" : "integer"
