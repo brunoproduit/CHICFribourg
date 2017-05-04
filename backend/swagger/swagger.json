@@ -279,7 +279,7 @@
           "type" : "string"
         },
         "name" : {
-          "type" : "integer"
+          "type" : "string"
         },
         "price" : {
           "type" : "integer"
