@@ -10,33 +10,33 @@
   "paths" : {
     "/users" : {
       "get" : {
-        "description" : "Returns a list of users.",
+        "description" : "Returns an Array of users.",
         "produces" : [ "application/json" ],
         "parameters" : [ ],
         "responses" : {
           "200" : {
-            "description" : "OK"
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/UserArrayOut"
+            }
+          },
+          "404" : {
+            "description" : "Not found",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          },
+          "400" : {
+            "description" : "Bad request",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
           }
         }
       },
       "post" : {
-        "summary" : "Creates a new user.",
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "user",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/UserIn"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK"
-          }
-        }
-      },
-      "put" : {
-        "summary" : "updates a user.",
+        "description" : "Creates a new user.",
+        "produces" : [ "application/json" ],
         "parameters" : [ {
           "in" : "body",
           "name" : "user",
@@ -47,41 +47,87 @@
         } ],
         "responses" : {
           "201" : {
-            "description" : "Created"
+            "description" : "Created",
+            "schema" : {
+              "$ref" : "#/definitions/UserOut"
+            }
+          },
+          "404" : {
+            "description" : "Not found",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          },
+          "400" : {
+            "description" : "Bad request",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put" : {
+        "description" : "updates a user.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "user",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/UserIn"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/UserOut"
+            }
+          },
+          "404" : {
+            "description" : "Not found",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          },
+          "400" : {
+            "description" : "Bad request",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
           }
         }
       }
     },
     "/peggy" : {
       "get" : {
-        "summary" : "Returns a list of peggy.",
-        "description" : "Optional extended description in Markdown.",
+        "description" : "Returns a list of peggy.",
         "produces" : [ "application/json" ],
         "parameters" : [ ],
         "responses" : {
           "200" : {
-            "description" : "OK"
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/PeggyArrayOut"
+            }
+          },
+          "404" : {
+            "description" : "Not found",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          },
+          "400" : {
+            "description" : "Bad request",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
           }
         }
       },
       "post" : {
-        "summary" : "Creates a new peggy.",
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "user",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/UserIn"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK"
-          }
-        }
-      },
-      "put" : {
-        "summary" : "updates a peggy.",
+        "description" : "Creates a new peggy.",
+        "produces" : [ "application/json" ],
         "parameters" : [ {
           "in" : "body",
           "name" : "user",
@@ -92,25 +138,87 @@
         } ],
         "responses" : {
           "201" : {
-            "description" : "Created"
+            "description" : "Created",
+            "schema" : {
+              "$ref" : "#/definitions/PeggyOut"
+            }
+          },
+          "404" : {
+            "description" : "Not found",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          },
+          "400" : {
+            "description" : "Bad request",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put" : {
+        "description" : "updates a peggy.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "user",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/UserIn"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/PeggyOut"
+            }
+          },
+          "404" : {
+            "description" : "Not found",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          },
+          "400" : {
+            "description" : "Bad request",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
           }
         }
       }
     },
     "/objective" : {
       "get" : {
-        "summary" : "Returns a list of objective.",
-        "description" : "Optional extended description in Markdown.",
+        "description" : "Returns a list of objective.",
         "produces" : [ "application/json" ],
         "parameters" : [ ],
         "responses" : {
           "200" : {
-            "description" : "OK"
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ObjectiveArrayOut"
+            }
+          },
+          "404" : {
+            "description" : "Not found",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          },
+          "400" : {
+            "description" : "Bad request",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
           }
         }
       },
       "post" : {
-        "summary" : "Creates a new objective.",
+        "description" : "Creates a new objective.",
+        "produces" : [ "application/json" ],
         "parameters" : [ {
           "in" : "body",
           "name" : "peggy",
@@ -120,13 +228,29 @@
           }
         } ],
         "responses" : {
-          "200" : {
-            "description" : "OK"
+          "201" : {
+            "description" : "Created",
+            "schema" : {
+              "$ref" : "#/definitions/ObjectiveOut"
+            }
+          },
+          "404" : {
+            "description" : "Not found",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          },
+          "400" : {
+            "description" : "Bad request",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
           }
         }
       },
       "put" : {
-        "summary" : "updates a objective.",
+        "description" : "updates a objective.",
+        "produces" : [ "application/json" ],
         "parameters" : [ {
           "in" : "body",
           "name" : "objective",
@@ -136,15 +260,30 @@
           }
         } ],
         "responses" : {
-          "201" : {
-            "description" : "Created"
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ObjectiveOut"
+            }
+          },
+          "404" : {
+            "description" : "Not found",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          },
+          "400" : {
+            "description" : "Bad request",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
           }
         }
       }
     },
     "/users/{uuid}" : {
       "get" : {
-        "summary" : "Returns a user by ID.",
+        "description" : "Returns a user by ID.",
         "produces" : [ "application/json" ],
         "parameters" : [ {
           "name" : "uuid",
@@ -156,23 +295,50 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "OK"
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/UserOut"
+            }
+          },
+          "404" : {
+            "description" : "Not found",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          },
+          "400" : {
+            "description" : "Bad request",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
           }
         }
       },
       "delete" : {
-        "summary" : "deletes a user.",
+        "description" : "deletes a user.",
         "parameters" : [ ],
         "responses" : {
           "200" : {
             "description" : "OK"
+          },
+          "404" : {
+            "description" : "Not found",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          },
+          "400" : {
+            "description" : "Bad request",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
           }
         }
       }
     },
     "/peggy/{uuid}" : {
       "get" : {
-        "summary" : "Returns a peggy by ID.",
+        "description" : "Returns a peggy by ID.",
         "produces" : [ "application/json" ],
         "parameters" : [ {
           "name" : "uuid",
@@ -184,23 +350,44 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "OK"
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/PeggyOut"
+            }
+          },
+          "404" : {
+            "description" : "Not found",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          },
+          "400" : {
+            "description" : "Bad request",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
           }
         }
       },
       "delete" : {
-        "summary" : "deletes a user.",
+        "description" : "deletes a user.",
         "parameters" : [ ],
         "responses" : {
           "200" : {
             "description" : "OK"
+          },
+          "404" : {
+            "description" : "Not found",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
           }
         }
       }
     },
     "/objective/{uuid}" : {
       "get" : {
-        "summary" : "Returns a objective by ID.",
+        "description" : "Returns a objective by ID.",
         "produces" : [ "application/json" ],
         "parameters" : [ {
           "name" : "uuid",
@@ -212,16 +399,43 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "OK"
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ObjectiveOut"
+            }
+          },
+          "404" : {
+            "description" : "Not found",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          },
+          "400" : {
+            "description" : "Bad request",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
           }
         }
       },
       "delete" : {
-        "summary" : "deletes a objective.",
+        "description" : "deletes a objective.",
         "parameters" : [ ],
         "responses" : {
           "200" : {
             "description" : "OK"
+          },
+          "404" : {
+            "description" : "Not found",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          },
+          "400" : {
+            "description" : "Bad request",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
           }
         }
       }
@@ -291,6 +505,24 @@
         }
       }
     },
+    "UserArrayOut" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/UserOut"
+      }
+    },
+    "PeggyArrayOut" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/PeggyOut"
+      }
+    },
+    "ObjectiveArrayOut" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/ObjectiveOut"
+      }
+    },
     "UserIn" : {
       "type" : "object",
       "properties" : {
@@ -324,6 +556,17 @@
           "type" : "integer"
         },
         "deadline" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Error" : {
+      "type" : "object",
+      "properties" : {
+        "code" : {
+          "type" : "integer"
+        },
+        "message" : {
           "type" : "string"
         }
       }
