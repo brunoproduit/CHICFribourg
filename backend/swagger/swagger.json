@@ -229,6 +229,7 @@
   },
   "definitions" : {
     "UserOut" : {
+      "type" : "object",
       "properties" : {
         "uuid" : {
           "type" : "string"
@@ -248,6 +249,7 @@
       }
     },
     "PeggyOut" : {
+      "type" : "object",
       "properties" : {
         "uuid" : {
           "type" : "string"
@@ -273,6 +275,7 @@
       }
     },
     "ObjectiveOut" : {
+      "type" : "object",
       "properties" : {
         "uuid" : {
           "type" : "string"
@@ -289,6 +292,7 @@
       }
     },
     "UserIn" : {
+      "type" : "object",
       "properties" : {
         "uuid" : {
           "type" : "string"
@@ -308,6 +312,7 @@
       }
     },
     "ObjectiveIn" : {
+      "type" : "object",
       "properties" : {
         "uuid" : {
           "type" : "string"
