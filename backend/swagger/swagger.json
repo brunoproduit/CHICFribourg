@@ -526,9 +526,6 @@
     "UserIn" : {
       "type" : "object",
       "properties" : {
-        "uuid" : {
-          "type" : "string"
-        },
         "name" : {
           "type" : "string"
         },
@@ -537,18 +534,12 @@
         },
         "role" : {
           "type" : "string"
-        },
-        "balance" : {
-          "type" : "integer"
         }
       }
     },
     "ObjectiveIn" : {
       "type" : "object",
       "properties" : {
-        "uuid" : {
-          "type" : "string"
-        },
         "name" : {
           "type" : "string"
         },
