@@ -3,11 +3,40 @@
   "info" : {
     "description" : "backend REST",
     "version" : "0.1",
-    "title" : "CHICFribourg"
+    "title" : "CHICFribourg",
+    "contact" : {
+      "email" : "bruno.produit@edu.hefr.ch"
+    },
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
   },
   "host" : "chic.tic.heia-fr.ch",
   "schemes" : [ "https" ],
   "paths" : {
+    "/uuid" : {
+      "get" : {
+        "description" : "Returns a UUID.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "string",
+              "format" : "uuid"
+            }
+          },
+          "400" : {
+            "description" : "Bad request",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/users" : {
       "get" : {
         "description" : "Returns an Array of users.",
@@ -20,14 +49,14 @@
               "$ref" : "#/definitions/UserArrayOut"
             }
           },
-          "404" : {
-            "description" : "Not found",
+          "400" : {
+            "description" : "Bad request",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
           },
-          "400" : {
-            "description" : "Bad request",
+          "404" : {
+            "description" : "Not found",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
@@ -36,6 +65,7 @@
       },
       "post" : {
         "description" : "Creates a new user.",
+        "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
           "in" : "body",
@@ -52,14 +82,14 @@
               "$ref" : "#/definitions/UserOut"
             }
           },
-          "404" : {
-            "description" : "Not found",
+          "400" : {
+            "description" : "Bad request",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
           },
-          "400" : {
-            "description" : "Bad request",
+          "404" : {
+            "description" : "Not found",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
@@ -68,6 +98,7 @@
       },
       "put" : {
         "description" : "updates a user.",
+        "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
           "in" : "body",
@@ -84,14 +115,14 @@
               "$ref" : "#/definitions/UserOut"
             }
           },
-          "404" : {
-            "description" : "Not found",
+          "400" : {
+            "description" : "Bad request",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
           },
-          "400" : {
-            "description" : "Bad request",
+          "404" : {
+            "description" : "Not found",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
@@ -111,14 +142,14 @@
               "$ref" : "#/definitions/PeggyArrayOut"
             }
           },
-          "404" : {
-            "description" : "Not found",
+          "400" : {
+            "description" : "Bad request",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
           },
-          "400" : {
-            "description" : "Bad request",
+          "404" : {
+            "description" : "Not found",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
@@ -127,6 +158,7 @@
       },
       "post" : {
         "description" : "Creates a new peggy.",
+        "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
           "in" : "body",
@@ -143,14 +175,14 @@
               "$ref" : "#/definitions/PeggyOut"
             }
           },
-          "404" : {
-            "description" : "Not found",
+          "400" : {
+            "description" : "Bad request",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
           },
-          "400" : {
-            "description" : "Bad request",
+          "404" : {
+            "description" : "Not found",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
@@ -159,6 +191,7 @@
       },
       "put" : {
         "description" : "updates a peggy.",
+        "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
           "in" : "body",
@@ -175,14 +208,14 @@
               "$ref" : "#/definitions/PeggyOut"
             }
           },
-          "404" : {
-            "description" : "Not found",
+          "400" : {
+            "description" : "Bad request",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
           },
-          "400" : {
-            "description" : "Bad request",
+          "404" : {
+            "description" : "Not found",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
@@ -202,14 +235,14 @@
               "$ref" : "#/definitions/ObjectiveArrayOut"
             }
           },
-          "404" : {
-            "description" : "Not found",
+          "400" : {
+            "description" : "Bad request",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
           },
-          "400" : {
-            "description" : "Bad request",
+          "404" : {
+            "description" : "Not found",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
@@ -218,6 +251,7 @@
       },
       "post" : {
         "description" : "Creates a new objective.",
+        "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
           "in" : "body",
@@ -234,14 +268,14 @@
               "$ref" : "#/definitions/ObjectiveOut"
             }
           },
-          "404" : {
-            "description" : "Not found",
+          "400" : {
+            "description" : "Bad request",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
           },
-          "400" : {
-            "description" : "Bad request",
+          "404" : {
+            "description" : "Not found",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
@@ -250,6 +284,7 @@
       },
       "put" : {
         "description" : "updates a objective.",
+        "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
           "in" : "body",
@@ -266,14 +301,14 @@
               "$ref" : "#/definitions/ObjectiveOut"
             }
           },
-          "404" : {
-            "description" : "Not found",
+          "400" : {
+            "description" : "Bad request",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
           },
-          "400" : {
-            "description" : "Bad request",
+          "404" : {
+            "description" : "Not found",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
@@ -291,7 +326,8 @@
           "description" : "Parameter description in Markdown.",
           "required" : true,
           "type" : "string",
-          "minimum" : 1
+          "minimum" : 1,
+          "format" : "uuid"
         } ],
         "responses" : {
           "200" : {
@@ -300,14 +336,14 @@
               "$ref" : "#/definitions/UserOut"
             }
           },
-          "404" : {
-            "description" : "Not found",
+          "400" : {
+            "description" : "Bad request",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
           },
-          "400" : {
-            "description" : "Bad request",
+          "404" : {
+            "description" : "Not found",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
@@ -321,14 +357,14 @@
           "200" : {
             "description" : "OK"
           },
-          "404" : {
-            "description" : "Not found",
+          "400" : {
+            "description" : "Bad request",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
           },
-          "400" : {
-            "description" : "Bad request",
+          "404" : {
+            "description" : "Not found",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
@@ -343,10 +379,10 @@
         "parameters" : [ {
           "name" : "uuid",
           "in" : "path",
-          "description" : "Parameter description in Markdown.",
           "required" : true,
           "type" : "string",
-          "minimum" : 1
+          "minimum" : 1,
+          "format" : "uuid"
         } ],
         "responses" : {
           "200" : {
@@ -355,14 +391,14 @@
               "$ref" : "#/definitions/PeggyOut"
             }
           },
-          "404" : {
-            "description" : "Not found",
+          "400" : {
+            "description" : "Bad request",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
           },
-          "400" : {
-            "description" : "Bad request",
+          "404" : {
+            "description" : "Not found",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
@@ -392,10 +428,10 @@
         "parameters" : [ {
           "name" : "uuid",
           "in" : "path",
-          "description" : "Parameter description in Markdown.",
           "required" : true,
           "type" : "string",
-          "minimum" : 1
+          "minimum" : 1,
+          "format" : "uuid"
         } ],
         "responses" : {
           "200" : {
@@ -404,14 +440,14 @@
               "$ref" : "#/definitions/ObjectiveOut"
             }
           },
-          "404" : {
-            "description" : "Not found",
+          "400" : {
+            "description" : "Bad request",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
           },
-          "400" : {
-            "description" : "Bad request",
+          "404" : {
+            "description" : "Not found",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
@@ -425,14 +461,14 @@
           "200" : {
             "description" : "OK"
           },
-          "404" : {
-            "description" : "Not found",
+          "400" : {
+            "description" : "Bad request",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
           },
-          "400" : {
-            "description" : "Bad request",
+          "404" : {
+            "description" : "Not found",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
@@ -446,13 +482,11 @@
       "type" : "object",
       "properties" : {
         "uuid" : {
-          "type" : "string"
+          "type" : "string",
+          "format" : "uuid"
         },
         "name" : {
           "type" : "string"
-        },
-        "password" : {
-          "type" : "integer"
         },
         "role" : {
           "type" : "string"
@@ -466,7 +500,8 @@
       "type" : "object",
       "properties" : {
         "uuid" : {
-          "type" : "string"
+          "type" : "string",
+          "format" : "uuid"
         },
         "coin5" : {
           "type" : "integer"
@@ -492,7 +527,8 @@
       "type" : "object",
       "properties" : {
         "uuid" : {
-          "type" : "string"
+          "type" : "string",
+          "format" : "uuid"
         },
         "name" : {
           "type" : "string"
@@ -501,7 +537,8 @@
           "type" : "integer"
         },
         "deadline" : {
-          "type" : "string"
+          "type" : "string",
+          "format" : "date-time"
         }
       }
     },
@@ -547,7 +584,8 @@
           "type" : "integer"
         },
         "deadline" : {
-          "type" : "string"
+          "type" : "string",
+          "format" : "date-time"
         }
       }
     },
