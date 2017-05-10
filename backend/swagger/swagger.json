@@ -190,7 +190,7 @@
         }
       },
       "put" : {
-        "description" : "updates a peggy.",
+        "description" : "Insert or remove coins in a peggy.",
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
@@ -198,7 +198,7 @@
           "name" : "user",
           "required" : false,
           "schema" : {
-            "$ref" : "#/definitions/UserIn"
+            "$ref" : "#/definitions/PeggyIn"
           }
         } ],
         "responses" : {
@@ -586,6 +586,33 @@
         "deadline" : {
           "type" : "string",
           "format" : "date-time"
+        }
+      }
+    },
+    "PeggyIn" : {
+      "type" : "object",
+      "properties" : {
+        "uuid" : {
+          "type" : "string",
+          "format" : "uuid"
+        },
+        "coin5" : {
+          "type" : "integer"
+        },
+        "coin2" : {
+          "type" : "integer"
+        },
+        "coin1" : {
+          "type" : "integer"
+        },
+        "coin50c" : {
+          "type" : "integer"
+        },
+        "coin20c" : {
+          "type" : "integer"
+        },
+        "coin10c" : {
+          "type" : "integer"
         }
       }
     },
