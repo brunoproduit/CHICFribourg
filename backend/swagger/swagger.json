@@ -168,7 +168,7 @@
         }
       },
       "put" : {
-        "description" : "Insert or remove coins in a peggy.",
+        "description" : "Insert or remove coins in a specific peggy.",
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
