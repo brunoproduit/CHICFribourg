@@ -15,28 +15,6 @@
   "host" : "chic.tic.heia-fr.ch",
   "schemes" : [ "https" ],
   "paths" : {
-    "/uuid" : {
-      "get" : {
-        "description" : "Returns a UUID.",
-        "produces" : [ "application/json" ],
-        "parameters" : [ ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "type" : "string",
-              "format" : "uuid"
-            }
-          },
-          "400" : {
-            "description" : "Bad request",
-            "schema" : {
-              "$ref" : "#/definitions/Error"
-            }
-          }
-        }
-      }
-    },
     "/users" : {
       "get" : {
         "description" : "Returns an Array of users.",
