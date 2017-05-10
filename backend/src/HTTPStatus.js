@@ -14,7 +14,6 @@ module.exports.getStatusJSON= function getStatusJSON(code, value) {
             status.currentvalue = new Object();
             status.success.code = 201;
             status.success.message = "Created";
-            status.success.details = "Entity has been added to the Database";
             status.currentvalue = value;
             return JSON.stringify(status);
             break;
@@ -58,7 +57,6 @@ module.exports.getStatusJSON= function getStatusJSON(code, value) {
             status.error = new Object();
             status.error.code = 401;
             status.error.message = "Unauthorized";
-            status.error.details = "Please Authenticate";
             return JSON.stringify(status);
             break;
         case 403:
@@ -66,7 +64,6 @@ module.exports.getStatusJSON= function getStatusJSON(code, value) {
             status.error = new Object();
             status.error.code = 403;
             status.error.message = "Forbidden";
-            status.error.details = "You are not allowed to do that, please ask an administrator";
             return JSON.stringify(status);
             break;
         case 404:
@@ -74,7 +71,6 @@ module.exports.getStatusJSON= function getStatusJSON(code, value) {
             status.error = new Object();
             status.error.code = 404;
             status.error.message = "Not Found";
-            status.error.details = "Entity doesn't exist";
             return JSON.stringify(status);
             break;
         case 405:
@@ -82,7 +78,6 @@ module.exports.getStatusJSON= function getStatusJSON(code, value) {
             status.error = new Object();
             status.error.code = 405;
             status.error.message = "Method Not Allowed";
-            status.error.details = "This Method is intentionally blocked";
             return JSON.stringify(status);
             break;
         case 406:
@@ -90,7 +85,6 @@ module.exports.getStatusJSON= function getStatusJSON(code, value) {
             status.error = new Object();
             status.error.code = 406;
             status.error.message = "Not Acceptable";
-            status.error.details = "Please only use application/json format";
             return JSON.stringify(status);
             break;
         case 501:
@@ -105,7 +99,6 @@ module.exports.getStatusJSON= function getStatusJSON(code, value) {
             status.error = new Object();
             status.error.code = 500;
             status.error.message = "Internal Server Error";
-            status.error.details = "Try again later";
             return JSON.stringify(status);
     }
 };

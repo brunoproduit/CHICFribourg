@@ -26,11 +26,13 @@ pool.connect();
 //GET
 app.get('*', cors(), function(req, res, next) {
     res.type('application/json');
-    /*    if(coins.length <= req.params.id || req.params.id < 0) {
-     res.statusCode = 404;
-     return res.send('Error 404: No coins found');
-     }*/ //TODO error handeling
-    next();
+    var re = /^\/(coins\/?[0-9.]{0,4}|users\/?[a-zA-Z0-9]{0,40})$/;
+    if (re.test(req.originalUrl)) {
+        next();
+    } else {
+        //TODO error handeling
+        res.status(400).send(HTTPStatus.getStatusJSON(400))
+    }
 });
 
 app.get('/', cors(), function(req, res) {
