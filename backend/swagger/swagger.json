@@ -1,7 +1,7 @@
 {
   "swagger" : "2.0",
   "info" : {
-    "description" : "backend REST",
+    "description" : "backend REST in the TIC cluster @HEIA-FR",
     "version" : "0.1",
     "title" : "CHICFribourg",
     "contact" : {
