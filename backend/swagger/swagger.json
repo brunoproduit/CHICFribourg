@@ -466,8 +466,8 @@
         "name" : {
           "type" : "string"
         },
-        "role" : {
-          "type" : "string"
+        "isParent" : {
+          "type" : "boolean"
         },
         "balance" : {
           "type" : "integer"
@@ -547,8 +547,8 @@
         "password" : {
           "type" : "string"
         },
-        "role" : {
-          "type" : "string"
+        "isParent" : {
+          "type" : "boolean"
         }
       }
     },
