@@ -35,8 +35,7 @@ module.exports.getAllUsers = function getAllUsers(callback) {
 };
 
 module.exports.postUser = function postUser(name, balance, role, peggy_id, token, callback) {
-    pool.query(INSERT, [name, balance, new Date(), role, peggy_id, token]);
-    callback();
+    pool.query(INSERT, [name, balance, new Date(), role, peggy_id, token], function(){callback();});
 };
 
 module.exports.deleteUser = function deleteUser(name) {
@@ -44,6 +43,5 @@ module.exports.deleteUser = function deleteUser(name) {
 };
 
 module.exports.putUser = function putUser(name, balance, role, callback) {
-    pool.query(UPDATE, [name, balance, role, new Date()]);
-    callback();
+    pool.query(UPDATE, [name, balance, role, new Date()], function(){callback();});
 };
