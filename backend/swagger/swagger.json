@@ -399,66 +399,6 @@
         }
       }
     },
-    "/peggy/{uuid}/:id" : {
-      "get" : {
-        "description" : "Returns the amount of coins contained in this peggy.",
-        "produces" : [ "application/json" ],
-        "parameters" : [ ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/PeggyArrayOut"
-            }
-          },
-          "400" : {
-            "description" : "Bad request",
-            "schema" : {
-              "$ref" : "#/definitions/Error"
-            }
-          },
-          "404" : {
-            "description" : "Not found",
-            "schema" : {
-              "$ref" : "#/definitions/Error"
-            }
-          }
-        }
-      },
-      "put" : {
-        "description" : "Insert or remove coins in a specific peggy.",
-        "consumes" : [ "application/json" ],
-        "produces" : [ "application/json" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "user",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/PeggyIn"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/PeggyOut"
-            }
-          },
-          "400" : {
-            "description" : "Bad request",
-            "schema" : {
-              "$ref" : "#/definitions/Error"
-            }
-          },
-          "404" : {
-            "description" : "Not found",
-            "schema" : {
-              "$ref" : "#/definitions/Error"
-            }
-          }
-        }
-      }
-    },
     "/objective/{uuid}" : {
       "get" : {
         "description" : "Returns a objective by ID.",
