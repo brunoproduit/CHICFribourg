@@ -1,4 +1,5 @@
 const pool = require('./postgreSQL');
+const uuidV4 = require('uuid/v4');
 const SELECT = "SELECT name, amount FROM coins WHERE name = $1 ORDER BY name";
 const SELECTALL = "SELECT name, amount FROM coins ORDER BY name";
 const INSERT = 'INSERT INTO coins(name, amount, lastchanged, peggy_id) VALUES($1, $2, $3, $4)';
