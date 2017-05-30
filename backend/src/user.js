@@ -1,13 +1,14 @@
 const pool = require('./postgreSQL');
+const uuidV4 = require('uuid/v4');
 var bodyParser = require('body-parser');
-const SELECT = "SELECT name, balance, role FROM users WHERE name = $1 ORDER BY user_id";
-const SELECTALL = "SELECT name, balance, role FROM users ORDER BY user_id";
-const INSERT = 'INSERT INTO users(name, balance, lastchanged, role, peggy_id, token) VALUES($1, $2, $3, $4, $5, $6)';
+const SELECT = "SELECT * FROM users WHERE uuid = $1 ORDER BY uuid";
+const SELECTALL = "SELECT * FROM users ORDER BY uuid";
+const INSERT = 'INSERT INTO users(uuid, name, password, isParent, lastchanged, lastrequest, peggyUuid) VALUES($1, $2, $3, $4, $5, $5, $6)';
 const DELETE = 'DELETE FROM users WHERE name = $1';
-const UPDATE = 'UPDATE users SET balance = $2, role = $3, lastchanged = $4 WHERE name = $1';
+const UPDATE = 'UPDATE users SET balance = $2, isParent = $3, lastchanged = $4 WHERE uuid = $1';
 
-module.exports.getUser = function getUser(name, callback) {
-    pool.query(SELECT, [name], function(err, res) {
+module.exports.getUser = function getUser(uuid, callback) {
+    pool.query(SELECT, [uuid], function(err, res) {
         var results = [];
         if (err) {
             return console.error('error running query', err);
@@ -34,9 +35,8 @@ module.exports.getAllUsers = function getAllUsers(callback) {
     });
 };
 
-module.exports.postUser = function postUser(name, balance, role, peggy_id, token, callback) {
-    pool.query(INSERT, [name, balance, new Date(), role, peggy_id, token]);
-    callback();
+module.exports.postUser = function postUser(name, password, isParent, peggyUuid, callback) {
+    pool.query(INSERT, [uuidV4(), name, password, isParent, new Date(), peggyUuid], function(){callback();});
 };
 
 module.exports.deleteUser = function deleteUser(name) {
@@ -44,6 +44,5 @@ module.exports.deleteUser = function deleteUser(name) {
 };
 
 module.exports.putUser = function putUser(name, balance, role, callback) {
-    pool.query(UPDATE, [name, balance, role, new Date()]);
-    callback();
+    pool.query(UPDATE, [name, balance, role, new Date()], function(){callback();});
 };

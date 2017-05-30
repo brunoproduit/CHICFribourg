@@ -38,8 +38,8 @@ module.exports.getAllCoins = function getAllCoins(callback) {
 
 
 module.exports.postCoin = function postCoin(name, amount, peggy_id, callback) {
-    pool.query(INSERT, [name, amount, new Date(), peggy_id]);
-    callback();
+    pool.query(INSERT, [name, amount, new Date(), peggy_id], function(){callback();});
+
 };
 
 module.exports.deleteCoin = function deleteCoin(name) {
@@ -47,11 +47,10 @@ module.exports.deleteCoin = function deleteCoin(name) {
 };
 
 module.exports.putCoin = function putCoin(name, amount, callback) {
-    var re = /[\u002B|\u002D]\d{1,2}$/i;
+    var re = /^(\u002B|\u002D)\d{1,2}$/i;
     if (re.test(amount)) { // if relative (with plus or minus)
-        pool.query(UPDATE_RELATIVE, [name, amount, new Date()]);
+        pool.query(UPDATE_RELATIVE, [name, amount, new Date()], function(){callback();});
     } else { // if absolute number
-        pool.query(UPDATE, [name, amount, new Date()]);
+        pool.query(UPDATE, [name, amount, new Date()], function(){callback();});
     }
-    callback();
 };
