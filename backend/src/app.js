@@ -4,8 +4,11 @@ var https = require('https');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 const pool = require('./postgreSQL');
-const coin = require('./coin');
+const peggy = require('./peggy');
 const user = require('./user');
+const objective = require('./objective');
+const uuidV4 = require('uuid/v4');
+
 var HTTPStatus = require('./HTTPStatus');
 var privateKey = fs.readFileSync('../misc/sslcert/privkey.pem', 'utf8');
 var certificate = fs.readFileSync('../misc/sslcert/fullchain.pem', 'utf8');
@@ -15,7 +18,8 @@ var credentials = {
 };
 var express = require('express');
 var app = express();
-
+var swagger = fs.readFileSync('../swagger/swagger.json', 'utf8')
+var swaggerjson = new Object(JSON.parse(swagger))
 
 app.use(bodyParser.json());
 pool.connect();
@@ -26,7 +30,7 @@ pool.connect();
 //GET
 app.get('*', cors(), function(req, res, next) {
     res.type('application/json');
-    var re = /^\/(coins\/?[0-9.]{0,4}|users\/?[a-zA-Z0-9]{0,40})$/;
+    var re = /^\/$|(\/(peggy\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?|users\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?|objective\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?))$/;
     if (re.test(req.originalUrl)) {
         next();
     } else {
@@ -36,19 +40,18 @@ app.get('*', cors(), function(req, res, next) {
 });
 
 app.get('/', cors(), function(req, res) {
-    res.json('ok')
+    res.json(swaggerjson)
 });
 
-app.get('/coins/:id', cors(), function(req, res) {
-    coin.getCoin(req.params.id, function(response) {
-        var out = response.pop();
-        console.log(JSON.stringify(out));
-        res.json(out);
+app.get('/peggy', cors(), function(req, res) {
+    peggy.getAllPeggy(function(response) {
+        console.log(JSON.stringify(response));
+        return res.json(response);
     });
 });
 
-app.get('/users/:id', cors(), function(req, res) {
-    user.getUser(req.params.id, function(response) {
+app.get('/peggy/:id', cors(), function(req, res) {
+    peggy.getPeggy(req.params.id, function(response) {
         var out = response.pop();
         console.log(JSON.stringify(out));
         res.json(out);
@@ -62,10 +65,27 @@ app.get('/users', cors(), function(req, res) {
     });
 });
 
-app.get('/coins', cors(), function(req, res) {
-    coin.getAllCoins(function(response) {
+app.get('/users/:id', cors(), function(req, res) {
+    user.getUser(req.params.id, function(response) {
+        var out = response.pop();
+        console.log(JSON.stringify(out));
+        res.json(out);
+    });
+});
+
+app.get('/objective', cors(), function(req, res) {
+    objective.getAllObjectives(function(response) {
         console.log(JSON.stringify(response));
         return res.json(response);
+    });
+});
+
+
+app.get('/objective/:id', cors(), function(req, res) {
+    objective.getObjective(req.params.id, function(response) {
+        var out = response.pop();
+        console.log(JSON.stringify(out));
+        res.json(out);
     });
 });
 /* -------------------------------------------------------------------------- */
@@ -85,10 +105,10 @@ app.post('*', cors(), function(req, res, next) {
     }
 });
 
-app.post('/coins', cors(), function(req, res) {
-    var name = req.body.name;
-    coin.postCoin(req.body.name, req.body.amount, 1, function() {
-        coin.getCoin(name, function(response) {
+app.post('/peggy', cors(), function(req, res) {
+    var uuid = uuidV4();
+    peggy.postPeggy(uuid, req.body.name, req.body.password, req.body.isParent, function() {
+        peggy.getPeggy(uuid, function(response) {
             var out = response.pop();
             console.log(JSON.stringify(out));
             res.status(201).send(HTTPStatus.getStatusJSON(201, out));
@@ -98,8 +118,19 @@ app.post('/coins', cors(), function(req, res) {
 
 app.post('/users', cors(), function(req, res) {
     var name = req.body.name;
-    user.postUser(req.body.name, req.body.balance, req.body.role, 1, 1, function() {
+    user.postUser(req.body.name, req.body.balance, req.body.isParent, 1, 1, function() {
         user.getUser(name, function(response) {
+            var out = response.pop();
+            console.log(JSON.stringify(out));
+            res.status(201).send(HTTPStatus.getStatusJSON(201, out));
+        })
+    });
+});
+
+app.post('/objective', cors(), function(req, res) {
+    var uuid = uuidV4();
+    objective.postObjective(uuid, req.body.name, req.body.price, "c946d55d-86ab-4c02-82f6-344049ccbb82", req.body.deadline, function() {
+        objective.getObjective(uuid, function(response) {
             var out = response.pop();
             console.log(JSON.stringify(out));
             res.status(201).send(HTTPStatus.getStatusJSON(201, out));
@@ -118,13 +149,18 @@ app.delete('*', cors(), function(req, res, next) {
      }*/ //TODO error handeling
     next();
 });
-app.delete('/coins/:id', cors(), function(req, res) {
-    coin.deleteCoin(req.params.id);
+app.delete('/peggy/:id', cors(), function(req, res) {
+    peggy.deletePeggy(req.params.id);
     res.status(200).send(HTTPStatus.getStatusJSON(200));
 });
 
 app.delete('/users/:id', cors(), function(req, res) {
     user.deleteUser(req.params.id);
+    res.status(200).send(HTTPStatus.getStatusJSON(200));
+});
+
+app.delete('/objective/:id', cors(), function(req, res) {
+    objective.deleteObjective(req.params.id);
     res.status(200).send(HTTPStatus.getStatusJSON(200));
 });
 
@@ -140,10 +176,10 @@ app.put('*', cors(), function(req, res, next) {
     next();
 });
 
-app.put('/coins', cors(), function(req, res) {
+app.put('/peggy', cors(), function(req, res) {
     var name = req.body.name;
-    coin.putCoin(req.body.name, req.body.amount, function() {
-        coin.getCoin(name, function(response) {
+    peggy.putPeggy(req.body.name, req.body.amount, function() {
+        peggy.getPeggy(name, function(response) {
             var out = response.pop();
             console.log(JSON.stringify(out));
             res.status(200).send(HTTPStatus.getStatusJSON(200, out));
@@ -161,14 +197,28 @@ app.put('/users', cors(), function(req, res) {
         })
     });
 });
+
+app.put('/objective', cors(), function(req, res) {
+    var name = req.body.name;
+    objective.putObjective(req.body.name, req.body.amount, function() {
+        objective.getObjective(name, function(response) {
+            var out = response.pop();
+            console.log(JSON.stringify(out));
+            res.status(200).send(HTTPStatus.getStatusJSON(200, out));
+        })
+    });
+});
+
+
 /* -------------------------------------------------------------------------- */
 
 
 /* -------------------------------------------------------------------------- */
 
 // OPTION
-app.options('/coins/:id', cors()); // enable pre-flight request for DELETE request
+app.options('/peggy/:id', cors()); // enable pre-flight request for DELETE request
 app.options('/users/:id', cors()); // enable pre-flight request for DELETE request
+app.options('/objective/:id', cors()); // enable pre-flight request for DELETE request
 
 /* -------------------------------------------------------------------------- */
 
