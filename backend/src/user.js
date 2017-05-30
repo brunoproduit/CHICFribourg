@@ -35,8 +35,13 @@ module.exports.getAllUsers = function getAllUsers(callback) {
     });
 };
 
+<<<<<<< HEAD
 module.exports.postUser = function postUser(name, password, isParent, peggyUuid, callback) {
     pool.query(INSERT, [uuidV4(), name, password, isParent, new Date(), peggyUuid], function(){callback();});
+=======
+module.exports.postUser = function postUser(name, balance, role, peggy_id, token, callback) {
+    pool.query(INSERT, [name, balance, new Date(), role, peggy_id, token], function(){callback();});
+>>>>>>> 0848e31cb8ef8f89ba0eb3a559f204e0abee4fa6
 };
 
 module.exports.deleteUser = function deleteUser(name) {

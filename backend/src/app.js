@@ -30,7 +30,11 @@ pool.connect();
 //GET
 app.get('*', cors(), function(req, res, next) {
     res.type('application/json');
+<<<<<<< HEAD
     var re = /^\/$|(\/(peggy\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?|users\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?|objective\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?))$/;
+=======
+    var re = /^\/(coins\/?[0-9.]{0,4}|users\/?[a-zA-Z0-9]{0,40})$/;
+>>>>>>> 0848e31cb8ef8f89ba0eb3a559f204e0abee4fa6
     if (re.test(req.originalUrl)) {
         next();
     } else {
