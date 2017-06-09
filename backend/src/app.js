@@ -210,5 +210,9 @@ app.options('/objective/:id', cors()); // enable pre-flight request for DELETE r
 
 /* -------------------------------------------------------------------------- */
 
+<<<<<<< HEAD
 console.log('Server running at https://chic.tic.heia-fr.ch/');
+=======
+console.log('Server running at https://chic.tic.heia-fr/');
+>>>>>>> 1cba963b9c3a9ff083da87dedae85ef374a95c31
 https.createServer(credentials, app).listen(443);

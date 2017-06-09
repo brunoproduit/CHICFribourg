@@ -43,6 +43,11 @@ module.exports.deleteUser = function deleteUser(name) {
     pool.query(DELETE, [name]);
 };
 
+<<<<<<< HEAD
 module.exports.putUser = function putUser(uuid, name, password, isParent, callback) {
     pool.query(UPDATE, [uuid, name, password, isParent, new Date()], function(){callback();});
+=======
+module.exports.putUser = function putUser(name, balance, role, callback) {
+    pool.query(UPDATE, [name, balance, role, new Date()], function(){callback();});
+>>>>>>> 1cba963b9c3a9ff083da87dedae85ef374a95c31
 };
