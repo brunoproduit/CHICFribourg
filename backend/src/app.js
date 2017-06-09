@@ -30,11 +30,7 @@ pool.connect();
 //GET
 app.get('*', cors(), function(req, res, next) {
     res.type('application/json');
-<<<<<<< HEAD
     var re = /^\/$|(\/(peggy\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?|users\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?|objective\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?))$/;
-=======
-    var re = /^\/(coins\/?[0-9.]{0,4}|users\/?[a-zA-Z0-9]{0,40})$/;
->>>>>>> 0848e31cb8ef8f89ba0eb3a559f204e0abee4fa6
     if (re.test(req.originalUrl)) {
         next();
     } else {
@@ -56,9 +52,8 @@ app.get('/peggy', cors(), function(req, res) {
 
 app.get('/peggy/:id', cors(), function(req, res) {
     peggy.getPeggy(req.params.id, function(response) {
-        var out = response.pop();
-        console.log(JSON.stringify(out));
-        res.json(out);
+        console.log(JSON.stringify(response));
+        res.json(response);
     });
 });
 
@@ -71,9 +66,8 @@ app.get('/users', cors(), function(req, res) {
 
 app.get('/users/:id', cors(), function(req, res) {
     user.getUser(req.params.id, function(response) {
-        var out = response.pop();
-        console.log(JSON.stringify(out));
-        res.json(out);
+        console.log(JSON.stringify(response));
+        res.json(response);
     });
 });
 
@@ -87,9 +81,8 @@ app.get('/objective', cors(), function(req, res) {
 
 app.get('/objective/:id', cors(), function(req, res) {
     objective.getObjective(req.params.id, function(response) {
-        var out = response.pop();
-        console.log(JSON.stringify(out));
-        res.json(out);
+        console.log(JSON.stringify(response));
+        res.json(response);
     });
 });
 /* -------------------------------------------------------------------------- */
@@ -113,31 +106,28 @@ app.post('/peggy', cors(), function(req, res) {
     var uuid = uuidV4();
     peggy.postPeggy(uuid, req.body.name, req.body.password, req.body.isParent, function() {
         peggy.getPeggy(uuid, function(response) {
-            var out = response.pop();
-            console.log(JSON.stringify(out));
-            res.status(201).send(HTTPStatus.getStatusJSON(201, out));
+            console.log(JSON.stringify(response));
+            res.status(201).send(HTTPStatus.getStatusJSON(201, response));
         })
     });
 });
 
 app.post('/users', cors(), function(req, res) {
-    var name = req.body.name;
-    user.postUser(req.body.name, req.body.balance, req.body.isParent, 1, 1, function() {
-        user.getUser(name, function(response) {
-            var out = response.pop();
-            console.log(JSON.stringify(out));
-            res.status(201).send(HTTPStatus.getStatusJSON(201, out));
+    var uuid = uuidV4();
+    user.postUser(uuid, req.body.name, req.body.password, req.body.isParent, "cf94737d-5d5b-4ca4-ba6f-33cc1f1f8de1", function() {
+        user.getUser(uuid, function(response) {
+            console.log(JSON.stringify(response));
+            res.status(201).send(HTTPStatus.getStatusJSON(201, response));
         })
     });
 });
 
 app.post('/objective', cors(), function(req, res) {
     var uuid = uuidV4();
-    objective.postObjective(uuid, req.body.name, req.body.price, "c946d55d-86ab-4c02-82f6-344049ccbb82", req.body.deadline, function() {
+    objective.postObjective(uuid, req.body.name, req.body.price, "4c3c9845-5ef6-4556-87b0-f04a4c33004e", req.body.deadline, function() {
         objective.getObjective(uuid, function(response) {
-            var out = response.pop();
-            console.log(JSON.stringify(out));
-            res.status(201).send(HTTPStatus.getStatusJSON(201, out));
+            console.log(JSON.stringify(response));
+            res.status(201).send(HTTPStatus.getStatusJSON(201, response));
         })
     });
 });
@@ -181,34 +171,28 @@ app.put('*', cors(), function(req, res, next) {
 });
 
 app.put('/peggy', cors(), function(req, res) {
-    var name = req.body.name;
-    peggy.putPeggy(req.body.name, req.body.amount, function() {
-        peggy.getPeggy(name, function(response) {
-            var out = response.pop();
-            console.log(JSON.stringify(out));
-            res.status(200).send(HTTPStatus.getStatusJSON(200, out));
+    peggy.putPeggy(req.body.uuid, req.body.coin5, req.body.coin2, req.body.coin1, req.body.coin50c, req.body.coin20c, req.body.coin10c, function() {
+        peggy.getPeggy(req.body.uuid, function(response) {
+            console.log(JSON.stringify(response));
+            res.status(200).send(HTTPStatus.getStatusJSON(200, response));
         })
     });
 });
 
 app.put('/users', cors(), function(req, res) {
-    var name = req.body.name;
-    user.putUser(req.body.name, req.body.balance, req.body.role, function() {
-        user.getUser(name, function(response) {
-            var out = response.pop();
-            console.log(JSON.stringify(out));
-            res.status(200).send(HTTPStatus.getStatusJSON(200, out));
+    user.putUser(req.body.uuid, req.body.name, req.body.password, req.body.isParent, function() {
+        user.getUser(req.body.uuid, function(response) {
+            console.log(JSON.stringify(response));
+            res.status(200).send(HTTPStatus.getStatusJSON(200, response));
         })
     });
 });
 
 app.put('/objective', cors(), function(req, res) {
-    var name = req.body.name;
-    objective.putObjective(req.body.name, req.body.amount, function() {
-        objective.getObjective(name, function(response) {
-            var out = response.pop();
-            console.log(JSON.stringify(out));
-            res.status(200).send(HTTPStatus.getStatusJSON(200, out));
+    objective.putObjective(req.body.uuid, req.body.name, req.body.price, req.body.deadline, function() {
+        objective.getObjective(uuid, function(response) {
+            console.log(JSON.stringify(response));
+            res.status(200).send(HTTPStatus.getStatusJSON(200, response));
         })
     });
 });
@@ -226,5 +210,5 @@ app.options('/objective/:id', cors()); // enable pre-flight request for DELETE r
 
 /* -------------------------------------------------------------------------- */
 
-console.log('Server running at https://chic.tic.heia-fr/');
+console.log('Server running at https://chic.tic.heia-fr.ch/');
 https.createServer(credentials, app).listen(443);
