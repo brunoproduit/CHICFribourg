@@ -1,6 +1,7 @@
 //Var
 var fs = require('fs');
 var https = require('https');
+var jwt = require('jsonwebtoken');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 const pool = require('./postgreSQL');
@@ -8,9 +9,10 @@ const peggy = require('./peggy');
 const user = require('./user');
 const objective = require('./objective');
 const uuidV4 = require('uuid/v4');
-
+const bearerToken = require('express-bearer-token');
 var HTTPStatus = require('./HTTPStatus');
 var privateKey = fs.readFileSync('../misc/sslcert/privkey.pem', 'utf8');
+var publicKey = fs.readFileSync('../misc/sslcert/key.pub', 'utf8');
 var certificate = fs.readFileSync('../misc/sslcert/fullchain.pem', 'utf8');
 var credentials = {
     key: privateKey,
@@ -27,10 +29,10 @@ pool.connect();
 
 
 /* -------------------------------------------------------------------------- */
-//GET
-app.get('*', cors(), function(req, res, next) {
+app.all('*', cors(), bearerToken(), function(req, res, next) {
+    //console.log('GET request from ' + jwt.decode(req.token).name);
     res.type('application/json');
-    var re = /^\/$|(\/(peggy\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?|users\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?|objective\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?))$/;
+    var re = /^\/$|(\/(peggy\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?|users\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?|objective\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?))|auth\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?$/;
     if (re.test(req.originalUrl)) {
         next();
     } else {
@@ -39,51 +41,89 @@ app.get('*', cors(), function(req, res, next) {
     }
 });
 
-app.get('/', cors(), function(req, res) {
+
+
+//GET
+app.get('*', cors(), bearerToken(), function(req, res, next) {
+    var re = /^\/$|auth\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?$/
+    if (typeof(req.token) === 'undefined'&!re.test(req.originalUrl)){
+        res.status(401).send(HTTPStatus.getStatusJSON(401))
+    } else{
+        next();
+    }
+});
+
+app.get('/', cors(), bearerToken(), function(req, res) {
     res.json(swaggerjson)
 });
 
-app.get('/peggy', cors(), function(req, res) {
+app.get('/auth/:id', cors(), bearerToken(), function(req, res) {
+
+    user.getUser(req.params.id, function(response) {
+        var out = new Object();
+        out.token = jwt.sign(
+            response, privateKey, { algorithm: 'RS512', expiresIn: '1h'});
+        console.log(JSON.stringify(out));
+        res.json(out);
+    });
+});
+
+app.get('/peggy', cors(), bearerToken(), function(req, res) {
     peggy.getAllPeggy(function(response) {
         console.log(JSON.stringify(response));
         return res.json(response);
     });
 });
 
-app.get('/peggy/:id', cors(), function(req, res) {
+app.get('/peggy/:id', cors(), bearerToken(), function(req, res) {
+    if (jwt.decode(req.token).peggyuuid == req.params.id){
     peggy.getPeggy(req.params.id, function(response) {
         console.log(JSON.stringify(response));
         res.json(response);
-    });
+    });}
+    else {
+        res.status(401).send(HTTPStatus.getStatusJSON(401))
+    }
 });
 
-app.get('/users', cors(), function(req, res) {
-    user.getAllUsers(function(response) {
+app.get('/users', cors(), bearerToken(), function(req, res) {
+    user.getAllUsers(jwt.decode(req.token).peggyuuid, function(response) {
         console.log(JSON.stringify(response));
         return res.json(response);
     });
 });
 
-app.get('/users/:id', cors(), function(req, res) {
+app.get('/users/:id', cors(), bearerToken(), function(req, res) {
+    if (jwt.decode(req.token).isparent){
     user.getUser(req.params.id, function(response) {
+        console.log(jwt.decode(req.token).peggyuuid);
+        console.log(response.peggyuuid);
+        if (jwt.decode(req.token).peggyuuid == response.peggyuuid){
         console.log(JSON.stringify(response));
         res.json(response);
-    });
+        } else{
+            res.status(401).send(HTTPStatus.getStatusJSON(401));
+        }
+    });} else{
+        res.status(401).send(HTTPStatus.getStatusJSON(401));
+    }
 });
 
-app.get('/objective', cors(), function(req, res) {
-    objective.getAllObjectives(function(response) {
+app.get('/objective', cors(), bearerToken(), function(req, res) {
+    objective.getAllObjectives(jwt.decode(req.token).uuid, function(response) {
         console.log(JSON.stringify(response));
         return res.json(response);
     });
 });
 
 
-app.get('/objective/:id', cors(), function(req, res) {
-    objective.getObjective(req.params.id, function(response) {
-        console.log(JSON.stringify(response));
-        res.json(response);
-    });
+app.get('/objective/:id', cors(), bearerToken(), function(req, res) {
+        objective.getObjective(req.params.id, function(response) {
+            if (jwt.decode(req.token).isparent | jwt.decode(req.token).uuid == response.useruuid){
+                console.log(JSON.stringify(response));
+                res.json(response);
+            }
+        });
 });
 /* -------------------------------------------------------------------------- */
 
@@ -92,17 +132,29 @@ app.get('/objective/:id', cors(), function(req, res) {
 
 /* -------------------------------------------------------------------------- */
 //POST
-app.post('*', cors(), function(req, res, next) {
-    res.type('application/json');
-    if (!req.body || typeof(req.body) != 'object') {
-        res.statusCode = 400;
-        return res.send(HTTPStatus.getStatusJSON(400));
+app.post('*', cors(), bearerToken(), function(req, res, next) {
+    if (typeof(req.token) === 'undefined'){
+        res.status(401).send(HTTPStatus.getStatusJSON(401))
+    } else if (!req.body || typeof(req.body) != 'object') {
+        res.status(400).send(HTTPStatus.getStatusJSON(400))
     } else {
         next();
     }
 });
 
-app.post('/peggy', cors(), function(req, res) {
+app.post('/auth', cors(), bearerToken(), function(req, res) {
+    jwt.verify(req.token, publicKey, function(err, decoded) {
+        if(err){
+            res.json(false);
+        }
+        else {
+            res.json(true);
+        }
+    });
+
+});
+
+app.post('/peggy', cors(), bearerToken(), function(req, res) {
     var uuid = uuidV4();
     peggy.postPeggy(uuid, req.body.name, req.body.password, req.body.isParent, function() {
         peggy.getPeggy(uuid, function(response) {
@@ -112,7 +164,7 @@ app.post('/peggy', cors(), function(req, res) {
     });
 });
 
-app.post('/users', cors(), function(req, res) {
+app.post('/users', cors(), bearerToken(), function(req, res) {
     var uuid = uuidV4();
     user.postUser(uuid, req.body.name, req.body.password, req.body.isParent, "cf94737d-5d5b-4ca4-ba6f-33cc1f1f8de1", function() {
         user.getUser(uuid, function(response) {
@@ -122,7 +174,7 @@ app.post('/users', cors(), function(req, res) {
     });
 });
 
-app.post('/objective', cors(), function(req, res) {
+app.post('/objective', cors(), bearerToken(), function(req, res) {
     var uuid = uuidV4();
     objective.postObjective(uuid, req.body.name, req.body.price, "4c3c9845-5ef6-4556-87b0-f04a4c33004e", req.body.deadline, function() {
         objective.getObjective(uuid, function(response) {
@@ -135,25 +187,25 @@ app.post('/objective', cors(), function(req, res) {
 /* -------------------------------------------------------------------------- */
 
 //DELETE
-app.delete('*', cors(), function(req, res, next) {
+app.delete('*', cors(), bearerToken(), function(req, res, next) {
     res.type('application/json');
-    /*    if(coins.length <= req.params.id) {
-     res.statusCode = 404;
-     return res.send('Error 404: No coins found.');
-     }*/ //TODO error handeling
-    next();
+    if (typeof(req.token) === 'undefined'){
+        res.status(401).send(HTTPStatus.getStatusJSON(401))
+    } else {
+        next();
+    }
 });
-app.delete('/peggy/:id', cors(), function(req, res) {
+app.delete('/peggy/:id', cors(), bearerToken(), function(req, res) {
     peggy.deletePeggy(req.params.id);
     res.status(200).send(HTTPStatus.getStatusJSON(200));
 });
 
-app.delete('/users/:id', cors(), function(req, res) {
+app.delete('/users/:id', cors(), bearerToken(), function(req, res) {
     user.deleteUser(req.params.id);
     res.status(200).send(HTTPStatus.getStatusJSON(200));
 });
 
-app.delete('/objective/:id', cors(), function(req, res) {
+app.delete('/objective/:id', cors(), bearerToken(), function(req, res) {
     objective.deleteObjective(req.params.id);
     res.status(200).send(HTTPStatus.getStatusJSON(200));
 });
@@ -161,16 +213,17 @@ app.delete('/objective/:id', cors(), function(req, res) {
 /* -------------------------------------------------------------------------- */
 
 // PUT
-app.put('*', cors(), function(req, res, next) {
-    res.type('application/json');
-    /*    if(coins.length <= req.params.id) {
-     res.statusCode = 404;
-     return res.send('Error 404: No coins found.');
-     }*/ //TODO error handeling
-    next();
+app.put('*', cors(), bearerToken(), function(req, res, next) {
+    if (typeof(req.token) === 'undefined'){
+        res.status(401).send(HTTPStatus.getStatusJSON(401))
+    } else if (!req.body || typeof(req.body) != 'object') {
+        res.status(400).send(HTTPStatus.getStatusJSON(400))
+    } else {
+        next();
+    }
 });
 
-app.put('/peggy', cors(), function(req, res) {
+app.put('/peggy', cors(), bearerToken(), function(req, res) {
     peggy.putPeggy(req.body.uuid, req.body.coin5, req.body.coin2, req.body.coin1, req.body.coin50c, req.body.coin20c, req.body.coin10c, function() {
         peggy.getPeggy(req.body.uuid, function(response) {
             console.log(JSON.stringify(response));
@@ -179,7 +232,7 @@ app.put('/peggy', cors(), function(req, res) {
     });
 });
 
-app.put('/users', cors(), function(req, res) {
+app.put('/users', cors(), bearerToken(), function(req, res) {
     user.putUser(req.body.uuid, req.body.name, req.body.password, req.body.isParent, function() {
         user.getUser(req.body.uuid, function(response) {
             console.log(JSON.stringify(response));
@@ -188,7 +241,7 @@ app.put('/users', cors(), function(req, res) {
     });
 });
 
-app.put('/objective', cors(), function(req, res) {
+app.put('/objective', cors(), bearerToken(), function(req, res) {
     objective.putObjective(req.body.uuid, req.body.name, req.body.price, req.body.deadline, function() {
         objective.getObjective(uuid, function(response) {
             console.log(JSON.stringify(response));
@@ -204,15 +257,11 @@ app.put('/objective', cors(), function(req, res) {
 /* -------------------------------------------------------------------------- */
 
 // OPTION
-app.options('/peggy/:id', cors()); // enable pre-flight request for DELETE request
-app.options('/users/:id', cors()); // enable pre-flight request for DELETE request
-app.options('/objective/:id', cors()); // enable pre-flight request for DELETE request
+app.options('/peggy/:id', cors(), bearerToken()); // enable pre-flight request for DELETE request
+app.options('/users/:id', cors(), bearerToken()); // enable pre-flight request for DELETE request
+app.options('/objective/:id', cors(), bearerToken()); // enable pre-flight request for DELETE request
 
 /* -------------------------------------------------------------------------- */
 
-<<<<<<< HEAD
 console.log('Server running at https://chic.tic.heia-fr.ch/');
-=======
-console.log('Server running at https://chic.tic.heia-fr/');
->>>>>>> 1cba963b9c3a9ff083da87dedae85ef374a95c31
 https.createServer(credentials, app).listen(443);
