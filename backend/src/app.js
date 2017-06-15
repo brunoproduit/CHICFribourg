@@ -1,4 +1,4 @@
-//Var
+//Var and libraries
 var fs = require('fs');
 var https = require('https');
 var jwt = require('jsonwebtoken');
@@ -11,6 +11,7 @@ const objective = require('./objective');
 const uuidV4 = require('uuid/v4');
 const bearerToken = require('express-bearer-token');
 var HTTPStatus = require('./HTTPStatus');
+var blake2 = require('blake2');
 var privateKey = fs.readFileSync('../misc/sslcert/privkey.pem', 'utf8');
 var publicKey = fs.readFileSync('../misc/sslcert/key.pub', 'utf8');
 var certificate = fs.readFileSync('../misc/sslcert/fullchain.pem', 'utf8');
@@ -20,21 +21,52 @@ var credentials = {
 };
 var express = require('express');
 var app = express();
-var swagger = fs.readFileSync('../swagger/swagger.json', 'utf8')
+var swagger = fs.readFileSync('../swagger/swagger.json', 'utf8');
 var swaggerjson = new Object(JSON.parse(swagger))
 
+
+
+/* -------------------------------------------------------------------------- */
 app.use(bodyParser.json());
 pool.connect();
 //TODO change CORS whitelist for production
 
 
 /* -------------------------------------------------------------------------- */
+//All requests will go through here at first
 app.all('*', cors(), bearerToken(), function(req, res, next) {
-    //console.log('GET request from ' + jwt.decode(req.token).name);
+    console.log("Request from " + req.connection.remoteAddress + " on " + req.get('host') + req.originalUrl)
     res.type('application/json');
-    var re = /^\/$|(\/(peggy\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?|users\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?|objective\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?))|auth\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?$/;
+
+    // Check if URL is valid
+    var re = /^\/$|(\/(peggy\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?|users\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?|objective\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?))|auth\/?(\?uuid=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))\&(password=(.{0,128}))$/;
     if (re.test(req.originalUrl)) {
-        next();
+
+        // Check URL to know if user is authenticating
+        var re2 = /^\/$|auth\/?(\?uuid=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))\&(password=(.{0,128}))$/;
+        if(re2.test(req.originalUrl)){
+            // User is authenticating, no need for token
+            next();
+        } else if (typeof(req.token) === 'undefined'){
+
+            // User not authenticating and no token in header
+            res.status(401).send(HTTPStatus.getStatusJSON(401));
+        } else {
+
+            // Verify token validity
+            jwt.verify(req.token, publicKey, function(err, decoded) {
+                if(err){
+
+                    // Token is not valid
+                    res.status(401).send(HTTPStatus.getStatusJSON(401))
+                }
+                else {
+
+                    // Valid token, continue
+                    next();
+                }
+            });
+        }
     } else {
         //TODO error handeling
         res.status(400).send(HTTPStatus.getStatusJSON(400))
@@ -45,29 +77,42 @@ app.all('*', cors(), bearerToken(), function(req, res, next) {
 
 //GET
 app.get('*', cors(), bearerToken(), function(req, res, next) {
-    var re = /^\/$|auth\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?$/
-    if (typeof(req.token) === 'undefined'&!re.test(req.originalUrl)){
-        res.status(401).send(HTTPStatus.getStatusJSON(401))
-    } else{
-        next();
-    }
+    next();
 });
 
 app.get('/', cors(), bearerToken(), function(req, res) {
+
+    // Respond with API definition
     res.json(swaggerjson)
 });
 
-app.get('/auth/:id', cors(), bearerToken(), function(req, res) {
-
-    user.getUser(req.params.id, function(response) {
-        var out = new Object();
-        out.token = jwt.sign(
-            response, privateKey, { algorithm: 'RS512', expiresIn: '1h'});
-        console.log(JSON.stringify(out));
-        res.json(out);
-    });
+// Authentication
+app.get('/auth', cors(), bearerToken(), function(req, res) {
+    console.log(req.query.uuid);
+    var re = /^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/;
+    if (re.test(req.query.uuid)) {
+            user.getPasswordHash(req.query.uuid, function (response) {
+                var h = blake2.createHash('blake2b');
+                h.update(new Buffer(req.query.password));
+                var hash = h.digest("hex")
+                if (response == hash){
+                    user.getUser(req.query.uuid, function (user) {
+                        var out = new Object();
+                        out.token = jwt.sign(
+                            user, privateKey, {algorithm: 'RS512', expiresIn: '1h'});
+                        console.log(JSON.stringify(out));
+                        res.json(out);
+                });
+            } else {
+                    res.status(401).send(HTTPStatus.getStatusJSON(401));
+                }
+        });
+    } else {
+        res.status(406).send(HTTPStatus.getStatusJSON(406));
+    }
 });
 
+// List all peggy status/content
 app.get('/peggy', cors(), bearerToken(), function(req, res) {
     peggy.getAllPeggy(function(response) {
         console.log(JSON.stringify(response));
@@ -75,6 +120,7 @@ app.get('/peggy', cors(), bearerToken(), function(req, res) {
     });
 });
 
+// Returns specific peggy status/content
 app.get('/peggy/:id', cors(), bearerToken(), function(req, res) {
     if (jwt.decode(req.token).peggyuuid == req.params.id){
     peggy.getPeggy(req.params.id, function(response) {
@@ -82,19 +128,25 @@ app.get('/peggy/:id', cors(), bearerToken(), function(req, res) {
         res.json(response);
     });}
     else {
-        res.status(401).send(HTTPStatus.getStatusJSON(401))
+        res.status(401).send(HTTPStatus.getStatusJSON(401));
     }
 });
 
+// List all users in one peggy, user must be parent
 app.get('/users', cors(), bearerToken(), function(req, res) {
-    user.getAllUsers(jwt.decode(req.token).peggyuuid, function(response) {
-        console.log(JSON.stringify(response));
-        return res.json(response);
-    });
+    if (jwt.decode(req.token).isparent){
+        user.getAllUsers(jwt.decode(req.token).peggyuuid, function(response) {
+            console.log(JSON.stringify(response));
+            return res.json(response);
+        });
+    } else {
+        res.status(401).send(HTTPStatus.getStatusJSON(401));
+    }
 });
 
+// Returns user informations, must be self or parent in the same peggy
 app.get('/users/:id', cors(), bearerToken(), function(req, res) {
-    if (jwt.decode(req.token).isparent){
+    if (jwt.decode(req.token).isparent|jwt.decode(req.token).uuid == req.params.id){
     user.getUser(req.params.id, function(response) {
         console.log(jwt.decode(req.token).peggyuuid);
         console.log(response.peggyuuid);
@@ -109,6 +161,7 @@ app.get('/users/:id', cors(), bearerToken(), function(req, res) {
     }
 });
 
+// List all objectives of one user
 app.get('/objective', cors(), bearerToken(), function(req, res) {
     objective.getAllObjectives(jwt.decode(req.token).uuid, function(response) {
         console.log(JSON.stringify(response));
@@ -116,10 +169,10 @@ app.get('/objective', cors(), bearerToken(), function(req, res) {
     });
 });
 
-
+// Returns information about specific objective, must be owned by self or be a parent in the same peggy
 app.get('/objective/:id', cors(), bearerToken(), function(req, res) {
         objective.getObjective(req.params.id, function(response) {
-            if (jwt.decode(req.token).isparent | jwt.decode(req.token).uuid == response.useruuid){
+            if (jwt.decode(req.token).isparent | jwt.decode(req.token).uuid == response.useruuid){ // TODO check if parent in good peggy
                 console.log(JSON.stringify(response));
                 res.json(response);
             }
@@ -142,18 +195,6 @@ app.post('*', cors(), bearerToken(), function(req, res, next) {
     }
 });
 
-app.post('/auth', cors(), bearerToken(), function(req, res) {
-    jwt.verify(req.token, publicKey, function(err, decoded) {
-        if(err){
-            res.json(false);
-        }
-        else {
-            res.json(true);
-        }
-    });
-
-});
-
 app.post('/peggy', cors(), bearerToken(), function(req, res) {
     var uuid = uuidV4();
     peggy.postPeggy(uuid, req.body.name, req.body.password, req.body.isParent, function() {
@@ -166,17 +207,21 @@ app.post('/peggy', cors(), bearerToken(), function(req, res) {
 
 app.post('/users', cors(), bearerToken(), function(req, res) {
     var uuid = uuidV4();
-    user.postUser(uuid, req.body.name, req.body.password, req.body.isParent, "cf94737d-5d5b-4ca4-ba6f-33cc1f1f8de1", function() {
-        user.getUser(uuid, function(response) {
-            console.log(JSON.stringify(response));
-            res.status(201).send(HTTPStatus.getStatusJSON(201, response));
-        })
-    });
+    if (jwt.decode(req.token).isparent){
+        user.postUser(uuid, req.body.name, req.body.password, req.body.isParent, jwt.decode(req.token).peggyuuid , function() {
+            user.getUser(uuid, function(response) {
+                console.log(JSON.stringify(response));
+                res.status(201).send(HTTPStatus.getStatusJSON(201, response));
+            })
+        });
+    } else {
+        res.status(401).send(HTTPStatus.getStatusJSON(401));
+    }
 });
 
 app.post('/objective', cors(), bearerToken(), function(req, res) {
     var uuid = uuidV4();
-    objective.postObjective(uuid, req.body.name, req.body.price, "4c3c9845-5ef6-4556-87b0-f04a4c33004e", req.body.deadline, function() {
+    objective.postObjective(uuid, req.body.name, req.body.price, jwt.decode(req.token).uuid, req.body.deadline, function() {
         objective.getObjective(uuid, function(response) {
             console.log(JSON.stringify(response));
             res.status(201).send(HTTPStatus.getStatusJSON(201, response));
@@ -189,9 +234,12 @@ app.post('/objective', cors(), bearerToken(), function(req, res) {
 //DELETE
 app.delete('*', cors(), bearerToken(), function(req, res, next) {
     res.type('application/json');
-    if (typeof(req.token) === 'undefined'){
+    if (typeof(req.token) === 'undefined') {
         res.status(401).send(HTTPStatus.getStatusJSON(401))
-    } else {
+    } else if(!jwt.decode(req.token).isparent){
+        res.status(401).send(HTTPStatus.getStatusJSON(401))
+        }
+    else {
         next();
     }
 });
@@ -224,7 +272,7 @@ app.put('*', cors(), bearerToken(), function(req, res, next) {
 });
 
 app.put('/peggy', cors(), bearerToken(), function(req, res) {
-    peggy.putPeggy(req.body.uuid, req.body.coin5, req.body.coin2, req.body.coin1, req.body.coin50c, req.body.coin20c, req.body.coin10c, function() {
+    peggy.putPeggy(req.body.uuid, req.body.coin5, req.body.coin2, req.body.coin1, req.body.coin50c, req.body.coin20c, req.body.coin10c, jwt.decode(req.token).uuid, function() {
         peggy.getPeggy(req.body.uuid, function(response) {
             console.log(JSON.stringify(response));
             res.status(200).send(HTTPStatus.getStatusJSON(200, response));
@@ -265,3 +313,5 @@ app.options('/objective/:id', cors(), bearerToken()); // enable pre-flight reque
 
 console.log('Server running at https://chic.tic.heia-fr.ch/');
 https.createServer(credentials, app).listen(443);
+
+
