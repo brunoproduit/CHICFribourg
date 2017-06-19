@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "backend REST in the TIC cluster @HEIA-FR",
-    "version" : "0.1",
+    "version" : "1.1",
     "title" : "CHICFribourg",
     "contact" : {
       "email" : "bruno.produit@edu.hefr.ch"
@@ -63,12 +63,7 @@
       "get" : {
         "description" : "Returns an Array of users inside the peggy of the authenticated user. IsParent must be true.",
         "produces" : [ "application/json" ],
-        "parameters" : [ {
-          "name" : "authorization",
-          "in" : "header",
-          "required" : true,
-          "type" : "string"
-        } ],
+        "parameters" : [ ],
         "responses" : {
           "200" : {
             "description" : "OK",
@@ -88,18 +83,16 @@
               "$ref" : "#/definitions/Error"
             }
           }
-        }
+        },
+        "security" : [ {
+          "ApiKeyAuth" : [ ]
+        } ]
       },
       "post" : {
         "description" : "Creates a new user in the peggy of the authenticated user. IsParent must be true.",
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
-          "name" : "authorization",
-          "in" : "header",
-          "required" : true,
-          "type" : "string"
-        }, {
           "in" : "body",
           "name" : "user",
           "required" : false,
@@ -126,18 +119,16 @@
               "$ref" : "#/definitions/Error"
             }
           }
-        }
+        },
+        "security" : [ {
+          "ApiKeyAuth" : [ ]
+        } ]
       },
       "put" : {
         "description" : "updates a user.",
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
-          "name" : "authorization",
-          "in" : "header",
-          "required" : true,
-          "type" : "string"
-        }, {
           "in" : "body",
           "name" : "user",
           "required" : false,
@@ -164,19 +155,17 @@
               "$ref" : "#/definitions/Error"
             }
           }
-        }
+        },
+        "security" : [ {
+          "ApiKeyAuth" : [ ]
+        } ]
       }
     },
     "/peggy" : {
       "get" : {
         "description" : "Returns a list of peggy.",
         "produces" : [ "application/json" ],
-        "parameters" : [ {
-          "name" : "authorization",
-          "in" : "header",
-          "required" : true,
-          "type" : "string"
-        } ],
+        "parameters" : [ ],
         "responses" : {
           "200" : {
             "description" : "OK",
@@ -196,18 +185,16 @@
               "$ref" : "#/definitions/Error"
             }
           }
-        }
+        },
+        "security" : [ {
+          "ApiKeyAuth" : [ ]
+        } ]
       },
       "post" : {
         "description" : "Creates a new peggy with a parent user inside.",
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
-          "name" : "authorization",
-          "in" : "header",
-          "required" : true,
-          "type" : "string"
-        }, {
           "in" : "body",
           "name" : "user",
           "required" : false,
@@ -228,18 +215,16 @@
               "$ref" : "#/definitions/Error"
             }
           }
-        }
+        },
+        "security" : [ {
+          "ApiKeyAuth" : [ ]
+        } ]
       },
       "put" : {
         "description" : "Insert or remove coins in a specific peggy.",
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
-          "name" : "authorization",
-          "in" : "header",
-          "required" : true,
-          "type" : "string"
-        }, {
           "in" : "body",
           "name" : "user",
           "required" : false,
@@ -266,19 +251,17 @@
               "$ref" : "#/definitions/Error"
             }
           }
-        }
+        },
+        "security" : [ {
+          "ApiKeyAuth" : [ ]
+        } ]
       }
     },
     "/objective" : {
       "get" : {
         "description" : "Returns a list of objective owned by the authenticated user.",
         "produces" : [ "application/json" ],
-        "parameters" : [ {
-          "name" : "authorization",
-          "in" : "header",
-          "required" : true,
-          "type" : "string"
-        } ],
+        "parameters" : [ ],
         "responses" : {
           "200" : {
             "description" : "OK",
@@ -298,18 +281,16 @@
               "$ref" : "#/definitions/Error"
             }
           }
-        }
+        },
+        "security" : [ {
+          "ApiKeyAuth" : [ ]
+        } ]
       },
       "post" : {
         "description" : "Creates a new objective for the authenticated use.",
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
-          "name" : "authorization",
-          "in" : "header",
-          "required" : true,
-          "type" : "string"
-        }, {
           "in" : "body",
           "name" : "peggy",
           "required" : false,
@@ -336,18 +317,16 @@
               "$ref" : "#/definitions/Error"
             }
           }
-        }
+        },
+        "security" : [ {
+          "ApiKeyAuth" : [ ]
+        } ]
       },
       "put" : {
         "description" : "updates a objective.",
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
-          "name" : "authorization",
-          "in" : "header",
-          "required" : true,
-          "type" : "string"
-        }, {
           "in" : "body",
           "name" : "objective",
           "required" : false,
@@ -374,7 +353,10 @@
               "$ref" : "#/definitions/Error"
             }
           }
-        }
+        },
+        "security" : [ {
+          "ApiKeyAuth" : [ ]
+        } ]
       }
     },
     "/users/{uuid}" : {
@@ -382,11 +364,6 @@
         "description" : "Returns a user by ID. IsParent must be true and in the peggy, or user must be self.",
         "produces" : [ "application/json" ],
         "parameters" : [ {
-          "name" : "authorization",
-          "in" : "header",
-          "required" : true,
-          "type" : "string"
-        }, {
           "name" : "uuid",
           "in" : "path",
           "required" : true,
@@ -413,16 +390,14 @@
               "$ref" : "#/definitions/Error"
             }
           }
-        }
+        },
+        "security" : [ {
+          "ApiKeyAuth" : [ ]
+        } ]
       },
       "delete" : {
         "description" : "Deletes a user. Isparent must be true and in the same peggy.",
         "parameters" : [ {
-          "name" : "authorization",
-          "in" : "header",
-          "required" : true,
-          "type" : "string"
-        }, {
           "name" : "uuid",
           "in" : "path",
           "required" : true,
@@ -449,7 +424,10 @@
               "$ref" : "#/definitions/Error"
             }
           }
-        }
+        },
+        "security" : [ {
+          "ApiKeyAuth" : [ ]
+        } ]
       }
     },
     "/peggy/{uuid}" : {
@@ -457,11 +435,6 @@
         "description" : "Returns a peggy by ID. Authenticated user must be in the peggy.",
         "produces" : [ "application/json" ],
         "parameters" : [ {
-          "name" : "authorization",
-          "in" : "header",
-          "required" : true,
-          "type" : "string"
-        }, {
           "name" : "uuid",
           "in" : "path",
           "required" : true,
@@ -488,16 +461,14 @@
               "$ref" : "#/definitions/Error"
             }
           }
-        }
+        },
+        "security" : [ {
+          "ApiKeyAuth" : [ ]
+        } ]
       },
       "delete" : {
         "description" : "Deletes a peggy. Isparent must be true and in the same peggy. Peggy must be empty.",
         "parameters" : [ {
-          "name" : "authorization",
-          "in" : "header",
-          "required" : true,
-          "type" : "string"
-        }, {
           "name" : "uuid",
           "in" : "path",
           "required" : true,
@@ -524,7 +495,10 @@
               "$ref" : "#/definitions/Error"
             }
           }
-        }
+        },
+        "security" : [ {
+          "ApiKeyAuth" : [ ]
+        } ]
       }
     },
     "/objective/{uuid}" : {
@@ -532,11 +506,6 @@
         "description" : "Returns a objective by ID. isParent must be true or authenticated user must own objective.",
         "produces" : [ "application/json" ],
         "parameters" : [ {
-          "name" : "authorization",
-          "in" : "header",
-          "required" : true,
-          "type" : "string"
-        }, {
           "name" : "uuid",
           "in" : "path",
           "required" : true,
@@ -563,16 +532,14 @@
               "$ref" : "#/definitions/Error"
             }
           }
-        }
+        },
+        "security" : [ {
+          "ApiKeyAuth" : [ ]
+        } ]
       },
       "delete" : {
         "description" : "deletes a objective.",
         "parameters" : [ {
-          "name" : "authorization",
-          "in" : "header",
-          "required" : true,
-          "type" : "string"
-        }, {
           "name" : "uuid",
           "in" : "path",
           "required" : true,
@@ -599,8 +566,18 @@
               "$ref" : "#/definitions/Error"
             }
           }
-        }
+        },
+        "security" : [ {
+          "ApiKeyAuth" : [ ]
+        } ]
       }
+    }
+  },
+  "securityDefinitions" : {
+    "ApiKeyAuth" : {
+      "type" : "apiKey",
+      "name" : "Authorization",
+      "in" : "header"
     }
   },
   "definitions" : {
