@@ -219,7 +219,7 @@
           "201" : {
             "description" : "Created",
             "schema" : {
-              "$ref" : "#/definitions/PeggyOut"
+              "$ref" : "#/definitions/inline_response_201"
             }
           },
           "400" : {
@@ -695,27 +695,27 @@
         },
         "coin5" : {
           "type" : "string",
-          "format" : "^\\+?|\\-?[0-9]{12}$"
+          "pattern" : "^\\+?|\\-?[0-9]{12}$"
         },
         "coin2" : {
           "type" : "string",
-          "format" : "^\\+?|\\-?[0-9]{12}$"
+          "pattern" : "^\\+?|\\-?[0-9]{12}$"
         },
         "coin1" : {
           "type" : "string",
-          "format" : "^\\+?|\\-?[0-9]{12}$"
+          "pattern" : "^\\+?|\\-?[0-9]{12}$"
         },
         "coin50c" : {
           "type" : "string",
-          "format" : "^\\+?|\\-?[0-9]{12}$"
+          "pattern" : "^\\+?|\\-?[0-9]{12}$"
         },
         "coin20c" : {
           "type" : "string",
-          "format" : "^\\+?|\\-?[0-9]{12}$"
+          "pattern" : "^\\+?|\\-?[0-9]{12}$"
         },
         "coin10c" : {
           "type" : "string",
-          "format" : "^\\+?|\\-?[0-9]{12}$"
+          "pattern" : "^\\+?|\\-?[0-9]{12}$"
         }
       }
     },
@@ -746,6 +746,59 @@
         },
         "password" : {
           "type" : "string"
+        }
+      }
+    },
+    "inline_response_201_peggy" : {
+      "properties" : {
+        "uuid" : {
+          "type" : "string",
+          "format" : "uuid"
+        },
+        "coin5" : {
+          "type" : "integer"
+        },
+        "coin2" : {
+          "type" : "integer"
+        },
+        "coin1" : {
+          "type" : "integer"
+        },
+        "coin50c" : {
+          "type" : "integer"
+        },
+        "coin20c" : {
+          "type" : "integer"
+        },
+        "coin10c" : {
+          "type" : "integer"
+        }
+      }
+    },
+    "inline_response_201_user" : {
+      "properties" : {
+        "uuid" : {
+          "type" : "string",
+          "format" : "uuid"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "isParent" : {
+          "type" : "boolean"
+        },
+        "balance" : {
+          "type" : "integer"
+        }
+      }
+    },
+    "inline_response_201" : {
+      "properties" : {
+        "peggy" : {
+          "$ref" : "#/definitions/inline_response_201_peggy"
+        },
+        "user" : {
+          "$ref" : "#/definitions/inline_response_201_user"
         }
       }
     }
