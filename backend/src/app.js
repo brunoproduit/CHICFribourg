@@ -21,8 +21,7 @@ var credentials = {
 };
 var express = require('express');
 var app = express();
-var swagger = fs.readFileSync('../swagger/swagger.json', 'utf8');
-var swaggerjson = new Object(JSON.parse(swagger))
+
 
 
 
@@ -81,7 +80,8 @@ app.get('*', cors(), bearerToken(), function(req, res, next) {
 });
 
 app.get('/', cors(), bearerToken(), function(req, res) {
-
+    var swagger = fs.readFileSync('../swagger/swagger.json', 'utf8');
+    var swaggerjson = new Object(JSON.parse(swagger));
     // Respond with API definition
     res.json(swaggerjson)
 });
@@ -282,7 +282,7 @@ app.put('/peggy', cors(), bearerToken(), function(req, res) {
     peggy.putPeggy(req.body.uuid, req.body.coin5, req.body.coin2, req.body.coin1, req.body.coin50c, req.body.coin20c, req.body.coin10c, jwt.decode(req.token).uuid, function() {
         peggy.getPeggy(req.body.uuid, function(response) {
             console.log(JSON.stringify(response));
-            res.status(200).send(HTTPStatus.getStatusJSON(200, response));
+            res.json(response);
         })
     });
 });
@@ -291,16 +291,16 @@ app.put('/users', cors(), bearerToken(), function(req, res) {
     user.putUser(req.body.uuid, req.body.name, req.body.password, req.body.isParent, function() {
         user.getUser(req.body.uuid, function(response) {
             console.log(JSON.stringify(response));
-            res.status(200).send(HTTPStatus.getStatusJSON(200, response));
+            res.json(response);
         })
     });
 });
 
 app.put('/objective', cors(), bearerToken(), function(req, res) {
     objective.putObjective(req.body.uuid, req.body.name, req.body.price, req.body.deadline, function() {
-        objective.getObjective(uuid, function(response) {
+        objective.getObjective(req.body.uuid, function(response) {
             console.log(JSON.stringify(response));
-            res.status(200).send(HTTPStatus.getStatusJSON(200, response));
+            res.json(response);
         })
     });
 });

@@ -2,9 +2,8 @@ module.exports.getStatusJSON= function getStatusJSON(code, value) {
     switch(code) {
         case 200:
             var status = new Object();
-            status.success = new Object();
-            status.success.code = 200;
-            status.success.message = "OK";
+            status.code = 200;
+            status.message = "OK";
             status.currentvalue = value;
             return JSON.stringify(status);
             break;
@@ -13,86 +12,74 @@ module.exports.getStatusJSON= function getStatusJSON(code, value) {
             break;
         case 202:
             var status = new Object();
-            status.success = new Object();
-            status.success.code = 202;
-            status.success.message = "Accepted";
+            status.code = 202;
+            status.message = "Accepted";
             return JSON.stringify(status);
             break;
         case 204:
             var status = new Object();
-            status.success = new Object();
-            status.success.code = 204;
-            status.success.message = "No Content";
+            status.code = 204;
+            status.message = "No Content";
             return JSON.stringify(status);
             break;
         case 301:
             var status = new Object();
-            status.success = new Object();
-            status.success.code = 301;
-            status.success.message = "Moved Permanently";
+            status.code = 301;
+            status.message = "Moved Permanently";
             return JSON.stringify(status);
             break;
         case 304:
             var status = new Object();
-            status.error = new Object();
-            status.error.code = 304;
-            status.error.message = "Not Modified";
+            status.code = 304;
+            status.message = "Not Modified";
             return JSON.stringify(status);
             break;
         case 400:
             var status = new Object();
-            status.error = new Object();
-            status.error.code = 400;
-            status.error.message = "Bad Request";
+            status.code = 400;
+            status.message = "Bad Request";
             return JSON.stringify(status);
             break;
         case 401:
             var status = new Object();
-            status.error = new Object();
-            status.error.code = 401;
-            status.error.message = "Unauthorized";
+            status.code = 401;
+            status.message = "Unauthorized";
             return JSON.stringify(status);
             break;
         case 403:
             var status = new Object();
-            status.error = new Object();
-            status.error.code = 403;
-            status.error.message = "Forbidden";
+            status.code = 403;
+            status.message = "Forbidden";
             return JSON.stringify(status);
             break;
         case 404:
             var status = new Object();
-            status.error = new Object();
-            status.error.code = 404;
-            status.error.message = "Not Found";
+            status.code = 404;
+            status.message = "Not Found";
             return JSON.stringify(status);
             break;
         case 405:
             var status = new Object();
-            status.error = new Object();
-            status.error.code = 405;
-            status.error.message = "Method Not Allowed";
+            status.code = 405;
+            status.message = "Method Not Allowed";
             return JSON.stringify(status);
             break;
         case 406:
             var status = new Object();
-            status.error = new Object();
-            status.error.code = 406;
-            status.error.message = "Not Acceptable";
+            status.code = 406;
+            status.message = "Not Acceptable";
             return JSON.stringify(status);
             break;
         case 501:
             var status = new Object();
-            status.error = new Object();
-            status.error.code = 501;
-            status.error.message = "Not Implemented";
+            status.code = 501;
+            status.message = "Not Implemented";
             return JSON.stringify(status);
             break;
         default:
             var status = new Object();
-            status.error = new Object();
-            status.error.code = 500;
-            status.error.message = "Internal Server Error";
+            status.code = 500;
+            status.message = "Internal Server Error";
             return JSON.stringify(status);
     }
 };
