@@ -158,8 +158,8 @@
               "$ref" : "#/definitions/Error"
             }
           },
-          "404" : {
-            "description" : "Not found",
+          "401" : {
+            "description" : "Unauthorized",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
@@ -260,8 +260,8 @@
               "$ref" : "#/definitions/Error"
             }
           },
-          "404" : {
-            "description" : "Not found",
+          "401" : {
+            "description" : "Unauthorized",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
@@ -368,8 +368,8 @@
               "$ref" : "#/definitions/Error"
             }
           },
-          "404" : {
-            "description" : "Not found",
+          "401" : {
+            "description" : "Unauthorized",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
