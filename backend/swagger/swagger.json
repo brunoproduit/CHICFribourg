@@ -352,7 +352,7 @@
           "name" : "objective",
           "required" : false,
           "schema" : {
-            "$ref" : "#/definitions/ObjectiveIn"
+            "$ref" : "#/definitions/ObjectiveInModify"
           }
         } ],
         "responses" : {
@@ -389,7 +389,6 @@
         }, {
           "name" : "uuid",
           "in" : "path",
-          "description" : "Parameter description in Markdown.",
           "required" : true,
           "type" : "string",
           "minimum" : 1,
@@ -423,10 +422,20 @@
           "in" : "header",
           "required" : true,
           "type" : "string"
+        }, {
+          "name" : "uuid",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "minimum" : 1,
+          "format" : "uuid"
         } ],
         "responses" : {
           "200" : {
-            "description" : "OK"
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
           },
           "400" : {
             "description" : "Bad request",
@@ -488,10 +497,20 @@
           "in" : "header",
           "required" : true,
           "type" : "string"
+        }, {
+          "name" : "uuid",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "minimum" : 1,
+          "format" : "uuid"
         } ],
         "responses" : {
           "200" : {
-            "description" : "OK"
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
           },
           "400" : {
             "description" : "Bad request",
@@ -553,10 +572,20 @@
           "in" : "header",
           "required" : true,
           "type" : "string"
+        }, {
+          "name" : "uuid",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "minimum" : 1,
+          "format" : "uuid"
         } ],
         "responses" : {
           "200" : {
-            "description" : "OK"
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
           },
           "400" : {
             "description" : "Bad request",
@@ -590,6 +619,10 @@
         },
         "balance" : {
           "type" : "integer"
+        },
+        "peggyuid" : {
+          "type" : "string",
+          "format" : "uuid"
         }
       }
     },
@@ -617,6 +650,10 @@
         },
         "coin10c" : {
           "type" : "integer"
+        },
+        "lastchanged" : {
+          "type" : "string",
+          "format" : "date-time"
         }
       }
     },
@@ -636,6 +673,14 @@
         "deadline" : {
           "type" : "string",
           "format" : "date-time"
+        },
+        "creation" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "useruuid" : {
+          "type" : "string",
+          "format" : "uuid"
         }
       }
     },
@@ -674,6 +719,25 @@
     "ObjectiveIn" : {
       "type" : "object",
       "properties" : {
+        "name" : {
+          "type" : "string"
+        },
+        "price" : {
+          "type" : "integer"
+        },
+        "deadline" : {
+          "type" : "string",
+          "format" : "date-time"
+        }
+      }
+    },
+    "ObjectiveInModify" : {
+      "type" : "object",
+      "properties" : {
+        "uuid" : {
+          "type" : "string",
+          "format" : "uuid"
+        },
         "name" : {
           "type" : "string"
         },
