@@ -9,13 +9,7 @@ module.exports.getStatusJSON= function getStatusJSON(code, value) {
             return JSON.stringify(status);
             break;
         case 201:
-            var status = new Object();
-            status.success = new Object();
-            status.currentvalue = new Object();
-            status.success.code = 201;
-            status.success.message = "Created";
-            status.currentvalue = value;
-            return JSON.stringify(status);
+            return JSON.stringify(value);
             break;
         case 202:
             var status = new Object();

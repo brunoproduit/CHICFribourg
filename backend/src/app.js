@@ -175,6 +175,8 @@ app.get('/objective/:id', cors(), bearerToken(), function(req, res) {
             if (jwt.decode(req.token).isparent | jwt.decode(req.token).uuid == response.useruuid){ // TODO check if parent in good peggy
                 console.log(JSON.stringify(response));
                 res.json(response);
+            } else {
+                res.status(401).send(HTTPStatus.getStatusJSON(401));
             }
         });
 });
@@ -198,9 +200,14 @@ app.post('*', cors(), bearerToken(), function(req, res, next) {
 app.post('/peggy', cors(), bearerToken(), function(req, res) {
     var uuid = uuidV4();
     peggy.postPeggy(uuid, req.body.name, req.body.password, req.body.isParent, function() {
-        peggy.getPeggy(uuid, function(response) {
-            console.log(JSON.stringify(response));
-            res.status(201).send(HTTPStatus.getStatusJSON(201, response));
+        peggy.getPeggy(uuid, function(peggy) {
+            user.getUser(uuid, function(user) {
+                response = new Object();
+                response.peggy = peggy;
+                response.user = user;
+                console.log(JSON.stringify(response));
+                res.status(201).send(HTTPStatus.getStatusJSON(201, response));
+            })
         })
     });
 });
