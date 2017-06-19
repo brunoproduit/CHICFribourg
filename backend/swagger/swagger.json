@@ -15,11 +15,60 @@
   "host" : "chic.tic.heia-fr.ch",
   "schemes" : [ "https" ],
   "paths" : {
+    "/auth" : {
+      "get" : {
+        "description" : "Returns a signed JSON Web token if authentication is sucessfull.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "uuid",
+          "in" : "query",
+          "required" : true,
+          "type" : "string",
+          "format" : "uuid"
+        }, {
+          "name" : "password",
+          "in" : "query",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/TokenOut"
+            }
+          },
+          "400" : {
+            "description" : "Bad request",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          },
+          "406" : {
+            "description" : "Not Acceptable",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/users" : {
       "get" : {
-        "description" : "Returns an Array of users.",
+        "description" : "Returns an Array of users inside the peggy of the authenticated user. IsParent must be true.",
         "produces" : [ "application/json" ],
-        "parameters" : [ ],
+        "parameters" : [ {
+          "name" : "authorization",
+          "in" : "header",
+          "required" : true,
+          "type" : "string"
+        } ],
         "responses" : {
           "200" : {
             "description" : "OK",
@@ -33,8 +82,8 @@
               "$ref" : "#/definitions/Error"
             }
           },
-          "404" : {
-            "description" : "Not found",
+          "401" : {
+            "description" : "Unauthorized",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
@@ -42,10 +91,15 @@
         }
       },
       "post" : {
-        "description" : "Creates a new user.",
+        "description" : "Creates a new user in the peggy of the authenticated user. IsParent must be true.",
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
+          "name" : "authorization",
+          "in" : "header",
+          "required" : true,
+          "type" : "string"
+        }, {
           "in" : "body",
           "name" : "user",
           "required" : false,
@@ -66,8 +120,8 @@
               "$ref" : "#/definitions/Error"
             }
           },
-          "404" : {
-            "description" : "Not found",
+          "401" : {
+            "description" : "Unauthorized",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
@@ -79,6 +133,11 @@
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
+          "name" : "authorization",
+          "in" : "header",
+          "required" : true,
+          "type" : "string"
+        }, {
           "in" : "body",
           "name" : "user",
           "required" : false,
@@ -99,8 +158,8 @@
               "$ref" : "#/definitions/Error"
             }
           },
-          "404" : {
-            "description" : "Not found",
+          "401" : {
+            "description" : "Unauthorized",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
@@ -112,7 +171,12 @@
       "get" : {
         "description" : "Returns a list of peggy.",
         "produces" : [ "application/json" ],
-        "parameters" : [ ],
+        "parameters" : [ {
+          "name" : "authorization",
+          "in" : "header",
+          "required" : true,
+          "type" : "string"
+        } ],
         "responses" : {
           "200" : {
             "description" : "OK",
@@ -135,32 +199,31 @@
         }
       },
       "post" : {
-        "description" : "Creates a new peggy.",
+        "description" : "Creates a new peggy with a parent user inside.",
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
+          "name" : "authorization",
+          "in" : "header",
+          "required" : true,
+          "type" : "string"
+        }, {
           "in" : "body",
           "name" : "user",
           "required" : false,
           "schema" : {
-            "$ref" : "#/definitions/UserIn"
+            "$ref" : "#/definitions/user"
           }
         } ],
         "responses" : {
           "201" : {
             "description" : "Created",
             "schema" : {
-              "$ref" : "#/definitions/PeggyOut"
+              "$ref" : "#/definitions/inline_response_201"
             }
           },
           "400" : {
             "description" : "Bad request",
-            "schema" : {
-              "$ref" : "#/definitions/Error"
-            }
-          },
-          "404" : {
-            "description" : "Not found",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
@@ -172,6 +235,11 @@
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
+          "name" : "authorization",
+          "in" : "header",
+          "required" : true,
+          "type" : "string"
+        }, {
           "in" : "body",
           "name" : "user",
           "required" : false,
@@ -192,8 +260,8 @@
               "$ref" : "#/definitions/Error"
             }
           },
-          "404" : {
-            "description" : "Not found",
+          "401" : {
+            "description" : "Unauthorized",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
@@ -203,9 +271,14 @@
     },
     "/objective" : {
       "get" : {
-        "description" : "Returns a list of objective.",
+        "description" : "Returns a list of objective owned by the authenticated user.",
         "produces" : [ "application/json" ],
-        "parameters" : [ ],
+        "parameters" : [ {
+          "name" : "authorization",
+          "in" : "header",
+          "required" : true,
+          "type" : "string"
+        } ],
         "responses" : {
           "200" : {
             "description" : "OK",
@@ -228,10 +301,15 @@
         }
       },
       "post" : {
-        "description" : "Creates a new objective.",
+        "description" : "Creates a new objective for the authenticated use.",
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
+          "name" : "authorization",
+          "in" : "header",
+          "required" : true,
+          "type" : "string"
+        }, {
           "in" : "body",
           "name" : "peggy",
           "required" : false,
@@ -252,8 +330,8 @@
               "$ref" : "#/definitions/Error"
             }
           },
-          "404" : {
-            "description" : "Not found",
+          "401" : {
+            "description" : "Unauthorized",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
@@ -265,6 +343,11 @@
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
+          "name" : "authorization",
+          "in" : "header",
+          "required" : true,
+          "type" : "string"
+        }, {
           "in" : "body",
           "name" : "objective",
           "required" : false,
@@ -285,8 +368,8 @@
               "$ref" : "#/definitions/Error"
             }
           },
-          "404" : {
-            "description" : "Not found",
+          "401" : {
+            "description" : "Unauthorized",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
@@ -296,9 +379,14 @@
     },
     "/users/{uuid}" : {
       "get" : {
-        "description" : "Returns a user by ID.",
+        "description" : "Returns a user by ID. IsParent must be true and in the peggy, or user must be self.",
         "produces" : [ "application/json" ],
         "parameters" : [ {
+          "name" : "authorization",
+          "in" : "header",
+          "required" : true,
+          "type" : "string"
+        }, {
           "name" : "uuid",
           "in" : "path",
           "description" : "Parameter description in Markdown.",
@@ -320,8 +408,8 @@
               "$ref" : "#/definitions/Error"
             }
           },
-          "404" : {
-            "description" : "Not found",
+          "401" : {
+            "description" : "Unauthorized",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
@@ -329,8 +417,13 @@
         }
       },
       "delete" : {
-        "description" : "deletes a user.",
-        "parameters" : [ ],
+        "description" : "Deletes a user. Isparent must be true and in the same peggy.",
+        "parameters" : [ {
+          "name" : "authorization",
+          "in" : "header",
+          "required" : true,
+          "type" : "string"
+        } ],
         "responses" : {
           "200" : {
             "description" : "OK"
@@ -341,8 +434,8 @@
               "$ref" : "#/definitions/Error"
             }
           },
-          "404" : {
-            "description" : "Not found",
+          "401" : {
+            "description" : "Unauthorized",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
@@ -352,9 +445,14 @@
     },
     "/peggy/{uuid}" : {
       "get" : {
-        "description" : "Returns a peggy by ID.",
+        "description" : "Returns a peggy by ID. Authenticated user must be in the peggy.",
         "produces" : [ "application/json" ],
         "parameters" : [ {
+          "name" : "authorization",
+          "in" : "header",
+          "required" : true,
+          "type" : "string"
+        }, {
           "name" : "uuid",
           "in" : "path",
           "required" : true,
@@ -375,8 +473,8 @@
               "$ref" : "#/definitions/Error"
             }
           },
-          "404" : {
-            "description" : "Not found",
+          "401" : {
+            "description" : "Unauthorized",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
@@ -384,14 +482,25 @@
         }
       },
       "delete" : {
-        "description" : "deletes a user.",
-        "parameters" : [ ],
+        "description" : "Deletes a peggy. Isparent must be true and in the same peggy. Peggy must be empty.",
+        "parameters" : [ {
+          "name" : "authorization",
+          "in" : "header",
+          "required" : true,
+          "type" : "string"
+        } ],
         "responses" : {
           "200" : {
             "description" : "OK"
           },
-          "404" : {
-            "description" : "Not found",
+          "400" : {
+            "description" : "Bad request",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
@@ -401,9 +510,14 @@
     },
     "/objective/{uuid}" : {
       "get" : {
-        "description" : "Returns a objective by ID.",
+        "description" : "Returns a objective by ID. isParent must be true or authenticated user must own objective.",
         "produces" : [ "application/json" ],
         "parameters" : [ {
+          "name" : "authorization",
+          "in" : "header",
+          "required" : true,
+          "type" : "string"
+        }, {
           "name" : "uuid",
           "in" : "path",
           "required" : true,
@@ -424,8 +538,8 @@
               "$ref" : "#/definitions/Error"
             }
           },
-          "404" : {
-            "description" : "Not found",
+          "401" : {
+            "description" : "Unauthorized",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
@@ -434,7 +548,12 @@
       },
       "delete" : {
         "description" : "deletes a objective.",
-        "parameters" : [ ],
+        "parameters" : [ {
+          "name" : "authorization",
+          "in" : "header",
+          "required" : true,
+          "type" : "string"
+        } ],
         "responses" : {
           "200" : {
             "description" : "OK"
@@ -445,8 +564,8 @@
               "$ref" : "#/definitions/Error"
             }
           },
-          "404" : {
-            "description" : "Not found",
+          "401" : {
+            "description" : "Unauthorized",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
@@ -575,6 +694,68 @@
           "format" : "uuid"
         },
         "coin5" : {
+          "type" : "string",
+          "pattern" : "^\\+?|\\-?[0-9]{12}$"
+        },
+        "coin2" : {
+          "type" : "string",
+          "pattern" : "^\\+?|\\-?[0-9]{12}$"
+        },
+        "coin1" : {
+          "type" : "string",
+          "pattern" : "^\\+?|\\-?[0-9]{12}$"
+        },
+        "coin50c" : {
+          "type" : "string",
+          "pattern" : "^\\+?|\\-?[0-9]{12}$"
+        },
+        "coin20c" : {
+          "type" : "string",
+          "pattern" : "^\\+?|\\-?[0-9]{12}$"
+        },
+        "coin10c" : {
+          "type" : "string",
+          "pattern" : "^\\+?|\\-?[0-9]{12}$"
+        }
+      }
+    },
+    "Error" : {
+      "type" : "object",
+      "properties" : {
+        "code" : {
+          "type" : "integer"
+        },
+        "message" : {
+          "type" : "string"
+        }
+      }
+    },
+    "TokenOut" : {
+      "type" : "object",
+      "properties" : {
+        "token" : {
+          "type" : "string"
+        }
+      }
+    },
+    "user" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string"
+        },
+        "password" : {
+          "type" : "string"
+        }
+      }
+    },
+    "inline_response_201_peggy" : {
+      "properties" : {
+        "uuid" : {
+          "type" : "string",
+          "format" : "uuid"
+        },
+        "coin5" : {
           "type" : "integer"
         },
         "coin2" : {
@@ -594,14 +775,30 @@
         }
       }
     },
-    "Error" : {
-      "type" : "object",
+    "inline_response_201_user" : {
       "properties" : {
-        "code" : {
-          "type" : "integer"
+        "uuid" : {
+          "type" : "string",
+          "format" : "uuid"
         },
-        "message" : {
+        "name" : {
           "type" : "string"
+        },
+        "isParent" : {
+          "type" : "boolean"
+        },
+        "balance" : {
+          "type" : "integer"
+        }
+      }
+    },
+    "inline_response_201" : {
+      "properties" : {
+        "peggy" : {
+          "$ref" : "#/definitions/inline_response_201_peggy"
+        },
+        "user" : {
+          "$ref" : "#/definitions/inline_response_201_user"
         }
       }
     }
