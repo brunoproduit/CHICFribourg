@@ -100,7 +100,7 @@
           "name" : "user",
           "required" : false,
           "schema" : {
-            "$ref" : "#/definitions/user"
+            "$ref" : "#/definitions/UserIn"
           }
         } ],
         "responses" : {
@@ -136,7 +136,7 @@
           "name" : "user",
           "required" : false,
           "schema" : {
-            "$ref" : "#/definitions/UserIn"
+            "$ref" : "#/definitions/user"
           }
         } ],
         "responses" : {
