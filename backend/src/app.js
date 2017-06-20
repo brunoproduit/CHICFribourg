@@ -38,11 +38,11 @@ app.all('*', cors(), bearerToken(), function(req, res, next) {
     res.type('application/json');
 
     // Check if URL is valid
-    var re = /^\/$|(\/(peggy\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?|users\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?|objective\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?))|auth\/?(\?uuid=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))\&(password=(.{0,128}))$/;
+    var re = /^\/$|(\/(peggy\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?|users\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?|objective\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?))|auth\/?(\?uuid=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))\&(password=(.{0,128}))|change\/([0-9]{1,3})(\.[0-9]{1,3})?$/;
     if (re.test(req.originalUrl)) {
 
         // Check URL to know if user is authenticating
-        var re2 = /^\/$|auth\/?(\?uuid=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))\&(password=(.{0,128}))$|users\/?(\?uuid=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))/;
+        var re2 = /^\/$|auth\/?(\?uuid=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))\&(password=(.{0,128}))$|users\/?(\?uuid=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))|change\/([0-9]{1,3})(\.[0-9]{1,3})?/;
         if(re2.test(req.originalUrl)){
             // User is authenticating, no need for token
             next();
@@ -84,6 +84,23 @@ app.get('/', cors(), bearerToken(), function(req, res) {
     var swaggerjson = new Object(JSON.parse(swagger));
     // Respond with API definition
     res.json(swaggerjson)
+});
+
+app.get('/change/:id', cors(), bearerToken(), function(req, res) {
+    amount = req.params.id * 100;
+    var response= new Object();
+    response.coin5 = Math.floor(amount / 500);
+    remainder = amount % 500;
+    response.coin2 = Math.floor(remainder / 200);
+    remainder = amount % 500 % 200;
+    response.coin1 = Math.floor(remainder / 100);
+    remainder = amount % 500 % 200 % 100;
+    response.coin50c = Math.floor(remainder / 50);
+    remainder = amount % 500 % 200 % 100 % 50;
+    response.coin20c = Math.floor(remainder / 20);
+    remainder = amount % 500 % 200 % 100 % 50 % 20;
+    response.coin10c = Math.floor(remainder / 10);
+    res.json(response);
 });
 
 // Authentication

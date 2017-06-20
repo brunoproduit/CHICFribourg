@@ -370,7 +370,22 @@
             "in": "body",
             "name": "user",
             "schema": {
-              "$ref": "#/definitions/UserIn"
+              "type": "object",
+              "properties": {
+                "uuid": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "isParent": {
+                  "type": "boolean"
+                }
+              }
             }
           }
         ],
