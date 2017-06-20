@@ -22,21 +22,13 @@ var credentials = {
 var express = require('express');
 var app = express();
 
-
-
-
-/* -------------------------------------------------------------------------- */
 app.use(bodyParser.json());
 pool.connect();
-//TODO change CORS whitelist for production
-
-
 /* -------------------------------------------------------------------------- */
 //All requests will go through here at first
 app.all('*', cors(), bearerToken(), function(req, res, next) {
     console.log("Request from " + req.connection.remoteAddress + " on " + req.get('host') + req.originalUrl)
     res.type('application/json');
-
     // Check if URL is valid
     var re = /^\/$|(\/(peggy\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?|users\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?|objective\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?))|auth\/?(\?uuid=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))\&(password=(.{0,128}))|change\/([0-9]{1,3})(\.[0-9]{1,3})?$/;
     if (re.test(req.originalUrl)) {
@@ -87,6 +79,8 @@ app.get('/', cors(), bearerToken(), function(req, res) {
 });
 
 app.get('/change/:id', cors(), bearerToken(), function(req, res) {
+
+    // Greedy funtion to get change
     amount = req.params.id * 100;
     var response= new Object();
     response.coin5 = Math.floor(amount / 500);
@@ -100,7 +94,12 @@ app.get('/change/:id', cors(), bearerToken(), function(req, res) {
     response.coin20c = Math.floor(remainder / 20);
     remainder = amount % 500 % 200 % 100 % 50 % 20;
     response.coin10c = Math.floor(remainder / 10);
-    res.json(response);
+    remainder = amount % 500 % 200 % 100 % 50 % 20 % 10;
+    if (remainder!=0){
+        res.status(406).send(HTTPStatus.getStatusJSON(406));
+    } else{
+        res.json(response);
+    }
 });
 
 // Authentication
@@ -331,6 +330,7 @@ app.options('/objective/:id', cors(), bearerToken()); // enable pre-flight reque
 
 /* -------------------------------------------------------------------------- */
 
+//TODO change CORS whitelist for production
 console.log('Server running at https://chic.tic.heia-fr.ch/');
 https.createServer(credentials, app).listen(443);
 
