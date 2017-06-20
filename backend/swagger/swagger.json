@@ -61,9 +61,15 @@
     },
     "/users" : {
       "get" : {
-        "description" : "Returns an Array of users inside the peggy of the authenticated user. IsParent must be true.",
+        "description" : "Returns an Array of users inside the given peggy.",
         "produces" : [ "application/json" ],
-        "parameters" : [ ],
+        "parameters" : [ {
+          "name" : "uuid",
+          "in" : "query",
+          "required" : true,
+          "type" : "string",
+          "format" : "uuid"
+        } ],
         "responses" : {
           "200" : {
             "description" : "OK",
@@ -83,10 +89,7 @@
               "$ref" : "#/definitions/Error"
             }
           }
-        },
-        "security" : [ {
-          "ApiKeyAuth" : [ ]
-        } ]
+        }
       },
       "post" : {
         "description" : "Creates a new user in the peggy of the authenticated user. IsParent must be true.",
