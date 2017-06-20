@@ -100,7 +100,7 @@
           "name" : "user",
           "required" : false,
           "schema" : {
-            "$ref" : "#/definitions/UserIn"
+            "$ref" : "#/definitions/user"
           }
         } ],
         "responses" : {
@@ -202,7 +202,7 @@
           "name" : "user",
           "required" : false,
           "schema" : {
-            "$ref" : "#/definitions/user"
+            "$ref" : "#/definitions/user_1"
           }
         } ],
         "responses" : {
@@ -783,6 +783,24 @@
       }
     },
     "user" : {
+      "type" : "object",
+      "properties" : {
+        "uuid" : {
+          "type" : "string",
+          "format" : "uuid"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "password" : {
+          "type" : "string"
+        },
+        "isParent" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "user_1" : {
       "type" : "object",
       "properties" : {
         "name" : {
