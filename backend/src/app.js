@@ -42,7 +42,7 @@ app.all('*', cors(), bearerToken(), function(req, res, next) {
     if (re.test(req.originalUrl)) {
 
         // Check URL to know if user is authenticating
-        var re2 = /^\/$|auth\/?(\?uuid=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))\&(password=(.{0,128}))$/;
+        var re2 = /^\/$|auth\/?(\?uuid=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))\&(password=(.{0,128}))$|users\/?(\?uuid=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))/;
         if(re2.test(req.originalUrl)){
             // User is authenticating, no need for token
             next();
@@ -134,14 +134,10 @@ app.get('/peggy/:id', cors(), bearerToken(), function(req, res) {
 
 // List all users in one peggy, user must be parent
 app.get('/users', cors(), bearerToken(), function(req, res) {
-    if (jwt.decode(req.token).isparent){
-        user.getAllUsers(jwt.decode(req.token).peggyuuid, function(response) {
+        user.getAllUsers(req.query.uuid, function(response) {
             console.log(JSON.stringify(response));
             return res.json(response);
         });
-    } else {
-        res.status(401).send(HTTPStatus.getStatusJSON(401));
-    }
 });
 
 // Returns user informations, must be self or parent in the same peggy

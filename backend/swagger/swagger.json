@@ -275,14 +275,18 @@
     },
     "/users": {
       "get": {
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "description": "Returns an Array of users inside the peggy of the authenticated user. IsParent must be true.",
+        "description": "Returns an Array of users inside the given peggy.",
         "produces": [
           "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "query",
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          }
         ],
         "responses": {
           "200": {
