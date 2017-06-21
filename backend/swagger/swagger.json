@@ -813,7 +813,7 @@
     "ChangeOut" : {
       "type" : "object",
       "properties" : {
-        "token" : {
+        "coin5" : {
           "type" : "integer"
         },
         "coin2" : {
