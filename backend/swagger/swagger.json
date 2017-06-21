@@ -59,6 +59,34 @@
         }
       }
     },
+    "/change/{money}" : {
+      "get" : {
+        "description" : "Returns an Array of coins which are the best possible change in CHF for the given money.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "money",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "minimum" : 1,
+          "format" : "uuid"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ChangeOut"
+            }
+          },
+          "406" : {
+            "description" : "Not Acceptable",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/users" : {
       "get" : {
         "description" : "Returns an Array of users inside the given peggy.",
@@ -779,6 +807,29 @@
       "properties" : {
         "token" : {
           "type" : "string"
+        }
+      }
+    },
+    "ChangeOut" : {
+      "type" : "object",
+      "properties" : {
+        "token" : {
+          "type" : "integer"
+        },
+        "coin2" : {
+          "type" : "integer"
+        },
+        "coin1" : {
+          "type" : "integer"
+        },
+        "coin50c" : {
+          "type" : "integer"
+        },
+        "coin20c" : {
+          "type" : "integer"
+        },
+        "coin10c" : {
+          "type" : "integer"
         }
       }
     },
