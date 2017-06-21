@@ -152,7 +152,7 @@
           }
         },
         "security" : [ {
-          "ApiKeyAuth" : [ ]
+          "Bearer" : [ ]
         } ]
       },
       "put" : {
@@ -188,7 +188,7 @@
           }
         },
         "security" : [ {
-          "ApiKeyAuth" : [ ]
+          "Bearer" : [ ]
         } ]
       }
     },
@@ -218,7 +218,7 @@
           }
         },
         "security" : [ {
-          "ApiKeyAuth" : [ ]
+          "Bearer" : [ ]
         } ]
       },
       "post" : {
@@ -248,7 +248,7 @@
           }
         },
         "security" : [ {
-          "ApiKeyAuth" : [ ]
+          "Bearer" : [ ]
         } ]
       },
       "put" : {
@@ -284,7 +284,7 @@
           }
         },
         "security" : [ {
-          "ApiKeyAuth" : [ ]
+          "Bearer" : [ ]
         } ]
       }
     },
@@ -314,7 +314,7 @@
           }
         },
         "security" : [ {
-          "ApiKeyAuth" : [ ]
+          "Bearer" : [ ]
         } ]
       },
       "post" : {
@@ -350,7 +350,7 @@
           }
         },
         "security" : [ {
-          "ApiKeyAuth" : [ ]
+          "Bearer" : [ ]
         } ]
       },
       "put" : {
@@ -386,7 +386,7 @@
           }
         },
         "security" : [ {
-          "ApiKeyAuth" : [ ]
+          "Bearer" : [ ]
         } ]
       }
     },
@@ -423,7 +423,7 @@
           }
         },
         "security" : [ {
-          "ApiKeyAuth" : [ ]
+          "Bearer" : [ ]
         } ]
       },
       "delete" : {
@@ -457,7 +457,7 @@
           }
         },
         "security" : [ {
-          "ApiKeyAuth" : [ ]
+          "Bearer" : [ ]
         } ]
       }
     },
@@ -494,7 +494,7 @@
           }
         },
         "security" : [ {
-          "ApiKeyAuth" : [ ]
+          "Bearer" : [ ]
         } ]
       },
       "delete" : {
@@ -528,7 +528,7 @@
           }
         },
         "security" : [ {
-          "ApiKeyAuth" : [ ]
+          "Bearer" : [ ]
         } ]
       }
     },
@@ -565,7 +565,7 @@
           }
         },
         "security" : [ {
-          "ApiKeyAuth" : [ ]
+          "Bearer" : [ ]
         } ]
       },
       "delete" : {
@@ -599,13 +599,13 @@
           }
         },
         "security" : [ {
-          "ApiKeyAuth" : [ ]
+          "Bearer" : [ ]
         } ]
       }
     }
   },
   "securityDefinitions" : {
-    "ApiKeyAuth" : {
+    "Bearer" : {
       "type" : "apiKey",
       "name" : "Authorization",
       "in" : "header"
