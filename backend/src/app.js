@@ -1,6 +1,7 @@
 //Var and libraries
 var fs = require('fs');
 var https = require('https');
+//var http = require('http');
 var jwt = require('jsonwebtoken');
 var bodyParser = require('body-parser');
 var cors = require('cors');
@@ -27,7 +28,7 @@ pool.connect();
 /* -------------------------------------------------------------------------- */
 //All requests will go through here at first
 app.all('*', cors(), bearerToken(), function(req, res, next) {
-    console.log("Request from " + req.connection.remoteAddress + " on " + req.get('host') + req.originalUrl)
+    console.log("Request from " + req.connection.remoteAddress + " on " + req.get('host') + req.originalUrl);
     res.type('application/json');
     // Check if URL is valid
     var re = /^\/$|(\/(peggy\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?|users\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?|objective\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?))|auth\/?(\?uuid=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))\&(password=(.{0,128}))|change\/([0-9]{1,3})(\.[0-9]{1,3})?$/;

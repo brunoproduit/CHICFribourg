@@ -17,7 +17,7 @@
     "https"
   ],
   "securityDefinitions": {
-    "ApiKeyAuth": {
+    "Bearer": {
       "type": "apiKey",
       "in": "header",
       "name": "Authorization"
@@ -221,6 +221,29 @@
           "type": "string"
         }
       }
+    },
+    "ChangeOut": {
+      "type": "object",
+      "properties": {
+        "coin5": {
+          "type": "integer"
+        },
+        "coin2": {
+          "type": "integer"
+        },
+        "coin1": {
+          "type": "integer"
+        },
+        "coin50c": {
+          "type": "integer"
+        },
+        "coin20c": {
+          "type": "integer"
+        },
+        "coin10c": {
+          "type": "integer"
+        }
+      }
     }
   },
   "paths": {
@@ -262,6 +285,38 @@
             "description": "Unauthorized",
             "schema": {
               "$ref": "#/definitions/Error"
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/change/{money}": {
+      "get": {
+        "description": "Returns an Array of coins which are the best possible change in CHF for the given money.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "money",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "minimum": 1
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ChangeOut"
             }
           },
           "406": {
@@ -319,7 +374,7 @@
         ],
         "security": [
           {
-            "ApiKeyAuth": []
+            "Bearer": []
           }
         ],
         "parameters": [
@@ -362,7 +417,7 @@
         ],
         "security": [
           {
-            "ApiKeyAuth": []
+            "Bearer": []
           }
         ],
         "parameters": [
@@ -415,7 +470,7 @@
       "get": {
         "security": [
           {
-            "ApiKeyAuth": []
+            "Bearer": []
           }
         ],
         "description": "Returns a list of peggy.",
@@ -453,7 +508,7 @@
         ],
         "security": [
           {
-            "ApiKeyAuth": []
+            "Bearer": []
           }
         ],
         "parameters": [
@@ -545,7 +600,7 @@
         ],
         "security": [
           {
-            "ApiKeyAuth": []
+            "Bearer": []
           }
         ],
         "parameters": [
@@ -583,7 +638,7 @@
       "get": {
         "security": [
           {
-            "ApiKeyAuth": []
+            "Bearer": []
           }
         ],
         "description": "Returns a list of objective owned by the authenticated user.",
@@ -621,7 +676,7 @@
         ],
         "security": [
           {
-            "ApiKeyAuth": []
+            "Bearer": []
           }
         ],
         "parameters": [
@@ -664,7 +719,7 @@
         ],
         "security": [
           {
-            "ApiKeyAuth": []
+            "Bearer": []
           }
         ],
         "parameters": [
@@ -703,7 +758,7 @@
         "description": "Returns a user by ID. IsParent must be true and in the peggy, or user must be self.",
         "security": [
           {
-            "ApiKeyAuth": []
+            "Bearer": []
           }
         ],
         "parameters": [
@@ -743,7 +798,7 @@
       "delete": {
         "security": [
           {
-            "ApiKeyAuth": []
+            "Bearer": []
           }
         ],
         "parameters": [
@@ -784,7 +839,7 @@
         "description": "Returns a peggy by ID. Authenticated user must be in the peggy.",
         "security": [
           {
-            "ApiKeyAuth": []
+            "Bearer": []
           }
         ],
         "parameters": [
@@ -824,7 +879,7 @@
       "delete": {
         "security": [
           {
-            "ApiKeyAuth": []
+            "Bearer": []
           }
         ],
         "parameters": [
@@ -865,7 +920,7 @@
         "description": "Returns a objective by ID. isParent must be true or authenticated user must own objective.",
         "security": [
           {
-            "ApiKeyAuth": []
+            "Bearer": []
           }
         ],
         "parameters": [
@@ -905,7 +960,7 @@
       "delete": {
         "security": [
           {
-            "ApiKeyAuth": []
+            "Bearer": []
           }
         ],
         "parameters": [
