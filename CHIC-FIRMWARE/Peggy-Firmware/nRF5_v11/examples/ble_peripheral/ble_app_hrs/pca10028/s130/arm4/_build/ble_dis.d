@@ -1,0 +1,10 @@
+.\_build\ble_dis.o: ..\..\..\..\..\..\components\ble\ble_services\ble_dis\ble_dis.c
+.\_build\ble_dis.o: ..\..\..\..\..\..\components\ble\ble_services\ble_dis\ble_dis.h
+.\_build\ble_dis.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\_build\ble_dis.o: ..\..\..\..\..\..\components\ble\common\ble_srv_common.h
+.\_build\ble_dis.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\_build\ble_dis.o: ..\..\..\..\..\..\components\softdevice\s130\headers\ble_types.h
+.\_build\ble_dis.o: ..\..\..\..\..\..\components\libraries\util\app_util.h
+.\_build\ble_dis.o: ..\..\..\..\..\..\components\device\compiler_abstraction.h
+.\_build\ble_dis.o: ..\..\..\..\..\..\components\device\nrf.h
+.\_build\ble_dis.o: ..\..\..\..\..\..\components\device\nrf51.h
