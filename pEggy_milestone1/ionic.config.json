@@ -1,12 +1,11 @@
 {
   "name": "pEggy_milestone1",
   "app_id": "",
-  "v2": true,
-  "typescript": true,
   "proxies": [
     {
       "path": "/https://chic.tic.heia-fr.ch",
       "proxyUrl": "https://chic.tic.heia-fr.ch/"
     }
-  ]
+  ],
+  "type": "ionic-angular"
 }

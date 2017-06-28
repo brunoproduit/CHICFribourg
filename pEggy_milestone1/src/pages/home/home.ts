@@ -1,9 +1,9 @@
 //Import of libraries
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { BLE } from '@ionic-native/ble';
 import { BlePage } from "../ble/ble";
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 /*
@@ -22,13 +22,20 @@ export class HomePage {
 
   public devices; // list of devices
   public isScanning; //set a true if scanning is on
+  public ValueOf5; //value of the total amount of the coin 5
+  public ValueOf2; //value of the total amount of the coin 2
+  public ValueOf1; //value of the total amount of the coin 1
+  public ValueOf50c; //value of the total amount of the coin 50 ct
+  public ValueOf20c; //value of the total amount of the coin 20 ct
+  public ValueOf10c; //value of the total amount of the coin 10 ct
+  public CoinsData;
 
 
   /*
     Constructor, we give name to the component we need from the imported library to use them in our code
     We can set local variable here, if necessary
   */
-  constructor(public navCtrl: NavController, public ble: BLE, public http: Http) {
+  constructor(public navCtrl: NavController, public ble: BLE, public http: Http, private zone: NgZone) {
     this.navCtrl = navCtrl;
     this.isScanning = false;
   }
@@ -67,4 +74,47 @@ export class HomePage {
     console.log(JSON.stringify(device))
     this.navCtrl.push(BlePage, {device: device});
   };
+
+  /*
+
+  doGet(){
+    this.http.get('https://chic.tic.heia-fr.ch/peggy').map(res => res.json()).subscribe(data => {
+        this.CoinsData = data[0];
+        this.ValueOf5 = this.CoinsData.coin5;
+        this.ValueOf2 = this.CoinsData.coin2;
+        this.ValueOf1 = this.CoinsData.coin1;
+        this.ValueOf50c = this.CoinsData.coin50c;
+        this.ValueOf20c = this.CoinsData.coin20c;
+        this.ValueOf10c = this.CoinsData.coin10c;
+      }
+    );
+
+}*/
+  /*
+   This function use the HTTP library
+   This function will put data to the web server at the address mentioned. the web server needs a Json, so the format send
+   is in Json. The format is put in the header of the request HTTP, and the parameter in the body.
+
+
+  doPut(){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    let body = {
+      "uuid": "cf94737d-5d5b-4ca4-ba6f-33cc1f1f8de1",
+      "coin5": 2,
+      "coin2": 0,
+      "coin1": 0,
+      "coin50c": 0,
+      "coin20c": 0,
+      "coin10c": 0
+    };
+    this.http.put('https://chic.tic.heia-fr.ch/peggy', JSON.stringify(body), {headers: headers})
+      .map(res => res.json())
+      .subscribe(data =>{
+        console.log(JSON.stringify(data));
+        this.doGet();
+      });
+  }*/
+
 }

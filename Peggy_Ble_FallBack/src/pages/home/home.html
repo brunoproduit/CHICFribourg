@@ -1,0 +1,42 @@
+<!-- View Interface in HTML Language and Ionic components -->
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Peggy Ble Test
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div>
+    <p>Scan to find your Device</p>
+    <div>
+      <ion-buttons>
+        <button ion-button (click) = "findDevice()" block>Scan</button>
+      </ion-buttons>
+    </div>
+    <ion-buttons>
+      <button ion-button (click) = "readCharacteristic()" block> READ</button>
+    </ion-buttons>
+
+    <ion-buttons>
+      <button ion-button (click) = "Notification()" block>Notify</button>
+    </ion-buttons>
+
+
+    <div align="center">
+      <ion-spinner *ngIf="isScanning==true" name="circles"></ion-spinner>
+    </div>
+  </div>
+  <ion-card *ngFor="let device of devices">
+    <ion-card-header>
+      {{device.name}}
+    </ion-card-header>
+    <ion-card-content>
+      {{device.id}}
+      <ion-buttons end>
+        <button ion-button (click) = "connectToDevice(this.device.id)" outline>Connect</button>
+      </ion-buttons>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

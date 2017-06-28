@@ -2,7 +2,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Peggy 1st Milestone
+      Peggy Milestone
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -15,6 +15,22 @@
         <button ion-button (click) = "startScanning()" block>Scan</button>
       </ion-buttons>
     </div>
+    <!--<ion-buttons>
+      <button ion-button (click) = "doGet()" block>GET</button>
+    </ion-buttons>
+    <ion-buttons>
+      <button ion-button (click) = "doPut()" block>PUT</button>
+    </ion-buttons>
+
+   <div>
+      <p >COIN'S AMOUNT OF 0.1 CHF VALUE : {{ValueOf10c}}</p>
+      <p >COIN'S AMOUNT OF 0.2 CHF VALUE : {{ValueOf20c}}</p>
+      <p >COIN'S AMOUNT OF 0.5 CHF VALUE : {{ValueOf50c}}</p>
+      <p >COIN'S AMOUNT OF 1CHF VALUE : {{ValueOf1}}</p>
+      <p >COIN'S AMOUNT OF 2CHF VALUE : {{ValueOf2}}</p>
+      <p>COIN'S AMOUNT OF 5CHF VALUE : {{ValueOf5}}</p>
+    </div>-->
+
     <div align="center">
       <ion-spinner *ngIf="isScanning==true" name="circles"></ion-spinner>
     </div>

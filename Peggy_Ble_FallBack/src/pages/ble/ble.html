@@ -6,15 +6,15 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <ion-card>
-    <ion-card-header>
-      Amount of 5 CHF coins
-    </ion-card-header>
-    <ion-card-content>
-      {{ValueOf5}}
-    </ion-card-content>
-  </ion-card>
   <ion-buttons>
     <button ion-button (click) = "disconnect(device.id)" block>Disconnect</button>
+  </ion-buttons>
+  <div>
+    <p >COIN'S AMOUNT OF 2CHF VALUE : {{getValueOf2}}</p>
+    <p>COIN'S AMOUNT OF 5CHF VALUE : {{getValueOf5}}</p>
+  </div>
+
+  <ion-buttons>
+    <button ion-button (click) = "readService()" block> READ </button>
   </ion-buttons>
 </ion-content>

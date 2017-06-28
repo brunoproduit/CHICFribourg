@@ -5,7 +5,7 @@ import { HomePage } from '../pages/home/home';
 import { BlePage } from '../pages/ble/ble';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import {BLE} from "@ionic-native/ble";
+import { BLE } from "@ionic-native/ble";
 
 @NgModule({
   declarations: [
