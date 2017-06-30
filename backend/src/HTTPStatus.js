@@ -49,7 +49,7 @@ module.exports.getStatusJSON= function getStatusJSON(code, value) {
         case 403:
             var status = new Object();
             status.code = 403;
-            status.message = "Forbidden";
+            status.message = "Forbidden, This IP has used too much requests, please try again in 1 minute";
             return JSON.stringify(status);
             break;
         case 404:

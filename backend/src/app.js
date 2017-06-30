@@ -8,6 +8,7 @@ var cors = require('cors');
 var csp = require('express-csp-header');
 var sts = require('strict-transport-security');
 var hpkp = require('hpkp');
+var RateLimit = require('express-rate-limit');
 const pool = require('./postgreSQL');
 const peggy = require('./peggy');
 const user = require('./user');
@@ -41,6 +42,7 @@ var credentials = {
         "!SRP",
         "!CAMELLIA"
     ].join(':'),
+    secureOptions: require('constants').SSL_OP_NO_TLSv1,
     honorCipherOrder: true
 };
 var express = require('express');
@@ -70,6 +72,16 @@ var corsOptions = {
     //origin: '*'
     origin: 'chic.tic.heia-fr.ch'
 };
+
+var limiter = new RateLimit({
+    windowMs: 60*1000, // 1 min window
+    delayAfter: 60, // begin slowing down responses after 60 requests (1 request per s)
+    delayMs: 500, // slow down subsequent responses by 0.5s per request
+    max: 60*5, // start blocking after 300 requests (5 requests per s)
+    message: HTTPStatus.getStatusJSON(403)
+});
+
+app.use(limiter);
 
 pool.connect();
 /* -------------------------------------------------------------------------- */
