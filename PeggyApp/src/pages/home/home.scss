@@ -1,0 +1,24 @@
+page-home {
+
+  .elements-color {
+    background-color: #f4f4f4;
+  }
+
+  .buttons-div{
+    float: left;
+  }
+
+  .function-button{
+    float: left;
+    background-image: url("../../assets/img/red-square.png");
+  }
+
+  ion-grid{
+    height: 100%;
+  }
+
+  ion-row{
+    height: 50%;
+  }
+
+}

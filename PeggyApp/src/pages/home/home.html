@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-navbar hideBackButton="true">
+    <ion-title>
+      Welcome {{user.name}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="background">
+  <ion-grid>
+    <ion-row>
+      <div>
+        <ion-buttons>
+          <button ion-button icon-left color="PeggyElement" (click)="logOut()"><ion-icon name="log-out"></ion-icon>Log out</button>
+        </ion-buttons>
+      </div>
+      <div>
+        <ion-buttons>
+          <button ion-button color="PeggyElement" (click)="testToken()">Test Token</button>
+        </ion-buttons>
+      </div>
+    </ion-row>
+    <ion-row padding>
+     <!--
+     <ion-col><ion-buttons><button ion-button color="PeggyElement" class="button-large-md">Add Money</button><button ion-button color="PeggyElement" class="button-large-md">Withdraw Money</button></ion-buttons></ion-col>
+      <ion-col><button ion-button color="PeggyElement" class="button-large-md">Summary</button><button ion-button color="PeggyElement" class="button-large-md">Settings</button></ion-col>
+    -->
+      <div class="buttons-div">
+       <div class="function-button" tappable (click)="goToInsertMoney()">
+        <p>Insert Money</p>
+        <img src="assets/img/red-square.png">
+      </div>
+        <div class="function-button" tappable (click)="doThis()">
+          <p>Insert Money</p>
+          <img src="assets/img/blue-square.png">
+        </div>
+        <div class="function-button" tappable (click)="doThis()">
+          <p>Insert Money</p>
+          <img src="assets/img/yellow-square.png">
+        </div>
+        <div class="function-button" tappable (click)="doThis()">
+          <p>Insert Money</p>
+          <img src="assets/img/pink-square.png">
+        </div>
+
+
+
+      </div>
+    </ion-row>
+  </ion-grid>
+</ion-content>
