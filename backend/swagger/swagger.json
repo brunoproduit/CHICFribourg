@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.1",
+    "version": "1.2",
     "title": "CHICFribourg",
     "description": "backend REST in the TIC cluster @HEIA-FR for the CHIC project",
     "contact": {
@@ -74,6 +74,9 @@
         "lastchanged": {
           "type": "string",
           "format": "date-time"
+        },
+        "balance": {
+          "type": "integer"
         }
       }
     },

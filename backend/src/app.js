@@ -67,8 +67,8 @@ app.disable('x-powered-by');
 
 //TODO change CORS whitelist for production
 var corsOptions = {
-    origin: '*'
-    //origin: 'chic.tic.heia-fr.ch'
+    //origin: '*'
+    origin: 'chic.tic.heia-fr.ch'
 };
 
 pool.connect();
@@ -344,9 +344,13 @@ app.put('*', cors(corsOptions), bearerToken(), function(req, res, next) {
 
 app.put('/peggy', cors(corsOptions), bearerToken(), function(req, res) {
     peggy.putPeggy(req.body.uuid, req.body.coin5, req.body.coin2, req.body.coin1, req.body.coin50c, req.body.coin20c, req.body.coin10c, jwt.decode(req.token).uuid, function() {
-        peggy.getPeggy(req.body.uuid, function(response) {
-            console.log(JSON.stringify(response));
-            res.json(response);
+        peggy.getPeggy(req.body.uuid, function(peggy) {
+            console.log(jwt.decode(req.token).uuid);
+            user.getUser(jwt.decode(req.token).uuid, function(user) {
+                peggy.balance = user.balance;
+                console.log(JSON.stringify(peggy));
+                res.json(peggy);
+            });
         })
     });
 });
