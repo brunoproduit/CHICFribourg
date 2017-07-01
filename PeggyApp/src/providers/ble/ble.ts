@@ -194,62 +194,107 @@ export class BleProvider {
   };
 
   sortCoin = (value) => {
+    var coin:string;
     switch (value){
       case 1:
-        //this.doPut("coin10c", "+1");
         console.log("Coin of 10ct added");
+         coin = "coin10c";
+        if (this.callback != null)
+        {
+          this.callback.onMoneyInserted(coin);
+        }
         break;
       case 2:
-        //this.doPut("coin20c", "+1");
         console.log("Coin of 20ct added");
+        coin = "coin20c";
+        if (this.callback != null)
+        {
+          this.callback.onMoneyInserted(coin);
+        }
         break;
       case 4:
-        //this.doPut("coin50c", "+1");
         console.log("Coin of 50ct added");
+        coin = "coin50c";
+        if (this.callback != null)
+        {
+          this.callback.onMoneyInserted(coin);
+        }
         break;
       case 8:
-        //this.doPut("coin1", "+1");
         console.log("Coin of 1.- added");
+        coin = "coin1";
+        if (this.callback != null)
+        {
+          this.callback.onMoneyInserted(coin);
+        }
         break;
       case 16:
-        //this.doPut("coin2", "+1");
         console.log("Coin of 2.- added");
+        coin = "coin2";
+        if (this.callback != null)
+        {
+          this.callback.onMoneyInserted(coin);
+        }
         break;
       case 32:
-        //this.doPut("coin5", "+1");
         console.log("Coin of 5.- added");
-        var coin = "coin5";
+        coin = "coin5";
         if (this.callback != null)
         {
           this.callback.onMoneyInserted(coin);
         }
         break;
       case 65:
-        //this.doPut("coin10c", "-1");
         console.log("Coin of 10ct substracted");
+        coin = "coin10c";
+        if (this.callback != null)
+        {
+          this.callback.onMoneyWithdrawn(coin);
+        }
         break;
       case 66:
-        //this.doPut("coin20c", "-1");
         console.log("Coin of 20ct substracted");
+        coin = "coin20c";
+        if (this.callback != null)
+        {
+          this.callback.onMoneyWithdrawn(coin);
+        }
         break;
       case 68:
-        //this.doPut("coin50c", "-1");
         console.log("Coin of 50ct substracted");
+        coin = "coin50c";
+        if (this.callback != null)
+        {
+          this.callback.onMoneyWithdrawn(coin);
+        }
         break;
       case 72:
-        //this.doPut("coin1", "-1");
         console.log("Coin of 1.- substracted");
+        coin = "coin1";
+        if (this.callback != null)
+        {
+          this.callback.onMoneyWithdrawn(coin);
+        }
         break;
       case 80:
-        //this.doPut("coin2", "-1");
         console.log("Coin of 2.- substracted");
+        coin = "coin2";
+        if (this.callback != null)
+        {
+          this.callback.onMoneyWithdrawn(coin);
+        }
         break;
       case 96:
-        //this.doPut("coin5", "-1");
         console.log("Coin of 5.- substracted");
+        coin = "coin5";
+        if (this.callback != null)
+        {
+          this.callback.onMoneyWithdrawn(coin);
+        }
         break;
     }
   };
+
   getIsConnected = () =>{
     if (this.callback != null) {
       return this.isConnected

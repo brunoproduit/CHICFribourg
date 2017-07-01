@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Http, Headers } from '@angular/http';
 import { BleProvider } from '../../providers/ble/ble'
 import {InsertMoneyPage} from "../insert-money/insert-money";
+import {WithdrawMoneyPage} from "../withdraw-money/withdraw-money";
 
 @Component({
   selector: 'page-home',
@@ -36,11 +37,25 @@ export class HomePage {
         err => console.log("Error: "+ err));
   }
 
+  parametersCallbackFunction = (user, tokenSession) =>{
+    return new Promise((resolve, reject)=>{
+      this.user = user;
+      this.tokenSession = tokenSession;
+      resolve();
+    })
+  };
+
   goToInsertMoney(){
-    this.navCtrl.push(InsertMoneyPage, {user: this.user, tokenSession: this.tokenSession});
+    this.navCtrl.push(InsertMoneyPage, {callback: this.parametersCallbackFunction, user: this.user, tokenSession: this.tokenSession})
+  }
+
+  goToWithdrawMoney(){
+    this.navCtrl.push(WithdrawMoneyPage, {callback: this.parametersCallbackFunction, user: this.user, tokenSession: this.tokenSession})
   }
 
   logOut(){
     this.navCtrl.popToRoot();
   }
+
+
 }
