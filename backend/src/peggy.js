@@ -1,6 +1,14 @@
-const pool = require('./postgreSQL');
-const user = require('./user');
-const uuidV4 = require('uuid/v4');
+/* --------------------------------------------------------------------------
+ --------------------------------Imports----------------------------------
+ -------------------------------------------------------------------------- */
+var pool = require('./postgreSQL');
+var user = require('./user');
+var uuidV4 = require('uuid/v4');
+
+
+/* --------------------------------------------------------------------------
+ --------------------------------Constants-----------------------------------
+ -------------------------------------------------------------------------- */
 const SELECT = "SELECT * FROM peggy WHERE uuid = $1 ORDER BY uuid";
 const SELECTALL = "SELECT * FROM peggy ORDER BY uuid";
 const INSERT = 'INSERT INTO peggy(uuid, lastchanged) VALUES($1, $2)';
@@ -13,6 +21,11 @@ const UPDATE_RELATIVE_coin50c = 'UPDATE peggy SET coin50c = coin50c + $2, lastch
 const UPDATE_RELATIVE_coin20c = 'UPDATE peggy SET coin20c = coin20c + $2, lastchanged = $3 WHERE uuid = $1';
 const UPDATE_RELATIVE_coin10c = 'UPDATE peggy SET coin10c = coin10c + $2, lastchanged = $3 WHERE uuid = $1';
 
+
+
+/* --------------------------------------------------------------------------
+ --------------------------------Functions-----------------------------------
+ -------------------------------------------------------------------------- */
 module.exports.getPeggy = function getPeggy(uuid, callback) {
     pool.query(SELECT, [uuid], function(err, res) {
         var results = [];

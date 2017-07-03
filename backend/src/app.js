@@ -1,4 +1,6 @@
-//Var and libraries
+/* --------------------------------------------------------------------------
+ --------------------------------Imports----------------------------------
+ -------------------------------------------------------------------------- */
 var fs = require('fs');
 var https = require('https');
 var http = require('http');
@@ -22,10 +24,8 @@ var crypto = require('crypto');
 var privateKey = fs.readFileSync('../misc/sslcert/privkey.pem', 'utf8');
 var publicKey = fs.readFileSync('../misc/sslcert/key.pub', 'utf8');
 var certificate = fs.readFileSync('../misc/sslcert/fullchain.pem', 'utf8');
-
-
-/* -------------------------------------------------------------------------- */
-
+var express = require('express');
+var app = express();
 var credentials = {
     key: privateKey,
     cert: certificate,
@@ -52,47 +52,77 @@ var credentials = {
     secureOptions: require('constants').SSL_OP_NO_TLSv1,
     honorCipherOrder: true
 };
-var express = require('express');
-var app = express();
 
-app.use(bodyParser.json());
-app.use(csp({
+
+
+/* --------------------------------------------------------------------------
+ --------------------------------Constants-----------------------------------
+ -------------------------------------------------------------------------- */
+const NINETY_DAYS_IN_SECONDS = 7776000; // Time to pin the public keys in HPKP
+const HSTS_DAYS  = 180;                 // Time used for HSTS
+const HTTPS_PORT = 443;                 // Default port for HTTPS
+
+
+
+
+/* --------------------------------------------------------------------------
+--------------------------------Middlewares----------------------------------
+ -------------------------------------------------------------------------- */
+
+app.use(bodyParser.json());             // Used to parse incoming JSON data
+
+app.use(csp({                           // CSP header rules
     policies: {
-        'default-src': [csp.SELF],
-        'script-src': [csp.SELF],
-        'style-src': [csp.SELF],
-        'img-src': [csp.SELF],
-        'block-all-mixed-content': true
+        'default-src': [csp.SELF],      // Files source self
+        'script-src': [csp.SELF],       // If scripts are used, then source self
+        'style-src': [csp.SELF],        // If CSS is used, then source self
+        'img-src': [csp.SELF],          // If images are used, then source self
+        'block-all-mixed-content': true // No other content
     }
 }));
-app.use(sts.getSTS({"max-age": {days: 180}}));
-var ninetyDaysInSeconds = 7776000;
-app.use(hpkp({
-    maxAge: ninetyDaysInSeconds,
-    sha256s: ['yAs3QPoZf+wDpRWBPNV2Dvi0tq7tysNuOCH4VaWPxMQ=', 'YLh1dUR9y6Kja30RrAn7JKnbQG/uEtLMkBgFF2Fuihg=', 'Vjs8r4z+80wjNcr1YKepWQboSIRi63WsWXhIMN+eWys=', 'rQfc9Oew5VQWfPh6qaKE7QfPqTWUi10XC5X4Oe3ig2s=']
+
+
+app.use(sts.getSTS({"max-age": {days: HSTS_DAYS}}));            // Middleware for HSTS
+
+app.use(hpkp({                                                  // Public key pinning
+    maxAge: NINETY_DAYS_IN_SECONDS,                             // pin key for ninety days
+    sha256s: ['yAs3QPoZf+wDpRWBPNV2Dvi0tq7tysNuOCH4VaWPxMQ=',   // Own public key
+              'YLh1dUR9y6Kja30RrAn7JKnbQG/uEtLMkBgFF2Fuihg=',   // Let’s Encrypt Authority X3
+              'Vjs8r4z+80wjNcr1YKepWQboSIRi63WsWXhIMN+eWys=',   // ISRG Root X1
+              'rQfc9Oew5VQWfPh6qaKE7QfPqTWUi10XC5X4Oe3ig2s=']   // Own backup key
 }));
 
-app.disable('x-powered-by');
+app.disable('x-powered-by');                                    // Disable x-powered-by header
 
-//TODO change CORS whitelist for production
-var corsOptions = {
-    //origin: '*'
-    origin: 'chic.tic.heia-fr.ch'
-};
+var corsOptions = {origin: 'chic.tic.heia-fr.ch'};              // Set CORS origin to only self
 
 var limiter = new RateLimit({
-    windowMs: 60 * 1000, // 1 min window
-    delayAfter: 60, // begin slowing down responses after 60 requests (1 request per s)
-    delayMs: 500, // slow down subsequent responses by 0.5s per request
-    max: 60 * 5, // start blocking after 300 requests (5 requests per s)
-    message: HTTPStatus.getStatusJSON(403)
+    windowMs: 60 * 1000,                    // 1 min window
+    delayAfter: 60,                         // begin slowing down responses after 60 requests (1 request per s)
+    delayMs: 500,                           // slow down subsequent responses by 0.5s per request
+    max: 60 * 5,                            // start blocking after 300 requests (5 requests per s)
+    message: HTTPStatus.getStatusJSON(403)  // Send back blocking message
 });
 
-app.use(limiter);
+app.use(limiter);                           // Use the declared limits for the API to prevent abuse
 
-pool.connect();
+pool.connect();                             // Connect to the postgreSQL pool
 
-/* -------------------------------------------------------------------------- */
+
+
+
+
+
+
+
+
+/* --------------------------------------------------------------------------
+ --------------------------------Routes--------------------------------------
+ -------------------------------------------------------------------------- */
+
+
+//-----------------------------------ALL-------------------------------------
+
 //All requests will go through here at first
 app.all('*', cors(corsOptions), bearerToken(), function (req, res, next) {
     try {
@@ -142,7 +172,9 @@ app.all('*', cors(corsOptions), bearerToken(), function (req, res, next) {
 });
 
 
-//GET
+
+
+//-----------------------------------GET-------------------------------------
 app.get('*', cors(corsOptions), bearerToken(), function (req, res, next) {
     next();
 });
@@ -159,6 +191,12 @@ app.get('/', cors(corsOptions), bearerToken(), function (req, res) {
     }
 });
 
+
+/**
+ *
+ * Return an Array of coins which are the best possible change in CHF for the given money.
+ * @param money
+ */
 app.get('/change/:id', cors(corsOptions), bearerToken(), function (req, res) {
     try {
         // Greedy funtion to get change
@@ -187,7 +225,12 @@ app.get('/change/:id', cors(corsOptions), bearerToken(), function (req, res) {
     }
 });
 
-// Authentication
+/**
+ *
+ * Return a signed JSON Web token if authentication is sucessfull.
+ * @param uuid
+ * @param password
+ */
 app.get('/auth', cors(corsOptions), bearerToken(), function (req, res) {
     try {
         console.log(req.query.uuid);
@@ -215,7 +258,10 @@ app.get('/auth', cors(corsOptions), bearerToken(), function (req, res) {
     }
 });
 
-// List all peggy status/content
+/**
+ *
+ * Return a list of peggy.
+ */
 app.get('/peggy', cors(corsOptions), bearerToken(), function (req, res) {
     try {
         peggy.getAllPeggy(function (response) {
@@ -228,7 +274,11 @@ app.get('/peggy', cors(corsOptions), bearerToken(), function (req, res) {
     }
 });
 
-// Returns specific peggy status/content
+/**
+ *
+ * Return a peggy by ID. Authenticated user must be in the peggy.
+ * @param uuid
+ */
 app.get('/peggy/:id', cors(corsOptions), bearerToken(), function (req, res) {
     try {
         if (jwt.decode(req.token).peggyuuid == req.params.id) {
@@ -246,7 +296,11 @@ app.get('/peggy/:id', cors(corsOptions), bearerToken(), function (req, res) {
     }
 });
 
-// List all users in one peggy, user must be parent
+/**
+ *
+ * Return an Array of users inside the given peggy.
+ * @param uuid
+ */
 app.get('/users', cors(corsOptions), bearerToken(), function (req, res) {
     try {
         user.getAllUsers(req.query.uuid, function (response) {
@@ -259,7 +313,11 @@ app.get('/users', cors(corsOptions), bearerToken(), function (req, res) {
     }
 });
 
-// Returns user informations, must be self or parent in the same peggy
+/**
+ *
+ * Return a user by ID. IsParent must be true and in the peggy, or user must be self.
+ * @param uuid
+ */
 app.get('/users/:id', cors(corsOptions), bearerToken(), function (req, res) {
     try {
         if (jwt.decode(req.token).isparent | jwt.decode(req.token).uuid == req.params.id) {
@@ -282,7 +340,10 @@ app.get('/users/:id', cors(corsOptions), bearerToken(), function (req, res) {
     }
 });
 
-// List all objectives of one user
+/**
+ *
+ * Return a list of objective owned by the authenticated user.
+ */
 app.get('/objective', cors(corsOptions), bearerToken(), function (req, res) {
     try {
         objective.getAllObjectives(jwt.decode(req.token).uuid, function (response) {
@@ -295,7 +356,11 @@ app.get('/objective', cors(corsOptions), bearerToken(), function (req, res) {
     }
 });
 
-// Returns information about specific objective, must be owned by self or be a parent in the same peggy
+/**
+ *
+ * Returns a objective by ID. isParent must be true or authenticated user must own objective.
+ * @param uuid
+ */
 app.get('/objective/:id', cors(corsOptions), bearerToken(), function (req, res) {
     try {
         objective.getObjective(req.params.id, function (response) {
@@ -316,8 +381,7 @@ app.get('/objective/:id', cors(corsOptions), bearerToken(), function (req, res) 
 
 
 
-/* -------------------------------------------------------------------------- */
-//POST
+//-----------------------------------POST-------------------------------------
 app.post('*', cors(corsOptions), bearerToken(), function (req, res, next) {
     try {
         if (typeof(req.token) === 'undefined') {
@@ -333,6 +397,12 @@ app.post('*', cors(corsOptions), bearerToken(), function (req, res, next) {
     }
 });
 
+/**
+ *
+ * Create a new peggy with a parent user inside.
+ * @param { "name"     : string,
+ *          "password" : string }
+ */
 app.post('/peggy', cors(corsOptions), bearerToken(), function (req, res) {
     try {
         var uuid = uuidV4();
@@ -358,6 +428,13 @@ app.post('/peggy', cors(corsOptions), bearerToken(), function (req, res) {
     }
 });
 
+/**
+ *
+ * Creates a new user in the peggy of the authenticated user. IsParent must be true.
+ * @param { "name"     : string,
+ *          "password" : string,
+ *          "isParent" : boolean }
+ */
 app.post('/users', cors(corsOptions), bearerToken(), function (req, res) {
     try {
 
@@ -384,6 +461,14 @@ app.post('/users', cors(corsOptions), bearerToken(), function (req, res) {
     }
 });
 
+
+/**
+ *
+ * Creates a new objective for the authenticated user.
+ * @param {  "name"     : string,
+ *           "price"    : integer,
+ * @optional "deadline" : string }
+ */
 app.post('/objective', cors(corsOptions), bearerToken(), function (req, res) {
     try {
         var uuid = uuidV4();
@@ -403,58 +488,9 @@ app.post('/objective', cors(corsOptions), bearerToken(), function (req, res) {
     }
 });
 
-/* -------------------------------------------------------------------------- */
 
-//DELETE
-app.delete('*', cors(corsOptions), bearerToken(), function (req, res, next) {
-    try {
-        res.type('application/json');
-        if (typeof(req.token) === 'undefined') {
-            res.status(401).send(HTTPStatus.getStatusJSON(401))
-        } else if (!jwt.decode(req.token).isparent) {
-            res.status(401).send(HTTPStatus.getStatusJSON(401))
-        }
-        else {
-            next();
-        }
-    }
-    catch (err) {
-        res.status(500).send(HTTPStatus.getStatusJSON(500));
-    }
-});
-app.delete('/peggy/:id', cors(corsOptions), bearerToken(), function (req, res) {
-    try {
-        peggy.deletePeggy(req.params.id);
-        res.status(200).send(HTTPStatus.getStatusJSON(200));
-    }
-    catch (err) {
-        res.status(500).send(HTTPStatus.getStatusJSON(500));
-    }
-});
 
-app.delete('/users/:id', cors(corsOptions), bearerToken(), function (req, res) {
-    try {
-        user.deleteUser(req.params.id);
-        res.status(200).send(HTTPStatus.getStatusJSON(200));
-    }
-    catch (err) {
-        res.status(500).send(HTTPStatus.getStatusJSON(500));
-    }
-});
-
-app.delete('/objective/:id', cors(corsOptions), bearerToken(), function (req, res) {
-    try {
-        objective.deleteObjective(req.params.id);
-        res.status(200).send(HTTPStatus.getStatusJSON(200));
-    }
-    catch (err) {
-        res.status(500).send(HTTPStatus.getStatusJSON(500));
-    }
-});
-
-/* -------------------------------------------------------------------------- */
-
-// PUT
+//-----------------------------------PUT-------------------------------------
 app.put('*', cors(corsOptions), bearerToken(), function (req, res, next) {
     try {
         if (typeof(req.token) === 'undefined') {
@@ -470,6 +506,17 @@ app.put('*', cors(corsOptions), bearerToken(), function (req, res, next) {
     }
 });
 
+/**
+ *
+ * Insert or remove coins in a specific peggy. At least one optional is required
+ * @param {  "uuid"    : string,
+ * @optional "coin5"   : string,
+ * @optional "coin2"   : string,
+ * @optional "coin1"   : string,
+ * @optional "coin50c" : string,
+ * @optional "coin20c" : string,
+ * @optional "coin10c" : string  }
+ */
 app.put('/peggy', cors(corsOptions), bearerToken(), function (req, res) {
     try {
         if (typeof(req.body.uuid) != 'string') {
@@ -491,6 +538,14 @@ app.put('/peggy', cors(corsOptions), bearerToken(), function (req, res) {
     }
 });
 
+/**
+ *
+ * Updates a user. isParent must be true or user must be self
+ * @param  { "uuid"     : string,
+ *           "name"     : string,
+ *           "password" : string,
+ *           "isParent" : boolean }
+ */
 app.put('/users', cors(corsOptions), bearerToken(), function (req, res) {
     try {
         user.putUser(req.body.uuid, req.body.name, req.body.password, req.body.isParent, function () {
@@ -510,6 +565,14 @@ app.put('/users', cors(corsOptions), bearerToken(), function (req, res) {
     }
 });
 
+/**
+ *
+ * Update an objective. isParent or owner of the objective
+ * @param {  "uuid"     : string
+ *           "name"     : string,
+ *           "price"    : integer,
+ * @optional "deadline" : string }
+ */
 app.put('/objective', cors(corsOptions), bearerToken(), function (req, res) {
     try {
         objective.putObjective(req.body.uuid, req.body.name, req.body.price, req.body.deadline, function () {
@@ -529,8 +592,87 @@ app.put('/objective', cors(corsOptions), bearerToken(), function (req, res) {
 });
 
 
-/* -------------------------------------------------------------------------- */
 
+//-----------------------------------DELETE-------------------------------------
+app.delete('*', cors(corsOptions), bearerToken(), function (req, res, next) {
+    try {
+        res.type('application/json');
+        if (typeof(req.token) === 'undefined') {
+            res.status(401).send(HTTPStatus.getStatusJSON(401))
+        } else if (!jwt.decode(req.token).isparent) {
+            res.status(401).send(HTTPStatus.getStatusJSON(401))
+        }
+        else {
+            next();
+        }
+    }
+    catch (err) {
+        res.status(500).send(HTTPStatus.getStatusJSON(500));
+    }
+});
+
+/**
+ *
+ * Deletes a peggy. isParent must be true and in the same peggy. Peggy must be empty.
+ * @param uuid
+ */
+app.delete('/peggy/:id', cors(corsOptions), bearerToken(), function (req, res) {
+    try {
+        peggy.deletePeggy(req.params.id);
+        res.status(200).send(HTTPStatus.getStatusJSON(200));
+    }
+    catch (err) {
+        res.status(500).send(HTTPStatus.getStatusJSON(500));
+    }
+});
+
+/**
+ *
+ * Deletes a user. Isparent must be true and in the same peggy.
+ * @param uuid
+ */
+app.delete('/users/:id', cors(corsOptions), bearerToken(), function (req, res) {
+    try {
+        user.deleteUser(req.params.id);
+        res.status(200).send(HTTPStatus.getStatusJSON(200));
+    }
+    catch (err) {
+        res.status(500).send(HTTPStatus.getStatusJSON(500));
+    }
+});
+
+/**
+ *
+ * Delete an objective.
+ * @param uuid
+ */
+app.delete('/objective/:id', cors(corsOptions), bearerToken(), function (req, res) {
+    try {
+        objective.deleteObjective(req.params.id);
+        res.status(200).send(HTTPStatus.getStatusJSON(200));
+    }
+    catch (err) {
+        res.status(500).send(HTTPStatus.getStatusJSON(500));
+    }
+});
+
+
+
+//-----------------------------------OPTION-------------------------------------
+app.options('/peggy/:id', cors(corsOptions), bearerToken());        // enable pre-flight request for DELETE request
+app.options('/users/:id', cors(corsOptions), bearerToken());        // enable pre-flight request for DELETE request
+app.options('/objective/:id', cors(corsOptions), bearerToken());    // enable pre-flight request for DELETE request
+
+
+
+/* --------------------------------------------------------------------------
+ --------------------------------Events--------------------------------------
+ -------------------------------------------------------------------------- */
+
+/**
+ *
+ * Handler for OCSP requests
+ */
 app.on('OCSPRequest', function (certificate, issuer, cb) {
     try {
         ocsp.getOCSPURI(certificate, function (err, uri) {
@@ -551,15 +693,11 @@ app.on('OCSPRequest', function (certificate, issuer, cb) {
     }
 });
 
-/* -------------------------------------------------------------------------- */
-
-// OPTION
-app.options('/peggy/:id', cors(corsOptions), bearerToken()); // enable pre-flight request for DELETE request
-app.options('/users/:id', cors(corsOptions), bearerToken()); // enable pre-flight request for DELETE request
-app.options('/objective/:id', cors(corsOptions), bearerToken()); // enable pre-flight request for DELETE request
-
-/* -------------------------------------------------------------------------- */
 
 
-console.log('Server running at https://chic.tic.heia-fr.ch/');
-https.createServer(credentials, app).listen(443);
+/* --------------------------------------------------------------------------
+ --------------------------------Start Server--------------------------------
+ -------------------------------------------------------------------------- */
+
+console.log('Server running at https://chic.tic.heia-fr.ch/');  // Write startup in log
+https.createServer(credentials, app).listen(HTTPS_PORT);        // Start server on port 443 (HTTPS default)

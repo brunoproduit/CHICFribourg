@@ -1,7 +1,7 @@
 {
-  "name": "pEggy-REST-API",
-  "description": "The backend RESTful API for the pEggy",
-  "version": "0.0.1",
+  "name": "Peggy-REST-API",
+  "description": "The backend, RESTful API for the Peggy",
+  "version": "1.0.0",
   "repository": {
   "type": "git",
   "url": "git://github.com/brunoproduit/CHICFribourg.git"
