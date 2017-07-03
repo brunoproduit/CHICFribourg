@@ -15,4 +15,5 @@ Smartphone app for the pEggy, written with the ionic framework in angularJS by @
 backend
 -------
 Backend server code, written in nodejs by @brunoproduit
+
 It is a REST API based on a swagger/OpenAPI definition => backend/swagger/swagger.json
