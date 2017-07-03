@@ -10,13 +10,13 @@ module.exports.getObjective = function getObjective(uuid, callback) {
     pool.query(SELECT, [uuid], function(err, res) {
         var results = [];
         if (err) {
-            return console.error('error running query', err);
+            console.error('error running query', err);
+            return callback(err);
         }
         for (var i = 0; i < res.rowCount; i++) {
             results.push(res.rows[i]);
         }
-        callback(results.pop());
-        return;
+        return callback(results.pop());
     });
 };
 
@@ -24,25 +24,46 @@ module.exports.getAllObjectives = function getAllObjectives(useruuid, callback) 
     pool.query(SELECTALL, [useruuid], function(err, res) {
         var results = [];
         if (err) {
-            return console.error('error running query', err);
+            console.error('error running query', err);
+            return callback(err);
         }
         for (var i = 0; i < res.rowCount; i++) {
             results.push(res.rows[i]);
         }
-        callback(results);
-        return;
+        return callback(results);
     });
 };
 
 
 module.exports.postObjective = function postObjective(uuid, name, price, userUuid, deadline, callback) {
-    pool.query(INSERT, [uuid, name, price, deadline, new Date(), userUuid], function(){callback();});
+    pool.query(INSERT, [uuid, name, price, deadline, new Date(), userUuid], function(err, res) {
+        if (err) {
+            console.error('error running query', err);
+            return callback(err);
+        } else {
+            return callback(res);
+        }
+    });
 };
 
 module.exports.deleteObjective = function deleteObjective(uuid) {
-    pool.query(DELETE, [uuid]);
+    pool.query(DELETE, [uuid], function(err, res) {
+        if (err) {
+            console.error('error running query', err);
+            return callback(err);
+        } else {
+            return callback(res);
+        }
+    });
 };
 
 module.exports.putObjective = function putObjective(uuid, name, price, deadline, callback) {
-    pool.query(UPDATE, [uuid, name, price, deadline, new Date()], function(){callback();});
+    pool.query(UPDATE, [uuid, name, price, deadline, new Date()], function(err, res) {
+        if (err) {
+            console.error('error running query', err);
+            return callback(err);
+        } else {
+            return callback(res);
+        }
+    });
 };

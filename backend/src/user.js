@@ -30,7 +30,8 @@ module.exports.getUser = function getUser(uuid, callback) {
     pool.query(SELECT, [uuid], function(err, res) {
         var results = [];
         if (err) {
-            return console.error('error running query', err);
+            console.error('error running query', err);
+            return callback(err);
         }
         for (var i = 0; i < res.rowCount; i++) {
             results.push(res.rows[i]);
@@ -43,32 +44,60 @@ module.exports.getAllUsers = function getAllUsers(peggyuuid, callback) {
     pool.query(SELECTALL, [peggyuuid], function(err, res) {
         var results = [];
         if (err) {
-            return console.error('error running query', err);
+            console.error('error running query', err);
+            return callback(err);
         }
         for (var i = 0; i < res.rowCount; i++) {
             results.push(res.rows[i]);
         }
-        callback(results);
-        return;
+        return callback(results);
     });
 };
 
 module.exports.postUser = function postUser(uuid, name, password, isParent, peggyUuid, callback) {
     var hash = hashPassword(password);
-    pool.query(INSERT, [uuid, name, hash, isParent, new Date(), peggyUuid], function(){callback();});
+    pool.query(INSERT, [uuid, name, hash, isParent, new Date(), peggyUuid], function(err, res) {
+        if (err) {
+            console.error('error running query', err);
+            return callback(err);
+        } else {
+            return callback(res);
+        }
+    });
 };
 
 module.exports.incrementUserBalance = function incrementUserBalance(uuid, increment,  callback) {
-    pool.query(INCREMENT_BALANCE, [uuid, increment, new Date()], function(){callback();});
+    pool.query(INCREMENT_BALANCE, [uuid, increment, new Date()], function(err, res) {
+        if (err) {
+            console.error('error running query', err);
+            return callback(err);
+        } else {
+            return callback(res);
+        }
+    });
 };
 
 module.exports.deleteUser = function deleteUser(name) {
-    pool.query(DELETE, [name]);
+    pool.query(DELETE, [name], function(err, res) {
+        if (err) {
+            console.error('error running query', err);
+            return callback(err);
+        } else {
+            return callback(res);
+        }
+    });
 };
 
 module.exports.putUser = function putUser(uuid, name, password, isParent, callback) {
     var hash = hashPassword(password);
-    pool.query(UPDATE, [uuid, name, hash, isParent, new Date()], function(){callback();});
+    pool.query(UPDATE, [uuid, name, hash, isParent, new Date()], function(err, res) {
+        if (err) {
+            console.error('error running query', err);
+            return callback(err);
+        } else {
+            return callback(res);
+        }
+    });
 };
 
 
@@ -76,13 +105,13 @@ module.exports.getPasswordHash = function checkPassword(uuid, callback) {;
     pool.query(SELECT_PASSWORD_HASH, [uuid], function(err, res) {
         var results = [];
         if (err) {
-            return console.error('error running query', err);
+            console.error('error running query', err);
+            return callback(err);
         }
         for (var i = 0; i < res.rowCount; i++) {
             results.push(res.rows[i]);
         }
-        callback(results.pop().password);
-        return;
+        return callback(results.pop().password);
     });
 };
 
