@@ -1,29 +1,36 @@
 //Var and libraries
 var fs = require('fs');
 var https = require('https');
-//var http = require('http');
+var http = require('http');
 var jwt = require('jsonwebtoken');
 var bodyParser = require('body-parser');
 var cors = require('cors');
+var ocsp = require('ocsp');
 var csp = require('express-csp-header');
 var sts = require('strict-transport-security');
+var cache = new ocsp.Cache();
 var hpkp = require('hpkp');
 var RateLimit = require('express-rate-limit');
-const pool = require('./postgreSQL');
-const peggy = require('./peggy');
-const user = require('./user');
-const objective = require('./objective');
-const uuidV4 = require('uuid/v4');
-const bearerToken = require('express-bearer-token');
+var pool = require('./postgreSQL');
+var peggy = require('./peggy');
+var user = require('./user');
+var objective = require('./objective');
+var uuidV4 = require('uuid/v4');
+var bearerToken = require('express-bearer-token');
 var HTTPStatus = require('./HTTPStatus');
-var blake2 = require('blake2');
+var crypto = require('crypto');
 var privateKey = fs.readFileSync('../misc/sslcert/privkey.pem', 'utf8');
 var publicKey = fs.readFileSync('../misc/sslcert/key.pub', 'utf8');
 var certificate = fs.readFileSync('../misc/sslcert/fullchain.pem', 'utf8');
+
+
+/* -------------------------------------------------------------------------- */
+
 var credentials = {
     key: privateKey,
     cert: certificate,
     ciphers: [
+        "ECDHE-ECDSA-CHACHA20-POLY1305",
         "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256",
         "ECDHE-RSA-AES256-SHA384",
         "DHE-RSA-AES256-SHA384",
@@ -84,6 +91,7 @@ var limiter = new RateLimit({
 app.use(limiter);
 
 pool.connect();
+
 /* -------------------------------------------------------------------------- */
 //All requests will go through here at first
 app.all('*', cors(corsOptions), bearerToken(), function(req, res, next) {
@@ -172,10 +180,7 @@ app.get('/auth', cors(corsOptions), bearerToken(), function(req, res) {
     var re = /^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/;
     if (re.test(req.query.uuid)) {
             user.getPasswordHash(req.query.uuid, function (response) {
-                var h = blake2.createHash('blake2b');
-                h.update(new Buffer(req.query.password));
-                var hash = h.digest("hex")
-                if (response == hash){
+                if (user.isPasswordCorrect(response, req.query.password)){
                     user.getUser(req.query.uuid, function (user) {
                         var out = new Object();
                         out.token = jwt.sign(
@@ -275,28 +280,39 @@ app.post('*', cors(corsOptions), bearerToken(), function(req, res, next) {
 
 app.post('/peggy', cors(corsOptions), bearerToken(), function(req, res) {
     var uuid = uuidV4();
-    peggy.postPeggy(uuid, req.body.name, req.body.password, req.body.isParent, function() {
-        peggy.getPeggy(uuid, function(peggy) {
-            user.getUser(uuid, function(user) {
-                response = new Object();
-                response.peggy = peggy;
-                response.user = user;
-                console.log(JSON.stringify(response));
-                res.status(201).send(HTTPStatus.getStatusJSON(201, response));
+    if (typeof(req.body.name)=='undefined'|typeof(req.body.password)=='undefined'|typeof(req.body.isParent)=='undefined'){
+        res.status(406).send(HTTPStatus.getStatusJSON(406))
+    }
+    else {
+        peggy.postPeggy(uuid, req.body.name, req.body.password, req.body.isParent, function() {
+            peggy.getPeggy(uuid, function(peggy) {
+                user.getUser(uuid, function(user) {
+                    response = new Object();
+                    response.peggy = peggy;
+                    response.user = user;
+                    console.log(JSON.stringify(response));
+                    res.status(201).send(HTTPStatus.getStatusJSON(201, response));
+                })
             })
-        })
-    });
+        });
+    }
 });
 
 app.post('/users', cors(corsOptions), bearerToken(), function(req, res) {
     var uuid = uuidV4();
+
     if (jwt.decode(req.token).isparent){
-        user.postUser(uuid, req.body.name, req.body.password, req.body.isParent, jwt.decode(req.token).peggyuuid , function() {
-            user.getUser(uuid, function(response) {
-                console.log(JSON.stringify(response));
-                res.status(201).send(HTTPStatus.getStatusJSON(201, response));
-            })
-        });
+        if (typeof(req.body.name)=='undefined'|typeof(req.body.password)=='undefined'|typeof(req.body.isParent)=='undefined'){
+            res.status(406).send(HTTPStatus.getStatusJSON(406))
+        }
+        else {
+            user.postUser(uuid, req.body.name, req.body.password, req.body.isParent, jwt.decode(req.token).peggyuuid , function() {
+                user.getUser(uuid, function(response) {
+                    console.log(JSON.stringify(response));
+                    res.status(201).send(HTTPStatus.getStatusJSON(201, response));
+                })
+            });
+        }
     } else {
         res.status(401).send(HTTPStatus.getStatusJSON(401));
     }
@@ -304,12 +320,16 @@ app.post('/users', cors(corsOptions), bearerToken(), function(req, res) {
 
 app.post('/objective', cors(corsOptions), bearerToken(), function(req, res) {
     var uuid = uuidV4();
-    objective.postObjective(uuid, req.body.name, req.body.price, jwt.decode(req.token).uuid, req.body.deadline, function() {
-        objective.getObjective(uuid, function(response) {
-            console.log(JSON.stringify(response));
-            res.status(201).send(HTTPStatus.getStatusJSON(201, response));
-        })
-    });
+    if (typeof(req.body.name)=='undefined'|typeof(req.body.price)=='undefined'){
+        res.status(406).send(HTTPStatus.getStatusJSON(406))
+    } else {
+        objective.postObjective(uuid, req.body.name, req.body.price, jwt.decode(req.token).uuid, req.body.deadline, function() {
+            objective.getObjective(uuid, function(response) {
+                console.log(JSON.stringify(response));
+                res.status(201).send(HTTPStatus.getStatusJSON(201, response));
+            })
+        });
+    }
 });
 
 /* -------------------------------------------------------------------------- */
@@ -356,37 +376,64 @@ app.put('*', cors(corsOptions), bearerToken(), function(req, res, next) {
 
 app.put('/peggy', cors(corsOptions), bearerToken(), function(req, res) {
     peggy.putPeggy(req.body.uuid, req.body.coin5, req.body.coin2, req.body.coin1, req.body.coin50c, req.body.coin20c, req.body.coin10c, jwt.decode(req.token).uuid, function() {
-        peggy.getPeggy(req.body.uuid, function(peggy) {
-            user.getUser(jwt.decode(req.token).uuid, function(user) {
-                peggy.balance = user.balance;
-                console.log(JSON.stringify(peggy));
-                res.json(peggy);
-            });
-        })
+        if (typeof(req.body.uuid)=='undefined'){
+            res.status(406).send(HTTPStatus.getStatusJSON(406))
+        } else {
+            peggy.getPeggy(req.body.uuid, function(peggy) {
+                user.getUser(jwt.decode(req.token).uuid, function(user) {
+                    peggy.balance = user.balance;
+                    console.log(JSON.stringify(peggy));
+                    res.json(peggy);
+                });
+            })
+        }
     });
 });
 
 app.put('/users', cors(corsOptions), bearerToken(), function(req, res) {
     user.putUser(req.body.uuid, req.body.name, req.body.password, req.body.isParent, function() {
-        user.getUser(req.body.uuid, function(response) {
-            console.log(JSON.stringify(response));
-            res.json(response);
-        })
+        if (typeof(req.body.uuid)=='undefined'|typeof(req.body.name)=='undefined'|typeof(req.body.password)=='undefined'|typeof(req.body.isParent)=='undefined'){
+            res.status(406).send(HTTPStatus.getStatusJSON(406))
+        }
+        else {
+            user.getUser(req.body.uuid, function(response) {
+                console.log(JSON.stringify(response));
+                res.json(response);
+            })
+        }
     });
 });
 
 app.put('/objective', cors(corsOptions), bearerToken(), function(req, res) {
     objective.putObjective(req.body.uuid, req.body.name, req.body.price, req.body.deadline, function() {
-        objective.getObjective(req.body.uuid, function(response) {
-            console.log(JSON.stringify(response));
-            res.json(response);
-        })
+        if (typeof(req.body.uuid)=='undefined'|typeof(req.body.name)=='undefined'|typeof(req.body.price)=='undefined'){
+            res.status(406).send(HTTPStatus.getStatusJSON(406))
+        } else {
+            objective.getObjective(req.body.uuid, function (response) {
+                console.log(JSON.stringify(response));
+                res.json(response);
+            })
+        }
     });
 });
 
 
 /* -------------------------------------------------------------------------- */
 
+app.on('OCSPRequest', function(certificate, issuer, cb) {
+    ocsp.getOCSPURI(certificate, function(err, uri) {
+        if (err)
+            return cb(err);
+
+        var req = ocsp.request.generate(certificate, issuer);
+        var options = {
+            url: uri,
+            ocsp: req.data
+        };
+
+        cache.request(req.id, options, cb);
+    });
+});
 
 /* -------------------------------------------------------------------------- */
 
@@ -398,8 +445,5 @@ app.options('/objective/:id', cors(corsOptions), bearerToken()); // enable pre-f
 /* -------------------------------------------------------------------------- */
 
 
-
 console.log('Server running at https://chic.tic.heia-fr.ch/');
 https.createServer(credentials, app).listen(443);
-
-

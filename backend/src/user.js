@@ -1,7 +1,7 @@
 const pool = require('./postgreSQL');
 const uuidV4 = require('uuid/v4');
 var bodyParser = require('body-parser');
-var blake2 = require('blake2');
+var crypto = require('crypto');
 const SELECT = "SELECT uuid, name, isParent, balance, peggyUuid FROM users WHERE uuid = $1 ORDER BY uuid";
 const SELECT_PASSWORD_HASH = "SELECT password FROM users WHERE uuid = $1 ORDER BY uuid";
 const SELECTALL = "SELECT uuid, name, isParent, balance, peggyUuid FROM users WHERE peggyuuid = $1 ORDER BY uuid";
@@ -9,6 +9,22 @@ const INSERT = 'INSERT INTO users(uuid, name, password, isParent, lastchanged, l
 const DELETE = 'DELETE FROM users WHERE uuid = $1';
 const UPDATE = 'UPDATE users SET name = $2, password = $3, isParent = $4, lastchanged = $5 WHERE uuid = $1';
 const INCREMENT_BALANCE = 'UPDATE users SET balance = balance + $2, lastchanged = $3 WHERE uuid = $1';
+const iterations = 10000;
+
+module.exports.isPasswordCorrect = function isPasswordCorrect(hash, password) {
+    var salt = hash.split("$")[1];
+    var hashwithoutsalt = hash.split("$")[2];
+    return hashwithoutsalt == crypto.pbkdf2Sync(password, salt, iterations, 512, 'sha512').toString('base64');
+};
+
+function hashPassword(password) {
+    var salt = crypto.randomBytes(128).toString('base64');
+    var hash = crypto.pbkdf2Sync(password, salt, iterations, 512, 'sha512').toString('base64');
+    var result = "$" + salt + "$" + hash;
+    return result;
+}
+
+module.exports.hashPassword = hashPassword;
 
 module.exports.getUser = function getUser(uuid, callback) {
     pool.query(SELECT, [uuid], function(err, res) {
@@ -19,8 +35,7 @@ module.exports.getUser = function getUser(uuid, callback) {
         for (var i = 0; i < res.rowCount; i++) {
             results.push(res.rows[i]);
         }
-        callback(results.pop());
-        return;
+        return callback(results.pop());
     });
 };
 
@@ -39,9 +54,8 @@ module.exports.getAllUsers = function getAllUsers(peggyuuid, callback) {
 };
 
 module.exports.postUser = function postUser(uuid, name, password, isParent, peggyUuid, callback) {
-    var h = blake2.createHash('blake2b');
-    h.update(new Buffer(password));
-    pool.query(INSERT, [uuid, name, h.digest("hex"), isParent, new Date(), peggyUuid], function(){callback();});
+    var hash = hashPassword(password);
+    pool.query(INSERT, [uuid, name, hash, isParent, new Date(), peggyUuid], function(){callback();});
 };
 
 module.exports.incrementUserBalance = function incrementUserBalance(uuid, increment,  callback) {
@@ -53,10 +67,10 @@ module.exports.deleteUser = function deleteUser(name) {
 };
 
 module.exports.putUser = function putUser(uuid, name, password, isParent, callback) {
-    var h = blake2.createHash('blake2b');
-    h.update(new Buffer(password));
-    pool.query(UPDATE, [uuid, name, h.digest("hex"), isParent, new Date()], function(){callback();});
+    var hash = hashPassword(password);
+    pool.query(UPDATE, [uuid, name, hash, isParent, new Date()], function(){callback();});
 };
+
 
 module.exports.getPasswordHash = function checkPassword(uuid, callback) {;
     pool.query(SELECT_PASSWORD_HASH, [uuid], function(err, res) {
@@ -71,3 +85,4 @@ module.exports.getPasswordHash = function checkPassword(uuid, callback) {;
         return;
     });
 };
+
