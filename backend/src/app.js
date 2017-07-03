@@ -280,7 +280,7 @@ app.post('*', cors(corsOptions), bearerToken(), function(req, res, next) {
 
 app.post('/peggy', cors(corsOptions), bearerToken(), function(req, res) {
     var uuid = uuidV4();
-    if (typeof(req.body.name)=='undefined'|typeof(req.body.password)=='undefined'|typeof(req.body.isParent)=='undefined'){
+    if (typeof(req.body.name)!='string'|typeof(req.body.password)!='string'|typeof(req.body.isParent)!='boolean'){
         res.status(406).send(HTTPStatus.getStatusJSON(406))
     }
     else {
@@ -302,7 +302,7 @@ app.post('/users', cors(corsOptions), bearerToken(), function(req, res) {
     var uuid = uuidV4();
 
     if (jwt.decode(req.token).isparent){
-        if (typeof(req.body.name)=='undefined'|typeof(req.body.password)=='undefined'|typeof(req.body.isParent)=='undefined'){
+        if (typeof(req.body.name)!='string'|typeof(req.body.password)!='string'|typeof(req.body.isParent)!='boolean'){
             res.status(406).send(HTTPStatus.getStatusJSON(406))
         }
         else {
@@ -320,7 +320,7 @@ app.post('/users', cors(corsOptions), bearerToken(), function(req, res) {
 
 app.post('/objective', cors(corsOptions), bearerToken(), function(req, res) {
     var uuid = uuidV4();
-    if (typeof(req.body.name)=='undefined'|typeof(req.body.price)=='undefined'){
+    if (typeof(req.body.name)!='string'|typeof(req.body.price)!='number'){
         res.status(406).send(HTTPStatus.getStatusJSON(406))
     } else {
         objective.postObjective(uuid, req.body.name, req.body.price, jwt.decode(req.token).uuid, req.body.deadline, function() {
@@ -375,24 +375,24 @@ app.put('*', cors(corsOptions), bearerToken(), function(req, res, next) {
 });
 
 app.put('/peggy', cors(corsOptions), bearerToken(), function(req, res) {
-    peggy.putPeggy(req.body.uuid, req.body.coin5, req.body.coin2, req.body.coin1, req.body.coin50c, req.body.coin20c, req.body.coin10c, jwt.decode(req.token).uuid, function() {
-        if (typeof(req.body.uuid)=='undefined'){
-            res.status(406).send(HTTPStatus.getStatusJSON(406))
-        } else {
-            peggy.getPeggy(req.body.uuid, function(peggy) {
-                user.getUser(jwt.decode(req.token).uuid, function(user) {
-                    peggy.balance = user.balance;
-                    console.log(JSON.stringify(peggy));
-                    res.json(peggy);
-                });
-            })
+    if (typeof(req.body.uuid)!='string'){
+        res.status(406).send(HTTPStatus.getStatusJSON(406))
+    } else {
+            peggy.putPeggy(req.body.uuid, req.body.coin5, req.body.coin2, req.body.coin1, req.body.coin50c, req.body.coin20c, req.body.coin10c, jwt.decode(req.token).uuid, function() {
+                    peggy.getPeggy(req.body.uuid, function(peggy) {
+                        user.getUser(jwt.decode(req.token).uuid, function(user) {
+                            peggy.balance = user.balance;
+                            console.log(JSON.stringify(peggy));
+                            res.json(peggy);
+                        });
+                    })
+            });
         }
-    });
 });
 
 app.put('/users', cors(corsOptions), bearerToken(), function(req, res) {
     user.putUser(req.body.uuid, req.body.name, req.body.password, req.body.isParent, function() {
-        if (typeof(req.body.uuid)=='undefined'|typeof(req.body.name)=='undefined'|typeof(req.body.password)=='undefined'|typeof(req.body.isParent)=='undefined'){
+        if (typeof(req.body.uuid)!='string'|typeof(req.body.name)!='string'|typeof(req.body.password)!='string'|typeof(req.body.isParent)!='boolean'){
             res.status(406).send(HTTPStatus.getStatusJSON(406))
         }
         else {
@@ -406,7 +406,7 @@ app.put('/users', cors(corsOptions), bearerToken(), function(req, res) {
 
 app.put('/objective', cors(corsOptions), bearerToken(), function(req, res) {
     objective.putObjective(req.body.uuid, req.body.name, req.body.price, req.body.deadline, function() {
-        if (typeof(req.body.uuid)=='undefined'|typeof(req.body.name)=='undefined'|typeof(req.body.price)=='undefined'){
+        if (typeof(req.body.uuid)!='string'|typeof(req.body.name)!='string'|typeof(req.body.price)!='number'){
             res.status(406).send(HTTPStatus.getStatusJSON(406))
         } else {
             objective.getObjective(req.body.uuid, function (response) {
