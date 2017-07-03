@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
+import { Storage, IonicStorageModule } from '@ionic/storage';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -13,6 +14,10 @@ import { SettingsPage } from '../pages/settings/settings';
 import { InsertMoneyPage } from '../pages/insert-money/insert-money';
 import { WithdrawMoneyPage } from '../pages/withdraw-money/withdraw-money';
 import { BleProvider } from '../providers/ble/ble';
+import {AddNewUserPage} from "../pages/add-new-user/add-new-user";
+import {ChangePasswordPage} from "../pages/change-password/change-password";
+import {DeleteUserPage} from "../pages/delete-user/delete-user";
+import {GoalsPage} from "../pages/goals/goals";
 
 
 @NgModule({
@@ -24,11 +29,17 @@ import { BleProvider } from '../providers/ble/ble';
     SettingsPage,
     InsertMoneyPage,
     WithdrawMoneyPage,
+    SettingsPage,
+    AddNewUserPage,
+    ChangePasswordPage,
+    DeleteUserPage,
+    GoalsPage,
   ],
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -39,6 +50,11 @@ import { BleProvider } from '../providers/ble/ble';
     SettingsPage,
     InsertMoneyPage,
     WithdrawMoneyPage,
+    SettingsPage,
+    AddNewUserPage,
+    ChangePasswordPage,
+    DeleteUserPage,
+    GoalsPage,
   ],
   providers: [
     StatusBar,

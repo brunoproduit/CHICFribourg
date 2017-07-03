@@ -4,6 +4,7 @@ import { Http, Headers } from '@angular/http';
 import { BleProvider } from '../../providers/ble/ble'
 import {InsertMoneyPage} from "../insert-money/insert-money";
 import {WithdrawMoneyPage} from "../withdraw-money/withdraw-money";
+import {SettingsPage} from "../settings/settings";
 
 @Component({
   selector: 'page-home',
@@ -51,6 +52,14 @@ export class HomePage {
 
   goToWithdrawMoney(){
     this.navCtrl.push(WithdrawMoneyPage, {callback: this.parametersCallbackFunction, user: this.user, tokenSession: this.tokenSession})
+  }
+
+  goToGoals(){
+    //this.navCtrl.push(WithdrawMoneyPage, {callback: this.parametersCallbackFunction, user: this.user, tokenSession: this.tokenSession})
+  }
+
+  goToSettings(){
+    this.navCtrl.push(SettingsPage, {callback: this.parametersCallbackFunction, user: this.user, tokenSession: this.tokenSession})
   }
 
   logOut(){

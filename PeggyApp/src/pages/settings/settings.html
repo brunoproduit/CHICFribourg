@@ -1,18 +1,18 @@
-<!--
-  Generated template for the SettingsPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>Settings</ion-title>
+  <ion-navbar hideBackButton="true">
+    <ion-title>Account settings</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content class="background" padding>
+  <div class="spacer" style="width: 300px; height: 70px;"></div>
+  <ion-card class="elements-color transparency">
+    <ion-card-header>Press on an action to do:</ion-card-header>
+    <ion-list>
+      <button ion-item (click)="goToChangePassword()"><ion-icon name="swap" item-left></ion-icon>Change Password</button>
+      <button ion-item *ngIf="(user.isparent)" (click)="goToAddNewUser()"><ion-icon name="add" item-left></ion-icon>Add new user</button>
+      <button ion-item *ngIf="(user.isparent)" (click)="goToDeleteUser()"><ion-icon name="remove-circle" item-left></ion-icon>Delete user</button>
+    </ion-list>
+  </ion-card>
 </ion-content>

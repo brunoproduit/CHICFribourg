@@ -22,11 +22,13 @@ export class BleProvider {
   public coinEventNotificationUUID = 'debe2901-ee8e-4178-aeae-a0d6cd896263';
   public pendingTransactionsIndicatorUUID = 'debe2902-ee8e-4178-aeae-a0d6cd896263';
   public pendingTransactionsUUID = 'debe2903-ee8e-4178-aeae-a0d6cd896263';
-  public sendUuidUUID = 'debe2904-ee8e-4178-aeae-a0d6cd896263';
+  public peggyUuidUUID = 'debe2904-ee8e-4178-aeae-a0d6cd896263';
   public eraseBondingUUID = 'debe2905-ee8e-4178-aeae-a0d6cd896263';
   public userInformationUUID = 'debe2906-ee8e-4178-aeae-a0d6cd896263';
-  public characteristic;
   public service;
+  public characteristicCoinNotification;
+  public characteristicPeggyUuid;
+
   private callback : BleProviderCallback;
 
   constructor(public http: Http, public platform: Platform)
@@ -103,11 +105,10 @@ export class BleProvider {
         console.log("Connected to device: " + device.name);
         this.isConnected = true;
         console.log("Connected to device: " + this.isConnected);
-        this.service = ble.getService(device, this.deviceUUID);
+        this.service = ble.getService(this.mDevice, this.deviceUUID);
         console.log("SERVICE: "+ JSON.stringify(this.service));
-        this.characteristic = ble.getCharacteristic(this.service, this.coinEventNotificationUUID);
-        console.log("CHARACTERISTIC: "+ JSON.stringify(this.characteristic));
         this.enableCoinNotification(device);
+        this.readPeggyUUID();
       },
       onDisconnected = (device) => {
         console.log('Disconnected from device: ' + device.name);
@@ -130,6 +131,11 @@ export class BleProvider {
   };
 
   enableCoinNotification = (device) => {
+    this.service = ble.getService(device, this.deviceUUID);
+    console.log("SERVICE: "+ JSON.stringify(this.service));
+    this.characteristicCoinNotification = ble.getCharacteristic(this.service, this.coinEventNotificationUUID);
+    console.log("CHARACTERISTIC: "+ JSON.stringify(this.characteristicCoinNotification));
+
     console.log("Start Notification process...");
     let onNotificationSuccess = (data) => {
         const dataView = new DataView(data);
@@ -142,7 +148,7 @@ export class BleProvider {
       };
     ble.enableNotification(
       device,
-      this.characteristic,
+      this.characteristicCoinNotification,
       onNotificationSuccess,
       onNotificationError)
   };
@@ -174,7 +180,7 @@ export class BleProvider {
     let onDeviceFound = (device) => {
       console.log('Found device: ' + device.name);
       this.mDevice = device;
-      if (device.advertisementData.kCBAdvDataLocalName == 'Peggy') {
+      if (device.advertisementData.kCBAdvDataLocalName == 'Peggy2') {
         console.log('Found Peggy');
         ble.stopScan();
         ble.bond(
@@ -191,6 +197,24 @@ export class BleProvider {
     ble.startScan(
         onDeviceFound,
         onScanError);
+  };
+
+  readPeggyUUID = () =>{
+    console.log("Read Peggy UUID...");
+    this.characteristicPeggyUuid = ble.getCharacteristic(this.service, this.peggyUuidUUID);
+    console.log("CHARACTERISTIC: "+ JSON.stringify(this.characteristicPeggyUuid));
+
+       ble.readCharacteristic(
+         this.mDevice,
+         this.characteristicPeggyUuid,
+         function(data)
+         {
+           console.log('characteristic data: ' + ble.fromUtf8(data));
+         },
+         function(errorCode)
+         {
+           console.log('readCharacteristic error: ' + errorCode);
+         });
   };
 
   sortCoin = (value) => {

@@ -45,6 +45,21 @@ export class WithdrawMoneyPage implements BleProviderCallback {
     console.log("isConnectedToPeggy"+ this.isConnectedToPeggy);
   }
 
+  allowWithdrawMoney = () =>{
+
+  };
+
+  checkAmountToWithdrawMoney = (amount) =>{
+    if(this.user.balance == 0){
+      return false
+    }
+    if(this.user.balance < amount ){
+      return false
+    }
+    return true;
+  };
+
+
   onMoneyWithdrawn = (coin) => {
     console.log("TEST moneyWithdrawn called:" + coin);
     let body = {};

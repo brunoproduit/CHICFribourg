@@ -46,7 +46,10 @@ export class InsertMoneyPage implements BleProviderCallback {
         console.log('ionViewDidLoad InsertMoneyPage');
         this.bleProvider.setCallback(this);
         this.isConnectedToPeggy = this.bleProvider.getIsConnected();
-        console.log("isConnectedToPeggy"+ this.isConnectedToPeggy);
+        console.log("isConnectedToPeggy: "+ this.isConnectedToPeggy);
+        if(!this.isConnectedToPeggy){
+            this.bleProvider.findDevice();
+        }
     }
 
     onMoneyInserted = (coin) => {

@@ -1,6 +1,6 @@
 import {Component, NgModule, NgZone, OnInit} from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform} from 'ionic-angular';
-//import { HomePage } from '../home/home';
+import { Storage } from '@ionic/storage';
 import { LoginPasswordPage } from '../login-password/login-password';
 import { Http } from '@angular/http';
 import { BleProvider } from '../../providers/ble/ble'
@@ -29,7 +29,7 @@ export class LoginPage implements OnInit{
   public urlGetListOfUsers = 'https://chic.tic.heia-fr.ch/users';
   public lastPeggyUUID = 'cf94737d-5d5b-4ca4-ba6f-33cc1f1f8de1';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private platform: Platform, public ble: BleProvider, private zone: NgZone) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private platform: Platform, public ble: BleProvider, private zone: NgZone, private storage: Storage) {
     this.isConnectedToPeggy = false;
     platform.ready().then(() => {
       ble.findDevice();
@@ -45,6 +45,7 @@ export class LoginPage implements OnInit{
    });
   }
   getListOfUsers(){
+
     let result = this.http.get(this.urlGetListOfUsers + '?uuid='+ this.lastPeggyUUID)
       .map(res => res.json());
     return result;
@@ -57,9 +58,18 @@ export class LoginPage implements OnInit{
   goToPassword(user){
     this.isConnectedToPeggy = this.ble.getIsConnected();
     console.log("isConnectedToPeggy: " + this.isConnectedToPeggy);
-    this.navCtrl.push(LoginPasswordPage, {user: user});
+    this.navCtrl.push(LoginPasswordPage, {user: user, peggyUUID: this.lastPeggyUUID});
   }
   navigate(){
     this.navCtrl.push(InsertMoneyPage);
+  }
+  setUUID = () =>{
+    this.storage.set('lastPeggyUUIDD', this.lastPeggyUUID);
+
+  }
+  getUUID(){
+    this.storage.get('lastPeggyUUIDD').then((data) =>{
+      console.log(data);
+    });
   }
 }
