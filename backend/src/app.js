@@ -14,9 +14,12 @@ var cache = new ocsp.Cache();
 var hpkp = require('hpkp');
 var RateLimit = require('express-rate-limit');
 var pool = require('./postgreSQL');
+
 var peggy = require('./peggy');
 var user = require('./user');
 var objective = require('./objective');
+var didyouknow = require('./didyouknow');
+
 var uuidV4 = require('uuid/v4');
 var bearerToken = require('express-bearer-token');
 var HTTPStatus = require('./HTTPStatus');
@@ -61,7 +64,12 @@ var credentials = {
 const NINETY_DAYS_IN_SECONDS = 7776000; // Time to pin the public keys in HPKP
 const HSTS_DAYS  = 180;                 // Time used for HSTS
 const HTTPS_PORT = 443;                 // Default port for HTTPS
-
+const maxcoin5 = 20;
+const maxcoin2 = 21;
+const maxcoin1 = 30;
+const maxcoin50c = 37;
+const maxcoin20c = 28;
+const maxcoin10c = 32;
 
 
 
@@ -133,11 +141,11 @@ app.all('*', cors(corsOptions), bearerToken(), function (req, res, next) {
         res.header('X-Frame-Options', ['SAMEORIGIN']);
         res.header('Referrer-Policy', ['no-referrer']);
         // Check if URL is valid
-        var re = /^\/$|(\/(peggy\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?|users\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?|objective\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?))|auth\/?(\?uuid=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))\&(password=(.{0,128}))|change\/([0-9]{1,3})(\.[0-9]{1,3})?$/;
+        var re = /^\/$|(\/(peggy\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?|users\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?|objective\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?))|auth\/?(\?uuid=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))\&(password=(.{0,128}))|change\/([0-9]{1,3})(\.[0-9]{1,3})?|didyouknow$/;
         if (re.test(req.originalUrl)) {
 
             // Check URL to know if user is authenticating
-            var re2 = /^\/$|auth\/?(\?uuid=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))\&(password=(.{0,128}))$|users\/?(\?uuid=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))|change\/([0-9]{1,3})(\.[0-9]{1,3})?/;
+            var re2 = /^\/$|auth\/?(\?uuid=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))\&(password=(.{0,128}))$|users\/?(\?uuid=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))|peggy|didyouknow/;
             if (re2.test(req.originalUrl)) {
                 // User is authenticating, no need for token
                 next();
@@ -191,6 +199,24 @@ app.get('/', cors(corsOptions), bearerToken(), function (req, res) {
     }
 });
 
+/**
+ *
+ * Return a random "did you know?" page
+ */
+app.get('/didyouknow', cors(corsOptions), bearerToken(), function (req, res) {
+    try {
+        res.type('text/html');
+        didyouknow.getDidyouknow(function(content){
+            var response = fs.readFileSync('./index.html', 'utf8');
+            res.write(response);
+            res.write("<p>" + content + "</p>");
+            res.send();
+        });
+    }
+    catch (err) {
+        res.status(500).send(HTTPStatus.getStatusJSON(500));
+    }
+});
 
 /**
  *
@@ -200,25 +226,29 @@ app.get('/', cors(corsOptions), bearerToken(), function (req, res) {
 app.get('/change/:id', cors(corsOptions), bearerToken(), function (req, res) {
     try {
         // Greedy funtion to get change
-        amount = req.params.id * 100;
-        var response = new Object();
-        response.coin5 = Math.floor(amount / 500);
-        remainder = amount % 500;
-        response.coin2 = Math.floor(remainder / 200);
-        remainder = amount % 500 % 200;
-        response.coin1 = Math.floor(remainder / 100);
-        remainder = amount % 500 % 200 % 100;
-        response.coin50c = Math.floor(remainder / 50);
-        remainder = amount % 500 % 200 % 100 % 50;
-        response.coin20c = Math.floor(remainder / 20);
-        remainder = amount % 500 % 200 % 100 % 50 % 20;
-        response.coin10c = Math.floor(remainder / 10);
-        remainder = amount % 500 % 200 % 100 % 50 % 20 % 10;
-        if (remainder != 0) {
-            res.status(406).send(HTTPStatus.getStatusJSON(406));
-        } else {
-            res.json(response);
-        }
+        peggy.getPeggy(req.params.id, function (peggy) {
+            var amount = req.params.id * 100;
+            var remainder=amount;
+
+            var response = new Object();
+            response.coin5 = Math.floor(amount / 500);
+            remainder = amount % 500;
+            response.coin2 = Math.floor(remainder / 200);
+            remainder = amount % 500 % 200;
+            response.coin1 = Math.floor(remainder / 100);
+            remainder = amount % 500 % 200 % 100;
+            response.coin50c = Math.floor(remainder / 50);
+            remainder = amount % 500 % 200 % 100 % 50;
+            response.coin20c = Math.floor(remainder / 20);
+            remainder = amount % 500 % 200 % 100 % 50 % 20;
+            response.coin10c = Math.floor(remainder / 10);
+            remainder = amount % 500 % 200 % 100 % 50 % 20 % 10;
+            if (remainder != 0) {
+                res.status(406).send(HTTPStatus.getStatusJSON(406));
+            } else {
+                res.json(response);
+            }
+        });
     }
     catch (err) {
         res.status(500).send(HTTPStatus.getStatusJSON(500));
@@ -384,7 +414,8 @@ app.get('/objective/:id', cors(corsOptions), bearerToken(), function (req, res) 
 //-----------------------------------POST-------------------------------------
 app.post('*', cors(corsOptions), bearerToken(), function (req, res, next) {
     try {
-        if (typeof(req.token) === 'undefined') {
+        var re=/\/?peggy\/?/;
+        if (typeof(req.token) === 'undefined' && !re.test(req.originalUrl)) {
             res.status(401).send(HTTPStatus.getStatusJSON(401))
         } else if (!req.body || typeof(req.body) != 'object') {
             res.status(400).send(HTTPStatus.getStatusJSON(400))
@@ -405,14 +436,15 @@ app.post('*', cors(corsOptions), bearerToken(), function (req, res, next) {
  */
 app.post('/peggy', cors(corsOptions), bearerToken(), function (req, res) {
     try {
-        var uuid = uuidV4();
-        if (typeof(req.body.name) != 'string' | typeof(req.body.password) != 'string' | typeof(req.body.isParent) != 'boolean') {
+        var peggyuuid = uuidV4();
+        var useruuid = uuidV4();
+        if (typeof(req.body.name) != 'string' | typeof(req.body.password) != 'string') {
             res.status(406).send(HTTPStatus.getStatusJSON(406))
         }
         else {
-            peggy.postPeggy(uuid, req.body.name, req.body.password, req.body.isParent, function () {
-                peggy.getPeggy(uuid, function (peggy) {
-                    user.getUser(uuid, function (user) {
+            peggy.postPeggy(peggyuuid, req.body.name, req.body.password, true, useruuid, function () {
+                peggy.getPeggy(peggyuuid, function (peggy) {
+                    user.getUser(useruuid, function (user) {
                         response = new Object();
                         response.peggy = peggy;
                         response.user = user;
@@ -430,7 +462,7 @@ app.post('/peggy', cors(corsOptions), bearerToken(), function (req, res) {
 
 /**
  *
- * Creates a new user in the peggy of the authenticated user. IsParent must be true.
+ * Creates a new user in the peggy of the authenticated user. IsParent must be true for the authenticated user.
  * @param { "name"     : string,
  *          "password" : string,
  *          "isParent" : boolean }

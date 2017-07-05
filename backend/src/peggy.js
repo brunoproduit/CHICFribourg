@@ -57,13 +57,20 @@ module.exports.getAllPeggy = function getAllPeggy(callback) {
 };
 
 
-module.exports.postPeggy = function postPeggy(uuid, name, password, isParent, callback) {
-    pool.query(INSERT, [uuid, new Date()], function(){
+module.exports.postPeggy = function postPeggy(peggyuuid, name, password, isParent, useruuid, callback) {
+    pool.query(INSERT, [peggyuuid, new Date()], function(err, res){
         if (err) {
             console.error('error running query', err);
             return callback(err);
         } else {
-            user.postUser(name, password, isParent, uuid, function(){callback();});
+            user.postUser(useruuid, name, password, isParent, peggyuuid, function(err, res) {
+                if (err) {
+                    console.error('error running query', err);
+                    return callback(err);
+                } else {
+                    return callback(res);
+                }
+            });
         }
     });
 
