@@ -14,6 +14,7 @@ var cache = new ocsp.Cache();
 var hpkp = require('hpkp');
 var RateLimit = require('express-rate-limit');
 var pool = require('./postgreSQL');
+var validator = require('validator');
 
 var peggy = require('./peggy');
 var user = require('./user');
@@ -78,7 +79,6 @@ const maxcoin10c = 32;
  -------------------------------------------------------------------------- */
 
 app.use(bodyParser.json());             // Used to parse incoming JSON data
-
 app.use(csp({                           // CSP header rules
     policies: {
         'default-src': [csp.SELF],      // Files source self
@@ -105,10 +105,10 @@ app.disable('x-powered-by');                                    // Disable x-pow
 var corsOptions = {origin: 'chic.tic.heia-fr.ch'};              // Set CORS origin to only self
 
 var limiter = new RateLimit({
-    windowMs: 60 * 1000,                    // 1 min window
-    delayAfter: 60,                         // begin slowing down responses after 60 requests (1 request per s)
+    windowMs: 60 * 10000,                   // 10 min window
+    delayAfter: 60,                         // begin slowing down responses after 60 requests
     delayMs: 500,                           // slow down subsequent responses by 0.5s per request
-    max: 60 * 5,                            // start blocking after 300 requests (5 requests per s)
+    max: 60 * 5,                            // start blocking after 300 requests
     message: HTTPStatus.getStatusJSON(403)  // Send back blocking message
 });
 
@@ -225,8 +225,9 @@ app.get('/didyouknow', cors(corsOptions), bearerToken(), function (req, res) {
  */
 app.get('/change/:id', cors(corsOptions), bearerToken(), function (req, res) {
     try {
+        console.log(req.params.id);
         // Greedy funtion to get change
-        peggy.getPeggy(req.params.id, function (peggy) {
+        //peggy.getPeggy(req.params.id, function (peggy) {
             var amount = req.params.id * 100;
             var remainder=amount;
 
@@ -248,7 +249,7 @@ app.get('/change/:id', cors(corsOptions), bearerToken(), function (req, res) {
             } else {
                 res.json(response);
             }
-        });
+        //});
     }
     catch (err) {
         res.status(500).send(HTTPStatus.getStatusJSON(500));
@@ -294,10 +295,14 @@ app.get('/auth', cors(corsOptions), bearerToken(), function (req, res) {
  */
 app.get('/peggy', cors(corsOptions), bearerToken(), function (req, res) {
     try {
-        peggy.getAllPeggy(function (response) {
-            console.log(JSON.stringify(response));
-            return res.json(response);
-        });
+        if (typeof(req.token)!='undefined' && jwt.decode(req.token).isparent) { //TODO block
+            peggy.getAllPeggy(function (response) {
+                console.log(JSON.stringify(response));
+                return res.json(response);
+            });
+        } else {
+            res.status(401).send(HTTPStatus.getStatusJSON(401));
+        }
     }
     catch (err) {
         res.status(500).send(HTTPStatus.getStatusJSON(500));
@@ -311,7 +316,8 @@ app.get('/peggy', cors(corsOptions), bearerToken(), function (req, res) {
  */
 app.get('/peggy/:id', cors(corsOptions), bearerToken(), function (req, res) {
     try {
-        if (jwt.decode(req.token).peggyuuid == req.params.id) {
+        re=/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/;
+        if (typeof(req.token)!='undefined' && jwt.decode(req.token).peggyuuid == req.params.id && re.test(id)) {
             peggy.getPeggy(req.params.id, function (response) {
                 console.log(JSON.stringify(response));
                 res.json(response);
@@ -442,7 +448,8 @@ app.post('/peggy', cors(corsOptions), bearerToken(), function (req, res) {
             res.status(406).send(HTTPStatus.getStatusJSON(406))
         }
         else {
-            peggy.postPeggy(peggyuuid, req.body.name, req.body.password, true, useruuid, function () {
+            var name = validator.escape(req.body.name);
+            peggy.postPeggy(peggyuuid, name, req.body.password, true, useruuid, function () {
                 peggy.getPeggy(peggyuuid, function (peggy) {
                     user.getUser(useruuid, function (user) {
                         response = new Object();
@@ -473,11 +480,12 @@ app.post('/users', cors(corsOptions), bearerToken(), function (req, res) {
         var uuid = uuidV4();
 
         if (jwt.decode(req.token).isparent) {
-            if (typeof(req.body.name) != 'string' | typeof(req.body.password) != 'string' | typeof(req.body.isParent) != 'boolean') {
+            if (typeof(req.body.name) != 'string' | typeof(req.body.password) != 'string' | typeof(req.body.isparent) != 'boolean') {
                 res.status(406).send(HTTPStatus.getStatusJSON(406))
             }
             else {
-                user.postUser(uuid, req.body.name, req.body.password, req.body.isParent, jwt.decode(req.token).peggyuuid, function () {
+                var name = validator.escape(req.body.name);
+                user.postUser(uuid, name, req.body.password, req.body.isparent, jwt.decode(req.token).peggyuuid, function () {
                     user.getUser(uuid, function (response) {
                         console.log(JSON.stringify(response));
                         res.status(201).send(HTTPStatus.getStatusJSON(201, response));
@@ -507,7 +515,10 @@ app.post('/objective', cors(corsOptions), bearerToken(), function (req, res) {
         if (typeof(req.body.name) != 'string' | typeof(req.body.price) != 'number') {
             res.status(406).send(HTTPStatus.getStatusJSON(406))
         } else {
-            objective.postObjective(uuid, req.body.name, req.body.price, jwt.decode(req.token).uuid, req.body.deadline, function () {
+            var name = validator.escape(req.body.name);
+            if (typeof(deadline)!='undefined') var deadline = validator.escape(deadline);
+            console.log(name, deadline);
+            objective.postObjective(uuid, name, req.body.price, jwt.decode(req.token).uuid, deadline, function () {
                 objective.getObjective(uuid, function (response) {
                     console.log(JSON.stringify(response));
                     res.status(201).send(HTTPStatus.getStatusJSON(201, response));
@@ -516,6 +527,7 @@ app.post('/objective', cors(corsOptions), bearerToken(), function (req, res) {
         }
     }
     catch (err) {
+        console.log(err, name);
         res.status(500).send(HTTPStatus.getStatusJSON(500));
     }
 });
@@ -550,24 +562,30 @@ app.put('*', cors(corsOptions), bearerToken(), function (req, res, next) {
  * @optional "coin10c" : string  }
  */
 app.put('/peggy', cors(corsOptions), bearerToken(), function (req, res) {
-    try {
         if (typeof(req.body.uuid) != 'string') {
             res.status(406).send(HTTPStatus.getStatusJSON(406));
         } else {
-            peggy.putPeggy(req.body.uuid, req.body.coin5, req.body.coin2, req.body.coin1, req.body.coin50c, req.body.coin20c, req.body.coin10c, jwt.decode(req.token).uuid, function () {
-                peggy.getPeggy(req.body.uuid, function (peggy) {
-                    user.getUser(jwt.decode(req.token).uuid, function (user) {
-                        peggy.balance = user.balance;
-                        console.log(JSON.stringify(peggy));
-                        res.json(peggy);
+            var uuid = validator.escape(req.body.uuid);
+            var coin5 = validator.escape(req.body.coin5);
+            var coin2 = validator.escape(req.body.coin2);
+            var coin1 = validator.escape(req.body.coin1);
+            var coin50c = validator.escape(req.body.coin50c);
+            var coin20c = validator.escape(req.body.coin20c);
+            var coin10c = validator.escape(req.body.coin10c);
+            peggy.putPeggy(uuid, coin5, coin2, coin1, coin50c, coin20c, coin10c, jwt.decode(req.token).uuid, function (err) {
+                if (typeof(err.constraint)!='undefined'){
+                    res.status(304).send(HTTPStatus.getStatusJSON(304));
+                } else {
+                    peggy.getPeggy(uuid, function (peggy) {
+                        user.getUser(jwt.decode(req.token).uuid, function (user) {
+                            peggy.balance = user.balance;
+                            console.log(JSON.stringify(peggy));
+                            res.json(peggy);
+                        });
                     });
-                })
+                }
             });
         }
-    }
-    catch (err) {
-        res.status(500).send(HTTPStatus.getStatusJSON(500));
-    }
 });
 
 /**
@@ -580,12 +598,15 @@ app.put('/peggy', cors(corsOptions), bearerToken(), function (req, res) {
  */
 app.put('/users', cors(corsOptions), bearerToken(), function (req, res) {
     try {
-        user.putUser(req.body.uuid, req.body.name, req.body.password, req.body.isParent, function () {
+        var uuid = validator.escape(req.body.uuid);
+        var name = validator.escape(req.body.name);
+
+        user.putUser(uuid, name, req.body.password, req.body.isParent, function () {
             if (typeof(req.body.uuid) != 'string' | typeof(req.body.name) != 'string' | typeof(req.body.password) != 'string' | typeof(req.body.isParent) != 'boolean') {
                 res.status(406).send(HTTPStatus.getStatusJSON(406))
             }
             else {
-                user.getUser(req.body.uuid, function (response) {
+                user.getUser(uuid, function (response) {
                     console.log(JSON.stringify(response));
                     res.json(response);
                 })
@@ -607,7 +628,9 @@ app.put('/users', cors(corsOptions), bearerToken(), function (req, res) {
  */
 app.put('/objective', cors(corsOptions), bearerToken(), function (req, res) {
     try {
-        objective.putObjective(req.body.uuid, req.body.name, req.body.price, req.body.deadline, function () {
+        var uuid = validator.escape(req.body.uuid);
+        var name = validator.escape(req.body.name);
+        objective.putObjective(uuid, name, req.body.price, req.body.deadline, function () {
             if (typeof(req.body.uuid) != 'string' | typeof(req.body.name) != 'string' | typeof(req.body.price) != 'number') {
                 res.status(406).send(HTTPStatus.getStatusJSON(406))
             } else {

@@ -76,7 +76,7 @@ module.exports.postPeggy = function postPeggy(peggyuuid, name, password, isParen
 
 };
 
-module.exports.deletePeggy = function deletePeggy(uuid) {
+module.exports.deletePeggy = function deletePeggy(uuid, callback) {
     pool.query(DELETE, [uuid], function(err, res) {
         if (err) {
             console.error('error running query', err);
@@ -96,158 +96,165 @@ module.exports.putPeggy = function putPeggy(uuid, coin5, coin2, coin1, coin50c, 
                 console.error('error running query', err);
                 return callback(err);
             } else {
+                user.incrementUserBalance(useruuid, coin5 * 5, function(err, res) {
+                    if (err) {
+                        console.error('error running query', err);
+                        return callback(err);
+                    } else {
+                        return callback(res);
+                    }
+                });
                 return callback(res);
             }
         });
-        user.incrementUserBalance(useruuid, coin5 * 5, function(err, res) {
-            if (err) {
-                console.error('error running query', err);
-                return callback(err);
-            } else {
-                return callback(res);
-            }
-        });
+
     } else if (re.test(coin2)) {
         pool.query(UPDATE_RELATIVE_coin2, [uuid, coin2, new Date()], function(err, res) {
             if (err) {
                 console.error('error running query', err);
                 return callback(err);
             } else {
+                user.incrementUserBalance(useruuid, coin2 * 2, function(err, res) {
+                    if (err) {
+                        console.error('error running query', err);
+                        return callback(err);
+                    } else {
+                        return callback(res);
+                    }
+                });
                 return callback(res);
             }
         });
-        user.incrementUserBalance(useruuid, coin2 * 2, function(err, res) {
-            if (err) {
-                console.error('error running query', err);
-                return callback(err);
-            } else {
-                return callback(res);
-            }
-        });
+
     } else if (re.test(coin1)) {
         pool.query(UPDATE_RELATIVE_coin1, [uuid, coin1, new Date()], function(err, res) {
             if (err) {
                 console.error('error running query', err);
                 return callback(err);
             } else {
+                user.incrementUserBalance(useruuid, coin1, function(err, res) {
+                    if (err) {
+                        console.error('error running query', err);
+                        return callback(err);
+                    } else {
+                        return callback(res);
+                    }
+                });
                 return callback(res);
             }
         });
-        user.incrementUserBalance(useruuid, coin1, function(err, res) {
-            if (err) {
-                console.error('error running query', err);
-                return callback(err);
-            } else {
-                return callback(res);
-            }
-        });
+
     } else if (re.test(coin50c)) {
         pool.query(UPDATE_RELATIVE_coin50c, [uuid, coin50c, new Date()], function(err, res) {
             if (err) {
                 console.error('error running query', err);
                 return callback(err);
             } else {
+                user.incrementUserBalance(useruuid, coin50c * 0.5, function(err, res) {
+                    if (err) {
+                        console.error('error running query', err);
+                        return callback(err);
+                    } else {
+                        return callback(res);
+                    }
+                });
                 return callback(res);
             }
         });
-        user.incrementUserBalance(useruuid, coin50c * 0.5, function(err, res) {
-            if (err) {
-                console.error('error running query', err);
-                return callback(err);
-            } else {
-                return callback(res);
-            }
-        });
+
     } else if (re.test(coin20c)) {
         pool.query(UPDATE_RELATIVE_coin20c, [uuid, coin20c, new Date()], function(err, res) {
             if (err) {
                 console.error('error running query', err);
                 return callback(err);
             } else {
+                user.incrementUserBalance(useruuid, coin20c * 0.2, function(err, res) {
+                    if (err) {
+                        console.error('error running query', err);
+                        return callback(err);
+                    } else {
+                        return callback(res);
+                    }
+                });
                 return callback(res);
             }
         });
-        user.incrementUserBalance(useruuid, coin20c * 0.2, function(err, res) {
-            if (err) {
-                console.error('error running query', err);
-                return callback(err);
-            } else {
-                return callback(res);
-            }
-        });
+
     } else if (re.test(coin10c)) {
         pool.query(UPDATE_RELATIVE_coin10c, [uuid, coin10c, new Date()], function(err, res) {
             if (err) {
                 console.error('error running query', err);
                 return callback(err);
             } else {
+                user.incrementUserBalance(useruuid, coin10c * 0.1, function(err, res) {
+                    if (err) {
+                        console.error('error running query', err);
+                        return callback(err);
+                    } else {
+                        return callback(res);
+                    }
+                });
                 return callback(res);
             }
         });
-        user.incrementUserBalance(useruuid, coin10c * 0.1, function(err, res) {
-            if (err) {
-                console.error('error running query', err);
-                return callback(err);
-            } else {
-                return callback(res);
-            }
-        });
+
     } else { // if absolute number
         pool.query(UPDATE, [uuid, coin5, coin2, coin1, coin50c, coin20c, coin10c, new Date()], function(err, res) {
             if (err) {
                 console.error('error running query', err);
                 return callback(err);
             } else {
+                user.incrementUserBalance(useruuid, coin5 * 5, function(err, res) {
+                    if (err) {
+                        console.error('error running query', err);
+                        return callback(err);
+                    } else {
+                        return callback(res);
+                    }
+                });
+                user.incrementUserBalance(useruuid, coin2 * 2, function(err, res) {
+                    if (err) {
+                        console.error('error running query', err);
+                        return callback(err);
+                    } else {
+                        return callback(res);
+                    }
+                });
+                user.incrementUserBalance(useruuid, coin1, function(err, res) {
+                    if (err) {
+                        console.error('error running query', err);
+                        return callback(err);
+                    } else {
+                        return callback(res);
+                    }
+                });
+                user.incrementUserBalance(useruuid, coin50c * 0.5, function(err, res) {
+                    if (err) {
+                        console.error('error running query', err);
+                        return callback(err);
+                    } else {
+                        return callback(res);
+                    }
+                });
+                user.incrementUserBalance(useruuid, coin20c * 0.2, function(err, res) {
+                    if (err) {
+                        console.error('error running query', err);
+                        return callback(err);
+                    } else {
+                        return callback(res);
+                    }
+                });
+                user.incrementUserBalance(useruuid, coin10c * 0.1, function(err, res) {
+                    if (err) {
+                        console.error('error running query', err);
+                        return callback(err);
+                    } else {
+                        return callback(res);
+                    }
+                });
                 return callback(res);
             }
         });
-        user.incrementUserBalance(useruuid, coin5 * 5, function(err, res) {
-            if (err) {
-                console.error('error running query', err);
-                return callback(err);
-            } else {
-                return callback(res);
-            }
-        });
-        user.incrementUserBalance(useruuid, coin2 * 2, function(err, res) {
-            if (err) {
-                console.error('error running query', err);
-                return callback(err);
-            } else {
-                return callback(res);
-            }
-        });
-        user.incrementUserBalance(useruuid, coin1, function(err, res) {
-            if (err) {
-                console.error('error running query', err);
-                return callback(err);
-            } else {
-                return callback(res);
-            }
-        });
-        user.incrementUserBalance(useruuid, coin50c * 0.5, function(err, res) {
-            if (err) {
-                console.error('error running query', err);
-                return callback(err);
-            } else {
-                return callback(res);
-            }
-        });
-        user.incrementUserBalance(useruuid, coin20c * 0.2, function(err, res) {
-            if (err) {
-                console.error('error running query', err);
-                return callback(err);
-            } else {
-                return callback(res);
-            }
-        });
-        user.incrementUserBalance(useruuid, coin10c * 0.1, function(err, res) {
-            if (err) {
-                console.error('error running query', err);
-                return callback(err);
-            } else {
-                return callback(res);
-            }
-        });
+
     }
 };

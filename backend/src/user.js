@@ -91,7 +91,7 @@ module.exports.incrementUserBalance = function incrementUserBalance(uuid, increm
     });
 };
 
-module.exports.deleteUser = function deleteUser(name) {
+module.exports.deleteUser = function deleteUser(name, callback) {
     pool.query(DELETE, [name], function(err, res) {
         if (err) {
             console.error('error running query', err);
@@ -115,7 +115,7 @@ module.exports.putUser = function putUser(uuid, name, password, isParent, callba
 };
 
 
-module.exports.getPasswordHash = function checkPassword(uuid, callback) {;
+module.exports.getPasswordHash = function checkPassword(uuid, callback) {
     pool.query(SELECT_PASSWORD_HASH, [uuid], function(err, res) {
         var results = [];
         if (err) {

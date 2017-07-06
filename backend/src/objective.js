@@ -59,7 +59,7 @@ module.exports.postObjective = function postObjective(uuid, name, price, userUui
     });
 };
 
-module.exports.deleteObjective = function deleteObjective(uuid) {
+module.exports.deleteObjective = function deleteObjective(uuid, callback) {
     pool.query(DELETE, [uuid], function(err, res) {
         if (err) {
             console.error('error running query', err);
