@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar hideBackButton="true">
+  <ion-navbar>
     <ion-title>Account settings</ion-title>
   </ion-navbar>
 </ion-header>
@@ -15,4 +15,5 @@
       <button ion-item *ngIf="(user.isparent)" (click)="goToDeleteUser()"><ion-icon name="remove-circle" item-left></ion-icon>Delete user</button>
     </ion-list>
   </ion-card>
+
 </ion-content>

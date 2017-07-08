@@ -6,6 +6,10 @@ page-login {
   .transparency{
     opacity: 0.9;
   }
-  .elements-size{
+  .warning{
+    background-color: map_get($colors, error)
+  }
+  .space{
+    margin-top: 44px;
   }
 }

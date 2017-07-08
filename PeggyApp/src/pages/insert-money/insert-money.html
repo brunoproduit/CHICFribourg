@@ -1,13 +1,11 @@
 <ion-header>
-  <ion-navbar hideBackButton="true">
+  <ion-navbar>
     <ion-title>Insert Money</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content class="background" padding>
-
-
   <ion-card>
     <ion-card-content class="connectedToPeggy transparency" *ngIf="(isConnectedToPeggy == true)">
       <ion-icon icon-start name="checkmark-circle"></ion-icon> You are connected to Peggy</ion-card-content>
@@ -23,8 +21,4 @@
     <ion-card-header>Money you have currently inserted</ion-card-header>
     <ion-card-content><h1>{{moneyAdded}} CHF</h1></ion-card-content>
   </ion-card>
-
-  <ion-buttons>
-    <button ion-button color="PeggyElement" (click) ="returnToHome()" block>Finish</button>
-  </ion-buttons>
 </ion-content>

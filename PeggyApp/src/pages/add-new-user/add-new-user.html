@@ -7,12 +7,96 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>AddNewUser</ion-title>
+    <ion-title>Add New User</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="background" padding>
+  <ion-card>
+    <ion-card-content>Enter the name of the new user: </ion-card-content>
+    <ion-item class="elements-color">
+      <ion-label floating>Name</ion-label>
+      <ion-input type="text" [(ngModel)]="newUserName"></ion-input>
+    </ion-item>
+  </ion-card>
+  <ion-card>
+  <ion-card-content>The new user is: </ion-card-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item class="elements-color">
+          <ion-checkbox color="primary" [(ngModel)]="newUserIsChild" (ionChange)="isChildPressed()"></ion-checkbox>
+          <ion-label>a Kid</ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item class="elements-color">
+          <ion-checkbox color="primary" [(ngModel)]="newUserIsParent" (ionChange)="isParentPressed()"></ion-checkbox>
+          <ion-label>a Parent</ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  </ion-card>
+  <ion-card *ngIf="(newUserIsParent == true)">
+    <ion-card-content>Enter a password for the new user:</ion-card-content>
+    <ion-item class="elements-color">
+      <ion-label floating>Password</ion-label>
+      <ion-input type="password" [(ngModel)]="password"></ion-input>
+    </ion-item>
+    <ion-item class="elements-color">
+      <ion-label floating>Password again</ion-label>
+      <ion-input type="password" [(ngModel)]="passwordControl"></ion-input>
+    </ion-item>
+  </ion-card>
 
+  <ion-card class="element-color transparency" *ngIf="((rotation == 0) && (newUserIsChild == true))">
+    <ion-card-header>select your first color:</ion-card-header>
+    <ion-grid>
+      <ion-row>
+        <ion-col><ion-item class="elements-color"><ion-checkbox color="Red" [(ngModel)]="red" (ionChange)="redPressed()"></ion-checkbox><ion-label><img src="assets/img/red-square.png"></ion-label></ion-item></ion-col>
+        <ion-col><ion-item class="elements-color"><ion-checkbox color="Blue" [(ngModel)]="blue" (ionChange)="bluePressed()"></ion-checkbox><ion-label><img src="assets/img/blue-square.png"></ion-label></ion-item></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col><ion-item class="elements-color"><ion-checkbox color="Green" [(ngModel)]="green" (ionChange)="greenPressed()"></ion-checkbox><ion-label><img src="assets/img/green-square.png"></ion-label></ion-item></ion-col>
+        <ion-col><ion-item class="elements-color"><ion-checkbox color="Yellow" [(ngModel)]="yellow" (ionChange)="yellowPressed()"></ion-checkbox><ion-label><img src="assets/img/yellow-square.png"></ion-label></ion-item></ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-buttons>
+      <button ion-button (click) ="addToPasswordChild()" block>Chose next color</button>
+    </ion-buttons>
+  </ion-card>
+  <ion-card class="element-color transparency" *ngIf="(this.rotation == 1)">
+    <ion-card-header>Please {{user.name}}, select your second color:</ion-card-header>
+    <ion-grid>
+      <ion-row>
+        <ion-col><ion-item class="elements-color"><ion-checkbox color="Green" [(ngModel)]="green" (ionChange)="greenPressed()"></ion-checkbox><ion-label><img src="assets/img/green-square.png"></ion-label></ion-item></ion-col>
+        <ion-col><ion-item class="elements-color"><ion-checkbox color="Yellow" [(ngModel)]="yellow" (ionChange)="yellowPressed()"></ion-checkbox><ion-label><img src="assets/img/yellow-square.png"></ion-label></ion-item></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col><ion-item class="elements-color"><ion-checkbox color="Pink" [(ngModel)]="pink" (ionChange)="pinkPressed()"></ion-checkbox><ion-label><img src="assets/img/pink-square.png"></ion-label></ion-item></ion-col>
+        <ion-col><ion-item class="elements-color"><ion-checkbox color="Brown" [(ngModel)]="brown" (ionChange)="brownPressed()"></ion-checkbox><ion-label><img src="assets/img/brown-square.png"></ion-label></ion-item></ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-buttons>
+      <button ion-button (click) ="addToPasswordChild()" block>chose next color</button>
+    </ion-buttons>
+  </ion-card>
+  <ion-card class="element-color transparency" *ngIf="(this.rotation == 2)">
+    <ion-card-header>Please {{user.name}}, select your third color:</ion-card-header>
+    <ion-grid>
+      <ion-row>
+        <ion-col><ion-item class="elements-color"><ion-checkbox color="Pink" [(ngModel)]="pink" (ionChange)="pinkPressed()"></ion-checkbox><ion-label><img src="assets/img/pink-square.png"></ion-label></ion-item></ion-col>
+        <ion-col><ion-item class="elements-color"><ion-checkbox color="Brown" [(ngModel)]="brown" (ionChange)="brownPressed()"></ion-checkbox><ion-label><img src="assets/img/brown-square.png"></ion-label></ion-item></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col><ion-item class="elements-color"><ion-checkbox color="Red" [(ngModel)]="red" (ionChange)="redPressed()"></ion-checkbox><ion-label><img src="assets/img/red-square.png"></ion-label></ion-item></ion-col>
+        <ion-col><ion-item class="elements-color"><ion-checkbox color="Blue" [(ngModel)]="blue" (ionChange)="bluePressed()"></ion-checkbox><ion-label><img src="assets/img/blue-square.png"></ion-label></ion-item></ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+  <ion-buttons *ngIf="((newUserIsParent == true) || (newUserIsChild == true))">
+    <button ion-button color="primary" type="submit" (click)="validateUserInformations()" block>Validate</button>
+  </ion-buttons>
 </ion-content>

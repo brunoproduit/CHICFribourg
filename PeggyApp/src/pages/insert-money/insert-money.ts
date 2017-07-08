@@ -1,5 +1,5 @@
-import {Component, Injectable, NgZone} from '@angular/core';
-import {IonicPage, NavController, NavParams, Platform} from 'ionic-angular';
+import {Component, Injectable, NgZone, ViewChild} from '@angular/core';
+import {IonicPage, NavController, NavParams, Platform, Navbar} from 'ionic-angular';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
 import {BleProviderCallback} from "../../providers/ble/BleProviderCallback";
@@ -21,18 +21,21 @@ import {BleProvider} from "../../providers/ble/ble";
 @Injectable()
 export class InsertMoneyPage implements BleProviderCallback {
 
+    @ViewChild(Navbar) navBar: Navbar;
     public user;
+    public peggyUUID;
     public callback;
     public amountAccount;
     public isConnectedToPeggy;
     public tokenSession;
     public urlAddMoney = 'https://chic.tic.heia-fr.ch/peggy';
     public moneyAdded;
-
+    public maxCoin;
 
     constructor(private bleProvider: BleProvider, private navCtrl: NavController, private navParams: NavParams, public http: Http, public platform: Platform, private zone: NgZone) {
         platform.ready().then(() => {
             this.user = this.navParams.get('user');
+            this.peggyUUID = this.navParams.get('peggyUUID');
             this.tokenSession = this.navParams.get('tokenSession');
             this.callback = this.navParams.get('callback');
             this.amountAccount = this.user.balance;
@@ -45,11 +48,16 @@ export class InsertMoneyPage implements BleProviderCallback {
     ionViewDidLoad() {
         console.log('ionViewDidLoad InsertMoneyPage');
         this.bleProvider.setCallback(this);
-        this.isConnectedToPeggy = this.bleProvider.getIsConnected();
+        this.isConnectedToPeggy = this.bleProvider.isConnected;
         console.log("isConnectedToPeggy: "+ this.isConnectedToPeggy);
         if(!this.isConnectedToPeggy){
             this.bleProvider.findDevice();
         }
+        this.navBar.backButtonClick =(e:UIEvent) =>{
+            this.callback(this.user, this.peggyUUID, this.tokenSession).then(()=>{
+                this.navCtrl.pop();
+            });
+        };
     }
 
     onMoneyInserted = (coin) => {
@@ -59,89 +67,97 @@ export class InsertMoneyPage implements BleProviderCallback {
         switch (coin) {
             case 'coin10c':
                 body = {
-                    "uuid": "cf94737d-5d5b-4ca4-ba6f-33cc1f1f8de1",
+                    "uuid": this.peggyUUID,
                     "coin10c": "+1",
                 };
-                this.zone.run(() => {
-                    this.moneyAdded += 0.1;
-                });
                 this.sendMoneyToAccount(body);
                 break;
             case 'coin20c':
                 body = {
-                    "uuid": "cf94737d-5d5b-4ca4-ba6f-33cc1f1f8de1",
+                    "uuid": this.peggyUUID,
                     "coin20c": "+1",
                 };
-                this.zone.run(() => {
-                    this.moneyAdded += 0.2;
-                });
                 this.sendMoneyToAccount(body);
                 break;
             case 'coin50c':
                 body = {
-                    "uuid": "cf94737d-5d5b-4ca4-ba6f-33cc1f1f8de1",
+                    "uuid": this.peggyUUID,
                     "coin50c": "+1",
                 };
-                this.zone.run(() => {
-                    this.moneyAdded += 0.5;
-                });
                 this.sendMoneyToAccount(body);
                 break;
             case 'coin1':
                 body = {
-                    "uuid": "cf94737d-5d5b-4ca4-ba6f-33cc1f1f8de1",
+                    "uuid": this.peggyUUID,
                     "coin1": "+1",
                 };
-                this.zone.run(() => {
-                    this.moneyAdded += 1;
-                });
                 this.sendMoneyToAccount(body);
                 break;
             case 'coin2':
                 body = {
-                    "uuid": "cf94737d-5d5b-4ca4-ba6f-33cc1f1f8de1",
+                    "uuid": this.peggyUUID,
                     "coin2": "+1",
                 };
-                this.zone.run(() => {
-                    this.moneyAdded += 2;
-                });
                 this.sendMoneyToAccount(body);
                 break;
             case 'coin5':
                 body = {
-                    "uuid": "cf94737d-5d5b-4ca4-ba6f-33cc1f1f8de1",
+                    "uuid": this.peggyUUID,
                     "coin5": "+1",
                 };
-                this.zone.run(() => {
-                    this.moneyAdded += 5;
-                });
                 this.sendMoneyToAccount(body);
                 break;
         }
     };
 
     sendMoneyToAccount = (body) =>{
-        let headers = new Headers();
-        headers.append('Authorization', 'Bearer ' + this.tokenSession);
-        headers.append('Content-Type', 'application/json');
 
-        this.http.put(this.urlAddMoney, JSON.stringify(body), {headers: headers})
-            .map((res: any) => res.json())
-            .subscribe(data =>{
-                    console.log("Data: " + JSON.stringify(data));
-                this.zone.run(() => {
-                    this.amountAccount = data.balance;
-                    this.user.balance = data.balance;
-                });
-            },
-                err => console.log("Error: " + err));
+            let headers = new Headers();
+            headers.append('Authorization', 'Bearer ' + this.tokenSession);
+            headers.append('Content-Type', 'application/json');
+
+            var promise = new Promise((resolve, reject) =>{
+                this.http.put(this.urlAddMoney, JSON.stringify(body), {headers: headers})
+                    .map((res: any) => res.json())
+                    .subscribe(data =>{
+                            console.log("Data: " + JSON.stringify(data));
+                            this.zone.run(() => {
+                                this.moneyAdded += data.balance - this.amountAccount;
+                                this.amountAccount = data.balance;
+                                this.user.balance = data.balance;
+                                this.controlMaxCoinReached(data.coin5, data.coin2, data.coin1, data.coin50c, data.coin20c, data.coin10c);
+                                resolve();
+                            });
+                        },
+                        err => console.log("Error: " + err));
+
+            });
+            promise.then(()=>{
+                console.log("Promise send money finished");
+            })
     };
 
-    returnToHome(){
-        this.callback(this.user, this.tokenSession).then(()=>{
-            this.navCtrl.pop();
-        })
-    }
+    controlMaxCoinReached = (coin5, coin2, coin1, coin50c, coin20c, coin10c) =>{
+        if(coin5 == 20){
+            this.maxCoinReached(coin5);
+        }else if(coin2 == 21){
+            this.maxCoinReached(coin2);
+        }else if(coin1 == 30){
+            this.maxCoinReached(coin1);
+        }else if(coin50c == 37){
+            this.maxCoinReached(coin50c);
+        }else if(coin20c == 28){
+            this.maxCoinReached(coin20c);
+        }else if(coin10c == 32){
+            this.maxCoinReached(coin10c);
+        }
+
+    };
+
+    maxCoinReached = (coin) =>{
+        this.maxCoin = coin;
+
+    };
     onMoneyWithdrawn = (coin) => {}
 }
 

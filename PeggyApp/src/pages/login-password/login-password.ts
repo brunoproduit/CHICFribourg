@@ -18,6 +18,7 @@ import 'rxjs/add/operator/map';
 export class LoginPasswordPage {
 
   public user;
+  public peggyUUID;
   public rotation;
   public password;
   public tokenSession;
@@ -32,6 +33,7 @@ export class LoginPasswordPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http) {
     this.user = this.navParams.get('user');
+    this.peggyUUID = this.navParams.get('peggyUUID');
     console.log("## USER INFORMATION : " + JSON.stringify(this.user));
     this.password = '';
     this.rotation = 0;
@@ -110,7 +112,7 @@ export class LoginPasswordPage {
     this.tokenSession = data.token;
     console.log("Token Session value: "+ this.tokenSession);
     console.log("User information" + JSON.stringify(this.user));
-    this.navCtrl.push(HomePage, {user: this.user, tokenSession: this.tokenSession});
+    this.navCtrl.push(HomePage, {user: this.user, peggyUUID: this.peggyUUID, tokenSession: this.tokenSession});
     this.rotation = 0;
     this.password = '';
     console.log("Password after correct:"+ this.password);

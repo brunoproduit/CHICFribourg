@@ -11,45 +11,27 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content class="background">
-    <ion-grid>
-        <ion-row padding>
+<ion-content class="background" padding>
             <div class="resume">
                 <h1>Money available:</h1>
                 <h1>{{user.balance}} CHF</h1>
             </div>
-        </ion-row>
-        <ion-row padding>
             <div class="buttons-div">
-                <div class="polaroid"><img src="assets/img/PeggyInsert.png">
+                <div class="align">
+                <div class="polaroid" (click)="goToInsertMoney()"><img src="assets/img/PeggyInsert.png">
                     <div class="container"><p>Add Money</p></div>
                 </div>
-                <div class="polaroid"><img src="assets/img/PeggyWithdraw.png">
-                    <div class="container"><p>Add Money</p></div>
+                <div class="polaroid" (click)="goToWithdrawMoney()"><img src="assets/img/PeggyWithdraw.png">
+                    <div class="container"><p>Withdraw Money</p></div>
                 </div>
-                <div class="polaroid"><img src="assets/img/PeggyGoals.png">
-                    <div class="container"><p>Add Money</p></div>
                 </div>
-                <div class="polaroid"><img src="assets/img/PeggySettings.png">
-                    <div class="container"><p>Add Money</p></div>
+                <div class="align">
+                <div class="polaroid" (click)="goToGoals()"><img src="assets/img/PeggyGoals.png">
+                    <div class="container"><p>Goals</p></div>
+                </div>
+                <div class="polaroid" (click)="goToSettings()"><img src="assets/img/PeggySettings.png">
+                    <div class="container"><p>Settings</p></div>
+                </div>
                 </div>
             </div>
-        </ion-row>
-    </ion-grid>
 </ion-content>
-<!--
-        <table class="table-cell">
-          <tr>
-            <td (click)="goToInsertMoney()"><img src="assets/img/PeggyInsert.png">
-              <br><b>Add money</b></td>
-            <td (click)="goToWithdrawMoney()"><img src="assets/img/PeggyWithdraw.png">
-              <br><b>Withdraw money</b></td>
-          </tr>
-          <tr>
-            <td (click)="goToGoals()"><img src="assets/img/PeggyGoals.png">
-              <br><b>Goals</b></td>
-            <td (click)="goToSettings()"><img src="assets/img/PeggySettings.png">
-              <br><b>Settings</b></td>
-          </tr>
-        </table>
--->

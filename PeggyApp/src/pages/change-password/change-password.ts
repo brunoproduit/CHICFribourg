@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import { IonicPage, NavController, NavParams, Navbar } from 'ionic-angular';
 import { Http, Headers} from '@angular/http';
 
 /**
@@ -15,7 +15,10 @@ import { Http, Headers} from '@angular/http';
 })
 export class ChangePasswordPage {
 
+  @ViewChild(Navbar) navBar: Navbar;
   public user;
+  public callback;
+  public peggyUUID;
   public rotation;
   public password;
   public passwordValidation;
@@ -23,16 +26,18 @@ export class ChangePasswordPage {
   public passwordChangeSuccess;
   public tokenSession;
   public urlChangePassword = 'https://chic.tic.heia-fr.ch/users';
-  red: boolean = false;
-  blue: boolean = false;
-  green: boolean = false;
-  yellow: boolean = false;
-  brown : boolean = false;
-  pink : boolean = false;
+  public red: boolean = false;
+  public blue: boolean = false;
+  public green: boolean = false;
+  public yellow: boolean = false;
+  public brown : boolean = false;
+  public pink : boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http) {
     this.user = this.navParams.get('user');
     this.tokenSession = this.navParams.get('tokenSession');
+    this.callback = this.navParams.get('callback');
+    this.peggyUUID = this.navParams.get('peggyUUID');
     this.passwordMatch = true;
     this.passwordChangeSuccess = false;
     this.password = '';
@@ -41,6 +46,11 @@ export class ChangePasswordPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ChangePasswordPage');
+    this.navBar.backButtonClick =(e:UIEvent) =>{
+      this.callback(this.user, this.peggyUUID, this.tokenSession).then(()=>{
+        this.navCtrl.pop();
+      });
+    };
   }
 
   changePasswordParent = () =>{
@@ -53,7 +63,6 @@ export class ChangePasswordPage {
       this.passwordMatch = false;
       this.passwordChangeSuccess = false;
     }
-
   };
 
   changePasswordChild = () =>{

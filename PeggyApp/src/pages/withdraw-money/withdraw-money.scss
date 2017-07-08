@@ -1,3 +1,24 @@
 page-withdraw-money {
 
+  .elements-color {
+    background-color: #f4f4f4;
+  }
+  .transparency{
+    opacity: 0.9;
+  }
+  .elements-size{
+  }
+
+  .notConnectedToPeggy{
+    background-color: map_get($colors, error);
+    opacity: 0.9;
+  }
+
+  .connectedToPeggy{
+    background-color: map_get($colors, noError);
+    opacity: 0.9;
+  }
+  .space{
+    margin-top: 55px;
+  }
 }
