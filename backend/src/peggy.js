@@ -96,15 +96,15 @@ module.exports.putPeggy = function putPeggy(uuid, coin5, coin2, coin1, coin50c, 
                 console.error('error running query', err);
                 return callback(err);
             } else {
-                user.incrementUserBalance(useruuid, coin5 * 5, function(err, res) {
+                user.incrementUserBalance(useruuid, coin5 * 5, function(res, err) {
                     if (err) {
                         console.error('error running query', err);
                         return callback(err);
                     } else {
-                        return callback(res);
+                       return callback(res);
                     }
                 });
-                return callback(res);
+                //return callback(response);
             }
         });
 

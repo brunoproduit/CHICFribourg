@@ -38,4 +38,5 @@ Thumbs.db
 backend/src/node_modules/
 backend/misc/
 backend/postgresql-9.6.2/
+backend/postgresql-9.6.3/
 .idea/

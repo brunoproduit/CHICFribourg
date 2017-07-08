@@ -108,7 +108,7 @@ var limiter = new RateLimit({
     windowMs: 60 * 10000,                   // 10 min window
     delayAfter: 60,                         // begin slowing down responses after 60 requests
     delayMs: 500,                           // slow down subsequent responses by 0.5s per request
-    max: 60 * 5,                            // start blocking after 300 requests
+    max: 60 * 50,                            // start blocking after 300 requests
     message: HTTPStatus.getStatusJSON(403)  // Send back blocking message
 });
 
@@ -566,13 +566,7 @@ app.put('/peggy', cors(corsOptions), bearerToken(), function (req, res) {
             res.status(406).send(HTTPStatus.getStatusJSON(406));
         } else {
             var uuid = validator.escape(req.body.uuid);
-            var coin5 = validator.escape(req.body.coin5);
-            var coin2 = validator.escape(req.body.coin2);
-            var coin1 = validator.escape(req.body.coin1);
-            var coin50c = validator.escape(req.body.coin50c);
-            var coin20c = validator.escape(req.body.coin20c);
-            var coin10c = validator.escape(req.body.coin10c);
-            peggy.putPeggy(uuid, coin5, coin2, coin1, coin50c, coin20c, coin10c, jwt.decode(req.token).uuid, function (err) {
+            peggy.putPeggy(uuid, req.body.coin5, req.body.coin2, req.body.coin1, req.body.coin50c, req.body.coin20c, req.body.coin10c, jwt.decode(req.token).uuid, function (err) {
                 if (typeof(err.constraint)!='undefined'){
                     res.status(304).send(HTTPStatus.getStatusJSON(304));
                 } else {
@@ -581,6 +575,7 @@ app.put('/peggy', cors(corsOptions), bearerToken(), function (req, res) {
                             peggy.balance = user.balance;
                             console.log(JSON.stringify(peggy));
                             res.json(peggy);
+                            res.end();
                         });
                     });
                 }

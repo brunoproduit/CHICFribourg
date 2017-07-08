@@ -46,12 +46,14 @@ module.exports.getUser = function getUser(uuid, callback) {
         if (err) {
             console.error('error running query', err);
             return callback(err);
+        } else {
+            for (var i = 0; i < res.rowCount; i++) {
+                results.push(res.rows[i]);
+            }
+            return callback(results.pop());
         }
-        for (var i = 0; i < res.rowCount; i++) {
-            results.push(res.rows[i]);
-        }
-        return callback(results.pop());
     });
+
 };
 
 module.exports.getAllUsers = function getAllUsers(peggyuuid, callback) {
@@ -60,11 +62,12 @@ module.exports.getAllUsers = function getAllUsers(peggyuuid, callback) {
         if (err) {
             console.error('error running query', err);
             return callback(err);
+        } else {
+            for (var i = 0; i < res.rowCount; i++) {
+                results.push(res.rows[i]);
+            }
+            return callback(results);
         }
-        for (var i = 0; i < res.rowCount; i++) {
-            results.push(res.rows[i]);
-        }
-        return callback(results);
     });
 };
 
