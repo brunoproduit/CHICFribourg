@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 import { Http } from '@angular/http';
 import { HomePage } from '../home/home';
 import 'rxjs/add/operator/map';
@@ -22,7 +22,6 @@ export class LoginPasswordPage {
   public rotation;
   public password;
   public tokenSession;
-  public errorPassword;
   public urlAuth = 'https://chic.tic.heia-fr.ch/auth';
   red: boolean = false;
   blue: boolean = false;
@@ -31,14 +30,13 @@ export class LoginPasswordPage {
   brown : boolean = false;
   pink : boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, public toastCtrl: ToastController) {
     this.user = this.navParams.get('user');
     this.peggyUUID = this.navParams.get('peggyUUID');
     console.log("## USER INFORMATION : " + JSON.stringify(this.user));
     this.password = '';
     this.rotation = 0;
     this.tokenSession = '';
-    this.errorPassword = false;
   }
 
   ionViewDidLoad() {
@@ -120,9 +118,20 @@ export class LoginPasswordPage {
 
   wrongPassword(error){
     console.log("Wrong Password:"+ error);
-    this.errorPassword = true;
+    this.wrongPasswordToast();
     this.rotation = 0;
     this.password = '';
+  }
+
+  wrongPasswordToast(){
+    let toast = this.toastCtrl.create({
+      message: 'Wrong password',
+      position: 'middle',
+      duration: 3000,
+      showCloseButton: true,
+      closeButtonText: 'X'
+    });
+    toast.present();
   }
 
   redPressed(){

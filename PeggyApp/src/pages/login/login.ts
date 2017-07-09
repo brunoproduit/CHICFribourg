@@ -1,5 +1,5 @@
 import {Component, NgModule, NgZone, OnInit} from '@angular/core';
-import {IonicPage, NavController, NavParams, Platform} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, Platform, ToastController} from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 import {LoginPasswordPage} from '../login-password/login-password';
 import {Http, Headers} from '@angular/http';
@@ -7,12 +7,6 @@ import {BleProvider} from '../../providers/ble/ble'
 import 'rxjs/add/operator/map';
 import {HomePage} from "../home/home";
 
-/**
- * Generated class for the LoginPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
     selector: 'page-login',
@@ -35,19 +29,16 @@ export class LoginPage implements OnInit {
     public password;
     public passwordControl;
     public passwordMatch;
-    public errorCreate;
 
 
-
-    constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private platform: Platform, public ble: BleProvider, private zone: NgZone, private storage: Storage) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private platform: Platform, public ble: BleProvider, private zone: NgZone, private storage: Storage, public toastCtrl: ToastController) {
         this.isConnectedToPeggy = false;
-        this.errorCreate = false;
         platform.ready().then(() => {
             ble.findDevice();
         });
     }
 
-    ionViewWillEnter = () =>{
+    ionViewWillEnter = () => {
         this.getListOfUsers();
     }
 
@@ -61,6 +52,7 @@ export class LoginPage implements OnInit {
             if (this.ble.isConnected == true) {
                 if (this.ble.peggyUUID == '0-0-00') {
                     this.firstTime = true;
+                    this.createAccountWarningToast();
                 } else {
                     this.firstTime = false;
                     this.getUUIDFromDevice().then(() => {
@@ -159,7 +151,6 @@ export class LoginPage implements OnInit {
         this.http.post(this.urlCreatePeggy, JSON.stringify(body), {headers: headers})
             .map((res: any) => res.json())
             .subscribe(data => {
-                    this.errorCreate = false;
                     console.log("Data: " + JSON.stringify(data));
                     this.lastPeggyUUID = data.peggy.uuid;
                     console.log("lastPeggyUUID after create Peggy: " + this.lastPeggyUUID);
@@ -170,32 +161,29 @@ export class LoginPage implements OnInit {
                 },
                 err => {
                     console.log("Error: " + err);
-                    this.errorCreate = true;
+                    this.createAccountErrorToast()
                 });
 
-    }
+    };
 
+    createAccountErrorToast = () => {
+        let toast = this.toastCtrl.create({
+            message: "Error while trying create account, check your internet connection or server might be offline",
+            duration: 3000,
+            position: 'middle',
+            showCloseButton: true,
+            closeButtonText: 'X'
+        });
+        toast.present();
+    };
+
+    createAccountWarningToast = () => {
+        let toast = this.toastCtrl.create({
+            message: "A parent must create the first account on the Peggy!",
+            position: 'middle',
+            showCloseButton: true,
+            closeButtonText: 'X'
+        });
+        toast.present();
+    };
 }
-/*
- if(this.ble.peggyUUID == ''){
- if(this.ble.isConnected == true) {
- this.getUUIDFromDevice().then(() => {
- console.log("peggyUUID: "+this.ble.peggyUUID);
- if (this.ble.peggyUUID == '0-0-00') {
- this.firstTime = true;
- } else {
- this.lastPeggyUUID = this.ble.peggyUUID;
- console.log("lastPeggyUUID in device: " + this.lastPeggyUUID);
- this.getListOfUsers();
- }
- });
- }else if(this.ble.isConnected == false){
- this.firstTime = false;
- this.getLastUUIDFromDB().then((data) =>{
- this.lastPeggyUUID = data;
- console.log("lastPeggyUUID in DB " + this.lastPeggyUUID);
- this.getListOfUsers();
- });
- }
- }
- */

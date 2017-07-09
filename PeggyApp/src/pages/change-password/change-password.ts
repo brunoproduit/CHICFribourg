@@ -2,12 +2,6 @@ import {Component, ViewChild} from '@angular/core';
 import { IonicPage, NavController, NavParams, Navbar } from 'ionic-angular';
 import { Http, Headers} from '@angular/http';
 
-/**
- * Generated class for the ChangePasswordPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
   selector: 'page-change-password',

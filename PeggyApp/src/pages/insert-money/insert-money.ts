@@ -1,17 +1,10 @@
 import {Component, Injectable, NgZone, ViewChild} from '@angular/core';
-import {IonicPage, NavController, NavParams, Platform, Navbar} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, Platform, Navbar, ToastController} from 'ionic-angular';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
 import {BleProviderCallback} from "../../providers/ble/BleProviderCallback";
 import {BleProvider} from "../../providers/ble/ble";
 
-
-/**
- * Generated class for the InsertMoneyPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -32,7 +25,7 @@ export class InsertMoneyPage implements BleProviderCallback {
     public moneyAdded;
     public maxCoin;
 
-    constructor(private bleProvider: BleProvider, private navCtrl: NavController, private navParams: NavParams, public http: Http, public platform: Platform, private zone: NgZone) {
+    constructor(private bleProvider: BleProvider, private navCtrl: NavController, private navParams: NavParams, public http: Http, public platform: Platform, private zone: NgZone, public toastCtrl: ToastController) {
         platform.ready().then(() => {
             this.user = this.navParams.get('user');
             this.peggyUUID = this.navParams.get('peggyUUID');
@@ -139,24 +132,29 @@ export class InsertMoneyPage implements BleProviderCallback {
 
     controlMaxCoinReached = (coin5, coin2, coin1, coin50c, coin20c, coin10c) =>{
         if(coin5 == 20){
-            this.maxCoinReached(coin5);
+            this.maxCoinReachedToast("Warning ! Coins of 5 CHF have reached their limit")
         }else if(coin2 == 21){
-            this.maxCoinReached(coin2);
+            this.maxCoinReachedToast("Warning ! Coins of 2 CHF have reached their limit")
         }else if(coin1 == 30){
-            this.maxCoinReached(coin1);
+            this.maxCoinReachedToast("Warning ! Coins of 1 CHF have reached their limit")
         }else if(coin50c == 37){
-            this.maxCoinReached(coin50c);
+            this.maxCoinReachedToast("Warning ! Coins of 0.50 cents have reached their limit")
         }else if(coin20c == 28){
-            this.maxCoinReached(coin20c);
+            this.maxCoinReachedToast("Warning ! Coins of 0.20 cents have reached their limit")
         }else if(coin10c == 32){
-            this.maxCoinReached(coin10c);
+            this.maxCoinReachedToast("Warning ! Coins of 0.10 cents have reached their limit")
         }
 
     };
 
-    maxCoinReached = (coin) =>{
-        this.maxCoin = coin;
-
+    maxCoinReachedToast = (alert) => {
+        let toast = this.toastCtrl.create({
+            message: alert,
+            position: 'middle',
+            showCloseButton: true,
+            closeButtonText: 'X'
+        });
+        toast.present();
     };
     onMoneyWithdrawn = (coin) => {}
 }
