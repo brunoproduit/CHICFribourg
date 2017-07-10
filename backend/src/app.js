@@ -106,9 +106,9 @@ var corsOptions = {origin: 'chic.tic.heia-fr.ch'};              // Set CORS orig
 
 var limiter = new RateLimit({
     windowMs: 60 * 10000,                   // 10 min window
-    delayAfter: 60,                         // begin slowing down responses after 60 requests
+    delayAfter: 600000,                         // begin slowing down responses after 60 requests
     delayMs: 500,                           // slow down subsequent responses by 0.5s per request
-    max: 60 * 50,                            // start blocking after 300 requests
+    max: 60 * 500000,                            // start blocking after 300 requests
     message: HTTPStatus.getStatusJSON(403)  // Send back blocking message
 });
 
@@ -296,6 +296,7 @@ app.get('/auth', cors(corsOptions), bearerToken(), function (req, res) {
 app.get('/peggy', cors(corsOptions), bearerToken(), function (req, res) {
     try {
         if (typeof(req.token)!='undefined' && jwt.decode(req.token).isparent) { //TODO block
+            console.log(jwt.decode(req.token).isparent);
             peggy.getAllPeggy(function (response) {
                 console.log(JSON.stringify(response));
                 return res.json(response);
@@ -480,12 +481,12 @@ app.post('/users', cors(corsOptions), bearerToken(), function (req, res) {
         var uuid = uuidV4();
 
         if (jwt.decode(req.token).isparent) {
-            if (typeof(req.body.name) != 'string' | typeof(req.body.password) != 'string' | typeof(req.body.isparent) != 'boolean') {
+            if (typeof(req.body.name) != 'string' | typeof(req.body.password) != 'string' | typeof(req.body.isParent) != 'boolean') {
                 res.status(406).send(HTTPStatus.getStatusJSON(406))
             }
             else {
                 var name = validator.escape(req.body.name);
-                user.postUser(uuid, name, req.body.password, req.body.isparent, jwt.decode(req.token).peggyuuid, function () {
+                user.postUser(uuid, name, req.body.password, req.body.isParent, jwt.decode(req.token).peggyuuid, function () {
                     user.getUser(uuid, function (response) {
                         console.log(JSON.stringify(response));
                         res.status(201).send(HTTPStatus.getStatusJSON(201, response));
@@ -563,19 +564,19 @@ app.put('*', cors(corsOptions), bearerToken(), function (req, res, next) {
  */
 app.put('/peggy', cors(corsOptions), bearerToken(), function (req, res) {
         if (typeof(req.body.uuid) != 'string') {
-            res.status(406).send(HTTPStatus.getStatusJSON(406));
+            return res.status(406).send(HTTPStatus.getStatusJSON(406));
         } else {
             var uuid = validator.escape(req.body.uuid);
             peggy.putPeggy(uuid, req.body.coin5, req.body.coin2, req.body.coin1, req.body.coin50c, req.body.coin20c, req.body.coin10c, jwt.decode(req.token).uuid, function (err) {
                 if (typeof(err.constraint)!='undefined'){
-                    res.status(304).send(HTTPStatus.getStatusJSON(304));
+                    return res.status(304).send(HTTPStatus.getStatusJSON(304));
                 } else {
                     peggy.getPeggy(uuid, function (peggy) {
                         user.getUser(jwt.decode(req.token).uuid, function (user) {
                             peggy.balance = user.balance;
                             console.log(JSON.stringify(peggy));
                             res.json(peggy);
-                            res.end();
+                            return res.end();
                         });
                     });
                 }
@@ -649,10 +650,7 @@ app.delete('*', cors(corsOptions), bearerToken(), function (req, res, next) {
         res.type('application/json');
         if (typeof(req.token) === 'undefined') {
             res.status(401).send(HTTPStatus.getStatusJSON(401))
-        } else if (!jwt.decode(req.token).isparent) {
-            res.status(401).send(HTTPStatus.getStatusJSON(401))
-        }
-        else {
+        } else {
             next();
         }
     }
@@ -668,8 +666,12 @@ app.delete('*', cors(corsOptions), bearerToken(), function (req, res, next) {
  */
 app.delete('/peggy/:id', cors(corsOptions), bearerToken(), function (req, res) {
     try {
-        peggy.deletePeggy(req.params.id);
-        res.status(200).send(HTTPStatus.getStatusJSON(200));
+        if (!jwt.decode(req.token).isparent) {
+            res.status(401).send(HTTPStatus.getStatusJSON(401))
+        } else {
+            peggy.deletePeggy(req.params.id);
+            res.status(200).send(HTTPStatus.getStatusJSON(200));
+        }
     }
     catch (err) {
         res.status(500).send(HTTPStatus.getStatusJSON(500));
@@ -683,8 +685,14 @@ app.delete('/peggy/:id', cors(corsOptions), bearerToken(), function (req, res) {
  */
 app.delete('/users/:id', cors(corsOptions), bearerToken(), function (req, res) {
     try {
-        user.deleteUser(req.params.id);
-        res.status(200).send(HTTPStatus.getStatusJSON(200));
+        if (!jwt.decode(req.token).isparent) {
+            res.status(401).send(HTTPStatus.getStatusJSON(401))
+        } else {
+            user.deleteUser(req.params.id, function(err){
+                res.status(200).send(HTTPStatus.getStatusJSON(200));
+            });
+
+        }
     }
     catch (err) {
         res.status(500).send(HTTPStatus.getStatusJSON(500));
@@ -712,6 +720,20 @@ app.delete('/objective/:id', cors(corsOptions), bearerToken(), function (req, re
 app.options('/peggy/:id', cors(corsOptions), bearerToken());        // enable pre-flight request for DELETE request
 app.options('/users/:id', cors(corsOptions), bearerToken());        // enable pre-flight request for DELETE request
 app.options('/objective/:id', cors(corsOptions), bearerToken());    // enable pre-flight request for DELETE request
+
+
+
+//-----------------------------------Other HTTP Methods-------------------------------------
+app.patch('*', cors(corsOptions), bearerToken(), function (req, res) {
+    res.status(405).send(HTTPStatus.getStatusJSON(405));
+});
+app.trace('*', cors(corsOptions), bearerToken(), function (req, res) {
+    res.status(405).send(HTTPStatus.getStatusJSON(405));
+});
+app.connect('*', cors(corsOptions), bearerToken(), function (req, res) {
+    res.status(405).send(HTTPStatus.getStatusJSON(405));
+});
+
 
 
 

@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.2",
+    "version": "1.4",
     "title": "CHICFribourg",
     "description": "backend REST in the TIC cluster @HEIA-FR for the CHIC project",
     "contact": {
@@ -250,6 +250,25 @@
     }
   },
   "paths": {
+    "/didyouknow": {
+      "get": {
+        "description": "Returns an didyouknow.",
+        "produces": [
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/auth": {
       "get": {
         "parameters": [
@@ -302,6 +321,11 @@
     "/change/{money}": {
       "get": {
         "description": "Returns an Array of coins which are the best possible change in CHF for the given money.",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "parameters": [
           {
             "in": "path",
@@ -508,11 +532,6 @@
         ],
         "produces": [
           "application/json"
-        ],
-        "security": [
-          {
-            "Bearer": []
-          }
         ],
         "parameters": [
           {
