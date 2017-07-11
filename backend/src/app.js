@@ -20,6 +20,7 @@ var peggy = require('./peggy');
 var user = require('./user');
 var objective = require('./objective');
 var didyouknow = require('./didyouknow');
+var change = require('./change');
 
 var uuidV4 = require('uuid/v4');
 var bearerToken = require('express-bearer-token');
@@ -105,16 +106,16 @@ app.disable('x-powered-by');                                    // Disable x-pow
 var corsOptions = {origin: 'chic.tic.heia-fr.ch'};              // Set CORS origin to only self
 
 var limiter = new RateLimit({
-    windowMs: 60 * 10000,                   // 10 min window
+    windowMs: 60 * 10000,                       // 10 min window
     delayAfter: 600000,                         // begin slowing down responses after 60 requests
-    delayMs: 500,                           // slow down subsequent responses by 0.5s per request
-    max: 60 * 500000,                            // start blocking after 300 requests
-    message: HTTPStatus.getStatusJSON(403)  // Send back blocking message
+    delayMs: 500,                               // slow down subsequent responses by 0.5s per request
+    max: 60 * 500000,                           // start blocking after 300 requests
+    message: HTTPStatus.getStatusJSON(403)      // Send back blocking message
 });
 
-app.use(limiter);                           // Use the declared limits for the API to prevent abuse
+app.use(limiter);                               // Use the declared limits for the API to prevent abuse
 
-pool.connect();                             // Connect to the postgreSQL pool
+pool.connect();                                 // Connect to the postgreSQL pool
 
 
 
@@ -170,7 +171,6 @@ app.all('*', cors(corsOptions), bearerToken(), function (req, res, next) {
                 });
             }
         } else {
-            //TODO error handeling
             res.status(400).send(HTTPStatus.getStatusJSON(400))
         }
     }
@@ -220,40 +220,18 @@ app.get('/didyouknow', cors(corsOptions), bearerToken(), function (req, res) {
 
 /**
  *
- * Return an Array of coins which are the best possible change in CHF for the given money.
+ * Return an Array of coins which are the best possible change in CHF for the given money, for the given peggy.
  * @param money
  */
 app.get('/change/:id', cors(corsOptions), bearerToken(), function (req, res) {
-    try {
-        console.log(req.params.id);
-        // Greedy funtion to get change
-        //peggy.getPeggy(req.params.id, function (peggy) {
-            var amount = req.params.id * 100;
-            var remainder=amount;
-
-            var response = new Object();
-            response.coin5 = Math.floor(amount / 500);
-            remainder = amount % 500;
-            response.coin2 = Math.floor(remainder / 200);
-            remainder = amount % 500 % 200;
-            response.coin1 = Math.floor(remainder / 100);
-            remainder = amount % 500 % 200 % 100;
-            response.coin50c = Math.floor(remainder / 50);
-            remainder = amount % 500 % 200 % 100 % 50;
-            response.coin20c = Math.floor(remainder / 20);
-            remainder = amount % 500 % 200 % 100 % 50 % 20;
-            response.coin10c = Math.floor(remainder / 10);
-            remainder = amount % 500 % 200 % 100 % 50 % 20 % 10;
-            if (remainder != 0) {
-                res.status(406).send(HTTPStatus.getStatusJSON(406));
-            } else {
-                res.json(response);
-            }
-        //});
-    }
-    catch (err) {
-        res.status(500).send(HTTPStatus.getStatusJSON(500));
-    }
+    //try {
+    peggy.getPeggy(jwt.decode(req.token).peggyuuid, function (peggy) {
+        console.log(JSON.stringify(peggy));
+        delete peggy['uuid'];
+        delete peggy['lastchanged'];
+        var result = change.getChange(req.params.id, peggy);
+        res.json(result);
+    });
 });
 
 /**
@@ -295,7 +273,7 @@ app.get('/auth', cors(corsOptions), bearerToken(), function (req, res) {
  */
 app.get('/peggy', cors(corsOptions), bearerToken(), function (req, res) {
     try {
-        if (typeof(req.token)!='undefined' && jwt.decode(req.token).isparent) { //TODO block
+        if (typeof(req.token)!='undefined' && jwt.decode(req.token).isparent) {
             console.log(jwt.decode(req.token).isparent);
             peggy.getAllPeggy(function (response) {
                 console.log(JSON.stringify(response));
