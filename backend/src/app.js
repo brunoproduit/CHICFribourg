@@ -107,9 +107,9 @@ var corsOptions = {origin: 'chic.tic.heia-fr.ch'};              // Set CORS orig
 
 var limiter = new RateLimit({
     windowMs: 60 * 10000,                       // 10 min window
-    delayAfter: 600000,                         // begin slowing down responses after 60 requests
+    delayAfter: 60,                         // begin slowing down responses after 60 requests
     delayMs: 500,                               // slow down subsequent responses by 0.5s per request
-    max: 60 * 500000,                           // start blocking after 300 requests
+    max: 60 * 50,                           // start blocking after 300 requests
     message: HTTPStatus.getStatusJSON(403)      // Send back blocking message
 });
 
