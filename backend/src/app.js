@@ -209,7 +209,7 @@ app.get('/didyouknow', cors(corsOptions), bearerToken(), function (req, res) {
         didyouknow.getDidyouknow(function(content){
             var response = fs.readFileSync('./index.html', 'utf8');
             res.write(response);
-            res.write("<p>" + content + "</p>");
+            res.write(content);
             res.send();
         });
     }
