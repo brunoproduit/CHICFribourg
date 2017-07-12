@@ -40,7 +40,7 @@ export class LoginPage implements OnInit {
 
     ionViewWillEnter = () => {
         this.getListOfUsers();
-    }
+    };
 
     ngOnInit() {
         setTimeout(() => {
@@ -117,14 +117,6 @@ export class LoginPage implements OnInit {
             console.log("Remove from DB: " + remove);
         });
     };
-
-    readUUID() {
-        this.ble.readPeggyUUID();
-    }
-
-    goToHome() {
-        this.navCtrl.push(HomePage, {user: this.user});
-    }
 
     onCreateAccount = () => {
         console.log("Name: " + this.name);

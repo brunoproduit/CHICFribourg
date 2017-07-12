@@ -15,21 +15,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="login.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/login/login.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="12" column="49" lean-forward="false" selection-start-line="12" selection-start-column="49" selection-end-line="12" selection-end-column="49" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="login.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/login/login.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="283">
-              <caret line="54" column="53" lean-forward="false" selection-start-line="54" selection-start-column="53" selection-end-line="54" selection-end-column="53" />
+            <state relative-caret-position="233">
+              <caret line="44" column="12" lean-forward="false" selection-start-line="44" selection-start-column="4" selection-end-line="44" selection-end-column="12" />
               <folding>
                 <element signature="e#0#66#0" expanded="true" />
               </folding>
@@ -37,53 +27,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="insert-money.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/insert-money/insert-money.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="156" column="24" lean-forward="false" selection-start-line="150" selection-start-column="8" selection-end-line="156" selection-end-column="24" />
-              <folding>
-                <element signature="e#0#71#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="login-password.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/login-password/login-password.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="503">
-              <caret line="76" column="0" lean-forward="false" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="login-password.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/login-password/login-password.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="235">
-              <caret line="130" column="28" lean-forward="false" selection-start-line="130" selection-start-column="28" selection-end-line="130" selection-end-column="28" />
+            <state relative-caret-position="-1435">
+              <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="37" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="delete-user.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/delete-user/delete-user.html">
+      <file leaf-file-name="insert-money.ts" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/pages/insert-money/insert-money.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+            <state relative-caret-position="242">
+              <caret line="111" column="21" lean-forward="true" selection-start-line="111" selection-start-column="21" selection-end-line="111" selection-end-column="89" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="variables.scss" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/theme/variables.scss">
+      <file leaf-file-name="ble.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/providers/ble/ble.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="282">
-              <caret line="27" column="8" lean-forward="false" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
+            <state relative-caret-position="4620">
+              <caret line="312" column="17" lean-forward="false" selection-start-line="312" selection-start-column="17" selection-end-line="312" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -92,30 +60,8 @@
       <file leaf-file-name="delete-user.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/delete-user/delete-user.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="453">
-              <caret line="68" column="42" lean-forward="false" selection-start-line="68" selection-start-column="42" selection-end-line="68" selection-end-column="42" />
-              <folding>
-                <element signature="e#0#53#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ble.ts" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/providers/ble/ble.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
-              <caret line="19" column="31" lean-forward="false" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="add-new-user.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/add-new-user/add-new-user.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="13" lean-forward="false" selection-start-line="7" selection-start-column="2" selection-end-line="13" selection-end-column="13" />
+            <state relative-caret-position="1519">
+              <caret line="106" column="23" lean-forward="false" selection-start-line="106" selection-start-column="2" selection-end-line="106" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -148,7 +94,13 @@
       <find>error</find>
       <find>errorPassword</find>
       <find>Peggy</find>
+      <find>test</find>
       <find>Peggy2</find>
+      <find>allowWithdrawMoney</find>
+      <find>moneyAdded</find>
+      <find>newUserIsChild</find>
+      <find>goToHome</find>
+      <find>readUUID</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -179,8 +131,6 @@
         <option value="$PROJECT_DIR$/src/pages/home/home.ts" />
         <option value="$PROJECT_DIR$/src/app/app.module.ts" />
         <option value="$PROJECT_DIR$/src/theme/variables.scss" />
-        <option value="$PROJECT_DIR$/src/providers/ble/ble.ts" />
-        <option value="$PROJECT_DIR$/src/pages/withdraw-money/withdraw-money.ts" />
         <option value="$PROJECT_DIR$/src/pages/withdraw-money/withdraw-money.scss" />
         <option value="$PROJECT_DIR$/src/pages/withdraw-money/withdraw-money.html" />
         <option value="$PROJECT_DIR$/src/pages/home/home.scss" />
@@ -191,13 +141,15 @@
         <option value="$PROJECT_DIR$/src/pages/change-password/change-password.ts" />
         <option value="$PROJECT_DIR$/src/pages/add-new-user/add-new-user.html" />
         <option value="$PROJECT_DIR$/src/pages/delete-user/delete-user.ts" />
-        <option value="$PROJECT_DIR$/src/pages/login/login.ts" />
         <option value="$PROJECT_DIR$/src/pages/login/login.html" />
         <option value="$PROJECT_DIR$/src/pages/delete-user/delete-user.html" />
         <option value="$PROJECT_DIR$/src/pages/insert-money/insert-money.scss" />
-        <option value="$PROJECT_DIR$/src/pages/insert-money/insert-money.ts" />
         <option value="$PROJECT_DIR$/src/pages/login-password/login-password.ts" />
         <option value="$PROJECT_DIR$/src/pages/login-password/login-password.html" />
+        <option value="$PROJECT_DIR$/src/providers/ble/ble.ts" />
+        <option value="$PROJECT_DIR$/src/pages/withdraw-money/withdraw-money.ts" />
+        <option value="$PROJECT_DIR$/src/pages/insert-money/insert-money.ts" />
+        <option value="$PROJECT_DIR$/src/pages/login/login.ts" />
       </list>
     </option>
   </component>
@@ -274,24 +226,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="theme" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PeggyApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PeggyApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="providers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -336,51 +270,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="settings" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PeggyApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PeggyApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="login-password" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PeggyApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PeggyApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="login" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -424,91 +314,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="home" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PeggyApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PeggyApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="delete-user" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PeggyApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PeggyApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="change-password" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PeggyApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PeggyApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="add-new-user" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PeggyApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PeggyApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -632,21 +438,22 @@
       <workItem from="1498475080544" duration="18086000" />
       <workItem from="1498639522514" duration="21000" />
       <workItem from="1498639580180" duration="201289000" />
-      <workItem from="1499532900163" duration="10484000" />
+      <workItem from="1499532900163" duration="48321000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="335746000" />
+    <option name="totallyTimeSpent" value="373583000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="4" y="23" width="1676" height="1027" extended-state="0" />
+    <frame x="4" y="23" width="1676" height="1027" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27625299" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32985386" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -659,7 +466,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32985386" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -696,20 +502,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/Downloads/typescript-angular2-client-generated (1)/configuration.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/ionic-angular/components/alert/alert.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="8" column="21" lean-forward="false" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Downloads/typescript-angular2-client-generated (1)/api/DefaultApi.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -773,6 +565,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="392">
           <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -825,14 +618,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/providers/ble/BleProviderCallback.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="39" lean-forward="false" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es6.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="205">
@@ -845,6 +630,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="966">
           <caret line="226" column="4" lean-forward="false" selection-start-line="226" selection-start-column="4" selection-end-line="226" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -852,6 +638,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="7" column="25" lean-forward="true" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -878,24 +665,6 @@
             <element signature="e#0#58#0" expanded="false" />
             <marker date="1499352899000" expanded="true" signature="1961:1965" ph="[...]" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/withdraw-money/withdraw-money.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="179" column="7" lean-forward="false" selection-start-line="179" selection-start-column="7" selection-end-line="179" selection-end-column="7" />
-          <folding>
-            <element signature="e#0#59#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/withdraw-money/withdraw-money.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="41" column="36" lean-forward="false" selection-start-line="41" selection-start-column="36" selection-end-line="41" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -949,6 +718,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#41#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -960,46 +732,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/home/home.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="41" column="12" lean-forward="false" selection-start-line="41" selection-start-column="12" selection-end-line="41" selection-end-column="53" />
-          <folding>
-            <element signature="e#0#40#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/add-new-user/add-new-user.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="122" column="0" lean-forward="false" selection-start-line="122" selection-start-column="0" selection-end-line="131" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#53#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/change-password/change-password.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="97" column="14" lean-forward="false" selection-start-line="97" selection-start-column="14" selection-end-line="97" selection-end-column="59" />
-          <folding>
-            <element signature="e#0#51#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/settings/settings.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/add-new-user/add-new-user.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -1008,46 +740,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/theme/variables.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="27" column="8" lean-forward="false" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/insert-money/insert-money.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="19" column="3" lean-forward="false" selection-start-line="19" selection-start-column="3" selection-end-line="19" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/insert-money/insert-money.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="156" column="24" lean-forward="false" selection-start-line="150" selection-start-column="8" selection-end-line="156" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#71#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/login/login.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="54" column="53" lean-forward="false" selection-start-line="54" selection-start-column="53" selection-end-line="54" selection-end-column="53" />
-          <folding>
-            <element signature="e#0#66#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/login-password/login-password.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="130" column="28" lean-forward="false" selection-start-line="130" selection-start-column="28" selection-end-line="130" selection-end-column="28" />
           <folding />
         </state>
       </provider>
@@ -1068,6 +764,175 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/providers/ble/BleProviderCallback.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="39" lean-forward="false" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/withdraw-money/withdraw-money.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="78">
+          <caret line="41" column="36" lean-forward="false" selection-start-line="41" selection-start-column="36" selection-end-line="41" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JavaScript-modules-diagram//Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/withdraw-money/withdraw-money.ts">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JavaScript-modules-diagram</ID>
+          <OriginalElement>$PROJECT_DIR$/src/pages/withdraw-money/withdraw-money.ts</OriginalElement>
+          <nodes>
+            <node x="" y="">$PROJECT_DIR$/src/providers/ble/BleProviderCallback.ts#BleProviderCallback#1;</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/ionic-angular/components/alert/alert-controller.d.ts#AlertController#161;</node>
+            <node x="" y="">$PROJECT_DIR$/src/providers/ble/ble.ts#BleProvider#229;</node>
+            <node x="" y="">Component;ViewChild;</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/@angular/http/src/headers.d.ts#Headers#203;</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/@angular/http/src/http.d.ts#Http#263;</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/ionic-angular/navigation/ionic-page.d.ts#IonicPage#178;</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/rxjs/add/operator/map.d.ts</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/ionic-angular/navigation/nav-controller.d.ts#NavController#217;</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/ionic-angular/navigation/nav-params.d.ts#NavParams#0;</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/ionic-angular/components/toolbar/navbar.d.ts#Navbar#312;</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/@angular/core/src/zone/ng_zone.d.ts#NgZone#252;</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/ionic-angular/platform/platform.d.ts#Platform#109;</node>
+            <node x="" y="">$PROJECT_DIR$/src/pages/withdraw-money/withdraw-money.ts#AlertController#115;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/withdraw-money/withdraw-money.ts#BleProvider#324;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/withdraw-money/withdraw-money.ts#BleProviderCallback#247;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/withdraw-money/withdraw-money.ts#Component#8;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/withdraw-money/withdraw-money.ts#Headers#176;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/withdraw-money/withdraw-money.ts#Http#170;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/withdraw-money/withdraw-money.ts#IonicPage#68;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/withdraw-money/withdraw-money.ts#NavController#79;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/withdraw-money/withdraw-money.ts#NavParams#94;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/withdraw-money/withdraw-money.ts#Navbar#132;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/withdraw-money/withdraw-money.ts#NgZone#19;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/withdraw-money/withdraw-money.ts#Platform#105;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/withdraw-money/withdraw-money.ts#ViewChild#27;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/withdraw-money/withdraw-money.ts#map.d.ts#207;</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="0.7074340527577938" x="550.3237288135592" y="327.0" />
+          <SelectedNodes />
+          <Categories>
+            <Category>All</Category>
+          </Categories>
+          <VISIBILITY>Details</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JavaScript-modules-diagram//Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JavaScript-modules-diagram</ID>
+          <OriginalElement>$PROJECT_DIR$/src</OriginalElement>
+          <nodes>
+            <node x="" y="">$PROJECT_DIR$/src/providers/ble/BleProviderCallback.ts#BleProviderCallback#1;</node>
+            <node x="" y="">$PROJECT_DIR$/src/pages/add-new-user/add-new-user.html</node>
+            <node x="" y="">$PROJECT_DIR$/src/pages/add-new-user/add-new-user.module.ts#AddNewUserPage#100;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/add-new-user/add-new-user.module.ts#IonicPageModule#51;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/add-new-user/add-new-user.module.ts#NgModule#9;</node>
+            <node x="" y="">$PROJECT_DIR$/src/pages/add-new-user/add-new-user.ts#AddNewUserPage#194;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/add-new-user/add-new-user.ts#Component#9;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/add-new-user/add-new-user.ts#Headers#162;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/add-new-user/add-new-user.ts#Http#156;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/add-new-user/add-new-user.ts#IonicPage#63;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/add-new-user/add-new-user.ts#NavController#74;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/add-new-user/add-new-user.ts#NavParams#89;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/add-new-user/add-new-user.ts#Navbar#100;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/add-new-user/add-new-user.ts#ToastController#108;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/add-new-user/add-new-user.ts#ViewChild#20;</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/ionic-angular/components/alert/alert-controller.d.ts#AlertController#161;</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/ionic-angular/components/app/app-root.d.ts#IonicApp#374;</node>
+            <node x="" y="">$PROJECT_DIR$/src/app/app.component.ts#Component#8;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/app/app.component.ts#LoginPage#207;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/app/app.component.ts#MyApp#249;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/app/app.component.ts#Platform#51;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/app/app.component.ts#SplashScreen#147;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/app/app.component.ts#StatusBar#93;</node>
+            <node x="" y="">$PROJECT_DIR$/src/app/app.module.ts#AddNewUserPage#927;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/app/app.module.ts#AppModule#1178;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/app/app.module.ts#BleProvider#876;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/app/app.module.ts#BrowserModule#9;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/app/app.module.ts#ChangePasswordPage#994;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/app/app.module.ts#DeleteUserPage#1071;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/app/app.module.ts#ErrorHandler#68;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/app/app.module.ts#GoalsPage#1136;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/app/app.module.ts#HomePage#498;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/app/app.module.ts#HttpModule#364;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/app/app.module.ts#InsertMoneyPage#730;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/app/app.module.ts#IonicApp#176;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/app/app.module.ts#IonicErrorHandler#186;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/app/app.module.ts#IonicModule#205;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/app/app.module.ts#IonicStorageModule#123;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/app/app.module.ts#LoginPage#545;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/app/app.module.ts#LoginPasswordPage#595;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/app/app.module.ts#MyApp#457;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/app/app.module.ts#Network#408;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/app/app.module.ts#NgModule#82;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/app/app.module.ts#SettingsPage#671;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/app/app.module.ts#SplashScreen#250;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/app/app.module.ts#StatusBar#310;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/app/app.module.ts#WithdrawMoneyPage#800;</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/cordova-plugin-ble/ble.js</node>
+            <node x="" y="">$PROJECT_DIR$/src/providers/ble/ble.ts#BleProvider#229;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/providers/ble/ble.ts#BleProviderCallback#176;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/providers/ble/ble.ts#Http#50;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/providers/ble/ble.ts#Injectable#8;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/providers/ble/ble.ts#Platform#86;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/providers/ble/ble.ts#ble#125;</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/@angular/platform-browser/src/browser.d.ts#BrowserModule#771;</node>
+            <node x="" y="">$PROJECT_DIR$/src/pages/change-password/change-password.html</node>
+            <node x="" y="">$PROJECT_DIR$/src/pages/change-password/change-password.module.ts#ChangePasswordPage#100;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/change-password/change-password.module.ts#IonicPageModule#51;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/change-password/change-password.module.ts#NgModule#9;</node>
+            <node x="" y="">$PROJECT_DIR$/src/pages/change-password/change-password.ts#ChangePasswordPage#176;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/change-password/change-password.ts#Component#8;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/change-password/change-password.ts#Headers#144;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/change-password/change-password.ts#Http#138;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/change-password/change-password.ts#IonicPage#61;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/change-password/change-password.ts#NavController#72;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/change-password/change-password.ts#NavParams#87;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/change-password/change-password.ts#Navbar#98;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/change-password/change-password.ts#ViewChild#19;</node>
+            <node x="" y="">Component;Injectable;NgModule;ViewChild;</node>
+            <node x="" y="">$PROJECT_DIR$/src/pages/delete-user/delete-user.module.ts#DeleteUserPage#100;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/delete-user/delete-user.module.ts#IonicPageModule#51;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/delete-user/delete-user.module.ts#NgModule#9;</node>
+            <node x="" y="">$PROJECT_DIR$/src/pages/delete-user/delete-user.ts#AlertController#125;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/delete-user/delete-user.ts#Component#9;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/delete-user/delete-user.ts#DeleteUserPage#213;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/delete-user/delete-user.ts#Headers#180;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/delete-user/delete-user.ts#Http#174;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/delete-user/delete-user.ts#IonicPage#63;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/delete-user/delete-user.ts#NavController#74;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/delete-user/delete-user.ts#NavParams#89;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/delete-user/delete-user.ts#Navbar#100;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/delete-user/delete-user.ts#ToastController#108;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/delete-user/delete-user.ts#ViewChild#20;</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/@angular/core/src/error_handler.d.ts#ErrorHandler#0;</node>
+            <node x="" y="">$PROJECT_DIR$/src/assets/icon/favicon.ico</node>
+            <node x="" y="">$PROJECT_DIR$/src/pages/goals/goals.module.ts#GoalsPage#100;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/goals/goals.module.ts#IonicPageModule#51;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/goals/goals.module.ts#NgModule#9;</node>
+            <node x="" y="">$PROJECT_DIR$/src/pages/goals/goals.ts#Component#9;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/goals/goals.ts#GoalsPage#113;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/goals/goals.ts#IonicPage#52;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/goals/goals.ts#NavController#63;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/goals/goals.ts#NavParams#78;</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/@angular/http/src/headers.d.ts#Headers#203;</node>
+            <node x="" y="">$PROJECT_DIR$/src/pages/home/home.html</node>
+            <node x="" y="">$PROJECT_DIR$/src/pages/home/home.ts#BleProvider#141;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/home/home.ts#Component#8;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/home/home.ts#HomePage#367;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/home/home.ts#Http#105;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/home/home.ts#InsertMoneyPage#193;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/home/home.ts#NavController#49;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/home/home.ts#NavParams#64;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/home/home.ts#SettingsPage#323;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/home/home.ts#WithdrawMoneyPage#255;</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/@angular/http/src/http.d.ts#Http#263;</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/@angular/http/src/http_module.d.ts#HttpModule#509;</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/@ionic/storage/es2015/index.d.ts#IonicStorageModule#180;</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/@ionic-native/network/index.d.ts#Network#138;</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/@ionic-native/status-bar/index.d.ts#StatusBar#56;</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/@ionic-native/splash-screen/index.d.ts#SplashScreen#56;</node>
+            <node x="" y="">$PROJECT_DIR$/src/index.html</node>
+            <node x="" y="">$PROJECT_DIR$/src/pages/insert-money/insert-money.module.ts#InsertMoneyPage#100;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/insert-money/insert-money.module.ts#IonicPageModule#51;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/insert-money/insert-money.module.ts#NgModule#9;</node>
+            <node x="" y="">$PROJECT_DIR$/src/pages/insert-money/insert-money.ts#BleProvider#336;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/insert-money/insert-money.ts#BleProviderCallback#259;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/insert-money/insert-money.ts#Component#8;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/insert-money/insert-money.ts#Headers#188;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/insert-money/insert-money.ts#Http#182;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/insert-money/insert-money.ts#Injectable#19;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/insert-money/insert-money.ts#InsertMoneyPage#383;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/insert-money/insert-money.ts#IonicPage#80;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/insert-money/insert-money.ts#NavController#91;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/insert-money/insert-money.ts#NavParams#106;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/insert-money/insert-money.ts#Navbar#127;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/insert-money/insert-money.ts#NgZone#31;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/insert-money/insert-money.ts#Platform#117;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/insert-money/insert-money.ts#ToastController#135;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/insert-money/insert-money.ts#ViewChild#39;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/insert-money/insert-money.ts#map.d.ts#219;</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/ionic-angular/util/ionic-error-handler.d.ts#IonicErrorHandler#46;</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/ionic-angular/navigation/ionic-page.d.ts#IonicPage#178;</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/@angular/core/src/metadata/lifecycle_hooks.d.ts#OnInit#1407;</node>
+            <node x="" y="">$PROJECT_DIR$/src/pages/login-password/login-password.html</node>
+            <node x="" y="">$PROJECT_DIR$/src/pages/login-password/login-password.module.ts#IonicPageModule#51;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/login-password/login-password.module.ts#LoginPasswordPage#100;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/login-password/login-password.module.ts#NgModule#9;</node>
+            <node x="" y="">$PROJECT_DIR$/src/pages/login-password/login-password.ts#Component#9;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/login-password/login-password.ts#HomePage#174;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/login-password/login-password.ts#Http#136;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/login-password/login-password.ts#IonicPage#51;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/login-password/login-password.ts#LoginPasswordPage#239;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/login-password/login-password.ts#NavController#62;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/login-password/login-password.ts#NavParams#77;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/login-password/login-password.ts#ToastController#88;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/login-password/login-password.ts#map.d.ts#206;</node>
+            <node x="" y="">$PROJECT_DIR$/src/pages/login/login.module.ts#IonicPageModule#51;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/login/login.module.ts#LoginPage#100;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/login/login.module.ts#NgModule#9;</node>
+            <node x="" y="">$PROJECT_DIR$/src/pages/login/login.ts#BleProvider#322;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/login/login.ts#Component#8;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/login/login.ts#Headers#283;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/login/login.ts#HomePage#406;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/login/login.ts#Http#277;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/login/login.ts#IonicPage#75;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/login/login.ts#LoginPage#438;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/login/login.ts#LoginPasswordPage#209;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/login/login.ts#NavController#86;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/login/login.ts#NavParams#101;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/login/login.ts#NgModule#19;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/login/login.ts#NgZone#29;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/login/login.ts#OnInit#37;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/login/login.ts#Platform#112;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/login/login.ts#Storage#169;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/login/login.ts#ToastController#122;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/login/login.ts#map.d.ts#366;</node>
+            <node x="" y="">$PROJECT_DIR$/src/app/main.ts#AppModule#86;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/app/main.ts#platformBrowserDynamic#9;</node>
+            <node x="" y="">$PROJECT_DIR$/src/manifest.json</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/rxjs/add/operator/map.d.ts</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/ionic-angular/module.d.ts#IonicModule#297;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/node_modules/ionic-angular/module.d.ts#IonicPageModule#1765;</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/ionic-angular/navigation/nav-controller.d.ts#NavController#217;</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/ionic-angular/navigation/nav-params.d.ts#NavParams#0;</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/ionic-angular/components/toolbar/navbar.d.ts#Navbar#312;</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/@angular/core/src/zone/ng_zone.d.ts#NgZone#252;</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/@angular/platform-browser-dynamic/src/platform-browser-dynamic.d.ts#platformBrowserDynamic#249;</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/ionic-angular/platform/platform.d.ts#Platform#109;</node>
+            <node x="" y="">$PROJECT_DIR$/src/pages/settings/settings.module.ts#IonicPageModule#51;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/settings/settings.module.ts#NgModule#9;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/settings/settings.module.ts#SettingsPage#100;</node>
+            <node x="" y="">$PROJECT_DIR$/src/pages/settings/settings.ts#AddNewUserPage#218;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/settings/settings.ts#ChangePasswordPage#147;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/settings/settings.ts#Component#8;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/settings/settings.ts#DeleteUserPage#279;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/settings/settings.ts#IonicPage#61;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/settings/settings.ts#NavController#72;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/settings/settings.ts#NavParams#87;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/settings/settings.ts#Navbar#108;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/settings/settings.ts#Platform#98;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/settings/settings.ts#SettingsPage#332;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/settings/settings.ts#ViewChild#19;</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/@ionic/storage/es2015/storage.d.ts#Storage#83;</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/ionic-angular/components/toast/toast-controller.d.ts#ToastController#161;</node>
+            <node x="" y="">$PROJECT_DIR$/src/pages/withdraw-money/withdraw-money.module.ts#IonicPageModule#51;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/withdraw-money/withdraw-money.module.ts#NgModule#9;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/withdraw-money/withdraw-money.module.ts#WithdrawMoneyPage#100;</node>
+            <node x="" y="">$PROJECT_DIR$/src/pages/withdraw-money/withdraw-money.ts#AlertController#115;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/withdraw-money/withdraw-money.ts#BleProvider#324;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/withdraw-money/withdraw-money.ts#BleProviderCallback#247;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/withdraw-money/withdraw-money.ts#Component#8;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/withdraw-money/withdraw-money.ts#Headers#176;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/withdraw-money/withdraw-money.ts#Http#170;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/withdraw-money/withdraw-money.ts#IonicPage#68;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/withdraw-money/withdraw-money.ts#NavController#79;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/withdraw-money/withdraw-money.ts#NavParams#94;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/withdraw-money/withdraw-money.ts#Navbar#132;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/withdraw-money/withdraw-money.ts#NgZone#19;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/withdraw-money/withdraw-money.ts#Platform#105;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/withdraw-money/withdraw-money.ts#ViewChild#27;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/withdraw-money/withdraw-money.ts#WithdrawMoneyPage#371;/Users/Florian/Documents/Ionic/CHICFribourg/PeggyApp/src/pages/withdraw-money/withdraw-money.ts#map.d.ts#207;</node>
+            <node x="" y="">assets/img/PeggyGoals.png</node>
+            <node x="" y="">assets/img/PeggyInsert.png</node>
+            <node x="" y="">assets/img/PeggySettings.png</node>
+            <node x="" y="">assets/img/PeggyWithdraw.png</node>
+            <node x="" y="">assets/img/blue-square.png</node>
+            <node x="" y="">assets/img/brown-square.png</node>
+            <node x="" y="">assets/img/green-square.png</node>
+            <node x="" y="">assets/img/pink-square.png</node>
+            <node x="" y="">assets/img/red-square.png</node>
+            <node x="" y="">assets/img/yellow-square.png</node>
+            <node x="" y="">build/main.css</node>
+            <node x="" y="">build/main.js</node>
+            <node x="" y="">build/polyfills.js</node>
+            <node x="" y="">cordova.js</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="0.18081520073551946" x="1788.2533898305087" y="1561.5" />
+          <SelectedNodes />
+          <Categories>
+            <Category>All</Category>
+          </Categories>
+          <VISIBILITY>Details</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/settings/settings.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/change-password/change-password.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="741">
+          <caret line="97" column="14" lean-forward="false" selection-start-line="97" selection-start-column="14" selection-end-line="97" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/add-new-user/add-new-user.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="817">
+          <caret line="108" column="0" lean-forward="true" selection-start-line="108" selection-start-column="0" selection-end-line="108" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/home/home.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="438">
+          <caret line="49" column="46" lean-forward="false" selection-start-line="49" selection-start-column="46" selection-end-line="49" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/delete-user/delete-user.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -1076,20 +941,60 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/theme/variables.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="27" column="8" lean-forward="false" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/withdraw-money/withdraw-money.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="68" column="6" lean-forward="false" selection-start-line="68" selection-start-column="6" selection-end-line="68" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/delete-user/delete-user.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="68" column="42" lean-forward="false" selection-start-line="68" selection-start-column="42" selection-end-line="68" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#53#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1519">
+          <caret line="106" column="23" lean-forward="false" selection-start-line="106" selection-start-column="2" selection-end-line="106" selection-end-column="23" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/providers/ble/ble.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="19" column="31" lean-forward="false" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="31" />
+        <state relative-caret-position="4620">
+          <caret line="312" column="17" lean-forward="false" selection-start-line="312" selection-start-column="17" selection-end-line="312" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/login-password/login-password.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1435">
+          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/login/login.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="44" column="12" lean-forward="false" selection-start-line="44" selection-start-column="4" selection-end-line="44" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#66#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/insert-money/insert-money.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="111" column="21" lean-forward="true" selection-start-line="111" selection-start-column="21" selection-end-line="111" selection-end-column="89" />
           <folding />
         </state>
       </provider>

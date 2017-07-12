@@ -31,8 +31,7 @@ export class WithdrawMoneyPage implements BleProviderCallback {
   public isConnectedToPeggy;
   public amountToWithdraw;
   public tokenSession;
-  public urlAddMoney = 'https://chic.tic.heia-fr.ch/peggy';
-  public moneyAdded;
+  public urlWithdrawMoney = 'https://chic.tic.heia-fr.ch/peggy';
 
   constructor(private bleProvider: BleProvider, private navCtrl: NavController, private navParams: NavParams, public http: Http, public platform: Platform, private zone: NgZone, private alertCtrl: AlertController) {
     platform.ready().then(() => {
@@ -46,9 +45,6 @@ export class WithdrawMoneyPage implements BleProviderCallback {
       this.amountToWithdraw = 0;
       this.amountWithdrawn = 0;
       this.totalWithdrawn = 0;
-      if(this.moneyAdded == null){
-        this.moneyAdded = 0;
-      }
     });
   }
 
@@ -66,7 +62,7 @@ export class WithdrawMoneyPage implements BleProviderCallback {
 
   addToAmountToWithdraw = (value) =>{
     if(this.amountToWithdraw + value > this.amountAccount){
-      console.log("You don't have enough money")
+      console.log("You don't have enough money");
       this.onAlertNotEnoughMoney();
     }else{
       this.amountToWithdraw += value;
@@ -90,10 +86,6 @@ export class WithdrawMoneyPage implements BleProviderCallback {
 
   resetAmount = () =>{
     this.amountToWithdraw = 0;
-  };
-
-  allowWithdrawMoney = () =>{
-
   };
 
   checkAmountToWithdrawMoney = (amount) =>{
@@ -163,7 +155,7 @@ export class WithdrawMoneyPage implements BleProviderCallback {
     headers.append('Content-Type', 'application/json');
 
     var promise = new Promise((resolve, reject) => {
-      this.http.put(this.urlAddMoney, JSON.stringify(body), {headers: headers})
+      this.http.put(this.urlWithdrawMoney, JSON.stringify(body), {headers: headers})
           .map((res: any) => res.json())
           .subscribe(data => {
                 console.log("Data: " + JSON.stringify(data));

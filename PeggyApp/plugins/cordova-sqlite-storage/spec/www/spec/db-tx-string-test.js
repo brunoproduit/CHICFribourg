@@ -56,7 +56,7 @@ var mytests = function() {
           // explicit database location:
           return window.sqlitePlugin.openDatabase({name: name, location: 'default'});
         }
-      }
+      };
 
       describe(suiteName + 'Basic US-ASCII string binding/manipulation tests [default sqlite encoding: UTF-16le on Windows; UTF-8 on others]', function() {
 
@@ -218,7 +218,7 @@ var mytests = function() {
           db.transaction(function(tx) {
             expect(tx).toBeDefined();
 
-            tx.executeSql(new String("SELECT UPPER('Some US-ASCII text') AS uppertext"), [], function(tx_ignored, rs) {
+            tx.executeSql(String("SELECT UPPER('Some US-ASCII text') AS uppertext"), [], function(tx_ignored, rs) {
               expect(rs).toBeDefined();
               expect(rs.rows).toBeDefined();
               expect(rs.rows.length).toBe(1);
@@ -1177,7 +1177,7 @@ var mytests = function() {
 
           db.transaction(function(tx) {
 
-            tx.executeSql('SELECT UPPER(?) AS upper_result', [new String('Test value')], function(ignored, rs) {
+            tx.executeSql('SELECT UPPER(?) AS upper_result', [String('Test value')], function(ignored, rs) {
               expect(rs).toBeDefined();
               expect(rs.rows).toBeDefined();
               expect(rs.rows.length).toBe(1);
@@ -1197,8 +1197,9 @@ var mytests = function() {
 
         it(suiteName + 'String test with custom object parameter value', function(done) {
           // MyCustomParameterObject "class":
-          function MyCustomParameterObject() {};
-          MyCustomParameterObject.prototype.toString = function() {return 'toString result';};
+            function MyCustomParameterObject() {
+            }
+            MyCustomParameterObject.prototype.toString = function() {return 'toString result';};
           MyCustomParameterObject.prototype.valueOf = function() {return 'valueOf result';};
 
           var myObject = new MyCustomParameterObject();
@@ -1232,7 +1233,7 @@ var mytests = function() {
       describe(suiteName + 'string test with [non-primitive] values for SQL', function() {
 
         it(suiteName + 'String test with new String for SQL', function(done) {
-          var myNewString = new String("SELECT UPPER('Alice') as u1");
+          var myNewString = String("SELECT UPPER('Alice') as u1");
 
           var db = openDatabase("New-string-for-sql-test.db", "1.0", "Demo", DEFAULT_SIZE);
 
@@ -1289,8 +1290,9 @@ var mytests = function() {
 
         it(suiteName + 'String test with custom object for SQL', function(done) {
           // MyCustomObject "class":
-          function MyCustomObject() {};
-          MyCustomObject.prototype.toString = function() {return "SELECT UPPER('Alice') as u1";};
+            function MyCustomObject() {
+            }
+            MyCustomObject.prototype.toString = function() {return "SELECT UPPER('Alice') as u1";};
           MyCustomObject.prototype.valueOf = function() {return "SELECT UPPER('Betty') as u1";};
 
           var myObject = new MyCustomObject();
@@ -1330,8 +1332,10 @@ var mytests = function() {
 
         it(suiteName + 'String test with dynamically changing object for SQL', function(done) {
           // MyDynamicObject "class":
-          function MyDynamicObject() { this.name = 'Alice'; };
-          MyDynamicObject.prototype.toString = function() {return "SELECT UPPER('" + this.name + "') as uppertext";}
+            function MyDynamicObject() {
+                this.name = 'Alice';
+            }
+            MyDynamicObject.prototype.toString = function() {return "SELECT UPPER('" + this.name + "') as uppertext";};
 
           var myObject = new MyDynamicObject();
 
@@ -1366,8 +1370,10 @@ var mytests = function() {
 
         it(suiteName + 'String test with dynamically changing object parameter arg value', function(done) {
           // MyDynamicParameterObject "class":
-          function MyDynamicParameterObject() {this.name='Alice';};
-          MyDynamicParameterObject.prototype.toString = function() {return this.name;};
+            function MyDynamicParameterObject() {
+                this.name = 'Alice';
+            }
+            MyDynamicParameterObject.prototype.toString = function() {return this.name;};
 
           var myObject = new MyDynamicParameterObject();
 
@@ -1707,7 +1713,7 @@ var mytests = function() {
 
   }
 
-}
+};
 
 if (window.hasBrowser) mytests();
 else exports.defineAutoTests = mytests;

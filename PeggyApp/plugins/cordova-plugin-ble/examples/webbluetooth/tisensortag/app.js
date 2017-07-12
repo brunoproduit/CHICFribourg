@@ -6,18 +6,18 @@
 {
 
 // UUIDs of services and characteristics.
-var LUXOMETER_SERVICE = 'f000aa70-0451-4000-b000-000000000000'
-var LUXOMETER_CONFIG = 'f000aa72-0451-4000-b000-000000000000'
-var LUXOMETER_DATA = 'f000aa71-0451-4000-b000-000000000000'
+var LUXOMETER_SERVICE = 'f000aa70-0451-4000-b000-000000000000';
+var LUXOMETER_CONFIG = 'f000aa72-0451-4000-b000-000000000000';
+var LUXOMETER_DATA = 'f000aa71-0451-4000-b000-000000000000';
 
 // Variables.
-var gattServer
-var luxometerService
+var gattServer;
+var luxometerService;
 
 // Main application function.
 function startLuxometerNotifications()
 {
-	showMessage('Scanning...')
+	showMessage('Scanning...');
 
 	bleat.requestDevice(
 	{
@@ -25,19 +25,19 @@ function startLuxometerNotifications()
 	})
 	.then(function(device)
 	{
-		showMessage('Found device: ' + device.name)
+		showMessage('Found device: ' + device.name);
 		return device.gatt.connect()
 	})
 	.then(function(server)
 	{
-		gattServer = server
-		showMessage('Connected')
+		gattServer = server;
+		showMessage('Connected');
 		return gattServer.getPrimaryService(LUXOMETER_SERVICE)
 	})
 	.then(function(service)
 	{
 		// Get config characteristic.
-		luxometerService = service
+		luxometerService = service;
 		return luxometerService.getCharacteristic(LUXOMETER_CONFIG)
 	})
 	.then(function(characteristic)
@@ -53,8 +53,8 @@ function startLuxometerNotifications()
 	.then(function(characteristic)
 	{
 		// Start sensor notification.
-		showMessage('Starting notfications')
-		characteristic.addEventListener('characteristicvaluechanged', onLuxometerChanged)
+		showMessage('Starting notfications');
+		characteristic.addEventListener('characteristicvaluechanged', onLuxometerChanged);
   		return characteristic.startNotifications()
 	})
 	.catch(function(error)
@@ -77,8 +77,8 @@ function stopLuxometerNotifications()
 // Notification callback function.
 function onLuxometerChanged(event)
 {
-	var characteristic = event.target
-	var lux = calculateLux(characteristic.value)
+	var characteristic = event.target;
+	var lux = calculateLux(characteristic.value);
 	showMessage('Luxometer value: ' + lux)
 }
 
@@ -87,18 +87,18 @@ function onLuxometerChanged(event)
 function calculateLux(data)
 {
 	// Get 16 bit value from data buffer in little endian format.
-	var value = data.getUint16(0, true)
+	var value = data.getUint16(0, true);
 
 	// Extraction of luxometer value, based on sfloatExp2ToDouble
 	// from BLEUtility.m in Texas Instruments TI BLE SensorTag
 	// iOS app source code.
-	var mantissa = value & 0x0FFF
-	var exponent = value >> 12
+	var mantissa = value & 0x0FFF;
+	var exponent = value >> 12;
 
-	var magnitude = Math.pow(2, exponent)
-	var output = (mantissa * magnitude)
+	var magnitude = Math.pow(2, exponent);
+	var output = (mantissa * magnitude);
 
-	var lux = output / 100.0
+	var lux = output / 100.0;
 
 	// Return result.
 	return lux
@@ -106,7 +106,7 @@ function calculateLux(data)
 
 function showMessage(text)
 {
-	document.querySelector('#message').innerHTML = text
+	document.querySelector('#message').innerHTML = text;
 	console.log(text)
 }
 

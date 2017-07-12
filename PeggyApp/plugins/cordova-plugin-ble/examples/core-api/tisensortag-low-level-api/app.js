@@ -7,9 +7,9 @@
 {
 
 // UUIDs of services and characteristics.
-var LUXOMETER_SERVICE = 'f000aa70-0451-4000-b000-000000000000'
-var LUXOMETER_CONFIG = 'f000aa72-0451-4000-b000-000000000000'
-var LUXOMETER_DATA = 'f000aa71-0451-4000-b000-000000000000'
+var LUXOMETER_SERVICE = 'f000aa70-0451-4000-b000-000000000000';
+var LUXOMETER_CONFIG = 'f000aa72-0451-4000-b000-000000000000';
+var LUXOMETER_DATA = 'f000aa71-0451-4000-b000-000000000000';
 
 function initialize()
 {
@@ -19,13 +19,13 @@ function initialize()
 
 function findDevice()
 {
-	showMessage('Scanning for the TI SensorTag CC2650...')
+	showMessage('Scanning for the TI SensorTag CC2650...');
 
 	// Start scanning. Two callback functions are specified.
 	evothings.ble.startScan(
 		['0000aa10-0000-1000-8000-00805f9b34fb'],
 		deviceFound,
-		scanError)
+		scanError);
 
 	// This function is called when a device is detected, here
 	// we check if we found the device we are looking for.
@@ -33,7 +33,7 @@ function findDevice()
 	{
 		// Parse advertisement data record.
 		// TODO: Move to startScan.
-		evothings.ble.parseAdvertisementData(device)
+		evothings.ble.parseAdvertisementData(device);
 
 		// For debugging, print advertisement data.
 		//console.log(JSON.stringify(device.advertisementData))
@@ -49,10 +49,10 @@ function findDevice()
 
 		if (device.advertisementData.kCBAdvDataLocalName == 'CC2650 SensorTag')
 		{
-			showMessage('Found the TI SensorTag!')
+			showMessage('Found the TI SensorTag!');
 
 			// Stop scanning.
-			evothings.ble.stopScan()
+			evothings.ble.stopScan();
 
 			// Connect.
 			connectToDevice(device)
@@ -69,18 +69,18 @@ function findDevice()
 function connectToDevice(device)
 {
 	// Handle of connected device.
-	var deviceHandle
+	var deviceHandle;
 
-	evothings.ble.connect(device.address, connectSuccess, connectError)
+	evothings.ble.connect(device.address, connectSuccess, connectError);
 
 	function connectSuccess(connectInfo)
 	{
 		if (connectInfo.state == evothings.ble.connectionState.STATE_CONNECTED)
 		{
 			// Save device handle.
-			deviceHandle = connectInfo.deviceHandle
+			deviceHandle = connectInfo.deviceHandle;
 
-			showMessage('Connected to device, reading services...')
+			showMessage('Connected to device, reading services...');
 
 			// Read all services, characteristics and descriptors.
 			evothings.ble.readAllServiceData(
@@ -98,12 +98,12 @@ function connectToDevice(device)
 
 	function readServicesSuccess(services)
 	{
-		showMessage('Reading services completed')
+		showMessage('Reading services completed');
 
 		// Get Luxometer service and characteristics.
-		var service = evothings.ble.getService(services, LUXOMETER_SERVICE)
-		var configCharacteristic = evothings.ble.getCharacteristic(service, LUXOMETER_CONFIG)
-		var dataCharacteristic = evothings.ble.getCharacteristic(service, LUXOMETER_DATA)
+		var service = evothings.ble.getService(services, LUXOMETER_SERVICE);
+		var configCharacteristic = evothings.ble.getCharacteristic(service, LUXOMETER_CONFIG);
+		var dataCharacteristic = evothings.ble.getCharacteristic(service, LUXOMETER_DATA);
 
 		// Enable notifications for Luxometer.
 		enableLuxometerNotifications(deviceHandle, configCharacteristic, dataCharacteristic)
@@ -130,14 +130,14 @@ function enableLuxometerNotifications(deviceHandle, configCharacteristic, dataCh
 		configCharacteristic.handle,
 		new Uint8Array([1]),
 		turnOnLuxometerSuccess,
-		turnOnLuxometerError)
+		turnOnLuxometerError);
 
 	// Enable notifications from the Luxometer.
 	evothings.ble.enableNotification(
 		deviceHandle,
 		dataCharacteristic.handle,
 		readLuxometerSuccess,
-		readLuxometerError)
+		readLuxometerError);
 
 	function turnOnLuxometerSuccess()
 	{
@@ -152,7 +152,7 @@ function enableLuxometerNotifications(deviceHandle, configCharacteristic, dataCh
 	// Called repeatedly until disableNotification is called.
 	function readLuxometerSuccess(data)
 	{
-		var lux = calculateLux(data)
+		var lux = calculateLux(data);
 		showMessage('Luxometer value: ' + lux)
 	}
 
@@ -167,18 +167,18 @@ function enableLuxometerNotifications(deviceHandle, configCharacteristic, dataCh
 function calculateLux(data)
 {
 	// Get 16 bit value from data buffer in little endian format.
-	var value = new DataView(data).getUint16(0, true)
+	var value = new DataView(data).getUint16(0, true);
 
 	// Extraction of luxometer value, based on sfloatExp2ToDouble
 	// from BLEUtility.m in Texas Instruments TI BLE SensorTag
 	// iOS app source code.
-	var mantissa = value & 0x0FFF
-	var exponent = value >> 12
+	var mantissa = value & 0x0FFF;
+	var exponent = value >> 12;
 
-	var magnitude = Math.pow(2, exponent)
-	var output = (mantissa * magnitude)
+	var magnitude = Math.pow(2, exponent);
+	var output = (mantissa * magnitude);
 
-	var lux = output / 100.0
+	var lux = output / 100.0;
 
 	// Return result.
 	return lux
@@ -186,7 +186,7 @@ function calculateLux(data)
 
 function showMessage(text)
 {
-	document.querySelector('#message').innerHTML = text
+	document.querySelector('#message').innerHTML = text;
 	console.log(text)
 }
 

@@ -6,9 +6,9 @@
 {
 
 // UUIDs of services and characteristics.
-var LUXOMETER_SERVICE = 'f000aa70-0451-4000-b000-000000000000'
-var LUXOMETER_CONFIG = 'f000aa72-0451-4000-b000-000000000000'
-var LUXOMETER_DATA = 'f000aa71-0451-4000-b000-000000000000'
+var LUXOMETER_SERVICE = 'f000aa70-0451-4000-b000-000000000000';
+var LUXOMETER_CONFIG = 'f000aa72-0451-4000-b000-000000000000';
+var LUXOMETER_DATA = 'f000aa71-0451-4000-b000-000000000000';
 
 function initialize()
 {
@@ -18,13 +18,13 @@ function initialize()
 
 function findDevice()
 {
-	showMessage('Scanning for the TI SensorTag CC2650...')
+	showMessage('Scanning for the TI SensorTag CC2650...');
 
 	// Start scanning. Two callback functions are specified.
 	evothings.ble.startScan(
 		onDeviceFound,
 		onScanError,
-		{ serviceUUIDs: ['0000aa10-0000-1000-8000-00805f9b34fb'] })
+		{ serviceUUIDs: ['0000aa10-0000-1000-8000-00805f9b34fb'] });
 
 	// This function is called when a device is detected, here
 	// we check if we found the device we are looking for.
@@ -44,10 +44,10 @@ function findDevice()
 
 		if (device.advertisementData.kCBAdvDataLocalName == 'CC2650 SensorTag')
 		{
-			showMessage('Found the TI SensorTag!')
+			showMessage('Found the TI SensorTag!');
 
 			// Stop scanning.
-			evothings.ble.stopScan()
+			evothings.ble.stopScan();
 
 			// Connect.
 			connectToDevice(device)
@@ -63,23 +63,23 @@ function findDevice()
 
 function connectToDevice(device)
 {
-	showMessage('Connecting to device...')
+	showMessage('Connecting to device...');
 
 	evothings.ble.connectToDevice(
 		device,
 		onConnected,
 		onDisconnected,
 		onConnectError,
-		{ serviceUUIDs: [LUXOMETER_SERVICE] })
+		{ serviceUUIDs: [LUXOMETER_SERVICE] });
 
 	function onConnected(device)
 	{
-		showMessage('Connected')
+		showMessage('Connected');
 
 		// Get Luxometer service and characteristics.
-		var service = evothings.ble.getService(device, LUXOMETER_SERVICE)
-		var configCharacteristic = evothings.ble.getCharacteristic(service, LUXOMETER_CONFIG)
-		var dataCharacteristic = evothings.ble.getCharacteristic(service, LUXOMETER_DATA)
+		var service = evothings.ble.getService(device, LUXOMETER_SERVICE);
+		var configCharacteristic = evothings.ble.getCharacteristic(service, LUXOMETER_CONFIG);
+		var dataCharacteristic = evothings.ble.getCharacteristic(service, LUXOMETER_DATA);
 
 		// Enable notifications for Luxometer.
 		enableLuxometerNotifications(device, configCharacteristic, dataCharacteristic)
@@ -106,11 +106,11 @@ function enableLuxometerNotifications(device, configCharacteristic, dataCharacte
 		configCharacteristic,
 		new Uint8Array([1]),
 		onLuxometerActivated,
-		onLuxometerActivatedError)
+		onLuxometerActivatedError);
 
 	function onLuxometerActivated()
 	{
-		showMessage('Luxometer is ON')
+		showMessage('Luxometer is ON');
 
 		// Enable notifications from the Luxometer.
 		evothings.ble.enableNotification(
@@ -128,7 +128,7 @@ function enableLuxometerNotifications(device, configCharacteristic, dataCharacte
 	// Called repeatedly until disableNotification is called.
 	function onLuxometerNotification(data)
 	{
-		var lux = calculateLux(data)
+		var lux = calculateLux(data);
 		showMessage('Luxometer value: ' + lux)
 	}
 
@@ -143,18 +143,18 @@ function enableLuxometerNotifications(device, configCharacteristic, dataCharacte
 function calculateLux(data)
 {
 	// Get 16 bit value from data buffer in little endian format.
-	var value = new DataView(data).getUint16(0, true)
+	var value = new DataView(data).getUint16(0, true);
 
 	// Extraction of luxometer value, based on sfloatExp2ToDouble
 	// from BLEUtility.m in Texas Instruments TI BLE SensorTag
 	// iOS app source code.
-	var mantissa = value & 0x0FFF
-	var exponent = value >> 12
+	var mantissa = value & 0x0FFF;
+	var exponent = value >> 12;
 
-	var magnitude = Math.pow(2, exponent)
-	var output = (mantissa * magnitude)
+	var magnitude = Math.pow(2, exponent);
+	var output = (mantissa * magnitude);
 
-	var lux = output / 100.0
+	var lux = output / 100.0;
 
 	// Return result.
 	return lux
@@ -162,7 +162,7 @@ function calculateLux(data)
 
 function showMessage(text)
 {
-	document.querySelector('#message').innerHTML = text
+	document.querySelector('#message').innerHTML = text;
 	console.log(text)
 }
 

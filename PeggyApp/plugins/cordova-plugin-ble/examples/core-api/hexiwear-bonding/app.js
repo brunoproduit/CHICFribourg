@@ -11,37 +11,37 @@
 // You can experiment with reading various characteristics
 // by modifying this app.
 
-var INFO_SERVICE = '0000180a-0000-1000-8000-00805f9b34fb'
-var INFO_MANUFACTURER = '00002a29-0000-1000-8000-00805f9b34fb'
-var INFO_FIRMWARE = '00002a26-0000-1000-8000-00805f9b34fb'
-var INFO_SERIAL = '00002a25-0000-1000-8000-00805f9b34fb'
+var INFO_SERVICE = '0000180a-0000-1000-8000-00805f9b34fb';
+var INFO_MANUFACTURER = '00002a29-0000-1000-8000-00805f9b34fb';
+var INFO_FIRMWARE = '00002a26-0000-1000-8000-00805f9b34fb';
+var INFO_SERIAL = '00002a25-0000-1000-8000-00805f9b34fb';
 
-var BATTERY_SERVICE = '0000180f-0000-1000-8000-00805f9b34fb'
-var BATTERY_CHARACTERISTIC = '00002a19-0000-1000-8000-00805f9b34fb'
+var BATTERY_SERVICE = '0000180f-0000-1000-8000-00805f9b34fb';
+var BATTERY_CHARACTERISTIC = '00002a19-0000-1000-8000-00805f9b34fb';
 
-var MOTION_SERVICE = '00002000-0000-1000-8000-00805f9b34fb'
-var MOTION_ACCELEROMETER = '00002001-0000-1000-8000-00805f9b34fb'
-var MOTION_GYRO = '00002002-0000-1000-8000-00805f9b34fb'
-var MOTION_MAGNET = '00002003-0000-1000-8000-00805f9b34fb'
+var MOTION_SERVICE = '00002000-0000-1000-8000-00805f9b34fb';
+var MOTION_ACCELEROMETER = '00002001-0000-1000-8000-00805f9b34fb';
+var MOTION_GYRO = '00002002-0000-1000-8000-00805f9b34fb';
+var MOTION_MAGNET = '00002003-0000-1000-8000-00805f9b34fb';
 
-var WEATHER_SERVICE = '00002010-0000-1000-8000-00805f9b34fb'
-var WEATHER_AMBIENT = '00002011-0000-1000-8000-00805f9b34fb'
-var WEATHER_TEMPERATURE = '00002012-0000-1000-8000-00805f9b34fb'
-var WEATHER_HUMIDITY = '00002013-0000-1000-8000-00805f9b34fb'
-var WEATHER_PRESSURE = '00002014-0000-1000-8000-00805f9b34fb'
+var WEATHER_SERVICE = '00002010-0000-1000-8000-00805f9b34fb';
+var WEATHER_AMBIENT = '00002011-0000-1000-8000-00805f9b34fb';
+var WEATHER_TEMPERATURE = '00002012-0000-1000-8000-00805f9b34fb';
+var WEATHER_HUMIDITY = '00002013-0000-1000-8000-00805f9b34fb';
+var WEATHER_PRESSURE = '00002014-0000-1000-8000-00805f9b34fb';
 
-var HEALTH_SERVICE = '00002020-0000-1000-8000-00805f9b34fb'
-var HEALTH_HEART = '00002021-0000-1000-8000-00805f9b34fb'
-var HEALTH_STEPS = '00002022-0000-1000-8000-00805f9b34fb'
-var HEALTH_ACTIVITY = '00002023-0000-1000-8000-00805f9b34fb'
+var HEALTH_SERVICE = '00002020-0000-1000-8000-00805f9b34fb';
+var HEALTH_HEART = '00002021-0000-1000-8000-00805f9b34fb';
+var HEALTH_STEPS = '00002022-0000-1000-8000-00805f9b34fb';
+var HEALTH_ACTIVITY = '00002023-0000-1000-8000-00805f9b34fb';
 
-var MODE_SERVICE = '00002040-0000-1000-8000-00805f9b34fb'
-var MODE_CHARACTERISTIC = '00002041-0000-1000-8000-00805f9b34fb'
+var MODE_SERVICE = '00002040-0000-1000-8000-00805f9b34fb';
+var MODE_CHARACTERISTIC = '00002041-0000-1000-8000-00805f9b34fb';
 
 // Connected device.
-var mDevice = null
+var mDevice = null;
 
-var mPollingTimer = null
+var mPollingTimer = null;
 
 function initialize()
 {
@@ -49,23 +49,23 @@ function initialize()
 		'click',
 		//initiateTestSequence, // Used for testing.
 		findDevice,
-		false)
+		false);
 	document.getElementById('disconnect').addEventListener(
 		'click',
 		disconnectDevice,
-		false)
+		false);
 	showMessage('Ready')
 }
 
 // Code used for testing repeated connect and disconnect.
-var testCount = 0
-var connectErrorCount = 0
+var testCount = 0;
+var connectErrorCount = 0;
 
 function initiateTestSequence()
 {
-	testCount = 0
+	testCount = 0;
 
-	console.log('Initiate test sequence')
+	console.log('Initiate test sequence');
 	runTestSequence()
 }
 
@@ -73,20 +73,20 @@ function runTestSequence()
 {
 	if (testCount < 10)
 	{
-		++testCount
+		++testCount;
 
-		console.log('Running test sequence')
-		console.log('testCount: ' + testCount)
-		console.log('connectErrorCount: ' + connectErrorCount)
+		console.log('Running test sequence');
+		console.log('testCount: ' + testCount);
+		console.log('connectErrorCount: ' + connectErrorCount);
 
-		findDevice()
-		setTimeout(disconnectDevice, 20000)
+		findDevice();
+		setTimeout(disconnectDevice, 20000);
 		setTimeout(runTestSequence, 30000)
 	}
 	else
 	{
-		console.log('Test sequence done')
-		console.log('testCount: ' + testCount)
+		console.log('Test sequence done');
+		console.log('testCount: ' + testCount);
 		console.log('connectErrorCount: ' + connectErrorCount)
 
 	}
@@ -95,7 +95,7 @@ function runTestSequence()
 
 function findDevice()
 {
-	disconnectDevice()
+	disconnectDevice();
 
 	// Used for debugging/testing.
 	//scanForDevice()
@@ -111,10 +111,10 @@ function findDevice()
 
 function disconnectDevice()
 {
-	evothings.ble.stopScan()
-	clearInterval(mPollingTimer)
+	evothings.ble.stopScan();
+	clearInterval(mPollingTimer);
 	if (mDevice) { evothings.ble.close(mDevice) }
-	mDevice = null
+	mDevice = null;
 	showMessage('Disconnected')
 }
 
@@ -124,18 +124,18 @@ function disconnectDevice()
  */
 function searchForBondedDevice(params)
 {
-	console.log('Searching for bonded device')
+	console.log('Searching for bonded device');
 	evothings.ble.getBondedDevices(
 		// Success function.
 		function(devices)
 		{
 			for (var i in devices)
 			{
-				var device = devices[i]
+				var device = devices[i];
 				if (device.name == params.name)
 				{
-					console.log('Found bonded device: ' + device.name)
-					params.onFound(device)
+					console.log('Found bonded device: ' + device.name);
+					params.onFound(device);
 					return // bonded device found
 				}
 			}
@@ -151,25 +151,25 @@ function searchForBondedDevice(params)
 
 function scanForDevice()
 {
-	showMessage('Scanning for HexiWear')
+	showMessage('Scanning for HexiWear');
 
 	// Start scanning. Two callback functions are specified.
 	evothings.ble.startScan(
 		onDeviceFound,
-		onScanError)
+		onScanError);
 
 	// This function is called when a device is detected, here
 	// we check if we found the device we are looking for.
 	function onDeviceFound(device)
 	{
-		console.log('Found device: ' + device.name)
+		console.log('Found device: ' + device.name);
 
 		if (device.advertisementData.kCBAdvDataLocalName == 'HEXIWEAR')
 		{
-			showMessage('Found HexiWear Sensor Tag')
+			showMessage('Found HexiWear Sensor Tag');
 
 			// Stop scanning.
-			evothings.ble.stopScan()
+			evothings.ble.stopScan();
 
 			// Connect directly.
 			// Used for debugging/testing.
@@ -213,10 +213,10 @@ function scanForDevice()
 
 function connectToDevice(device)
 {
-	showMessage('Connecting to device...')
+	showMessage('Connecting to device...');
 
 	// Save device.
-	mDevice = device
+	mDevice = device;
 
 	// Android connect error 133 might be prevented by waiting a
 	// little before connect (to make sure previous BLE operation
@@ -230,11 +230,11 @@ function connectToDevice(device)
 				onDisconnected,
 				onConnectError)
 		},
-	    500)
+	    500);
 
 	function onConnected(device)
 	{
-		showMessage('Connected')
+		showMessage('Connected');
 		testIfBonded()
 	}
 
@@ -246,8 +246,8 @@ function connectToDevice(device)
 	// Function called when a connect error or disconnect occurs.
 	function onConnectError(error)
 	{
-		++connectErrorCount
-		showMessage('Connect error: ' + error)
+		++connectErrorCount;
+		showMessage('Connect error: ' + error);
 
 		// If we get Android connect error 133, we wait and try to connect again.
 		// This can resolve connect problems on Android when error 133 is seen.
@@ -257,7 +257,7 @@ function connectToDevice(device)
 		// update the UI of the app.
 		if (133 == error)
 		{
-			showMessage('Reconnecting...')
+			showMessage('Reconnecting...');
 			setTimeout(function() { connectToDevice(device) }, 1000)
 		}
 	}
@@ -265,32 +265,32 @@ function connectToDevice(device)
 
 function testIfBonded()
 {
-	console.log('test if bonded')
+	console.log('test if bonded');
 
 	// Read encrypted characteristic to test if device is bonded.
 	// This will fail (on iOS) if not bonded.
-	var service = evothings.ble.getService(mDevice, WEATHER_SERVICE)
-	var characteristic = evothings.ble.getCharacteristic(service, WEATHER_TEMPERATURE)
+	var service = evothings.ble.getService(mDevice, WEATHER_SERVICE);
+	var characteristic = evothings.ble.getCharacteristic(service, WEATHER_TEMPERATURE);
 	evothings.ble.readCharacteristic(
 		mDevice,
 		characteristic,
 		function(data)
 		{
-		console.log('bonded')
+		console.log('bonded');
 			// We are bonded. Continue to read device data.
 			readDevice()
 		},
 		function(errorCode)
 		{
 			// Not bonded, try again.
-			console.log('not bonded')
+			console.log('not bonded');
 			showMessage('Device not bonded. Please Connect again.')
 		})
 }
 
 function readDevice()
 {
-	showMessage('Reading device data')
+	showMessage('Reading device data');
 
 	// Read static device data.
 	readCharacteristic(
@@ -298,21 +298,21 @@ function readDevice()
 		INFO_SERVICE,
 		INFO_MANUFACTURER,
 		'device-manufacturer',
-		dataToAscii)
+		dataToAscii);
 
 	readCharacteristic(
 		mDevice,
 		INFO_SERVICE,
 		INFO_FIRMWARE,
 		'device-firmware',
-		dataToAscii)
+		dataToAscii);
 
 	// Periodically read accelerometer.
-	clearInterval(mPollingTimer)
+	clearInterval(mPollingTimer);
 	mPollingTimer = setInterval(
 		function()
 		{
-			readAccelerometer()
+			readAccelerometer();
 			readTemperature()
 		},
 		1000)
@@ -320,8 +320,8 @@ function readDevice()
 
 function readCharacteristic(device, serviceUUID, characteristicUUID, elementId, dataConversionFunction)
 {
-	var service = evothings.ble.getService(device, serviceUUID)
-	var characteristic = evothings.ble.getCharacteristic(service, characteristicUUID)
+	var service = evothings.ble.getService(device, serviceUUID);
+	var characteristic = evothings.ble.getCharacteristic(service, characteristicUUID);
 	evothings.ble.readCharacteristic(
 		device,
 		characteristic,
@@ -363,7 +363,7 @@ function dataToAscii(data)
 
 function convert3x16bitDataToString(data)
 {
-	var array = new Int16Array(data)
+	var array = new Int16Array(data);
 	return array[0] + ' ' + array[1] + ' ' + array[2]
 }
 
@@ -374,7 +374,7 @@ function convertTemperatureDataToString(data)
 
 function showMessage(text)
 {
-	document.querySelector('#message').innerHTML = text
+	document.querySelector('#message').innerHTML = text;
 	console.log(text)
 }
 

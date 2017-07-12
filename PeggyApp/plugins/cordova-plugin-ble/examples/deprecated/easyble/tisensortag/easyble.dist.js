@@ -25,8 +25,7 @@ evothings.__NOOP_FUN__ = function() {};
 //
 // Here we define common function such as async script loading and OS detection.
 
-;(function()
-{
+(function () {
 	window.evothings = window.evothings || {};
 
 	/**
@@ -54,7 +53,7 @@ evothings.__NOOP_FUN__ = function() {};
 	window.addEventListener('DOMContentLoaded', function(e)
 	{
 		evothings.gotDOMContentLoaded = true;
-	})
+	});
 
 	/**
 	 * Load a script.
@@ -289,8 +288,7 @@ evothings = window.evothings || {};
  */
 evothings.util = {};
 
-;(function()
-{
+(function () {
 	/**
 	 * Interpret byte buffer as little endian 8 bit integer.
 	 * Returns converted number.
@@ -301,10 +299,10 @@ evothings.util = {};
 	 */
 	evothings.util.littleEndianToInt8 = function(data, offset)
 	{
-		var x = evothings.util.littleEndianToUint8(data, offset)
-		if (x & 0x80) x = x - 256
+		var x = evothings.util.littleEndianToUint8(data, offset);
+		if (x & 0x80) x = x - 256;
 		return x
-	}
+	};
 
 	/**
 	 * Interpret byte buffer as unsigned little endian 8 bit integer.
@@ -317,7 +315,7 @@ evothings.util = {};
 	evothings.util.littleEndianToUint8 = function(data, offset)
 	{
 		return data[offset]
-	}
+	};
 
 	/**
 	 * Interpret byte buffer as little endian 16 bit integer.
@@ -331,7 +329,7 @@ evothings.util = {};
 	{
 		return (evothings.util.littleEndianToInt8(data, offset + 1) << 8) +
 			evothings.util.littleEndianToUint8(data, offset)
-	}
+	};
 
 	/**
 	 * Interpret byte buffer as unsigned little endian 16 bit integer.
@@ -345,7 +343,7 @@ evothings.util = {};
 	{
 		return (evothings.util.littleEndianToUint8(data, offset + 1) << 8) +
 			evothings.util.littleEndianToUint8(data, offset)
-	}
+	};
 
 	/**
 	 * Interpret byte buffer as unsigned little endian 32 bit integer.
@@ -361,7 +359,7 @@ evothings.util = {};
 			(evothings.util.littleEndianToUint8(data, offset + 2) << 16) +
 			(evothings.util.littleEndianToUint8(data, offset + 1) << 8) +
 			evothings.util.littleEndianToUint8(data, offset)
-	}
+	};
 
 
 	/**
@@ -376,7 +374,7 @@ evothings.util = {};
 	{
 		return (evothings.util.littleEndianToInt8(data, offset) << 8) +
 			evothings.util.littleEndianToUint8(data, offset + 1)
-	}
+	};
 
 	/**
 	 * Interpret byte buffer as unsigned big endian 16 bit integer.
@@ -390,7 +388,7 @@ evothings.util = {};
 	{
 		return (evothings.util.littleEndianToUint8(data, offset) << 8) +
 			evothings.util.littleEndianToUint8(data, offset + 1)
-	}
+	};
 
 	/**
 	 * Interpret byte buffer as unsigned big endian 32 bit integer.
@@ -406,7 +404,7 @@ evothings.util = {};
 			(evothings.util.littleEndianToUint8(data, offset + 1) << 16) +
 			(evothings.util.littleEndianToUint8(data, offset + 2) << 8) +
 			evothings.util.littleEndianToUint8(data, offset + 3)
-	}
+	};
 
 	/**
 	 * Converts a single Base64 character to a 6-bit integer.
@@ -455,7 +453,7 @@ evothings.util = {};
 		}
 
 		return taBytes;
-	}
+	};
 
 	/**
 	 * Returns the integer i in hexadecimal string form,
@@ -466,12 +464,12 @@ evothings.util = {};
 	 * @public
 	 */
 	evothings.util.toHexString = function(i, byteCount) {
-		var string = (new Number(i)).toString(16);
+		var string = (Number(i)).toString(16);
 		while(string.length < byteCount*2) {
 			string = '0'+string;
 		}
 		return string;
-	}
+	};
 
 	/**
 	 * Takes a ArrayBuffer or TypedArray and returns its hexadecimal representation.
@@ -503,8 +501,7 @@ evothings.util = {};
 
 // File: easyble.js updated 160713
 
-;(function()
-{
+(function () {
 	// Load script used by this file.
 	evothings.__NOOP_FUN__('libs/evothings/util/util.js');
 
@@ -807,7 +804,7 @@ evothings.util = {};
 			}
 
 			// Check if we already have got the device.
-			var existingDevice = internal.knownDevices[device.address]
+			var existingDevice = internal.knownDevices[device.address];
 			if (existingDevice)
 			{
 				// Do not report device again if flag is set.
@@ -913,7 +910,7 @@ evothings.util = {};
 			// Parse types we know and care about.
 			// Skip other types.
 
-			var BLUETOOTH_BASE_UUID = '-0000-1000-8000-00805f9b34fb'
+			var BLUETOOTH_BASE_UUID = '-0000-1000-8000-00805f9b34fb';
 
 			// Convert 16-byte Uint8Array to RFC-4122-formatted UUID.
 			function arrayToUUID(array, offset)
@@ -1029,7 +1026,7 @@ evothings.util = {};
 
 		console.log(JSON.stringify(advertisementData));
 		*/
-	}
+	};
 
 	/**
 	 * Returns true if the device matches the serviceFilter, or if there is no filter.
@@ -1060,7 +1057,7 @@ evothings.util = {};
 			}
 		}
 		return false;
-	}
+	};
 
 	/**
 	 * Add functions to the device object to allow calling them

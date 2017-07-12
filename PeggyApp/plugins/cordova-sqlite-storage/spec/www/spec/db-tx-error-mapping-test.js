@@ -50,7 +50,7 @@ var mytests = function() {
         } else {
           return window.sqlitePlugin.openDatabase({name: name, location: 0});
         }
-      }
+      };
 
 
         // ERROR MAPPING ISSUES/DEVIATIONS:
@@ -823,7 +823,7 @@ var mytests = function() {
     });
   }
 
-}
+};
 
 if (window.hasBrowser) mytests();
 else exports.defineAutoTests = mytests;

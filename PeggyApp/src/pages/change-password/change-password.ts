@@ -90,7 +90,7 @@ export class ChangePasswordPage {
       "name": this.user.name,
       "password": password,
       "isParent": this.user.isparent
-    }
+    };
 
     this.http.put(this.urlChangePassword, JSON.stringify(body), {headers: headers})
         .map((res: any) => res.json())

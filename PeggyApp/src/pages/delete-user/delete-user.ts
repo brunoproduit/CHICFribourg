@@ -91,7 +91,7 @@ export class DeleteUserPage {
       ]
     });
     confirm.present();
-  }
+  };
 
   noDeleteToast = () => {
     let toast = this.toastCtrl.create({

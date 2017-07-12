@@ -21,7 +21,7 @@ function test_it(desc, fun) {
   }, MYTIMEOUT);
 }
 function stop(n) {
-  if (!!n) wait += n
+  if (!!n) wait += n;
   else ++wait;
 }
 function start(n) {
@@ -73,7 +73,7 @@ var mytests = function() {
           // explicit database location:
           return window.sqlitePlugin.openDatabase({name: name, location: 'default'});
         }
-      }
+      };
 
         it(suiteName + 'Simple tx sql order test', function(done) {
           // This test shows that executeSql statements run in intermediate callback
@@ -343,9 +343,8 @@ var mytests = function() {
             //start();
             func(db);
           });
-        };
-
-        test_it(suiteName + "transaction encompasses all callbacks", function() {
+        }
+          test_it(suiteName + "transaction encompasses all callbacks", function() {
           stop(); // wait until callback with the final count before signalling end of test
 
           var db = openDatabase("tx-all-callbacks.db", "1.0", "Demo", DEFAULT_SIZE);
@@ -745,7 +744,7 @@ var mytests = function() {
     });
   }
 
-}
+};
 
 if (window.hasBrowser) mytests();
 else exports.defineAutoTests = mytests;

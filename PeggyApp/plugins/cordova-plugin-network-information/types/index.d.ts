@@ -59,4 +59,4 @@ declare var Connection: {
     CELL_4G: string;
     CELL: string;
     NONE: string;
-}
+};

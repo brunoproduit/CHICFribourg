@@ -16,7 +16,7 @@ Keyboard.close = function() {
 };
 
 Keyboard.show = function() {
-    console.warn('Showing keyboard not supported in iOS due to platform limitations.')
+    console.warn('Showing keyboard not supported in iOS due to platform limitations.');
     console.warn('Instead, use input.focus(), and ensure that you have the following setting in your config.xml: \n');
     console.warn('    <preference name="KeyboardDisplayRequiresUserAction" value="false"/>\n');
     // exec(null, null, "Keyboard", "show", []);

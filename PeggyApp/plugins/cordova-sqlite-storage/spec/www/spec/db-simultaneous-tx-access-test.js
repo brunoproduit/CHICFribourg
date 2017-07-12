@@ -21,7 +21,7 @@ function test_it(desc, fun) {
   }, MYTIMEOUT);
 }
 function stop(n) {
-  if (!!n) wait += n
+  if (!!n) wait += n;
   else ++wait;
 }
 function start(n) {
@@ -73,7 +73,7 @@ var mytests = function() {
           // explicit database location:
           return window.sqlitePlugin.openDatabase({name: name, location: 'default'});
         }
-      }
+      };
 
         test_it(suiteName + ' open same db twice with string test', function () {
           var dbName = 'open-same-db-twice-string-test.db';
@@ -383,7 +383,7 @@ var mytests = function() {
     });
   }
 
-}
+};
 
 if (window.hasBrowser) mytests();
 else exports.defineAutoTests = mytests;

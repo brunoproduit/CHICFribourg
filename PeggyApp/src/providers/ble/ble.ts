@@ -4,20 +4,13 @@ import {Platform} from 'ionic-angular';
 import * as ble from "cordova-plugin-ble/ble.js";
 import {BleProviderCallback} from "./BleProviderCallback";
 
-/*
- Generated class for the BleProvider provider.
-
- See https://angular.io/docs/ts/latest/guide/dependency-injection.html
- for more info on providers and Angular DI.
- */
 
 @Injectable()
 export class BleProvider {
 
-    public test;
     public isConnected: boolean;
     public mDevice;
-    public deviceName = 'Peggy2';
+    public deviceName = 'Peggy';
     public deviceUUID = 'debe2900-ee8e-4178-aeae-a0d6cd896263';
     public coinEventNotificationUUID = 'debe2901-ee8e-4178-aeae-a0d6cd896263';
     public pendingTransactionsIndicatorUUID = 'debe2902-ee8e-4178-aeae-a0d6cd896263';
@@ -30,7 +23,6 @@ export class BleProvider {
     public characteristicPeggyUuid;
     public characteristicWithdrawAccess;
     public peggyUUID = '';
-
     private callback: BleProviderCallback;
 
     constructor(public http: Http, public platform: Platform) {
@@ -178,7 +170,7 @@ export class BleProvider {
         let onDeviceFound = (device) => {
                 console.log('Found device: ' + device.name);
                 this.mDevice = device;
-                if (device.advertisementData.kCBAdvDataLocalName == 'Peggy2') {
+                if (device.advertisementData.kCBAdvDataLocalName == 'Peggy') {
                     console.log('Found Peggy');
                     ble.stopScan();
                     ble.bond(
@@ -291,7 +283,7 @@ export class BleProvider {
         } //cf94737d-5d5b-4ca4-ba6f-33cc1f1f8de1
         uuid += pars4; //cf94737d-5d5b-4ca4-ba6f-33cc1f1f8de1
         return uuid;
-    }
+    };
 
     uuid2ab = (uuid) => {
 

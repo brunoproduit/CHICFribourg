@@ -7,9 +7,9 @@
 {
 
 // UUIDs of services and characteristics.
-var LUXOMETER_SERVICE = 'f000aa70-0451-4000-b000-000000000000'
-var LUXOMETER_CONFIG = 'f000aa72-0451-4000-b000-000000000000'
-var LUXOMETER_DATA = 'f000aa71-0451-4000-b000-000000000000'
+var LUXOMETER_SERVICE = 'f000aa70-0451-4000-b000-000000000000';
+var LUXOMETER_CONFIG = 'f000aa72-0451-4000-b000-000000000000';
+var LUXOMETER_DATA = 'f000aa71-0451-4000-b000-000000000000';
 
 function initialize()
 {
@@ -19,13 +19,13 @@ function initialize()
 
 function findDevice()
 {
-	showMessage('Scanning for the TI SensorTag CC2650...')
+	showMessage('Scanning for the TI SensorTag CC2650...');
 
 	// Start scanning. Two callback functions are specified.
 	evothings.easyble.startScan(
 		deviceFound,
 		scanError,
-		{ serviceUUIDs: ['0000aa10-0000-1000-8000-00805f9b34fb'] })
+		{ serviceUUIDs: ['0000aa10-0000-1000-8000-00805f9b34fb'] });
 
 	// This function is called when a device is detected, here
 	// we check if we found the device we are looking for.
@@ -45,10 +45,10 @@ function findDevice()
 
 		if (device.getName() == 'CC2650 SensorTag')
 		{
-			showMessage('Found the TI SensorTag!')
+			showMessage('Found the TI SensorTag!');
 
 			// Stop scanning.
-			evothings.easyble.stopScan()
+			evothings.easyble.stopScan();
 
 			// Connect.
 			connectToDevice(device)
@@ -64,11 +64,11 @@ function findDevice()
 
 function connectToDevice(device)
 {
-	device.connect(connectSuccess, connectError)
+	device.connect(connectSuccess, connectError);
 
 	function connectSuccess(device)
 	{
-		showMessage('Connected to device, reading services...')
+		showMessage('Connected to device, reading services...');
 
 		// Read all services, characteristics and descriptors.
 		device.readServices(
@@ -79,7 +79,7 @@ function connectToDevice(device)
 
 	function readServicesSuccess(device)
 	{
-		showMessage('Reading services completed')
+		showMessage('Reading services completed');
 
 		// Enable notifications for Luxometer.
 		enableLuxometerNotifications(device)
@@ -113,14 +113,14 @@ function enableLuxometerNotifications(device)
 		LUXOMETER_CONFIG,
 		new Uint8Array([1]),
 		turnOnLuxometerSuccess,
-		turnOnLuxometerError)
+		turnOnLuxometerError);
 
 	// Enable notifications from the Luxometer.
 	device.enableNotification(
 		LUXOMETER_SERVICE,
 		LUXOMETER_DATA,
 		readLuxometerSuccess,
-		readLuxometerError)
+		readLuxometerError);
 
 	function turnOnLuxometerSuccess()
 	{
@@ -135,7 +135,7 @@ function enableLuxometerNotifications(device)
 	// Called repeatedly until disableNotification is called.
 	function readLuxometerSuccess(data)
 	{
-		var lux = calculateLux(data)
+		var lux = calculateLux(data);
 		showMessage('Luxometer value: ' + lux)
 	}
 
@@ -150,18 +150,18 @@ function enableLuxometerNotifications(device)
 function calculateLux(data)
 {
 	// Get 16 bit value from data buffer in little endian format.
-	var value = new DataView(data).getUint16(0, true)
+	var value = new DataView(data).getUint16(0, true);
 
 	// Extraction of luxometer value, based on sfloatExp2ToDouble
 	// from BLEUtility.m in Texas Instruments TI BLE SensorTag
 	// iOS app source code.
-	var mantissa = value & 0x0FFF
-	var exponent = value >> 12
+	var mantissa = value & 0x0FFF;
+	var exponent = value >> 12;
 
-	var magnitude = Math.pow(2, exponent)
-	var output = (mantissa * magnitude)
+	var magnitude = Math.pow(2, exponent);
+	var output = (mantissa * magnitude);
 
-	var lux = output / 100.0
+	var lux = output / 100.0;
 
 	// Return result.
 	return lux
@@ -169,7 +169,7 @@ function calculateLux(data)
 
 function showMessage(text)
 {
-	document.querySelector('#message').innerHTML = text
+	document.querySelector('#message').innerHTML = text;
 	console.log(text)
 }
 

@@ -20,7 +20,7 @@ function test_it(desc, fun) {
   }, MYTIMEOUT);
 }
 function stop(n) {
-  if (!!n) wait += n
+  if (!!n) wait += n;
   else ++wait;
 }
 function start(n) {
@@ -95,7 +95,7 @@ var mytests = function() {
           };
 
           return window.sqlitePlugin.openDatabase(dbopts, okcb, errorcb);
-        }
+        };
 
         it(suiteName + 'db.executeSql string result test with null for parameter argument array', function(done) {
           var db = openDatabase("DB-sql-String-result-test-with-null-parameter-arg-array.db", "1.0", "Demo", DEFAULT_SIZE);
@@ -712,7 +712,7 @@ var mytests = function() {
           var db = openDatabase("DB-sql-new-String-test.db", "1.0", "Demo", DEFAULT_SIZE);
           expect(db).toBeDefined();
 
-          db.executeSql(new String("SELECT UPPER('first') AS uppertext"), null, function(rs) {
+          db.executeSql(String("SELECT UPPER('first') AS uppertext"), null, function(rs) {
             expect(rs).toBeDefined();
             expect(rs.rows).toBeDefined();
             expect(rs.rows.length).toBe(1);
@@ -800,8 +800,10 @@ var mytests = function() {
 
         it(suiteName + 'db.executeSql string result test with dynamic object for SQL [INCONSISTENT BEHAVIOR]', function(done) {
           // MyDynamicObject "class":
-          function MyDynamicObject() { this.name = 'Alice'; };
-          MyDynamicObject.prototype.toString = function() {return "SELECT UPPER('" + this.name + "') as uppertext";}
+            function MyDynamicObject() {
+                this.name = 'Alice';
+            }
+            MyDynamicObject.prototype.toString = function() {return "SELECT UPPER('" + this.name + "') as uppertext";};
 
           var myObject = new MyDynamicObject();
           // Check myObject:
@@ -833,8 +835,10 @@ var mytests = function() {
 
         it(suiteName + 'db.executeSql string result test with dynamic object for parameter arg [INCONSISTENT BEHAVIOR]', function(done) {
           // MyDynamicParameterObject "class":
-          function MyDynamicParameterObject() {this.name='Alice';};
-          MyDynamicParameterObject.prototype.toString = function() {return this.name;};
+            function MyDynamicParameterObject() {
+                this.name = 'Alice';
+            }
+            MyDynamicParameterObject.prototype.toString = function() {return this.name;};
 
           var myObject = new MyDynamicParameterObject();
           // Check myObject:
@@ -921,7 +925,7 @@ var mytests = function() {
           var okcb = function(result) {
             if (i > 1) {
               ok(false, "unexpected result: " + JSON.stringify(result));
-              console.log("discarding unexpected result: " + JSON.stringify(result))
+              console.log("discarding unexpected result: " + JSON.stringify(result));
               return;
             }
 
@@ -991,7 +995,7 @@ var mytests = function() {
           };
 
           return window.sqlitePlugin.openDatabase(dbopts, okcb, errorcb);
-        }
+        };
 
         it(suiteName + 'db.executeSql() with no arguments and then inline string test', function(done) {
           var db = openDatabase("DB-execute-sql-with-no-arguments.db", "1.0", "Demo", DEFAULT_SIZE);
@@ -1669,7 +1673,7 @@ var mytests = function() {
           };
 
           return window.sqlitePlugin.openDatabase(dbopts, okcb, errorcb);
-        }
+        };
 
         test_it(suiteName + "PRAGMAs & multiple database transactions mixed together", function() {
           var db = openDatabase("DB1", "1.0", "Demo", DEFAULT_SIZE);
@@ -1723,7 +1727,7 @@ var mytests = function() {
 
   });
 
-}
+};
 
 if (window.hasBrowser) mytests();
 else exports.defineAutoTests = mytests;

@@ -45,7 +45,7 @@ var mytests = function() {
         } else {
           return window.sqlitePlugin.openDatabase({name: name, location: 0});
         }
-      }
+      };
 
         // Known to work with:
         // - iOS 9 Web SQL
@@ -357,7 +357,7 @@ var mytests = function() {
 
   }
 
-}
+};
 
 if (window.hasBrowser) mytests();
 else exports.defineAutoTests = mytests;

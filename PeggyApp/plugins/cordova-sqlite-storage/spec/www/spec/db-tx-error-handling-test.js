@@ -46,7 +46,7 @@ var mytests = function() {
         } else {
           return window.sqlitePlugin.openDatabase({name: name, location: 0});
         }
-      }
+      };
 
       describe(scenarioList[i] + ': tx error semantics test(s)', function() {
 
@@ -363,7 +363,7 @@ var mytests = function() {
         }, MYTIMEOUT);
 
         it(suiteName + 'transaction ends with error if success callback throws [TBD (WebKit) Web SQL vs plugin error message]', function(done) {
-          var db = openDatabase('transaction-error-if-success-cb-throws.db')
+          var db = openDatabase('transaction-error-if-success-cb-throws.db');
           expect(db).toBeDefined();
 
           db.transaction(function(tx) {
@@ -429,7 +429,7 @@ var mytests = function() {
         }, MYTIMEOUT);
 
         it(suiteName + 'readTransaction ends with error if success callback throws [TBD (WebKit) Web SQL vs plugin error message]', function(done) {
-          var db = openDatabase('readTransaction-error-if-success-cb-throws.db')
+          var db = openDatabase('readTransaction-error-if-success-cb-throws.db');
           expect(db).toBeDefined();
 
           db.readTransaction(function(tx) {
@@ -1663,7 +1663,7 @@ var mytests = function() {
           }, function(error) {
             // EXPECTED RESULT:
             expect(error).toBeDefined();
-            expect(error.code).toBeDefined()
+            expect(error.code).toBeDefined();
             expect(error.message).toBeDefined();
             expect(error.code).toBe(0);
 
@@ -1719,7 +1719,7 @@ var mytests = function() {
             // EXPECTED RESULT:
             expect(check1).toBe(true);
             expect(error).toBeDefined();
-            expect(error.code).toBeDefined()
+            expect(error.code).toBeDefined();
             expect(error.message).toBeDefined();
 
             if (isWP8)
@@ -1783,7 +1783,7 @@ var mytests = function() {
             // EXPECTED RESULT:
             expect(check1).toBe(true);
             expect(error).toBeDefined();
-            expect(error.code).toBeDefined()
+            expect(error.code).toBeDefined();
             expect(error.message).toBeDefined();
 
             if (isWP8)
@@ -1847,7 +1847,7 @@ var mytests = function() {
             // EXPECTED RESULT:
             expect(check1).toBe(true);
             expect(error).toBeDefined();
-            expect(error.code).toBeDefined()
+            expect(error.code).toBeDefined();
             expect(error.message).toBeDefined();
 
             if (isWP8)
@@ -1912,7 +1912,7 @@ var mytests = function() {
             // EXPECTED RESULT:
             expect(check1).toBe(true);
             expect(error).toBeDefined();
-            expect(error.code).toBeDefined()
+            expect(error.code).toBeDefined();
             expect(error.message).toBeDefined();
 
             if (isWP8)
@@ -1977,7 +1977,7 @@ var mytests = function() {
             // EXPECTED RESULT:
             expect(check1).toBe(true);
             expect(error).toBeDefined();
-            expect(error.code).toBeDefined()
+            expect(error.code).toBeDefined();
             expect(error.message).toBeDefined();
 
             if (isWP8)
@@ -2043,7 +2043,7 @@ var mytests = function() {
             // EXPECTED RESULT:
             expect(check1).toBe(true);
             expect(error).toBeDefined();
-            expect(error.code).toBeDefined()
+            expect(error.code).toBeDefined();
             expect(error.message).toBeDefined();
 
             if (isWP8)
@@ -2109,7 +2109,7 @@ var mytests = function() {
             // EXPECTED RESULT:
             expect(check1).toBe(true);
             expect(error).toBeDefined();
-            expect(error.code).toBeDefined()
+            expect(error.code).toBeDefined();
             expect(error.message).toBeDefined();
 
             if (isWP8)
@@ -2171,7 +2171,7 @@ var mytests = function() {
             // EXPECTED RESULT:
             expect(check1).toBe(true);
             expect(error).toBeDefined();
-            expect(error.code).toBeDefined()
+            expect(error.code).toBeDefined();
             expect(error.message).toBeDefined();
 
             if (isWP8)
@@ -2234,7 +2234,7 @@ var mytests = function() {
             // EXPECTED RESULT:
             expect(check1).toBe(true);
             expect(error).toBeDefined();
-            expect(error.code).toBeDefined()
+            expect(error.code).toBeDefined();
             expect(error.message).toBeDefined();
 
             if (isWP8)
@@ -2300,7 +2300,7 @@ var mytests = function() {
             if (isWebSql)
               expect(check1).toBe(true);
             expect(error).toBeDefined();
-            expect(error.code).toBeDefined()
+            expect(error.code).toBeDefined();
             expect(error.message).toBeDefined();
 
             if (!isWebSql)
@@ -2363,7 +2363,7 @@ var mytests = function() {
             if (isWebSql)
               expect(check1).toBe(true);
             expect(error).toBeDefined();
-            expect(error.code).toBeDefined()
+            expect(error.code).toBeDefined();
             expect(error.message).toBeDefined();
 
             if (!isWebSql)
@@ -2423,7 +2423,7 @@ var mytests = function() {
             // EXPECTED RESULT:
             expect(check1).toBe(true);
             expect(error).toBeDefined();
-            expect(error.code).toBeDefined()
+            expect(error.code).toBeDefined();
             expect(error.message).toBeDefined();
 
             if (isWP8)
@@ -2485,7 +2485,7 @@ var mytests = function() {
             // EXPECTED RESULT:
             expect(check1).toBe(true);
             expect(error).toBeDefined();
-            expect(error.code).toBeDefined()
+            expect(error.code).toBeDefined();
             expect(error.message).toBeDefined();
 
             if (isWP8)
@@ -2547,7 +2547,7 @@ var mytests = function() {
             // EXPECTED RESULT:
             expect(check1).toBe(true);
             expect(error).toBeDefined();
-            expect(error.code).toBeDefined()
+            expect(error.code).toBeDefined();
             expect(error.message).toBeDefined();
 
             if (isWP8)
@@ -2608,7 +2608,7 @@ var mytests = function() {
             // EXPECTED RESULT:
             expect(check1).toBe(true);
             expect(error).toBeDefined();
-            expect(error.code).toBeDefined()
+            expect(error.code).toBeDefined();
             expect(error.message).toBeDefined();
 
             if (isWP8)
@@ -2669,7 +2669,7 @@ var mytests = function() {
             // EXPECTED RESULT:
             expect(check1).toBe(true);
             expect(error).toBeDefined();
-            expect(error.code).toBeDefined()
+            expect(error.code).toBeDefined();
             expect(error.message).toBeDefined();
 
             if (isWP8)
@@ -2730,7 +2730,7 @@ var mytests = function() {
             // EXPECTED RESULT:
             expect(check1).toBe(true);
             expect(error).toBeDefined();
-            expect(error.code).toBeDefined()
+            expect(error.code).toBeDefined();
             expect(error.message).toBeDefined();
 
             if (isWP8)
@@ -2794,7 +2794,7 @@ var mytests = function() {
             if (isWebSql)
               expect(check1).toBe(true);
             expect(error).toBeDefined();
-            expect(error.code).toBeDefined()
+            expect(error.code).toBeDefined();
             expect(error.message).toBeDefined();
 
             if (!isWebSql)
@@ -2853,9 +2853,9 @@ var mytests = function() {
             } catch (ex) {
               expect(ex).toBeDefined();
               if (!isWebSql)
-                expect(ex.code).not.toBeDefined()
+                expect(ex.code).not.toBeDefined();
               else if (!isAndroid)
-                expect(ex.code).toBeDefined()
+                expect(ex.code).toBeDefined();
               expect(ex.message).toBeDefined();
 
               if (isWebSql && !isAndroid)
@@ -2876,7 +2876,7 @@ var mytests = function() {
           }, function(error) {
             // EXPECTED RESULT:
             expect(error).toBeDefined();
-            expect(error.code).toBeDefined()
+            expect(error.code).toBeDefined();
             expect(error.message).toBeDefined();
 
             expect(error.code).toBe(0);
@@ -2934,9 +2934,9 @@ var mytests = function() {
             } catch (ex) {
               expect(ex).toBeDefined();
               if (!isWebSql)
-                expect(ex.code).not.toBeDefined()
+                expect(ex.code).not.toBeDefined();
               else if (!isAndroid)
-                expect(ex.code).toBeDefined()
+                expect(ex.code).toBeDefined();
               expect(ex.message).toBeDefined();
 
               if (isWebSql && !isAndroid)
@@ -2957,7 +2957,7 @@ var mytests = function() {
           }, function(error) {
             // EXPECTED RESULT:
             expect(error).toBeDefined();
-            expect(error.code).toBeDefined()
+            expect(error.code).toBeDefined();
             expect(error.message).toBeDefined();
 
             expect(error.code).toBe(0);
@@ -3025,7 +3025,7 @@ var mytests = function() {
               if (!isWebSql) expect('Plugin behavior changed please update this test').toBe('--');
               expect(ex).toBeDefined();
               if (!isAndroid)
-                expect(ex.code).toBeDefined()
+                expect(ex.code).toBeDefined();
               expect(ex.message).toBeDefined();
               if (!isAndroid)
                 expect(ex.code).toBe(17);
@@ -3069,7 +3069,7 @@ var mytests = function() {
               if (!isWebSql) expect('Plugin behavior changed please update this test').toBe('--');
               expect(ex).toBeDefined();
               if (!isAndroid)
-                expect(ex.code).toBeDefined()
+                expect(ex.code).toBeDefined();
               expect(ex.message).toBeDefined();
               if (!isAndroid)
                 expect(ex.code).toBe(17);
@@ -3113,7 +3113,7 @@ var mytests = function() {
               if (!isWebSql) expect('Plugin behavior changed please update this test').toBe('--');
               expect(ex).toBeDefined();
               if (!isAndroid)
-                expect(ex.code).toBeDefined()
+                expect(ex.code).toBeDefined();
               expect(ex.message).toBeDefined();
               if (!isAndroid)
                 expect(ex.code).toBe(17);
@@ -3157,7 +3157,7 @@ var mytests = function() {
               if (!isWebSql) expect('Plugin behavior changed please update this test').toBe('--');
               expect(ex).toBeDefined();
               if (!isAndroid)
-                expect(ex.code).toBeDefined()
+                expect(ex.code).toBeDefined();
               expect(ex.message).toBeDefined();
               if (!isAndroid)
                 expect(ex.code).toBe(17);
@@ -3386,7 +3386,7 @@ var mytests = function() {
               if (!isWebSql) expect('Plugin behavior changed please update this test').toBe('--');
               expect(ex).toBeDefined();
               if (!isAndroid)
-                expect(ex.code).toBeDefined()
+                expect(ex.code).toBeDefined();
               expect(ex.message).toBeDefined();
               if (!isAndroid)
                 expect(ex.code).toBe(17);
@@ -3396,7 +3396,7 @@ var mytests = function() {
           }, function(error) {
             // EXPECTED RESULT:
             expect(error).toBeDefined();
-            expect(error.code).toBeDefined()
+            expect(error.code).toBeDefined();
             expect(error.message).toBeDefined();
 
             expect(error.code).toBe(0);
@@ -3433,7 +3433,7 @@ var mytests = function() {
               if (!isWebSql) expect('Plugin behavior changed please update this test').toBe('--');
               expect(ex).toBeDefined();
               if (!isAndroid)
-                expect(ex.code).toBeDefined()
+                expect(ex.code).toBeDefined();
               expect(ex.message).toBeDefined();
               if (!isAndroid)
                 expect(ex.code).toBe(17);
@@ -3443,7 +3443,7 @@ var mytests = function() {
           }, function(error) {
             // EXPECTED RESULT:
             expect(error).toBeDefined();
-            expect(error.code).toBeDefined()
+            expect(error.code).toBeDefined();
             expect(error.message).toBeDefined();
 
             expect(error.code).toBe(0);
@@ -3480,7 +3480,7 @@ var mytests = function() {
               if (!isWebSql) expect('Plugin behavior changed please update this test').toBe('--');
               expect(ex).toBeDefined();
               if (!isAndroid)
-                expect(ex.code).toBeDefined()
+                expect(ex.code).toBeDefined();
               expect(ex.message).toBeDefined();
               if (!isAndroid)
                 expect(ex.code).toBe(17);
@@ -3490,7 +3490,7 @@ var mytests = function() {
           }, function(error) {
             // EXPECTED RESULT:
             expect(error).toBeDefined();
-            expect(error.code).toBeDefined()
+            expect(error.code).toBeDefined();
             expect(error.message).toBeDefined();
 
             if (isWP8)
@@ -3532,7 +3532,7 @@ var mytests = function() {
               if (!isWebSql) expect('Plugin behavior changed please update this test').toBe('--');
               expect(ex).toBeDefined();
               if (!isAndroid)
-                expect(ex.code).toBeDefined()
+                expect(ex.code).toBeDefined();
               expect(ex.message).toBeDefined();
               if (!isAndroid)
                 expect(ex.code).toBe(17);
@@ -3542,7 +3542,7 @@ var mytests = function() {
           }, function(error) {
             // EXPECTED RESULT:
             expect(error).toBeDefined();
-            expect(error.code).toBeDefined()
+            expect(error.code).toBeDefined();
             expect(error.message).toBeDefined();
 
             if (isWP8)
@@ -3586,7 +3586,7 @@ var mytests = function() {
               if (!isWebSql) expect('Plugin behavior changed please update this test').toBe('--');
               expect(ex).toBeDefined();
               if (!isAndroid)
-                expect(ex.code).toBeDefined()
+                expect(ex.code).toBeDefined();
               expect(ex.message).toBeDefined();
               if (!isAndroid)
                 expect(ex.code).toBe(17);
@@ -3596,7 +3596,7 @@ var mytests = function() {
           }, function(error) {
             // EXPECTED RESULT [(WebKit) Web SQL]:
             expect(error).toBeDefined();
-            expect(error.code).toBeDefined()
+            expect(error.code).toBeDefined();
             expect(error.message).toBeDefined();
 
             expect(error.code).toBe(0);
@@ -3631,7 +3631,7 @@ var mytests = function() {
               if (!isWebSql) expect('Plugin behavior changed please update this test').toBe('--');
               expect(ex).toBeDefined();
               if (!isAndroid)
-                expect(ex.code).toBeDefined()
+                expect(ex.code).toBeDefined();
               expect(ex.message).toBeDefined();
               if (!isAndroid)
                 expect(ex.code).toBe(17);
@@ -3641,7 +3641,7 @@ var mytests = function() {
           }, function(error) {
             // EXPECTED RESULT [(WebKit) Web SQL]:
             expect(error).toBeDefined();
-            expect(error.code).toBeDefined()
+            expect(error.code).toBeDefined();
             expect(error.message).toBeDefined();
 
             expect(error.code).toBe(0);
@@ -3674,7 +3674,7 @@ var mytests = function() {
               if (!isWebSql) expect('Plugin behavior changed please update this test').toBe('--');
               expect(ex).toBeDefined();
               if (!isAndroid)
-                expect(ex.code).toBeDefined()
+                expect(ex.code).toBeDefined();
               expect(ex.message).toBeDefined();
               if (!isAndroid)
                 expect(ex.code).toBe(17);
@@ -3684,7 +3684,7 @@ var mytests = function() {
           }, function(error) {
             // EXPECTED RESULT [(WebKit) Web SQL]:
             expect(error).toBeDefined();
-            expect(error.code).toBeDefined()
+            expect(error.code).toBeDefined();
             expect(error.message).toBeDefined();
 
             expect(error.code).toBe(0);
@@ -3720,7 +3720,7 @@ var mytests = function() {
               if (!isWebSql) expect('Plugin behavior changed please update this test').toBe('--');
               expect(ex).toBeDefined();
               if (!isAndroid)
-                expect(ex.code).toBeDefined()
+                expect(ex.code).toBeDefined();
               expect(ex.message).toBeDefined();
               if (!isAndroid)
                 expect(ex.code).toBe(17);
@@ -3730,7 +3730,7 @@ var mytests = function() {
           }, function(error) {
             // EXPECTED RESULT [(WebKit) Web SQL]:
             expect(error).toBeDefined();
-            expect(error.code).toBeDefined()
+            expect(error.code).toBeDefined();
             expect(error.message).toBeDefined();
 
             expect(error.code).toBe(0);
@@ -3890,7 +3890,7 @@ var mytests = function() {
 
   }
 
-}
+};
 
 if (window.hasBrowser) mytests();
 else exports.defineAutoTests = mytests;

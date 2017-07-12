@@ -51,7 +51,7 @@ var mytests = function() {
           // explicit database location:
           return window.sqlitePlugin.openDatabase({name: name, location: 'default'});
         }
-      }
+      };
 
       //describe(scenarioList[i] + ': tx blob test(s)', function() {
 
@@ -108,7 +108,7 @@ var mytests = function() {
     });
   }
 
-}
+};
 
 if (window.hasBrowser) mytests();
 else exports.defineAutoTests = mytests;

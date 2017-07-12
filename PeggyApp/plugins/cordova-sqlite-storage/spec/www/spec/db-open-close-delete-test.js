@@ -21,7 +21,7 @@ function test_it(desc, fun) {
   }, MYTIMEOUT);
 }
 function stop(n) {
-  if (!!n) wait += n
+  if (!!n) wait += n;
   else ++wait;
 }
 function start(n) {
@@ -82,7 +82,7 @@ var mytests = function() {
           };
 
           return window.sqlitePlugin.openDatabase(dbopts, okcb, errorcb);
-        }
+        };
 
         it(suiteName + 'Open database with normal US-ASCII characters (no slash) & check database file name', function(done) {
           var dbName = "Test!123-456$789.db";
@@ -1116,7 +1116,7 @@ var mytests = function() {
           };
 
           return window.sqlitePlugin.openDatabase(dbopts, okcb, errorcb);
-        }
+        };
 
         var deleteDatabase = function(first, second, third) {
           if (!isImpl2) {
@@ -1128,7 +1128,7 @@ var mytests = function() {
               location: 1 // (value ignored on Android)
             }, second, third);
           }
-        }
+        };
 
         test_it(suiteName + ' test sqlitePlugin.deleteDatabase()', function () {
           stop();
@@ -1239,7 +1239,7 @@ var mytests = function() {
           };
 
           return window.sqlitePlugin.openDatabase(dbopts, okcb, errorcb);
-        }
+        };
 
         test_it(suiteName + ' database.open calls its success callback', function () {
           // asynch test coming up
@@ -1478,11 +1478,11 @@ var mytests = function() {
         // NOTE: MUST be defined in function scope, NOT outer scope:
         var openDatabase = function(first, second, third) {
           return window.sqlitePlugin.openDatabase(first, second, third);
-        }
+        };
 
         var deleteDatabase = function(first, second, third) {
           window.sqlitePlugin.deleteDatabase(first, second, third);
-        }
+        };
 
         // Needed to support some large-scale applications:
         test_it(suiteName + ' open same database twice in [same] specified location works', function () {
@@ -1947,7 +1947,7 @@ var mytests = function() {
 
   });
 
-}
+};
 
 if (window.hasBrowser) mytests();
 else exports.defineAutoTests = mytests;

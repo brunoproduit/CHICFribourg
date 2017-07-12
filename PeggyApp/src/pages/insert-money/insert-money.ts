@@ -23,7 +23,6 @@ export class InsertMoneyPage implements BleProviderCallback {
     public tokenSession;
     public urlAddMoney = 'https://chic.tic.heia-fr.ch/peggy';
     public moneyAdded;
-    public maxCoin;
 
     constructor(private bleProvider: BleProvider, private navCtrl: NavController, private navParams: NavParams, public http: Http, public platform: Platform, private zone: NgZone, public toastCtrl: ToastController) {
         platform.ready().then(() => {
@@ -116,6 +115,7 @@ export class InsertMoneyPage implements BleProviderCallback {
                             console.log("Data: " + JSON.stringify(data));
                             this.zone.run(() => {
                                 this.moneyAdded += data.balance - this.amountAccount;
+                                this.moneyAdded =  Math.round(this.moneyAdded * 10)/10;
                                 this.amountAccount = data.balance;
                                 this.user.balance = data.balance;
                                 this.controlMaxCoinReached(data.coin5, data.coin2, data.coin1, data.coin50c, data.coin20c, data.coin10c);

@@ -632,7 +632,7 @@
 				},
 				function(error) {
 					errorCallback(error);
-					return;
+
 				});
 		}
 	}

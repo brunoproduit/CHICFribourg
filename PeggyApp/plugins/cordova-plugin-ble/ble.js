@@ -249,8 +249,7 @@ exports.stopScan = function()
 // Create closure for parseAdvertisementData and helper functions.
 // TODO: Investigate if the code can be simplified, compare to how
 // how the Evothings Bleat implementation does this.
-;(function()
-{
+(function () {
 var base64;
 
 /**
@@ -298,7 +297,7 @@ exports.parseAdvertisementData = function(device)
 		// Parse types we know and care about.
 		// Skip other types.
 
-		var BLUETOOTH_BASE_UUID = '-0000-1000-8000-00805f9b34fb'
+		var BLUETOOTH_BASE_UUID = '-0000-1000-8000-00805f9b34fb';
 
 		// Convert 16-byte Uint8Array to RFC-4122-formatted UUID.
 		function arrayToUUID(array, offset)
@@ -474,7 +473,7 @@ function b64ToUint6(nChr) {
  * @public
  */
 function toHexString(i, byteCount) {
-	var string = (new Number(i)).toString(16);
+	var string = (Number(i)).toString(16);
 	while(string.length < byteCount*2) {
 		string = '0'+string;
 	}
@@ -521,8 +520,8 @@ function littleEndianToUint32(data, offset)
  */
 function littleEndianToInt8(data, offset)
 {
-	var x = littleEndianToUint8(data, offset)
-	if (x & 0x80) x = x - 256
+	var x = littleEndianToUint8(data, offset);
+	if (x & 0x80) x = x - 256;
 	return x
 }
 
@@ -578,7 +577,7 @@ function littleEndianToUint8(data, offset)
 exports.getBondedDevices = function(success, fail, options)
 {
 	exec(success, fail, 'BLE', 'getBondedDevices', [options.serviceUUIDs]);
-}
+};
 
 /**
  * Success callback function for getBondState.
@@ -657,7 +656,7 @@ exports.getBondState = function(device, success, fail, options)
 			{ serviceUUIDs: [serviceUUID] }
 		);
 	}
-}
+};
 
 /**
  * Success callback function for bond. On iOS the bond state returned
@@ -696,7 +695,7 @@ exports.getBondState = function(device, success, fail, options)
 exports.bond = function(device, success, fail)
 {
 	exec(success, fail, 'BLE', 'bond', [device.address]);
-}
+};
 
 /**
  * Success callback function for unbond. On iOS the bond state returned
@@ -734,7 +733,7 @@ exports.bond = function(device, success, fail)
 exports.unbond = function(device, success, fail)
 {
 	exec(success, fail, 'BLE', 'unbond', [device.address]);
-}
+};
 
 /**
  * Connect to a remote device. It is recommended that you use the high-level
@@ -1589,7 +1588,7 @@ exports.getCanonicalUUID = function(uuid)
 exports.readAllServiceData = function(deviceOrHandle, success, fail)
 {
 	exports.readServiceData(deviceOrHandle, success, fail);
-}
+};
 
 /**
  * Options for readServiceData.
@@ -1837,7 +1836,7 @@ exports.getDescriptor = function(characteristic, uuid)
 
 /********** Platform utilities **********/
 
-exports.os = (window.evothings && window.evothings.os) ? window.evothings.os : {}
+exports.os = (window.evothings && window.evothings.os) ? window.evothings.os : {};
 
 /**
  * Returns true if current platform is iOS, false if not.
@@ -1865,7 +1864,7 @@ exports.os.isAndroid = function()
  * BLE Peripheral API. Experimental, supported only on Android.
  * @namespace
  */
-exports.peripheral = {}
+exports.peripheral = {};
 
 // Internal. Returns a function that will handle GATT server callbacks.
 function gattServerCallbackHandler(winFunc, settings) {
@@ -2022,7 +2021,7 @@ exports.peripheral.stopGattServer = function(win, fail) {
 */
 exports.peripheral.sendResponse = function(deviceHandle, requestId, data, win, fail) {
 	exec(win, fail, 'BLE', 'sendResponse', [deviceHandle, requestId, data.buffer]);
-}
+};
 
 /** Sends a notification to a remote device that a characteristic's value has been updated.
 * @param {int} deviceHandle - From a connectionStateChangeCallback.
@@ -2051,7 +2050,7 @@ exports.closeClient = function(clientHandle, win, fail) {
 */
 exports.peripheral.startAdvertise = function(settings, win, fail) {
 	exec(win, fail, 'BLE', 'startAdvertise', [settings]);
-}
+};
 
 /** Stops BLE advertise.
 *
@@ -2060,7 +2059,7 @@ exports.peripheral.startAdvertise = function(settings, win, fail) {
 */
 exports.peripheral.stopAdvertise = function(win, fail) {
 	exec(win, fail, 'BLE', 'stopAdvertise', []);
-}
+};
 
 // AdvertiseSettings
 /** Describes a BLE advertisement.

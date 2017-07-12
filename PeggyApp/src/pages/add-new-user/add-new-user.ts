@@ -118,7 +118,7 @@ export class AddNewUserPage {
       this.successToast();
       console.log("Promise create user finished");
     })
-  }
+  };
 
   successToast = () => {
     let toast = this.toastCtrl.create({

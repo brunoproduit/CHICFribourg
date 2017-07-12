@@ -19,7 +19,7 @@ function test_it(desc, fun) {
   }, MYTIMEOUT);
 }
 function stop(n) {
-  if (!!n) wait += n
+  if (!!n) wait += n;
   else ++wait;
 }
 function start(n) {
@@ -69,7 +69,7 @@ var mytests = function() {
         } else {
           return window.sqlitePlugin.openDatabase({name: name, location: 0});
         }
-      }
+      };
 
 
         // ref: litehelpers/Cordova-sqlite-storage#128
@@ -114,7 +114,7 @@ var mytests = function() {
     });
   }
 
-}
+};
 
 if (window.hasBrowser) mytests();
 else exports.defineAutoTests = mytests;
