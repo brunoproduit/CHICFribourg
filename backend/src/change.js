@@ -66,8 +66,6 @@ var getPossibleChange = function (poss, peggy) {
 
 // Choose the change set which takes the less coins
 var choose = function (poss) {
-    sortObject(poss);
-    console.log(poss);
     var result = {"change": false};                   // If the change is not possible respond with this
     var len = Number.MAX_VALUE;
     poss.forEach(function (currObj, arrInd, array) {
@@ -78,10 +76,6 @@ var choose = function (poss) {
     });
     return result;
 };
-
-function sortObject(o) {
-    return Object.keys(o).sort().reduce((r, k) => (r[k] = o[k], r), {});
-}
 
 //Get the change for the given amount
 module.exports.getChange = function (amount, peggy) {

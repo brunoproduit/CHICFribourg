@@ -379,7 +379,7 @@ app.get('/objective', cors(corsOptions), bearerToken(), function (req, res) {
 app.get('/objective/:id', cors(corsOptions), bearerToken(), function (req, res) {
     try {
         objective.getObjective(req.params.id, function (response) {
-            if (jwt.decode(req.token).isparent | jwt.decode(req.token).uuid == response.useruuid) { // TODO check if parent in good peggy
+            if (jwt.decode(req.token).isparent | jwt.decode(req.token).uuid == response.useruuid) {
                 console.log(JSON.stringify(response));
                 res.json(response);
             } else {

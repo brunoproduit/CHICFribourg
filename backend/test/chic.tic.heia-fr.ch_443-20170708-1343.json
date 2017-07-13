@@ -1,0 +1,954 @@
+[
+         {
+              "id"           : "service",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Service detected: HTTP"
+          }
+,         {
+              "id"           : "sslv2",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "SSLv2 not offered (OK)"
+          }
+,         {
+              "id"           : "sslv3",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "SSLv3 is not offered (OK)"
+          }
+,         {
+              "id"           : "tls1",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLSv1.0 is not offered"
+          }
+,         {
+              "id"           : "tls1_1",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLSv1.1 is offered"
+          }
+,         {
+              "id"           : "tls1_2",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "TLSv1.2 is offered (OK)"
+          }
+,         {
+              "id"           : "TLS Version Negotiation",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "Downgraded to TLSv1.2"
+          }
+,         {
+              "id"           : "spdy_npn",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "SPDY/NPN : http/1.1, http/1.0 (advertised)"
+          }
+,         {
+              "id"           : "https_alpn",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "HTTP2/ALPN : offered; Protocols: http/1.1"
+          }
+,         {
+              "id"           : "std_NULL",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "Null Ciphers              not offered (OK)"
+          }
+,         {
+              "id"           : "std_aNULL",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "Anonymous NULL Ciphers    not offered (OK)"
+          }
+,         {
+              "id"           : "std_ADH",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "Anonymous DH Ciphers      not offered (OK)"
+          }
+,         {
+              "id"           : "std_EXPORT40",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "WARN",
+              "finding"      : "Cipher  40 Bit encryption         (EXPORT40) not supported by local OpenSSL (/usr/bin/openssl)"
+          }
+,         {
+              "id"           : "std_EXPORT56",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "WARN",
+              "finding"      : "Cipher  56 Bit export ciphers     (EXPORT56) not supported by local OpenSSL (/usr/bin/openssl)"
+          }
+,         {
+              "id"           : "std_EXPORT",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "WARN",
+              "finding"      : "Cipher  Export Ciphers (general)  (EXPORT) not supported by local OpenSSL (/usr/bin/openssl)"
+          }
+,         {
+              "id"           : "std_LOW",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "WARN",
+              "finding"      : "Cipher  Low (<=64 Bit)            (LOW:!ADH) not supported by local OpenSSL (/usr/bin/openssl)"
+          }
+,         {
+              "id"           : "std_DES",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "WARN",
+              "finding"      : "Cipher  DES Ciphers               (DES:!ADH:!EXPORT:!aNULL) not supported by local OpenSSL (/usr/bin/openssl)"
+          }
+,         {
+              "id"           : "std_MEDIUM",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "'Medium' grade encryption not offered (OK)"
+          }
+,         {
+              "id"           : "std_3DES",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "Triple DES Ciphers        not offered (OK)"
+          }
+,         {
+              "id"           : "std_HIGH",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "High grade encryption     offered (OK)"
+          }
+,         {
+              "id"           : "pfs",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "(Perfect) Forward Secrecy : PFS is offered (OK)"
+          }
+,         {
+              "id"           : "pfs_ciphers",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "(Perfect) Forward Secrecy Ciphers: ECDHE-RSA-AES128-GCM-SHA256 ECDHE-RSA-AES128-SHA256 ECDHE-RSA-AES128-SHA ECDHE-RSA-AES256-GCM-SHA384 ECDHE-RSA-AES256-SHA384 ECDHE-RSA-AES256-SHA"
+          }
+,         {
+              "id"           : "ecdhe_curves",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Elliptic curves offered prime256v1"
+          }
+,         {
+              "id"           : "order",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "Server sets a cipher order (OK)"
+          }
+,         {
+              "id"           : "order_proto",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "Default protocol TLS1.2 (OK)"
+          }
+,         {
+              "id"           : "order_cipher",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "WARN",
+              "finding"      : "Default cipher: ECDHE-RSA-AES256-SHA384, 256 bit ECDH (cbc)"
+          }
+,         {
+              "id"           : "order_tls1_1",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Default cipher order for protocol tls1_1: ECDHE-RSA-AES256-SHA AES256-SHA ECDHE-RSA-AES128-SHA AES128-SHA"
+          }
+,         {
+              "id"           : "order_tls1_2",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Default cipher order for protocol tls1_2: ECDHE-RSA-AES256-SHA384 ECDHE-RSA-AES128-SHA256 ECDHE-RSA-AES256-GCM-SHA384 ECDHE-RSA-AES256-SHA AES256-GCM-SHA384 AES256-SHA256 AES256-SHA ECDHE-RSA-AES128-GCM-SHA256 ECDHE-RSA-AES128-SHA AES128-GCM-SHA256 AES128-SHA256 AES128-SHA"
+          }
+,         {
+              "id"           : "tls_extensions",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLS server extensions (std): 'renegotiation info/#65281' 'EC point formats/#11' 'session ticket/#35' 'application layer protocol negotiation/#16' 'next protocol/#13172'"
+          }
+,         {
+              "id"           : "session_ticket",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "TLS session tickes RFC 5077 valid for 300 seconds (PFS requires session ticket keys to be rotated at least daily)"
+          }
+,         {
+              "id"           : "session_id",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "SSL session ID support: yes"
+          }
+,         {
+              "id"           : "tls_time",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Your TLS time seems to be filled with random values to prevent fingerprinting"
+          }
+,         {
+              "id"           : "algorithm",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "Signature Algorithm: SHA256 with RSA (OK)"
+          }
+,         {
+              "id"           : "key_size",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Server keys 2048 bits"
+          }
+,         {
+              "id"           : "fingerprint",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Fingerprints / Serial: SHA1 6CEF3436A737835637C74108DC0B1B26193EFE72 / 03C923873E521C9702DB3824DFEEF259BCF0, SHA256 9F765A4BA05DED2130A8A455ACF0096484D2CC6F0C161B9A9AE13837E1C7AC63"
+          }
+,         {
+              "id"           : "cn",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "chic.tic.heia-fr.ch"
+          }
+,         {
+              "id"           : "san",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "subjectAltName (SAN) : chic.tic.heia-fr.ch"
+          }
+,         {
+              "id"           : "issuer",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Issuer: 'Let's Encrypt Authority X3' ('Let's Encrypt' from 'US')"
+          }
+,         {
+              "id"           : "trust",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Ok via SAN and CN (works w/o SNI)"
+          }
+,         {
+              "id"           : "ev",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Extended Validation (EV) (experimental) : no"
+          }
+,         {
+              "id"           : "expiration",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "Certificate Expiration : 51 >= 30 days (2017-05-31 09:54 --> 2017-08-29 09:54 +0200)"
+          }
+,         {
+              "id"           : "certcount",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "# of certificates provided :  2"
+          }
+,         {
+              "id"           : "crl",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "No CRL provided"
+          }
+,         {
+              "id"           : "ocsp_uri",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "OCSP URI : http://ocsp.int-x3.letsencrypt.org"
+          }
+,         {
+              "id"           : "ocsp_stapling",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "OCSP stapling : not offered"
+          }
+,         {
+              "id"           : "HTTP_STATUS_CODE",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Testing HTTP header response @ '/', 200 OK"
+          }
+,         {
+              "id"           : "http_clock_skew",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "HTTP clock skew 0 sec from localtime"
+          }
+,         {
+              "id"           : "hsts_time",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "HSTS timeout 180 days (=15552000 seconds) > 15465600 days"
+          }
+,         {
+              "id"           : "hsts_subdomains",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "HSTS only for this domain"
+          }
+,         {
+              "id"           : "hsts_preload",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "HSTS domain is NOT marked for preloading"
+          }
+,         {
+              "id"           : "hpkp_spkis",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "4 keys pinned in HPKP header, additional keys are available if the current key is revoked"
+          }
+,         {
+              "id"           : "hpkp_age",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "HPKP age is set to 90 days (7776000 sec)"
+          }
+,         {
+              "id"           : "hpkp_subdomains",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "HPKP header is valid for this domain only"
+          }
+,         {
+              "id"           : "hpkp_preload",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "HPKP header is NOT marked for browser preloading"
+          }
+,         {
+              "id"           : "hpkp_yAs3QPoZf+wDpRWBPNV2Dvi0tq7tysNuOCH4VaWPxMQ",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "SPKI yAs3QPoZf+wDpRWBPNV2Dvi0tq7tysNuOCH4VaWPxMQ matches the host certificate"
+          }
+,         {
+              "id"           : "hpkp_YLh1dUR9y6Kja30RrAn7JKnbQG/uEtLMkBgFF2Fuihg",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "SPKI YLh1dUR9y6Kja30RrAn7JKnbQG/uEtLMkBgFF2Fuihg matches Intermediate CA 'Let's Encrypt Authority X3' pinned in the HPKP header"
+          }
+,         {
+              "id"           : "hpkp_Vjs8r4z+80wjNcr1YKepWQboSIRi63WsWXhIMN+eWys",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "SPKI Vjs8r4z+80wjNcr1YKepWQboSIRi63WsWXhIMN+eWys doesn't match anything. This is ok for a backup for any certificate"
+          }
+,         {
+              "id"           : "hpkp_rQfc9Oew5VQWfPh6qaKE7QfPqTWUi10XC5X4Oe3ig2s",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "SPKI rQfc9Oew5VQWfPh6qaKE7QfPqTWUi10XC5X4Oe3ig2s doesn't match anything. This is ok for a backup for any certificate"
+          }
+,         {
+              "id"           : "hpkp_spkimatch",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "WARN",
+              "finding"      : "Attribution of further hashes couldn't be done as /home/bruno/Desktop/etc/ca_hashes.txt could not be found"
+          }
+,         {
+              "id"           : "serverbanner",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "WARN",
+              "finding"      : "No Server banner in header, interesting!"
+          }
+,         {
+              "id"           : "app_banner",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "No Application Banners found"
+          }
+,         {
+              "id"           : "cookie_count",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "No cookies issued at '/'"
+          }
+,         {
+              "id"           : "X-Frame-Options",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "X-Frame-Options:  SAMEORIGIN"
+          }
+,         {
+              "id"           : "X-XSS-Protection",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "X-XSS-Protection:  1; mode=block"
+          }
+,         {
+              "id"           : "X-Content-Type-Options",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "X-Content-Type-Options:  nosniff"
+          }
+,         {
+              "id"           : "Content-Security-Policy",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "Content-Security-Policy:  default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; block-all-mixed-content;"
+          }
+,         {
+              "id"           : "Access-Control-Allow-Origin",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "WARN",
+              "finding"      : "Access-Control-Allow-Origin:  chic.tic.heia-fr.ch"
+          }
+,         {
+              "id"           : "rp_header",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "No reverse proxy banner found"
+          }
+,         {
+              "id"           : "heartbleed",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "Heartbleed (CVE-2014-0160): not vulnerable (OK), no heartbeat extension"
+          }
+,         {
+              "id"           : "ccs",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "CCS (CVE-2014-0224): not vulnerable (OK)"
+          }
+,         {
+              "id"           : "secure_renego",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "Secure Renegotiation (CVE-2009-3555) : not vulnerable (OK)"
+          }
+,         {
+              "id"           : "sec_client_renego",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "WARN",
+              "finding"      : "Secure Client-Initiated Renegotiation : VULNERABLE (NOT ok), DoS threat"
+          }
+,         {
+              "id"           : "crime",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "WARN",
+              "finding"      : "CRIME, TLS (CVE-2012-4929) : Not tested. /usr/bin/openssl lacks zlib support"
+          }
+,         {
+              "id"           : "breach",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "BREACH (CVE-2013-3587) : no HTTP compression (OK)  - only supplied '/' tested"
+          }
+,         {
+              "id"           : "poodle_ssl",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "POODLE, SSL (CVE-2014-3566) : not vulnerable (OK)"
+          }
+,         {
+              "id"           : "fallback_scsv",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "WARN",
+              "finding"      : "TLS_FALLBACK_SCSV (RFC 7507) (experimental) : Check failed, unexpected result, run testssl.sh -Z --debug=1 and look at /tmp/ssltester.lbfwIY/*tls_fallback_scsv.txt"
+          }
+,         {
+              "id"           : "freak",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "WARN",
+              "finding"      : "FREAK (CVE-2015-0204) : Not tested. /usr/bin/openssl doesn't have any EXPORT RSA ciphers configured"
+          }
+,         {
+              "id"           : "drown",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "not vulnerable to DROWN"
+          }
+,         {
+              "id"           : "logjam",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "WARN",
+              "finding"      : "LOGJAM (CVE-2015-4000) : Not tested. /usr/bin/openssl doesn't have any DHE EXPORT ciphers configured"
+          }
+,         {
+              "id"           : "beast",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "BEAST (CVE-2011-3389) : not vulnerable (OK) no SSL3 or TLS1"
+          }
+,         {
+              "id"           : "rc4",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "RC4 (CVE-2013-2566, CVE-2015-2808) : not vulnerable (OK)"
+          }
+,         {
+              "id"           : "cipher_xc030",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "xc030   ECDHE-RSA-AES256-GCM-SHA384       ECDH 256   AESGCM    256"
+          }
+,         {
+              "id"           : "cipher_xc028",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "xc028   ECDHE-RSA-AES256-SHA384           ECDH 256   AES       256"
+          }
+,         {
+              "id"           : "cipher_xc014",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "xc014   ECDHE-RSA-AES256-SHA              ECDH 256   AES       256"
+          }
+,         {
+              "id"           : "cipher_x9d",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "x9d     AES256-GCM-SHA384                 RSA        AESGCM    256"
+          }
+,         {
+              "id"           : "cipher_x3d",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "x3d     AES256-SHA256                     RSA        AES       256"
+          }
+,         {
+              "id"           : "cipher_x35",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "x35     AES256-SHA                        RSA        AES       256"
+          }
+,         {
+              "id"           : "cipher_xc02f",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "xc02f   ECDHE-RSA-AES128-GCM-SHA256       ECDH 256   AESGCM    128"
+          }
+,         {
+              "id"           : "cipher_xc027",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "xc027   ECDHE-RSA-AES128-SHA256           ECDH 256   AES       128"
+          }
+,         {
+              "id"           : "cipher_xc013",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "xc013   ECDHE-RSA-AES128-SHA              ECDH 256   AES       128"
+          }
+,         {
+              "id"           : "cipher_x9c",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "x9c     AES128-GCM-SHA256                 RSA        AESGCM    128"
+          }
+,         {
+              "id"           : "cipher_x3c",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "x3c     AES128-SHA256                     RSA        AES       128"
+          }
+,         {
+              "id"           : "cipher_x2f",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "x2f     AES128-SHA                        RSA        AES       128"
+          }
+,         {
+              "id"           : "client_android_237",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Android2.3.7 client simulation: No connection"
+          }
+,         {
+              "id"           : "client_android_411",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Android4.1.1 client simulation: No connection"
+          }
+,         {
+              "id"           : "client_android_422",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Android4.2.2 client simulation: No connection"
+          }
+,         {
+              "id"           : "client_android_442",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Android4.4.2 client simulation:  TLSv1.2 ECDHE-RSA-AES128-SHA256"
+          }
+,         {
+              "id"           : "client_android_500",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Android5.0.0 client simulation:  TLSv1.2 ECDHE-RSA-AES256-SHA"
+          }
+,         {
+              "id"           : "client_android_60",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Android6.0 client simulation:  TLSv1.2 ECDHE-RSA-AES256-SHA"
+          }
+,         {
+              "id"           : "client_android_70",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Android7.0 client simulation:  TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384"
+          }
+,         {
+              "id"           : "client_baidu_jan_2015",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "BaiduJan2015 client simulation: No connection"
+          }
+,         {
+              "id"           : "client_bingpreview_jan_2015",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "BingPreviewJan2015 client simulation:  TLSv1.2 ECDHE-RSA-AES256-SHA384"
+          }
+,         {
+              "id"           : "client_chrome_48_osx",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Chrome48OSX client simulation:  TLSv1.2 ECDHE-RSA-AES256-SHA"
+          }
+,         {
+              "id"           : "client_chrome_51_win7",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Chrome51Win7 client simulation:  TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384"
+          }
+,         {
+              "id"           : "client_edge_13_win10",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Edge13Win10 client simulation:  TLSv1.2 ECDHE-RSA-AES256-SHA384"
+          }
+,         {
+              "id"           : "client_edge_13_winphone10",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Edge13WinPhone10 client simulation:  TLSv1.2 ECDHE-RSA-AES256-SHA384"
+          }
+,         {
+              "id"           : "client_firefox_45_win7",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Firefox45Win7 client simulation:  TLSv1.2 ECDHE-RSA-AES256-SHA"
+          }
+,         {
+              "id"           : "client_firefox_49_win7",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Firefox49Win7 client simulation:  TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384"
+          }
+,         {
+              "id"           : "client_firefox_49_xpsp3",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Firefox49XPSP3 client simulation:  TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384"
+          }
+,         {
+              "id"           : "client_googlebot_feb_2015",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "GooglebotFeb2015 client simulation:  TLSv1.2 ECDHE-RSA-AES256-SHA"
+          }
+,         {
+              "id"           : "client_ie_11_win10",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "IE11Win10 client simulation:  TLSv1.2 ECDHE-RSA-AES256-SHA384"
+          }
+,         {
+              "id"           : "client_ie_11_win7",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "IE11Win7 client simulation:  TLSv1.2 ECDHE-RSA-AES256-SHA384"
+          }
+,         {
+              "id"           : "client_ie_11_win81",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "IE11Win8.1 client simulation:  TLSv1.2 ECDHE-RSA-AES256-SHA384"
+          }
+,         {
+              "id"           : "client_ie_11_winphone81",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "IE11WinPhone8.1 client simulation:  TLSv1.2 ECDHE-RSA-AES128-SHA256"
+          }
+,         {
+              "id"           : "client_ie_11_winphone81update",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "IE11WinPhone8.1Update client simulation:  TLSv1.2 ECDHE-RSA-AES256-SHA384"
+          }
+,         {
+              "id"           : "client_ie_6_xp",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "IE6XP client simulation: No connection"
+          }
+,         {
+              "id"           : "client_ie_7_vista",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "IE7Vista client simulation: No connection"
+          }
+,         {
+              "id"           : "client_ie_8_win7",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "IE8Win7 client simulation: No connection"
+          }
+,         {
+              "id"           : "client_ie_8_xp",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "IE8XP client simulation: No connection"
+          }
+,         {
+              "id"           : "client_java_6u45",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Java6u45 client simulation: No connection"
+          }
+,         {
+              "id"           : "client_java_7u25",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Java7u25 client simulation: No connection"
+          }
+,         {
+              "id"           : "client_java_8b132",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Java8b132 client simulation:  TLSv1.2 ECDHE-RSA-AES128-SHA256"
+          }
+,         {
+              "id"           : "client_openssl_101l",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "OpenSSL1.0.1l client simulation:  TLSv1.2 ECDHE-RSA-AES256-SHA384"
+          }
+,         {
+              "id"           : "client_openssl_102e",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "OpenSSL1.0.2e client simulation:  TLSv1.2 ECDHE-RSA-AES256-SHA384"
+          }
+,         {
+              "id"           : "client_opera_17_win7",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Opera17Win7 client simulation:  TLSv1.2 ECDHE-RSA-AES128-SHA256"
+          }
+,         {
+              "id"           : "client_safari_519_osx1068",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Safari5.1.9OSX10.6.8 client simulation: No connection"
+          }
+,         {
+              "id"           : "client_safari_604_osx1084",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Safari6.0.4OSX10.8.4 client simulation: No connection"
+          }
+,         {
+              "id"           : "client_safari_7_osx109",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Safari7OSX10.9 client simulation:  TLSv1.2 ECDHE-RSA-AES256-SHA384"
+          }
+,         {
+              "id"           : "client_safari_8_osx1010",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Safari8OSX10.10 client simulation:  TLSv1.2 ECDHE-RSA-AES256-SHA384"
+          }
+,         {
+              "id"           : "client_safari_9_ios9",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Safari9iOS9 client simulation:  TLSv1.2 ECDHE-RSA-AES256-SHA384"
+          }
+,         {
+              "id"           : "client_safari_9_osx1011",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Safari9OSX10.11 client simulation:  TLSv1.2 ECDHE-RSA-AES256-SHA384"
+          }
+,         {
+              "id"           : "client_safari_10_osx1012",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Safari10OSX10.12 client simulation:  TLSv1.2 ECDHE-RSA-AES256-SHA384"
+          }
+,         {
+              "id"           : "client_apple_ats_9_ios9",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "AppleATS9iOS9 client simulation:  TLSv1.2 ECDHE-RSA-AES256-SHA384"
+          }
+,         {
+              "id"           : "client_tor_1709_win7",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "Tor17.0.9Win7 client simulation: No connection"
+          }
+,         {
+              "id"           : "client_yahoo_slurp_jan_2015",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "YahooSlurpJan2015 client simulation:  TLSv1.2 ECDHE-RSA-AES256-SHA384"
+          }
+,         {
+              "id"           : "client_yandexbot_jan_2015",
+              "ip"           : "chic.tic.heia-fr.ch/160.98.46.148",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "YandexBotJan2015 client simulation:  TLSv1.2 ECDHE-RSA-AES256-SHA384"
+          }
+]
