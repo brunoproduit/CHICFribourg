@@ -48,6 +48,11 @@ export class WithdrawMoneyPage implements BleProviderCallback {
     });
   }
 
+  /**
+   * This function is called everytime the page has finished loading. Inside it, we set the callback parameters to
+   * transmit the important information between pages. The callback to the BleProvider is set here
+   * */
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad WithdrawMoneyPage');
     this.bleProvider.setCallback(this);
@@ -60,6 +65,9 @@ export class WithdrawMoneyPage implements BleProviderCallback {
     };
   }
 
+  /**
+   * function to increase the value that the user want to withdraw
+   */
   addToAmountToWithdraw = (value) =>{
     if(this.amountToWithdraw + value > this.amountAccount){
       console.log("You don't have enough money");
@@ -70,6 +78,9 @@ export class WithdrawMoneyPage implements BleProviderCallback {
     }
   };
 
+  /**
+   * Alert displayed if the user has not enough money on his account
+   */
   onAlertNotEnoughMoney = () =>{
     let alert = this.alertCtrl.create({
       title: 'Not enough money',
@@ -79,14 +90,25 @@ export class WithdrawMoneyPage implements BleProviderCallback {
     alert.present();
   };
 
+  /**
+   * function called when the amount is validated, it will call the function allowToWithdraw from the BleProvider
+   */
   validateAmount = () =>{
     this.amountValidated = true;
     this.bleProvider.allowToWithdraw(true);
   };
 
+  /**
+   * Function called when the user press on the reset button to reset the amount to withdraw
+   */
+
   resetAmount = () =>{
     this.amountToWithdraw = 0;
   };
+
+  /**
+   * function that check if the user has enough money
+   */
 
   checkAmountToWithdrawMoney = (amount) =>{
     if(this.user.balance == 0){
@@ -98,7 +120,10 @@ export class WithdrawMoneyPage implements BleProviderCallback {
     return true;
   };
 
-
+  /**
+   * This function is called from the BleProvider. It is called everytime a notification for a coin withdrawn is
+   * received by the smartphone
+   */
   onMoneyWithdrawn = (coin) => {
     console.log("TEST moneyWithdrawn called:" + coin);
     let body = {};
@@ -149,6 +174,9 @@ export class WithdrawMoneyPage implements BleProviderCallback {
     }
   };
 
+  /**
+   * Function to request the server to update the amount of the user.
+   */
   updateMoneyToAccount = (body) =>{
     let headers = new Headers();
     headers.append('Authorization', 'Bearer ' + this.tokenSession);

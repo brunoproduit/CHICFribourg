@@ -26,6 +26,11 @@ export class DeleteUserPage {
     this.getListOfUsers();
   }
 
+  /**
+   * This function is called everytime the page has finished loading. Inside it, we set the callback parameters to
+   * transmit the important information between pages.
+   * */
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad DeleteUserPage');
     this.navBar.backButtonClick =(e:UIEvent) =>{
@@ -35,6 +40,9 @@ export class DeleteUserPage {
     };
   }
 
+  /**
+  * Function that will request the server to get the List of user of the Peggy.
+  * */
   getListOfUsers = () => {
     this.http.get(this.urlGetListOfUsers + '?uuid=' + this.peggyUUID)
         .map(res => res.json()).subscribe(data => {
@@ -43,6 +51,10 @@ export class DeleteUserPage {
     });
   };
 
+  /**
+  * Function that check if the user can be deleted or not. The user must have not money on his account and the user
+  * can't delete himself.
+  * */
   checkToDelete = (user) =>{
     if(user.balance > 0){
       this.noDeleteToast();
@@ -52,6 +64,10 @@ export class DeleteUserPage {
       this.showConfirmDelete(user)
     }
   };
+
+  /**
+  * Function that request the server to delete the user selected.
+  * */
 
   deleteUser = (user) =>{
     let headers = new Headers();
@@ -70,6 +86,10 @@ export class DeleteUserPage {
       this.getListOfUsers();
     })
   };
+
+  /**
+  * Function that display an alert for the user if he really wants to delete the user
+  * */
 
   showConfirmDelete = (user) =>{
     let confirm = this.alertCtrl.create({

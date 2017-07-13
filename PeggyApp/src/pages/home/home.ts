@@ -25,9 +25,10 @@ export class HomePage {
         console.log("user information: " + JSON.stringify(this.user));
     }
 
-    doThis() {
-
-    }
+    /**
+    * Function callback, to get the parameter from the page pushed. When a page pushed is poped, the callback is called
+    * before and the information are updated
+    * */
     parametersCallbackFunction = (user, peggyUUID, tokenSession) => {
         return new Promise((resolve, reject) => {
             this.user = user;
@@ -37,6 +38,10 @@ export class HomePage {
         })
     };
 
+    /**
+    * Navigate to the Insert Money page with the parameters
+    * */
+
     goToInsertMoney() {
         this.navCtrl.push(InsertMoneyPage, {
             callback: this.parametersCallbackFunction,
@@ -45,6 +50,10 @@ export class HomePage {
             tokenSession: this.tokenSession
         })
     }
+
+    /**
+     * Navigate to the Withdraw Money page with the parameters
+     * */
 
     goToWithdrawMoney() {
         this.navCtrl.push(WithdrawMoneyPage, {
@@ -59,6 +68,10 @@ export class HomePage {
         //this.navCtrl.push(WithdrawMoneyPage, {callback: this.parametersCallbackFunction, user: this.user, tokenSession: this.tokenSession})
     }
 
+    /**
+     * Navigate to the Settings Money page with the parameters
+     * */
+
     goToSettings() {
         this.navCtrl.push(SettingsPage, {
             callback: this.parametersCallbackFunction,
@@ -67,6 +80,10 @@ export class HomePage {
             tokenSession: this.tokenSession
         })
     }
+
+    /**
+    * Navigate to the root page which is the login page. The user will have to authenticate himself again
+    * */
 
     logOut() {
         this.navCtrl.popToRoot();

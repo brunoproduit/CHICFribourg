@@ -31,9 +31,17 @@ export class BleProvider {
 
     }
 
+    /**
+     * function callback to link the provider to the page that needs the BleProvider
+     */
+
     setCallback(callback: BleProviderCallback) {
         this.callback = callback;
     }
+
+    /**
+     * function to start the process to find the device
+     */
 
     findDevice = () => {
         this.disconnectDevice();
@@ -45,6 +53,10 @@ export class BleProvider {
         });
     };
 
+    /**
+     * Disconnect the device from the application
+     */
+
     disconnectDevice = () => {
         ble.stopScan();
         if (this.mDevice) {
@@ -54,7 +66,9 @@ export class BleProvider {
         console.log('Disconnected');
     };
 
-
+    /**
+     * search in the Bonded list, if the device is around. If yes, it will connect to it.
+     */
     searchForBondedDevice = (params) => {
         console.log('Searching for bonded device');
         console.log('Searching for ' + params.deviceName);
@@ -89,6 +103,10 @@ export class BleProvider {
         );
     };
 
+    /**
+     * Connect to the device specified
+     */
+
     connectToDevice = (device) => {
         console.log('Connecting to device...');
         this.mDevice = device;
@@ -122,6 +140,9 @@ export class BleProvider {
         }, 500);
     };
 
+    /**
+     * subscribe to the notification service of the device
+     */
     enableCoinNotification = (device) => {
         this.service = ble.getService(device, this.deviceUUID);
         this.characteristicCoinNotification = ble.getCharacteristic(this.service, this.coinEventNotificationUUID);
@@ -143,7 +164,9 @@ export class BleProvider {
             onNotificationError)
     };
 
-
+    /**
+     * function for Apple device, this will look for the device aournd the smartphone and connect to it
+     */
     scanForDevice = () => {
 
         console.log('Scanning for Peggy');
@@ -189,6 +212,10 @@ export class BleProvider {
             onScanError);
     };
 
+    /**
+     * Read in the service which contain the PeggyUUID
+     */
+
     readPeggyUUID = () => {
         console.log("Read Peggy UUID...");
         this.characteristicPeggyUuid = ble.getCharacteristic(this.service, this.peggyUuidUUID);
@@ -214,6 +241,10 @@ export class BleProvider {
             onReadError);
     };
 
+    /**
+     * Write in the service which contain the PeggyUUID
+     */
+
     writePeggyUUID = (uuid) => {
 
         console.log("Write Peggy UUID...");
@@ -237,6 +268,10 @@ export class BleProvider {
             onWriteSuccess,
             onWriteError)
     };
+
+    /**
+     * Write in the service which allow the user to withdraw money or not
+     */
 
     allowToWithdraw = (allow) => {
 
@@ -264,6 +299,9 @@ export class BleProvider {
             onWriteError)
     };
 
+    /**
+     * Convert an arrayBuffer into a UUID string
+     */
     ab2uuid = (pars1, pars2, pars3, pars4) => {
 
         // cf94737d-5d5b-4ca4-ba6f-33cc1f1f8de1
@@ -284,6 +322,10 @@ export class BleProvider {
         uuid += pars4; //cf94737d-5d5b-4ca4-ba6f-33cc1f1f8de1
         return uuid;
     };
+
+    /**
+     * Convert a UUID string to an arrayBuffer
+     */
 
     uuid2ab = (uuid) => {
 
@@ -306,6 +348,10 @@ export class BleProvider {
         }
         return arr;
     };
+
+    /**
+     * function called every time a notification is received by the smartphone.
+     */
 
     sortCoin = (value) => {
         var coin: string;
@@ -396,7 +442,9 @@ export class BleProvider {
                 break;
         }
     };
-
+    /**
+     * function to get the value if the device is connected.
+     */
     getIsConnected = () => {
         if (this.callback != null) {
             return this.isConnected

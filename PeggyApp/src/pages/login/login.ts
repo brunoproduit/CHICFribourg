@@ -38,10 +38,18 @@ export class LoginPage implements OnInit {
         });
     }
 
+    /**
+     * This function is called everytime the page is showed (even if the page is already loaded)
+     */
+
     ionViewWillEnter = () => {
         this.getListOfUsers();
     };
 
+    /*
+     * This function is called everytime the page has finished loading. Inside it, we set the callback parameters to
+     * transmit the important information between pages.
+     * */
     ngOnInit() {
         setTimeout(() => {
             console.log("do nothing");
@@ -71,6 +79,10 @@ export class LoginPage implements OnInit {
         }, 4000);
     }
 
+    /**
+     * Function to get from the server the list of users of the Peggy
+     */
+
     getListOfUsers = () => {
         this.http.get(this.urlGetListOfUsers + '?uuid=' + this.lastPeggyUUID)
             .map(res => res.json()).subscribe(data => {
@@ -79,21 +91,30 @@ export class LoginPage implements OnInit {
         });
     };
 
-    ionViewDidLoad() {
-        console.log('ionViewDidLoad LoginPage');
-    }
 
+    /**
+     *
+     * function to navigate to the password page
+     */
     goToPassword(user) {
         this.isConnectedToPeggy = this.ble.getIsConnected();
         console.log("isConnectedToPeggy: " + this.isConnectedToPeggy);
         this.navCtrl.push(LoginPasswordPage, {user: user, peggyUUID: this.lastPeggyUUID});
     }
 
+    /**
+     * function to set the UUID of the last Peggy used into the memory of the phone
+     */
+
     setLastUUIDInDB = () => {
         this.storage.set('lastPeggyUUIDD', this.lastPeggyUUID).then((set) => {
             console.log("SET in DB:" + set);
         });
     };
+
+    /**
+     * function to get the UUID of the last Peggy used from the memory of the phone
+     */
     getLastUUIDFromDB = () => {
         return new Promise((resolve, reject) => {
             this.storage.get('lastPeggyUUIDD').then((data) => {
@@ -102,6 +123,10 @@ export class LoginPage implements OnInit {
             });
         });
     };
+
+    /**
+     * function to get the UUID from the Peggy itself, it will call the function readPeggyUUID from the BleProvider
+     */
 
     getUUIDFromDevice = () => {
         return new Promise((resolve, reject) => {
@@ -112,12 +137,19 @@ export class LoginPage implements OnInit {
         });
     };
 
+    /**
+     * Function to delete the UUID of the last Peggy used from the memory of the phone
+     */
+
     removeLastUUIDFromDB = () => {
         this.storage.remove('lastPeggyUUIDD').then((remove) => {
             console.log("Remove from DB: " + remove);
         });
     };
 
+    /**
+     * Function to control if the parameters to create an account are correct
+     */
     onCreateAccount = () => {
         console.log("Name: " + this.name);
         console.log("Password: " + this.password);
@@ -129,6 +161,10 @@ export class LoginPage implements OnInit {
             this.passwordMatch = false;
         }
     };
+
+    /**
+     * function to request the server to create a new Peggy with a new user
+     */
 
     createAccount = (name: string, password: string) => {
 

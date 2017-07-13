@@ -39,9 +39,6 @@ export class LoginPasswordPage {
     this.tokenSession = '';
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPasswordPage');
-  }
 
   addToPasswordChild(){
     if(this.red == true){
@@ -98,6 +95,10 @@ export class LoginPasswordPage {
     this.sendPassword();
   }
 
+  /**
+   * function to send the password to the server to control if it is correct
+   */
+
   sendPassword(){
     console.log("Send Password");
     this.http.get(this.urlAuth +'?uuid='+ this.user.uuid +'&password='+ this.password)
@@ -105,6 +106,10 @@ export class LoginPasswordPage {
       .subscribe(data => this.correctPassword(data),
                  err => this.wrongPassword(err));
   }
+
+  /**
+   * function called if the password is right
+   */
 
   correctPassword(data){
     this.tokenSession = data.token;
@@ -115,6 +120,10 @@ export class LoginPasswordPage {
     this.password = '';
     console.log("Password after correct:"+ this.password);
   }
+
+  /**
+   * function called if the password is wrong
+   */
 
   wrongPassword(error){
     console.log("Wrong Password:"+ error);

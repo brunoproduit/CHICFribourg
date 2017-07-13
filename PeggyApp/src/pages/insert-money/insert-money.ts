@@ -37,6 +37,11 @@ export class InsertMoneyPage implements BleProviderCallback {
         });
     }
 
+    /**
+     * This function is called everytime the page has finished loading. Inside it, we set the callback parameters to
+     * transmit the important information between pages. The callback to the BleProvider is set here
+     * */
+
     ionViewDidLoad() {
         console.log('ionViewDidLoad InsertMoneyPage');
         this.bleProvider.setCallback(this);
@@ -52,6 +57,10 @@ export class InsertMoneyPage implements BleProviderCallback {
         };
     }
 
+    /**
+    * This function is called from the BleProvider. It is called everytime a notification for a coin added is
+    * received by the smartphone
+    * */
     onMoneyInserted = (coin) => {
         console.log("TEST moneyInserted called:" + coin);
         let body = {};
@@ -102,6 +111,10 @@ export class InsertMoneyPage implements BleProviderCallback {
         }
     };
 
+    /**
+     * Request to send the coin inserted to the server
+     */
+
     sendMoneyToAccount = (body) =>{
 
             let headers = new Headers();
@@ -129,6 +142,11 @@ export class InsertMoneyPage implements BleProviderCallback {
                 console.log("Promise send money finished");
             })
     };
+
+    /**
+     * function to control if the coin have reached their limit inside the Peggy.
+     * The user will be alerted if it the case
+     */
 
     controlMaxCoinReached = (coin5, coin2, coin1, coin50c, coin20c, coin10c) =>{
         if(coin5 == 20){

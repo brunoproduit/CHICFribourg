@@ -27,17 +27,31 @@ export class SettingsPage {
     });
   }
 
+  /**
+   * Function to navigate to the ChangePassword page
+   */
   goToChangePassword = () =>{
     this.navCtrl.push(ChangePasswordPage,{user: this.user, callback: this.callback, tokenSession: this.tokenSession, peggyUUID: this.peggyUUID});
   };
-
+  /**
+   * function to navigate to the addNewUser page
+   */
   goToAddNewUser = () =>{
     this.navCtrl.push(AddNewUserPage,{user: this.user, callback: this.callback, tokenSession: this.tokenSession, peggyUUID: this.peggyUUID});
   };
-
+  /**
+   * function to navigate to the DeleteUser page
+   */
   goToDeleteUser = () => {
     this.navCtrl.push(DeleteUserPage,{user: this.user, callback: this.callback, tokenSession: this.tokenSession, peggyUUID: this.peggyUUID});
   };
+
+  /**
+   *
+   * This function is called everytime the page has finished loading. Inside it, we set the callback parameters to
+   * transmit the important information between pages.
+   */
+
   ionViewDidLoad = () => {
     console.log('ionViewDidLoad SettingsPage');
     this.navBar.backButtonClick =(e:UIEvent) =>{

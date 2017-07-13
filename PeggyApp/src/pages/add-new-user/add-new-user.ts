@@ -36,6 +36,10 @@ export class AddNewUserPage {
     this.rotation = 0;
   }
 
+  /*
+  * This function is called everytime the page has finished loading. Inside it, we set the callback parameters to
+  * transmit the important information between pages.
+  * */
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddNewUserPage');
     this.navBar.backButtonClick =(e:UIEvent) =>{
@@ -44,6 +48,10 @@ export class AddNewUserPage {
       });
     };
   }
+
+  /*
+  * This function make sure that all the parameter the user put are ok. Or that the user has filled all the fields
+  * */
 
   validateUserInformations = () =>{
     if((this.password != '') && (this.newUserName != '')){
@@ -86,6 +94,10 @@ export class AddNewUserPage {
     }
   };
 
+  /*
+  * function to create a user. The request to the server is done here.
+  * */
+
   createUser = (isParent) =>{
 
     let headers = new Headers();
@@ -120,6 +132,10 @@ export class AddNewUserPage {
     })
   };
 
+  /*
+  * Display a success Toast
+  * */
+
   successToast = () => {
     let toast = this.toastCtrl.create({
       message: 'User was created successfully',
@@ -130,6 +146,10 @@ export class AddNewUserPage {
     });
     toast.present();
   };
+
+  /*
+   * Display a wrong password Toast
+   * */
 
   wrongPasswordToast = () => {
     let toast = this.toastCtrl.create({
@@ -153,6 +173,10 @@ export class AddNewUserPage {
     toast.present();
   };
 
+  /*
+  * function executed when the checkbox isParent is pressed
+  * */
+
   isParentPressed = () => {
     if(this.newUserIsParent == true && this.newUserIsChild == true){
       this.newUserIsChild = false;
@@ -161,6 +185,10 @@ export class AddNewUserPage {
     }
   };
 
+  /*
+   * function executed when the checkbox isChild is pressed
+   * */
+
   isChildPressed = () => {
     if(this.newUserIsChild == true && this.newUserIsParent == true){
       this.newUserIsParent = false;
@@ -168,6 +196,10 @@ export class AddNewUserPage {
       this.rotation = 0;
     }
   };
+
+  /*
+  * Function to add the value of the checkbox selected to the password of the child
+  * */
 
   addToPasswordChild = () =>{
     if(this.red == true){
@@ -198,6 +230,10 @@ export class AddNewUserPage {
     this.rotation++;
   };
 
+  /*
+   * function executed when the checkbox red is pressed
+   * */
+
   redPressed(){
     if((this.red == true) && ((this.blue == true) || (this.green == true) || (this.yellow == true) || (this.pink == true) || (this.brown == true))){
       this.blue = false;
@@ -207,6 +243,10 @@ export class AddNewUserPage {
       this.brown = false;
     }
   }
+
+  /*
+   * function executed when the checkbox blue is pressed
+   * */
 
   bluePressed(){
     if((this.blue == true) && ((this.red == true) || (this.green == true) || (this.yellow == true) || (this.pink == true) || (this.brown == true))){
@@ -219,6 +259,10 @@ export class AddNewUserPage {
 
   }
 
+  /*
+   * function executed when the checkbox green is pressed
+   * */
+
   greenPressed(){
     if((this.green == true) && ((this.red == true) || (this.blue == true) || (this.yellow == true) || (this.pink == true) || (this.brown == true))){
       this.red = false;
@@ -228,6 +272,10 @@ export class AddNewUserPage {
       this.brown = false;
     }
   }
+
+  /*
+   * function executed when the checkbox yellow is pressed
+   * */
 
   yellowPressed(){
     if((this.yellow == true) && ((this.red == true) || (this.green == true) || (this.blue == true) || (this.pink == true) || (this.brown == true))){
@@ -239,6 +287,10 @@ export class AddNewUserPage {
     }
   }
 
+  /*
+   * function executed when the checkbox pink is pressed
+   * */
+
   pinkPressed(){
     if((this.pink == true) && ((this.red == true) || (this.green == true) || (this.blue == true) || (this.yellow == true) || (this.brown == true))){
       this.red = false;
@@ -248,6 +300,10 @@ export class AddNewUserPage {
       this.brown = false;
     }
   }
+
+  /*
+   * function executed when the checkbox brown is pressed
+   * */
 
   brownPressed(){
     if((this.brown == true) && ((this.red == true) || (this.green == true) || (this.blue == true) || (this.yellow == true) || (this.pink == true))){

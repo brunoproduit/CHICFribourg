@@ -38,6 +38,10 @@ export class ChangePasswordPage {
     this.rotation = 0;
   }
 
+  /*
+   * This function is called everytime the page has finished loading. Inside it, we set the callback parameters to
+   * transmit the important information between pages.
+   * */
   ionViewDidLoad() {
     console.log('ionViewDidLoad ChangePasswordPage');
     this.navBar.backButtonClick =(e:UIEvent) =>{
@@ -46,6 +50,11 @@ export class ChangePasswordPage {
       });
     };
   }
+
+  /*
+  * function that is executed when the user press on the button to validate the new password, it will check that both
+  * password are matching
+  * */
 
   changePasswordParent = () =>{
     console.log("Password: "+ this.password);
@@ -58,6 +67,10 @@ export class ChangePasswordPage {
       this.passwordChangeSuccess = false;
     }
   };
+
+  /*
+  * This function will be executed when the user press on the button to validate the new password
+  * */
 
   changePasswordChild = () =>{
     if(this.red == true){
@@ -79,6 +92,10 @@ export class ChangePasswordPage {
     console.log("Password: " + this.password);
     this.changePassword(this.password);
   };
+
+  /*
+  * function that will request to the server to change the password
+  * */
 
   changePassword = (password) =>{
     let headers = new Headers();
