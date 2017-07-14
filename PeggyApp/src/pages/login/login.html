@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Login</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="background space" *ngIf="(firstTime == false)" padding>
+    <ion-card class="elements-color transparency">
+        <ion-card-header>Press on your name</ion-card-header>
+    </ion-card>
+    <ion-card *ngFor="let user of users" class="elements-color transparency elements-size">
+        <button ion-item (click)="goToPassword(user)" class="elements-color">
+            <ion-icon name="contact" item-left></ion-icon>
+            {{user.name}}
+        </button>
+    </ion-card>
+</ion-content>
+
+<ion-content class="background space" *ngIf="(firstTime == true)" padding>
+    <ion-card class="elements-color transparency">
+        <ion-card-header>Please enter your name and password:</ion-card-header>
+        <ion-item class="elements-color">
+            <ion-label floating>Name</ion-label>
+            <ion-input type="text" [(ngModel)]="name"></ion-input>
+        </ion-item>
+        <ion-item class="elements-color">
+            <ion-label floating>Password</ion-label>
+            <ion-input type="password" [(ngModel)]="password"></ion-input>
+        </ion-item>
+        <ion-item class="elements-color">
+            <ion-label floating>Password again</ion-label>
+            <ion-input type="password" [(ngModel)]="passwordControl"></ion-input>
+        </ion-item>
+    </ion-card>
+    <button ion-button color="PeggyElement" type="submit" (click)="onCreateAccount()" block>Create account</button>
+</ion-content>

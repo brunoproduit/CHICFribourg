@@ -1,0 +1,21 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Delete User</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="background" padding>
+    <ion-card class="elements-color transparency">
+        <ion-card-header>Press on a user to delete</ion-card-header>
+    </ion-card>
+    <ion-card *ngFor="let user of users" class="elements-color transparency elements-size">
+        <ion-item>
+            <ion-icon name="contact" item-left></ion-icon>
+            {{user.name}}
+                <button ion-button item-end outline icon-start color="secondary" (click)="checkToDelete(user)">
+                    <ion-icon name="close-circle"></ion-icon>
+                    Delete
+                </button>
+        </ion-item>
+    </ion-card>
+</ion-content>

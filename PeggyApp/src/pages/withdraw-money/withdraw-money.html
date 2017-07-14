@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>WithdrawMoney</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="background" *ngIf="(amountValidated == false)" padding>
+  <ion-card class="elements-color transparency">
+    <ion-card-header>Amount of money on your account:</ion-card-header>
+    <ion-card-content align="center"><h1>{{amountAccount}} CHF</h1></ion-card-content>
+  </ion-card>
+
+  <ion-card class="elements-color transparency">
+    <ion-card-content>Press on the buttons to increase the amount you want to withdraw:</ion-card-content>
+    <ion-card-content align="center">
+      <div>
+        <ion-buttons>
+        <button ion-button color="primary" (click)="addToAmountToWithdraw(5)" outline>5</button>
+        <button ion-button color="primary" (click)="addToAmountToWithdraw(2)" outline>2</button>
+        <button ion-button color="primary" (click)="addToAmountToWithdraw(1)" outline>1</button>
+    </ion-buttons>
+        </div>
+      <div>
+      <ion-buttons>
+        <button ion-button color="primary" (click)="addToAmountToWithdraw(0.5)" outline>0.5</button>
+        <button ion-button color="primary" (click)="addToAmountToWithdraw(0.2)" outline>0.2</button>
+        <button ion-button color="primary" (click)="addToAmountToWithdraw(0.1)" outline>0.1</button>
+      </ion-buttons>
+      </div>
+    </ion-card-content>
+    <ion-card-content>
+      <p>Amount you want to withdraw: <b>{{amountToWithdraw}} CHF</b></p>
+      <ion-buttons>
+        <button ion-button color="primary" (click)="validateAmount()" block>Validate amount</button>
+        <button ion-button color="secondary" (click)="resetAmount()" block>Reset amount</button>
+      </ion-buttons>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-content class="background space" *ngIf="(amountValidated == true)">
+  <ion-card>
+    <ion-card-content class="connectedToPeggy transparency" *ngIf="(isConnectedToPeggy == true)">
+      <ion-icon icon-start name="checkmark-circle"></ion-icon> You are connected to Peggy</ion-card-content>
+    <ion-card-content class="notConnectedToPeggy transparency" *ngIf="(isConnectedToPeggy == false)">
+      <ion-icon icon-start name="warning"></ion-icon> You are not connected to Peggy</ion-card-content>
+  </ion-card>
+  <ion-card class="elements-color transparency">
+    <ion-card-header>Amount left to withdraw: </ion-card-header>
+    <ion-card-content align="center"><h1>{{amountToWithdraw}} CHF</h1></ion-card-content>
+  </ion-card>
+
+  <ion-card class="elements-color transparency">
+    <ion-card-content>
+    <table>
+      <tr>
+        <td>You had: </td>
+        <td align="right"> <b>{{amountFrozen}} CHF</b></td>
+      </tr>
+      <tr>
+        <td>You just withdrawn: </td>
+        <td align="right"> <b> {{amountWithdrawn}} CHF</b></td>
+      </tr>
+      <tr>
+        <td>You withdrawn a total of: </td>
+        <td align="right"> <b>{{totalWithdrawn}} CHF</b></td>
+      </tr>
+      <tr>
+        <td>You currently have: </td>
+        <td align="right"> <b>{{amountAccount}} CHF</b></td>
+      </tr>
+    </table>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
