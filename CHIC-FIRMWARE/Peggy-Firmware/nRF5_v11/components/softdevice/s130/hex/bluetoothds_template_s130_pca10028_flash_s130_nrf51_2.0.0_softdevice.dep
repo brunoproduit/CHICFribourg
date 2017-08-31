@@ -1,39 +1,0 @@
-Dependencies for Project 'bluetoothds_template_s130_pca10028', Target 'flash_s130_nrf51_2.0.0_softdevice': (DO NOT MODIFY !)
-F (..\..\..\main.c)(0x59411FD4)()
-F (..\..\..\service_if.c)(0x591B6ACF)()
-F (..\..\..\ble_peggy_peripheral.c)(0x591B670F)(--c99 -c --cpu Cortex-M0 -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\..\..\config\bluetoothds_template_s130_pca10028 -I ..\..\..\config-I.\RTE\_flash_s130_nrf51_2.0.0_softdevice-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.13.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="523" -D_RTE_ -DNRF51-o ..\..\..\..\..\..\components\softdevice\s130\hex\ble_peggy_peripheral.o --omf_browse ..\..\..\..\..\..\components\softdevice\s130\hex\ble_peggy_peripheral.crf --depend ..\..\..\..\..\..\components\softdevice\s130\hex\ble_peggy_peripheral.d)
-I (..\..\..\ble_peggy_peripheral.h)(0x591B655B)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x57F65B18)
-I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x57F65B18)
-F (..\..\..\..\..\bsp\bsp.c)(0x56E1A84F)()
-F (..\..\..\..\..\bsp\bsp_btn_ble.c)(0x56E1A84F)()
-F (..\..\..\Abstract.txt)(0x56E1A877)()
-F (..\..\..\license.txt)(0x56E1A877)()
-F (..\..\..\..\..\..\components\ble\common\ble_advdata.c)(0x56E1A84E)()
-F (..\..\..\..\..\..\components\ble\ble_advertising\ble_advertising.c)(0x56E1A84E)()
-F (..\..\..\..\..\..\components\ble\common\ble_conn_params.c)(0x56E1A84E)()
-F (..\..\..\..\..\..\components\ble\common\ble_srv_common.c)(0x56E1A84E)()
-F (..\..\..\..\..\..\components\ble\device_manager\device_manager_peripheral.c)(0x56E1A84E)()
-F (..\..\..\..\..\..\components\libraries\uart\app_uart.c)(0x56E1A84E)()
-F (..\..\..\..\..\..\components\drivers_nrf\delay\nrf_delay.c)(0x56E1A84E)()
-F (..\..\..\..\..\..\components\drivers_nrf\common\nrf_drv_common.c)(0x56E1A84E)()
-F (..\..\..\..\..\..\components\drivers_nrf\gpiote\nrf_drv_gpiote.c)(0x56E1A84E)()
-F (..\..\..\..\..\..\components\drivers_nrf\uart\nrf_drv_uart.c)(0x56E1A84E)()
-F (..\..\..\..\..\..\components\drivers_nrf\pstorage\pstorage.c)(0x56E1A84E)()
-F (..\..\..\..\..\..\components\libraries\button\app_button.c)(0x56E1A84E)()
-F (..\..\..\..\..\..\components\libraries\util\app_error.c)(0x56E1A84E)()
-F (..\..\..\..\..\..\components\libraries\util\app_error_weak.c)(0x56E1A84E)()
-F (..\..\..\..\..\..\components\libraries\timer\app_timer.c)(0x56E1A84E)()
-F (..\..\..\..\..\..\components\libraries\trace\app_trace.c)(0x56E1A84E)()
-F (..\..\..\..\..\..\components\libraries\util\app_util_platform.c)(0x56E1A84E)()
-F (..\..\..\..\..\..\components\libraries\fstorage\fstorage.c)(0x56E1A84E)()
-F (..\..\..\..\..\..\components\libraries\util\nrf_assert.c)(0x56E1A84E)()
-F (..\..\..\..\..\..\components\libraries\util\nrf_log.c)(0x56E1A84E)()
-F (..\..\..\..\..\..\components\libraries\uart\retarget.c)(0x56E1A84E)()
-F (..\..\..\..\..\..\external\segger_rtt\RTT_Syscalls_KEIL.c)(0x56E1A850)()
-F (..\..\..\..\..\..\external\segger_rtt\SEGGER_RTT.c)(0x56E1A850)()
-F (..\..\..\..\..\..\external\segger_rtt\SEGGER_RTT_printf.c)(0x56E1A850)()
-F (..\..\..\..\..\..\components\softdevice\s130\doc\s130_nrf51_2.0.0_licence_agreement.txt)(0x56C595BB)()
-F (..\..\..\..\..\..\components\softdevice\common\softdevice_handler\softdevice_handler.c)(0x56E1A84F)()
-F (RTE\Device\nRF51422_xxAC\arm_startup_nrf51.s)(0x58D5093E)()
-F (RTE\Device\nRF51422_xxAC\system_nrf51.c)(0x58D50938)()
